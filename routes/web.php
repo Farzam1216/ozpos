@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('frontend.index');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.resturant');
 });
+
+Route::get('/checkout', function () {
+    return view('frontend.checkout');
+});
+
+Route::get('/my-order', function () {
+    return view('frontend.myOrder');
+});
+
+Route::get('/user-register', function () {
+    return view('frontend.register');
+});
+
+Route::get('/user-login', function () {
+    return view('frontend.login');
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
