@@ -7521,9 +7521,143 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     console.log('Component mounted.');
+    this.getVendorDetails();
+  },
+  data: function data() {
+    return {
+      vendor: null,
+      id: '',
+      name: '',
+      status: '',
+      editid: '',
+      editname: '',
+      editstatus: '',
+      info: null
+    };
+  },
+  methods: {
+    getVendorDetails: function getVendorDetails() {
+      var _this = this;
+
+      axios.get('http://ozpos.geekss.com.au/api/single_vendor/5').then(function (response) {
+        _this.vendor = response.data;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    }
   }
 });
 
@@ -37217,1543 +37351,1553 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("section", { staticClass: "container-fluid p-2" }, [
+    _c("div", { staticClass: "offer-section py-4" }, [
+      _c("div", { staticClass: "container position-relative" }, [
+        _c("img", {
+          staticClass: "restaurant-pic",
+          staticStyle: { width: "200px" },
+          attrs: { alt: "#", src: _vm.vendor.data.vendor.image },
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "pt-3 text-white" }, [
+          _c("h2", { staticClass: "font-weight-bold" }, [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.vendor.data.vendor.name) +
+                "\n                    "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-white m-0" }, [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.vendor.data.vendor.address) +
+                "\n                    "
+            ),
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "pb-4" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-6 col-md-1" }, [
+              _c(
+                "p",
+                { staticClass: "text-white-50 font-weight-bold m-0 small" },
+                [_vm._v("Open time")]
+              ),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-white m-0" }, [
+                _vm._v(_vm._s(_vm.vendor.data.vendor.start_time)),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-6 col-md-1" }, [
+              _c(
+                "p",
+                { staticClass: "text-white-50 font-weight-bold m-0 small" },
+                [_vm._v("Close time")]
+              ),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-white m-0" }, [
+                _vm._v(_vm._s(_vm.vendor.data.vendor.close_time)),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _vm._m(2),
+    _vm._v(" "),
+    _vm._m(3),
+    _vm._v(" "),
+    _c("div", { staticClass: "container backcolor" }, [
+      _c(
+        "div",
+        {
+          staticClass: "cat-slider slick-initialized slick-slider",
+          attrs: { id: "navbar-example2" },
+        },
+        [
+          _c("div", { staticClass: "slick-list draggable" }, [
+            _c(
+              "div",
+              {
+                staticClass: "slick-track",
+                staticStyle: {
+                  opacity: "1",
+                  width: "705px",
+                  transform: "translate3d(0px, 0px, 0px)",
+                },
+              },
+              _vm._l(_vm.vendor.data.MenuCategory, function (MenuCategory) {
+                return _c(
+                  "div",
+                  {
+                    key: MenuCategory.id,
+                    staticClass:
+                      "cat-item px-1 py-3 slick-slide slick-current slick-active",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "0",
+                      "data-slick-index": "0",
+                      "aria-hidden": "false",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: { href: "#", tabindex: "0" },
+                      },
+                      [
+                        _c("p", { staticClass: "m-0 small " }, [
+                          _vm._v(_vm._s(MenuCategory.name.toUpperCase())),
+                        ]),
+                      ]
+                    ),
+                  ]
+                )
+              }),
+              0
+            ),
+          ]),
+        ]
+      ),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container position-relative" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-8 pt-4" }, [
+          _c(
+            "div",
+            { staticClass: "shadow-sm rounded bg-white mb-3 overflow-hidden" },
+            [
+              _vm._m(4),
+              _vm._v(" "),
+              _vm._l(_vm.vendor.data.MenuCategory, function (MenuCategory) {
+                return _c(
+                  "div",
+                  { key: MenuCategory.id, staticClass: "row m-0" },
+                  [
+                    _c("h6", { staticClass: "p-3 m-0 bg-light w-100" }, [
+                      _vm._v(_vm._s(MenuCategory.name.toUpperCase())),
+                      _c("small", { staticClass: "ml-2 text-black-50" }, [
+                        _vm._v("3 ITEMS"),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-12 px-0 border-top" }, [
+                      _c(
+                        "div",
+                        {},
+                        _vm._l(MenuCategory.single_menu, function (singleMenu) {
+                          return _c(
+                            "div",
+                            {
+                              key: singleMenu.id,
+                              staticClass: "p-3 border-bottom gold-members",
+                            },
+                            [
+                              _vm._m(5, true),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "media" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "mr-3 font-weight-bold text-danger non_veg",
+                                  },
+                                  [_vm._v(".")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "media-body" },
+                                  [
+                                    _vm._l(singleMenu, function (menu) {
+                                      return _c(
+                                        "h6",
+                                        { key: menu.id, staticClass: "mb-1" },
+                                        [_vm._v(_vm._s(menu.name) + " ")]
+                                      )
+                                    }),
+                                    _vm._v(" "),
+                                    _vm._l(singleMenu, function (menu) {
+                                      return _c(
+                                        "p",
+                                        {
+                                          key: menu.id,
+                                          staticClass: "text-muted mb-0",
+                                        },
+                                        [_vm._v(_vm._s(menu.price))]
+                                      )
+                                    }),
+                                  ],
+                                  2
+                                ),
+                              ]),
+                            ]
+                          )
+                        }),
+                        0
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-12 px-0 border-top" }, [
+                      _c(
+                        "div",
+                        {},
+                        _vm._l(
+                          MenuCategory.half_n_half_menu,
+                          function (half_n_half_menu) {
+                            return _c(
+                              "div",
+                              {
+                                key: half_n_half_menu.id,
+                                staticClass: "p-3 border-bottom gold-members",
+                              },
+                              [
+                                _vm._m(6, true),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "media" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "mr-3 font-weight-bold text-danger non_veg",
+                                    },
+                                    [_vm._v(".")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "media-body" }, [
+                                    _c("h6", { staticClass: "mb-1" }, [
+                                      _vm._v(
+                                        _vm._s(half_n_half_menu.name) + " "
+                                      ),
+                                    ]),
+                                  ]),
+                                ]),
+                              ]
+                            )
+                          }
+                        ),
+                        0
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-12 px-0 border-top" }, [
+                      _c(
+                        "div",
+                        {},
+                        _vm._l(MenuCategory.deals_menu, function (dealsMenu) {
+                          return _c(
+                            "div",
+                            {
+                              key: dealsMenu.id,
+                              staticClass: "p-3 border-bottom gold-members",
+                            },
+                            [
+                              _vm._m(7, true),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "media" },
+                                [
+                                  _vm._l(
+                                    MenuCategory.deals_menu,
+                                    function (menu) {
+                                      return _c(
+                                        "div",
+                                        {
+                                          key: menu.id,
+                                          staticClass:
+                                            "mr-3 font-weight-bold text-danger non_veg",
+                                        },
+                                        [
+                                          _c("img", {
+                                            staticClass:
+                                              "mr-3 rounded-circle img-fluid",
+                                            attrs: {
+                                              alt: "osahan",
+                                              src: menu.image,
+                                            },
+                                          }),
+                                        ]
+                                      )
+                                    }
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "media-body" },
+                                    [
+                                      _vm._l(
+                                        MenuCategory.deals_menu,
+                                        function (menu) {
+                                          return _c(
+                                            "h6",
+                                            {
+                                              key: menu.id,
+                                              staticClass: "mb-1",
+                                            },
+                                            [_vm._v(_vm._s(menu.name) + " ")]
+                                          )
+                                        }
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._l(
+                                        MenuCategory.deals_menu,
+                                        function (menu) {
+                                          return _c(
+                                            "p",
+                                            {
+                                              key: menu.id,
+                                              staticClass: "text-muted mb-0",
+                                            },
+                                            [_vm._v(_vm._s(menu.price))]
+                                          )
+                                        }
+                                      ),
+                                    ],
+                                    2
+                                  ),
+                                ],
+                                2
+                              ),
+                            ]
+                          )
+                        }),
+                        0
+                      ),
+                    ]),
+                  ]
+                )
+              }),
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _vm._m(8),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-4 mt-4" }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "osahan-cart-item rounded rounded shadow-sm overflow-hidden bg-white sticky_sidebar",
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "d-flex border-bottom osahan-cart-item-profile bg-white p-3",
+                },
+                [
+                  _c("img", {
+                    staticClass: "mr-3 rounded-circle img-fluid",
+                    staticStyle: { width: "50px" },
+                    attrs: { alt: "osahan", src: _vm.vendor.data.vendor.image },
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "d-flex flex-column" }, [
+                    _c("h6", { staticClass: "mb-1 font-weight-bold" }, [
+                      _vm._v(_vm._s(_vm.vendor.data.vendor.name)),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mb-0 small text-muted" }, [
+                      _c("i", { staticClass: "feather-map-pin" }),
+                      _vm._v(" " + _vm._s(_vm.vendor.data.vendor.address)),
+                    ]),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(9),
+              _vm._v(" "),
+              _vm._m(10),
+              _vm._v(" "),
+              _vm._m(11),
+            ]
+          ),
+        ]),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "d-none" }, [
-        _c("div", { staticClass: "bg-primary p-3 d-flex align-items-center" }, [
-          _c(
-            "a",
-            { staticClass: "toggle togglew toggle-2", attrs: { href: "#" } },
-            [_c("span")]
-          ),
-          _vm._v(" "),
-          _c("h4", { staticClass: "font-weight-bold m-0 text-white" }, [
-            _vm._v("Osahan Bar"),
+    return _c(
+      "div",
+      { staticClass: "rating-wrap d-flex align-items-center mt-2" },
+      [
+        _c("ul", { staticClass: "rating-stars list-unstyled" }, [
+          _c("li", [
+            _c("i", { staticClass: "feather-star text-warning" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "feather-star text-warning" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "feather-star text-warning" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "feather-star text-warning" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "feather-star" }),
           ]),
         ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "offer-section py-4" }, [
-        _c("div", { staticClass: "container position-relative" }, [
-          _c("img", {
-            staticClass: "restaurant-pic",
-            attrs: { alt: "#", src: "img/trending1.png" },
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "pt-3 text-white" }, [
-            _c("h2", { staticClass: "font-weight-bold" }, [
-              _vm._v("Conrad Chicago Restaurant"),
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-white m-0" }, [
-              _vm._v("963 Madyson Drive Suite 679"),
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "rating-wrap d-flex align-items-center mt-2" },
-              [
-                _c("ul", { staticClass: "rating-stars list-unstyled" }, [
-                  _c("li", [
-                    _c("i", { staticClass: "feather-star text-warning" }),
-                    _vm._v(" "),
-                    _c("i", { staticClass: "feather-star text-warning" }),
-                    _vm._v(" "),
-                    _c("i", { staticClass: "feather-star text-warning" }),
-                    _vm._v(" "),
-                    _c("i", { staticClass: "feather-star text-warning" }),
-                    _vm._v(" "),
-                    _c("i", { staticClass: "feather-star" }),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "label-rating text-white ml-2 small" }, [
-                  _vm._v(" (245 Reviews)"),
-                ]),
-              ]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "pb-4" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-6 col-md-2" }, [
-                _c(
-                  "p",
-                  { staticClass: "text-white-50 font-weight-bold m-0 small" },
-                  [_vm._v("Delivery")]
-                ),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-white m-0" }, [_vm._v("Free")]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-6 col-md-2" }, [
-                _c(
-                  "p",
-                  { staticClass: "text-white-50 font-weight-bold m-0 small" },
-                  [_vm._v("Open time")]
-                ),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-white m-0" }, [_vm._v("8:00 AM")]),
-              ]),
-            ]),
-          ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "label-rating text-white ml-2 small" }, [
+          _vm._v(" (245 Reviews)"),
         ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "container" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "p-3 bg-primary bg-primary mt-n3 rounded position-relative",
-          },
-          [
-            _c("div", { staticClass: "d-flex align-items-center" }, [
-              _c("div", { staticClass: "feather_icon" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "text-decoration-none text-dark",
-                    attrs: { href: "#ratings-and-reviews" },
-                  },
-                  [
-                    _c("i", {
-                      staticClass:
-                        "p-2 bg-light rounded-circle font-weight-bold  feather-upload",
-                    }),
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "text-decoration-none text-dark mx-2",
-                    attrs: { href: "#ratings-and-reviews" },
-                  },
-                  [
-                    _c("i", {
-                      staticClass:
-                        "p-2 bg-light rounded-circle font-weight-bold  feather-star",
-                    }),
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "text-decoration-none text-dark",
-                    attrs: { href: "#ratings-and-reviews" },
-                  },
-                  [
-                    _c("i", {
-                      staticClass:
-                        "p-2 bg-light rounded-circle font-weight-bold feather-map-pin",
-                    }),
-                  ]
-                ),
-              ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container-fluid pt-2" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "p-3 bg-primary bg-primary mt-n3 rounded position-relative",
+        },
+        [
+          _c("div", { staticClass: "d-flex align-items-center" }, [
+            _c("div", { staticClass: "feather_icon" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "text-decoration-none text-dark",
+                  attrs: { href: "#ratings-and-reviews" },
+                },
+                [
+                  _c("i", {
+                    staticClass:
+                      "p-2 bg-light rounded-circle font-weight-bold  feather-upload",
+                  }),
+                ]
+              ),
               _vm._v(" "),
               _c(
                 "a",
                 {
-                  staticClass: "btn btn-sm btn-outline-light ml-auto",
-                  attrs: { href: "contact-us" },
+                  staticClass: "text-decoration-none text-dark mx-2",
+                  attrs: { href: "#ratings-and-reviews" },
                 },
-                [_vm._v("Contact")]
+                [
+                  _c("i", {
+                    staticClass:
+                      "p-2 bg-light rounded-circle font-weight-bold  feather-star",
+                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "text-decoration-none text-dark",
+                  attrs: { href: "#ratings-and-reviews" },
+                },
+                [
+                  _c("i", {
+                    staticClass:
+                      "p-2 bg-light rounded-circle font-weight-bold feather-map-pin",
+                  }),
+                ]
               ),
             ]),
-          ]
-        ),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "container" }, [
-        _c("div", {}, [
-          _c("p", { staticClass: "font-weight-bold pt-4 m-0" }, [
-            _vm._v("FEATURED ITEMS"),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-sm btn-outline-light ml-auto",
+                attrs: { href: "contact-us" },
+              },
+              [_vm._v("Contact")]
+            ),
           ]),
+        ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container-fluid" }, [_c("div", {})])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container backcolor" }, [
+      _c(
+        "div",
+        {
+          staticClass: "cat-slider slick-initialized slick-slider",
+          attrs: { id: "navbar-example2" },
+        },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "slick-prev slick-arrow",
+              attrs: { "aria-label": "Previous", type: "button" },
+            },
+            [_vm._v("Previous")]
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "trending-slider rounded" }, [
-            _c("div", { staticClass: "osahan-slider-item" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm",
-                },
-                [
-                  _c("div", { staticClass: "list-card-image" }, [
-                    _c("a", { attrs: { href: "checkout" } }, [
-                      _c("img", {
-                        staticClass: "img-fluid item-img w-100",
-                        attrs: { alt: "#", src: "img/trending1.png" },
-                      }),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "p-3 position-relative" }, [
-                    _c("div", { staticClass: "list-card-body" }, [
-                      _c("h6", { staticClass: "mb-1" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-black",
-                            attrs: { href: "checkout" },
-                          },
-                          [_vm._v("Famous Dave's Bar-B-Que")]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "text-gray mb-3" }, [
-                        _vm._v("Vegetarian • Indian • Pure veg"),
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "text-gray m-0" }, [
-                        _c("span", { staticClass: "text-black-50" }, [
-                          _vm._v(" $350 FOR TWO"),
-                        ]),
-                      ]),
-                    ]),
-                  ]),
-                ]
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "osahan-slider-item" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm",
-                },
-                [
-                  _c("div", { staticClass: "list-card-image" }, [
-                    _c("a", { attrs: { href: "checkout" } }, [
-                      _c("img", {
-                        staticClass: "img-fluid item-img w-100",
-                        attrs: { alt: "#", src: "img/trending2.png" },
-                      }),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "p-3 position-relative" }, [
-                    _c("div", { staticClass: "list-card-body" }, [
-                      _c("h6", { staticClass: "mb-1" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-black",
-                            attrs: { href: "checkout" },
-                          },
-                          [_vm._v("Thai Famous Cuisine")]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "text-gray mb-3" }, [
-                        _vm._v("North Indian • Indian • Pure veg"),
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "text-gray m-0" }, [
-                        _c("span", { staticClass: "text-black-50" }, [
-                          _vm._v(" $250 FOR TWO"),
-                        ]),
-                      ]),
-                    ]),
-                  ]),
-                ]
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "osahan-slider-item" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm",
-                },
-                [
-                  _c("div", { staticClass: "list-card-image" }, [
-                    _c("a", { attrs: { href: "checkout" } }, [
-                      _c("img", {
-                        staticClass: "img-fluid item-img w-100",
-                        attrs: { alt: "#", src: "img/trending3.png" },
-                      }),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "p-3 position-relative" }, [
-                    _c("div", { staticClass: "list-card-body" }, [
-                      _c("h6", { staticClass: "mb-1" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-black",
-                            attrs: { href: "checkout" },
-                          },
-                          [_vm._v("The osahan Restaurant")]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "text-gray mb-3" }, [
-                        _vm._v("North • Hamburgers • Pure veg"),
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "text-gray m-0" }, [
-                        _c("span", { staticClass: "text-black-50" }, [
-                          _vm._v(" $500 FOR TWO"),
-                        ]),
-                      ]),
-                    ]),
-                  ]),
-                ]
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "osahan-slider-item" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm",
-                },
-                [
-                  _c("div", { staticClass: "list-card-image" }, [
-                    _c("a", { attrs: { href: "checkout" } }, [
-                      _c("img", {
-                        staticClass: "img-fluid item-img w-100",
-                        attrs: { alt: "#", src: "img/trending2.png" },
-                      }),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "p-3 position-relative" }, [
-                    _c("div", { staticClass: "list-card-body" }, [
-                      _c("h6", { staticClass: "mb-1" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-black",
-                            attrs: { href: "checkout" },
-                          },
-                          [_vm._v("Thai Famous Cuisine")]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "text-gray mb-3" }, [
-                        _vm._v("North Indian • Indian • Pure veg"),
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "text-gray m-0" }, [
-                        _c("span", { staticClass: "text-black-50" }, [
-                          _vm._v(" $250 FOR TWO"),
-                        ]),
-                      ]),
-                    ]),
-                  ]),
-                ]
-              ),
-            ]),
-          ]),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "container position-relative" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-8 pt-3" }, [
+          _c("div", { staticClass: "slick-list draggable" }, [
             _c(
               "div",
               {
-                staticClass: "shadow-sm rounded bg-white mb-3 overflow-hidden",
+                staticClass: "slick-track",
+                staticStyle: {
+                  opacity: "1",
+                  width: "5640px",
+                  transform: "translate3d(-1128px, 0px, 0px)",
+                },
               },
               [
-                _c("div", { staticClass: "d-flex item-aligns-center" }, [
-                  _c(
-                    "p",
-                    {
-                      staticClass:
-                        "font-weight-bold h6 p-3 border-bottom mb-0 w-100",
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "cat-item px-1 py-3 slick-slide slick-current slick-active",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "0",
+                      "data-slick-index": "0",
+                      "aria-hidden": "false",
                     },
-                    [_vm._v("Menu")]
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row m-0" }, [
-                  _c("h6", { staticClass: "p-3 m-0 bg-light w-100" }, [
-                    _vm._v("Quick Bites "),
-                    _c("small", { staticClass: "text-black-50" }, [
-                      _vm._v("3 ITEMS"),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-12 px-0 border-top" }, [
-                    _c("div", {}, [
-                      _c(
-                        "div",
-                        { staticClass: "p-3 border-bottom gold-members" },
-                        [
-                          _c("span", { staticClass: "float-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-outline-secondary btn-sm",
-                                attrs: {
-                                  href: "#",
-                                  "data-toggle": "modal",
-                                  "data-target": "#extras",
-                                },
-                              },
-                              [_vm._v("ADD")]
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "mr-3 font-weight-bold text-danger non_veg",
-                              },
-                              [_vm._v(".")]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "media-body" }, [
-                              _c("h6", { staticClass: "mb-1" }, [
-                                _vm._v("Chicken Tikka Sub "),
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "text-muted mb-0" }, [
-                                _vm._v("$250"),
-                              ]),
-                            ]),
-                          ]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "p-3 border-bottom gold-members" },
-                        [
-                          _c("span", { staticClass: "float-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-outline-secondary btn-sm",
-                                attrs: {
-                                  href: "#",
-                                  "data-toggle": "modal",
-                                  "data-target": "#extras",
-                                },
-                              },
-                              [_vm._v("ADD")]
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "mr-3 font-weight-bold text-danger non_veg",
-                              },
-                              [_vm._v(".")]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "media-body" }, [
-                              _c("h6", { staticClass: "mb-1" }, [
-                                _vm._v("Cheese corn Roll "),
-                                _c(
-                                  "span",
-                                  { staticClass: "badge badge-danger" },
-                                  [_vm._v("BEST SELLER")]
-                                ),
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "text-muted mb-0" }, [
-                                _vm._v("$600"),
-                              ]),
-                            ]),
-                          ]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "p-3 border-bottom gold-members" },
-                        [
-                          _c("span", { staticClass: "float-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-outline-secondary btn-sm",
-                                attrs: {
-                                  href: "#",
-                                  "data-toggle": "modal",
-                                  "data-target": "#extras",
-                                },
-                              },
-                              [_vm._v("ADD")]
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "mr-3 font-weight-bold text-danger non_veg",
-                              },
-                              [_vm._v(".")]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "media-body" }, [
-                              _c("h6", { staticClass: "mb-1" }, [
-                                _vm._v("Chicken Tikka Sub "),
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "badge badge-danger text-white",
-                                  },
-                                  [_vm._v("Non veg")]
-                                ),
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "text-muted mb-0" }, [
-                                _vm._v("$250"),
-                              ]),
-                            ]),
-                          ]),
-                        ]
-                      ),
-                    ]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row m-0" }, [
-                  _c("h6", { staticClass: "p-3 m-0 bg-light w-100" }, [
-                    _vm._v("Starters "),
-                    _c("small", { staticClass: "text-black-50" }, [
-                      _vm._v("3 ITEMS"),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-12 px-0 border-top" }, [
-                    _c("div", {}, [
-                      _c(
-                        "div",
-                        { staticClass: "p-3 border-bottom menu-list" },
-                        [
-                          _c("span", { staticClass: "float-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-outline-secondary btn-sm",
-                                attrs: {
-                                  href: "#",
-                                  "data-toggle": "modal",
-                                  "data-target": "#extras",
-                                },
-                              },
-                              [_vm._v("ADD")]
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media" }, [
-                            _c("img", {
-                              staticClass: "mr-3 rounded-pill ",
-                              attrs: { alt: "#", src: "img/starter1.jpg" },
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "media-body" }, [
-                              _c("h6", { staticClass: "mb-1" }, [
-                                _vm._v("Chicken Tikka Sub "),
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "text-muted mb-0" }, [
-                                _vm._v("$250"),
-                              ]),
-                            ]),
-                          ]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "p-3 border-bottom menu-list" },
-                        [
-                          _c("span", { staticClass: "float-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-outline-secondary btn-sm",
-                                attrs: {
-                                  href: "#",
-                                  "data-toggle": "modal",
-                                  "data-target": "#extras",
-                                },
-                              },
-                              [_vm._v("ADD")]
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media" }, [
-                            _c("img", {
-                              staticClass: "mr-3 rounded-pill ",
-                              attrs: { alt: "#", src: "img/starter2.jpg" },
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "media-body" }, [
-                              _c("h6", { staticClass: "mb-1" }, [
-                                _vm._v("Cheese corn Roll "),
-                                _c(
-                                  "span",
-                                  { staticClass: "badge badge-danger" },
-                                  [_vm._v("BEST SELLER")]
-                                ),
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "text-muted mb-0" }, [
-                                _vm._v("$600"),
-                              ]),
-                            ]),
-                          ]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "p-3 border-bottom menu-list" },
-                        [
-                          _c("span", { staticClass: "float-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-outline-secondary btn-sm",
-                                attrs: {
-                                  href: "#",
-                                  "data-toggle": "modal",
-                                  "data-target": "#extras",
-                                },
-                              },
-                              [_vm._v("ADD")]
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media" }, [
-                            _c("img", {
-                              staticClass: "mr-3 rounded-pill ",
-                              attrs: { alt: "#", src: "img/starter3.jpg" },
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "media-body" }, [
-                              _c("h6", { staticClass: "mb-1" }, [
-                                _vm._v("Chicken Tikka Sub "),
-                                _c(
-                                  "span",
-                                  { staticClass: "badge badge-success" },
-                                  [_vm._v("Pure Veg")]
-                                ),
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "text-muted mb-0" }, [
-                                _vm._v("$250"),
-                              ]),
-                            ]),
-                          ]),
-                        ]
-                      ),
-                    ]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row m-0" }, [
-                  _c("h6", { staticClass: "p-3 m-0 bg-light w-100" }, [
-                    _vm._v("Soups "),
-                    _c("small", { staticClass: "text-black-50" }, [
-                      _vm._v("8 ITEMS"),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-12 px-0 border-top" }, [
-                    _c("div", { staticClass: "bg-white" }, [
-                      _c(
-                        "div",
-                        { staticClass: "p-3 border-bottom gold-members" },
-                        [
-                          _c("span", { staticClass: "float-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-outline-secondary btn-sm",
-                                attrs: {
-                                  href: "#",
-                                  "data-toggle": "modal",
-                                  "data-target": "#extras",
-                                },
-                              },
-                              [_vm._v("ADD")]
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "mr-3 font-weight-bold text-danger non_veg",
-                              },
-                              [_vm._v(".")]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "media-body" }, [
-                              _c("h6", { staticClass: "mb-1" }, [
-                                _vm._v("Chicken Tikka Sub "),
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "text-muted mb-0" }, [
-                                _vm._v("$250"),
-                              ]),
-                            ]),
-                          ]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "p-3 border-bottom gold-members" },
-                        [
-                          _c("span", { staticClass: "float-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-outline-secondary btn-sm",
-                                attrs: {
-                                  href: "#",
-                                  "data-toggle": "modal",
-                                  "data-target": "#extras",
-                                },
-                              },
-                              [_vm._v("ADD")]
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "mr-3 font-weight-bold text-danger non_veg",
-                              },
-                              [_vm._v(".")]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "media-body" }, [
-                              _c("h6", { staticClass: "mb-1" }, [
-                                _vm._v("Cheese corn Roll "),
-                                _c(
-                                  "span",
-                                  { staticClass: "badge badge-danger" },
-                                  [_vm._v("BEST SELLER")]
-                                ),
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "text-muted mb-0" }, [
-                                _vm._v("$600"),
-                              ]),
-                            ]),
-                          ]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "p-3 border-bottom gold-members" },
-                        [
-                          _c("span", { staticClass: "float-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-outline-secondary btn-sm",
-                                attrs: {
-                                  href: "#",
-                                  "data-toggle": "modal",
-                                  "data-target": "#extras",
-                                },
-                              },
-                              [_vm._v("ADD")]
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "mr-3 font-weight-bold text-success veg",
-                              },
-                              [_vm._v(".")]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "media-body" }, [
-                              _c("h6", { staticClass: "mb-1" }, [
-                                _vm._v("Chicken Tikka Sub "),
-                                _c(
-                                  "span",
-                                  { staticClass: "badge badge-success" },
-                                  [_vm._v("Pure Veg")]
-                                ),
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "text-muted mb-0" }, [
-                                _vm._v("$250"),
-                              ]),
-                            ]),
-                          ]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "p-3 border-bottom gold-members" },
-                        [
-                          _c("span", { staticClass: "float-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-outline-secondary btn-sm",
-                                attrs: {
-                                  href: "#",
-                                  "data-toggle": "modal",
-                                  "data-target": "#extras",
-                                },
-                              },
-                              [_vm._v("ADD")]
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "mr-3 font-weight-bold text-success veg",
-                              },
-                              [_vm._v(".")]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "media-body" }, [
-                              _c("h6", { staticClass: "mb-1" }, [
-                                _vm._v("Chicken Tikka Sub "),
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "text-muted mb-0" }, [
-                                _vm._v("$250"),
-                              ]),
-                            ]),
-                          ]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "p-3 border-bottom gold-members" },
-                        [
-                          _c("span", { staticClass: "float-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-outline-secondary btn-sm",
-                                attrs: {
-                                  href: "#",
-                                  "data-toggle": "modal",
-                                  "data-target": "#extras",
-                                },
-                              },
-                              [_vm._v("ADD")]
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "mr-3 font-weight-bold text-danger non_veg",
-                              },
-                              [_vm._v(".")]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "media-body" }, [
-                              _c("h6", { staticClass: "mb-1" }, [
-                                _vm._v("Cheese corn Roll "),
-                                _c(
-                                  "span",
-                                  { staticClass: "badge badge-danger" },
-                                  [_vm._v("BEST SELLER")]
-                                ),
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "text-muted mb-0" }, [
-                                _vm._v("$600"),
-                              ]),
-                            ]),
-                          ]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "p-3 gold-members" }, [
-                        _c("span", { staticClass: "float-right" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-outline-secondary btn-sm",
-                              attrs: {
-                                href: "#",
-                                "data-toggle": "modal",
-                                "data-target": "#extras",
-                              },
-                            },
-                            [_vm._v("ADD")]
-                          ),
-                        ]),
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/1",
+                          tabindex: "0",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dcfb34a354.jpg",
+                          },
+                        }),
                         _vm._v(" "),
-                        _c("div", { staticClass: "media" }, [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "mr-3 font-weight-bold text-success veg",
-                            },
-                            [_vm._v(".")]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media-body" }, [
-                            _c("h6", { staticClass: "mb-1" }, [
-                              _vm._v("Chicken Tikka Sub "),
-                              _c(
-                                "span",
-                                { staticClass: "badge badge-success" },
-                                [_vm._v("Pure Veg")]
-                              ),
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "text-muted mb-0" }, [
-                              _vm._v("$250"),
-                            ]),
-                          ]),
+                        _c("p", { staticClass: "m-0 small" }, [
+                          _vm._v("pizza updated"),
                         ]),
-                      ]),
-                    ]),
-                  ]),
-                ]),
+                      ]
+                    ),
+                  ]
+                ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "cat-item px-1 py-3 slick-slide slick-active",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "0",
+                      "data-slick-index": "1",
+                      "aria-hidden": "false",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/2",
+                          tabindex: "0",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dcfc1aab68.jpg",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "m-0 small" }, [
+                          _vm._v("Drinks"),
+                        ]),
+                      ]
+                    ),
+                  ]
+                ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "cat-item px-1 py-3 slick-slide slick-active",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "0",
+                      "data-slick-index": "2",
+                      "aria-hidden": "false",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/5",
+                          tabindex: "0",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dd007d4766.jpg",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "m-0 small" }, [_vm._v("Veg")]),
+                      ]
+                    ),
+                  ]
+                ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "cat-item px-1 py-3 slick-slide slick-active",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "0",
+                      "data-slick-index": "3",
+                      "aria-hidden": "false",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/7",
+                          tabindex: "0",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dd01224e83.jpg",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "m-0 small" }, [_vm._v("Def")]),
+                      ]
+                    ),
+                  ]
+                ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "cat-item px-1 py-3 slick-slide slick-active",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "0",
+                      "data-slick-index": "4",
+                      "aria-hidden": "false",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/8",
+                          tabindex: "0",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dd09fac5e4.jpg",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "m-0 small" }, [
+                          _vm._v("burger"),
+                        ]),
+                      ]
+                    ),
+                  ]
+                ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "cat-item px-1 py-3 slick-slide slick-active",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "0",
+                      "data-slick-index": "5",
+                      "aria-hidden": "false",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/9",
+                          tabindex: "0",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dd0aede4f6.jpg",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "m-0 small" }, [
+                          _vm._v("Breakfast"),
+                        ]),
+                      ]
+                    ),
+                  ]
+                ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "cat-item px-1 py-3 slick-slide slick-active",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "0",
+                      "data-slick-index": "6",
+                      "aria-hidden": "false",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/10",
+                          tabindex: "0",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dd0b907331.jpg",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "m-0 small" }, [
+                          _vm._v("Lunch"),
+                        ]),
+                      ]
+                    ),
+                  ]
+                ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "cat-item px-1 py-3 slick-slide slick-active",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "0",
+                      "data-slick-index": "7",
+                      "aria-hidden": "false",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/11",
+                          tabindex: "0",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dd7140a1d3.jpg",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "m-0 small" }, [
+                          _vm._v("Dinner"),
+                        ]),
+                      ]
+                    ),
+                  ]
+                ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "cat-item px-1 py-3 slick-slide",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "-1",
+                      "data-slick-index": "8",
+                      "aria-hidden": "true",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/12",
+                          tabindex: "-1",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dd730da731.jpg",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "m-0 small" }, [
+                          _vm._v("Steak"),
+                        ]),
+                      ]
+                    ),
+                  ]
+                ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "cat-item px-1 py-3 slick-slide",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "-1",
+                      "data-slick-index": "9",
+                      "aria-hidden": "true",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/13",
+                          tabindex: "-1",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dd747edabb.png",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "m-0 small" }, [
+                          _vm._v("Salad"),
+                        ]),
+                      ]
+                    ),
+                  ]
+                ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "cat-item px-1 py-3 slick-slide",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "-1",
+                      "data-slick-index": "10",
+                      "aria-hidden": "true",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/14",
+                          tabindex: "-1",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dd755bb004.jpg",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "m-0 small" }, [
+                          _vm._v("Fries"),
+                        ]),
+                      ]
+                    ),
+                  ]
+                ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "cat-item px-1 py-3 slick-slide",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "-1",
+                      "data-slick-index": "11",
+                      "aria-hidden": "true",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/15",
+                          tabindex: "-1",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dd765c9169.png",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "m-0 small" }, [
+                          _vm._v("Sea Food"),
+                        ]),
+                      ]
+                    ),
+                  ]
+                ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "cat-item px-1 py-3 slick-slide",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "-1",
+                      "data-slick-index": "12",
+                      "aria-hidden": "true",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/16",
+                          tabindex: "-1",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dd775bfcd7.jpg",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "m-0 small" }, [_vm._v("Beef")]),
+                      ]
+                    ),
+                  ]
+                ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "cat-item px-1 py-3 slick-slide",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "-1",
+                      "data-slick-index": "13",
+                      "aria-hidden": "true",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/17",
+                          tabindex: "-1",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dd78406041.jpg",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "m-0 small" }, [
+                          _vm._v("Sandwiches"),
+                        ]),
+                      ]
+                    ),
+                  ]
+                ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "cat-item px-1 py-3 slick-slide",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "-1",
+                      "data-slick-index": "14",
+                      "aria-hidden": "true",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/21",
+                          tabindex: "-1",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dd791f2a83.jpg",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "m-0 small" }, [_vm._v("dhfh")]),
+                      ]
+                    ),
+                  ]
+                ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "cat-item px-1 py-3 slick-slide slick-cloned",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "-1",
+                      "data-slick-index": "16",
+                      "aria-hidden": "true",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/1",
+                          tabindex: "-1",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dcfb34a354.jpg",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "m-0 small" }, [
+                          _vm._v("pizza updated"),
+                        ]),
+                      ]
+                    ),
+                  ]
+                ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "cat-item px-1 py-3 slick-slide slick-cloned",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "-1",
+                      "data-slick-index": "17",
+                      "aria-hidden": "true",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/2",
+                          tabindex: "-1",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dcfc1aab68.jpg",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "m-0 small" }, [
+                          _vm._v("Drinks"),
+                        ]),
+                      ]
+                    ),
+                  ]
+                ),
+                _c(
+                  "div",
+                  {
+                    staticClass: "cat-item px-1 py-3 slick-slide slick-cloned",
+                    staticStyle: { width: "141px" },
+                    attrs: {
+                      tabindex: "-1",
+                      "data-slick-index": "18",
+                      "aria-hidden": "true",
+                    },
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white rounded d-block p-2 text-center shadow-sm active",
+                        attrs: {
+                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/5",
+                          tabindex: "-1",
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid mb-2",
+                          staticStyle: { height: "35px" },
+                          attrs: {
+                            alt: "#",
+                            src: "http://ozpos-new.test/images/upload/619dd007d4766.jpg",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "m-0 small" }, [_vm._v("Veg")]),
+                      ]
+                    ),
+                  ]
+                ),
               ]
             ),
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "slick-next slick-arrow",
+              attrs: { "aria-label": "Next", type: "button" },
+            },
+            [_vm._v("Next")]
+          ),
+        ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex item-aligns-center" }, [
+      _c(
+        "p",
+        { staticClass: "font-weight-bold h6 p-3 border-bottom mb-0 w-100" },
+        [_vm._v("Menu")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "float-right" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-outline-secondary btn-sm",
+          attrs: {
+            href: "#",
+            "data-toggle": "modal",
+            "data-target": "#extras",
+          },
+        },
+        [_vm._v("ADD")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "float-right" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-outline-secondary btn-sm",
+          attrs: {
+            href: "#",
+            "data-toggle": "modal",
+            "data-target": "#extras",
+          },
+        },
+        [_vm._v("ADD")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "float-right" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-outline-secondary btn-sm",
+          attrs: {
+            href: "#",
+            "data-toggle": "modal",
+            "data-target": "#extras",
+          },
+        },
+        [_vm._v("ADD")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-3" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "bg-white shadow-sm d-flex align-items-center rounded p-3 mb-3 clearfix restaurant-detailed-star-rating",
+          attrs: { id: "ratings-and-reviews" },
+        },
+        [
+          _c("h6", { staticClass: "mb-0" }, [_vm._v("Rate this Place")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "star-rating ml-auto" }, [
+            _c("div", { staticClass: "d-inline-block h6 m-0" }, [
+              _c("i", { staticClass: "feather-star text-warning" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "feather-star text-warning" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "feather-star text-warning" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "feather-star text-warning" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "feather-star" }),
+            ]),
             _vm._v(" "),
-            _c("div", { staticClass: "mb-3" }, [
+            _c("b", { staticClass: "text-black ml-2" }, [_vm._v("334")]),
+          ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "bg-white rounded p-3 mb-3 clearfix graph-star-rating rounded shadow-sm",
+        },
+        [
+          _c("h6", { staticClass: "mb-0 mb-1" }, [
+            _vm._v("Ratings and Reviews"),
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-muted mb-4 mt-1 small" }, [
+            _vm._v("Rated 3.5 out of 5"),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "graph-star-rating-body" }, [
+            _c("div", { staticClass: "rating-list" }, [
               _c(
                 "div",
-                {
-                  staticClass:
-                    "bg-white shadow-sm d-flex align-items-center rounded p-3 mb-3 clearfix restaurant-detailed-star-rating",
-                  attrs: { id: "ratings-and-reviews" },
-                },
-                [
-                  _c("h6", { staticClass: "mb-0" }, [
-                    _vm._v("Rate this Place"),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "star-rating ml-auto" }, [
-                    _c("div", { staticClass: "d-inline-block h6 m-0" }, [
-                      _c("i", { staticClass: "feather-star text-warning" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "feather-star text-warning" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "feather-star text-warning" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "feather-star text-warning" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "feather-star" }),
-                    ]),
-                    _vm._v(" "),
-                    _c("b", { staticClass: "text-black ml-2" }, [
-                      _vm._v("334"),
-                    ]),
-                  ]),
-                ]
+                { staticClass: "rating-list-left font-weight-bold small" },
+                [_vm._v("5 Star")]
               ),
+              _vm._v(" "),
+              _c("div", { staticClass: "rating-list-center" }, [
+                _c("div", { staticClass: "progress" }, [
+                  _c("div", {
+                    staticClass: "progress-bar bg-info",
+                    staticStyle: { width: "56%" },
+                    attrs: {
+                      role: "progressbar",
+                      "aria-valuenow": "56",
+                      "aria-valuemin": "0",
+                      "aria-valuemax": "100",
+                    },
+                  }),
+                ]),
+              ]),
               _vm._v(" "),
               _c(
                 "div",
-                {
-                  staticClass:
-                    "bg-white rounded p-3 mb-3 clearfix graph-star-rating rounded shadow-sm",
-                },
-                [
-                  _c("h6", { staticClass: "mb-0 mb-1" }, [
-                    _vm._v("Ratings and Reviews"),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-muted mb-4 mt-1 small" }, [
-                    _vm._v("Rated 3.5 out of 5"),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "graph-star-rating-body" }, [
-                    _c("div", { staticClass: "rating-list" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "rating-list-left font-weight-bold small",
-                        },
-                        [_vm._v("5 Star")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "rating-list-center" }, [
-                        _c("div", { staticClass: "progress" }, [
-                          _c("div", {
-                            staticClass: "progress-bar bg-info",
-                            staticStyle: { width: "56%" },
-                            attrs: {
-                              role: "progressbar",
-                              "aria-valuenow": "56",
-                              "aria-valuemin": "0",
-                              "aria-valuemax": "100",
-                            },
-                          }),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "rating-list-right font-weight-bold small",
-                        },
-                        [_vm._v("56 %")]
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "rating-list" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "rating-list-left font-weight-bold small",
-                        },
-                        [_vm._v("4 Star")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "rating-list-center" }, [
-                        _c("div", { staticClass: "progress" }, [
-                          _c("div", {
-                            staticClass: "progress-bar bg-info",
-                            staticStyle: { width: "23%" },
-                            attrs: {
-                              role: "progressbar",
-                              "aria-valuenow": "23",
-                              "aria-valuemin": "0",
-                              "aria-valuemax": "100",
-                            },
-                          }),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "rating-list-right font-weight-bold small",
-                        },
-                        [_vm._v("23 %")]
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "rating-list" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "rating-list-left font-weight-bold small",
-                        },
-                        [_vm._v("3 Star")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "rating-list-center" }, [
-                        _c("div", { staticClass: "progress" }, [
-                          _c("div", {
-                            staticClass: "progress-bar bg-info",
-                            staticStyle: { width: "11%" },
-                            attrs: {
-                              role: "progressbar",
-                              "aria-valuenow": "11",
-                              "aria-valuemin": "0",
-                              "aria-valuemax": "100",
-                            },
-                          }),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "rating-list-right font-weight-bold small",
-                        },
-                        [_vm._v("11 %")]
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "rating-list" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "rating-list-left font-weight-bold small",
-                        },
-                        [_vm._v("2 Star")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "rating-list-center" }, [
-                        _c("div", { staticClass: "progress" }, [
-                          _c("div", {
-                            staticClass: "progress-bar bg-info",
-                            staticStyle: { width: "6%" },
-                            attrs: {
-                              role: "progressbar",
-                              "aria-valuenow": "6",
-                              "aria-valuemin": "0",
-                              "aria-valuemax": "100",
-                            },
-                          }),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "rating-list-right font-weight-bold small",
-                        },
-                        [_vm._v("6 %")]
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "rating-list" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "rating-list-left font-weight-bold small",
-                        },
-                        [_vm._v("1 Star")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "rating-list-center" }, [
-                        _c("div", { staticClass: "progress" }, [
-                          _c("div", {
-                            staticClass: "progress-bar bg-info",
-                            staticStyle: { width: "4%" },
-                            attrs: {
-                              role: "progressbar",
-                              "aria-valuenow": "4",
-                              "aria-valuemin": "0",
-                              "aria-valuemax": "100",
-                            },
-                          }),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "rating-list-right font-weight-bold small",
-                        },
-                        [_vm._v("4 %")]
-                      ),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "graph-star-rating-footer text-center mt-3",
-                    },
-                    [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary btn-block btn-sm",
-                          attrs: { type: "button" },
-                        },
-                        [_vm._v("Rate and Review")]
-                      ),
-                    ]
-                  ),
-                ]
+                { staticClass: "rating-list-right font-weight-bold small" },
+                [_vm._v("56 %")]
               ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "rating-list" }, [
+              _c(
+                "div",
+                { staticClass: "rating-list-left font-weight-bold small" },
+                [_vm._v("4 Star")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "rating-list-center" }, [
+                _c("div", { staticClass: "progress" }, [
+                  _c("div", {
+                    staticClass: "progress-bar bg-info",
+                    staticStyle: { width: "23%" },
+                    attrs: {
+                      role: "progressbar",
+                      "aria-valuenow": "23",
+                      "aria-valuemin": "0",
+                      "aria-valuemax": "100",
+                    },
+                  }),
+                ]),
+              ]),
               _vm._v(" "),
               _c(
                 "div",
-                {
-                  staticClass:
-                    "bg-white p-3 mb-3 restaurant-detailed-ratings-and-reviews shadow-sm rounded",
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "text-primary float-right",
-                      attrs: { href: "#" },
-                    },
-                    [_vm._v("Top Rated")]
-                  ),
-                  _vm._v(" "),
-                  _c("h6", { staticClass: "mb-1" }, [
-                    _vm._v("All Ratings and Reviews"),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "reviews-members py-3" }, [
-                    _c("div", { staticClass: "media" }, [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("img", {
-                          staticClass: "mr-3 rounded-pill",
-                          attrs: { alt: "#", src: "img/reviewer1.png" },
-                        }),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "media-body" }, [
-                        _c("div", { staticClass: "reviews-members-header" }, [
-                          _c(
-                            "div",
-                            { staticClass: "star-rating float-right" },
-                            [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "d-inline-block",
-                                  staticStyle: { "font-size": "14px" },
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "feather-star text-warning",
-                                  }),
-                                  _vm._v(" "),
-                                  _c("i", {
-                                    staticClass: "feather-star text-warning",
-                                  }),
-                                  _vm._v(" "),
-                                  _c("i", {
-                                    staticClass: "feather-star text-warning",
-                                  }),
-                                  _vm._v(" "),
-                                  _c("i", {
-                                    staticClass: "feather-star text-warning",
-                                  }),
-                                  _vm._v(" "),
-                                  _c("i", { staticClass: "feather-star" }),
-                                ]
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("h6", { staticClass: "mb-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "text-dark",
-                                attrs: { href: "#" },
-                              },
-                              [_vm._v("Trump")]
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text-muted small" }, [
-                            _vm._v("Tue, 20 Mar 2020"),
-                          ]),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "reviews-members-body" }, [
-                          _c("p", [
-                            _vm._v(
-                              "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classNameical Latin literature from 45 BC, making it over 2000 years old."
-                            ),
-                          ]),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "reviews-members-footer" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "total-like btn btn-sm btn-outline-primary",
-                              attrs: { href: "#" },
-                            },
-                            [
-                              _c("i", { staticClass: "feather-thumbs-up" }),
-                              _vm._v(" 856M"),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "total-like btn btn-sm btn-outline-primary",
-                              attrs: { href: "#" },
-                            },
-                            [
-                              _c("i", { staticClass: "feather-thumbs-down" }),
-                              _vm._v(" 158K"),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "total-like-user-main ml-2",
-                              attrs: { dir: "rtl" },
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  attrs: {
-                                    href: "#",
-                                    "aria-describedby": "tooltip-top0",
-                                  },
-                                },
-                                [
-                                  _c("img", {
-                                    staticClass: "total-like-user rounded-pill",
-                                    attrs: {
-                                      alt: "#",
-                                      src: "img/reviewer3.png",
-                                    },
-                                  }),
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  attrs: {
-                                    href: "#",
-                                    "aria-describedby": "tooltip-top1",
-                                  },
-                                },
-                                [
-                                  _c("img", {
-                                    staticClass: "total-like-user rounded-pill",
-                                    attrs: {
-                                      alt: "#",
-                                      src: "img/reviewer4.png",
-                                    },
-                                  }),
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("a", { attrs: { href: "#" } }, [
-                                _c("img", {
-                                  staticClass: "total-like-user rounded-pill",
-                                  attrs: { alt: "#", src: "img/reviewer5.png" },
-                                }),
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  attrs: {
-                                    href: "#",
-                                    "aria-describedby": "tooltip-top3",
-                                  },
-                                },
-                                [
-                                  _c("img", {
-                                    staticClass: "total-like-user rounded-pill",
-                                    attrs: {
-                                      alt: "#",
-                                      src: "img/reviewer6.png",
-                                    },
-                                  }),
-                                ]
-                              ),
-                            ]
-                          ),
-                        ]),
-                      ]),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "reviews-members py-3" }, [
-                    _c("div", { staticClass: "media" }, [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("img", {
-                          staticClass: "mr-3 rounded-pill",
-                          attrs: { alt: "#", src: "img/reviewer2.png" },
-                        }),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "media-body" }, [
-                        _c("div", { staticClass: "reviews-members-header" }, [
-                          _c(
-                            "div",
-                            { staticClass: "star-rating float-right" },
-                            [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "d-inline-block",
-                                  staticStyle: { "font-size": "14px" },
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "feather-star text-warning",
-                                  }),
-                                  _vm._v(" "),
-                                  _c("i", {
-                                    staticClass: "feather-star text-warning",
-                                  }),
-                                  _vm._v(" "),
-                                  _c("i", {
-                                    staticClass: "feather-star text-warning",
-                                  }),
-                                  _vm._v(" "),
-                                  _c("i", {
-                                    staticClass: "feather-star text-warning",
-                                  }),
-                                  _vm._v(" "),
-                                  _c("i", { staticClass: "feather-star" }),
-                                ]
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("h6", { staticClass: "mb-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "text-dark",
-                                attrs: { href: "#" },
-                              },
-                              [_vm._v("Jhon Smith")]
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text-muted small" }, [
-                            _vm._v("Tue, 20 Mar 2020"),
-                          ]),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "reviews-members-body" }, [
-                          _c("p", [
-                            _vm._v(
-                              "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
-                            ),
-                          ]),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "reviews-members-footer" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "total-like btn btn-sm btn-outline-primary",
-                              attrs: { href: "#" },
-                            },
-                            [
-                              _c("i", { staticClass: "feather-thumbs-up" }),
-                              _vm._v(" 88K"),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "total-like btn btn-sm btn-outline-primary",
-                              attrs: { href: "#" },
-                            },
-                            [
-                              _c("i", { staticClass: "feather-thumbs-down" }),
-                              _vm._v(" 1K"),
-                            ]
-                          ),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "total-like-user-main ml-2",
-                              attrs: { dir: "rtl" },
-                            },
-                            [
-                              _c("a", { attrs: { href: "#" } }, [
-                                _c("img", {
-                                  staticClass: "total-like-user rounded-pill",
-                                  attrs: { alt: "#", src: "img/reviewer3.png" },
-                                }),
-                              ]),
-                              _c("a", { attrs: { href: "#" } }, [
-                                _c("img", {
-                                  staticClass: "total-like-user rounded-pill",
-                                  attrs: { alt: "#", src: "img/reviewer4.png" },
-                                }),
-                              ]),
-                              _c("a", { attrs: { href: "#" } }, [
-                                _c("img", {
-                                  staticClass: "total-like-user rounded-pill",
-                                  attrs: { alt: "#", src: "img/reviewer5.png" },
-                                }),
-                              ]),
-                              _c("a", { attrs: { href: "#" } }, [
-                                _c("img", {
-                                  staticClass: "total-like-user rounded-pill",
-                                  attrs: { alt: "#", src: "img/reviewer6.png" },
-                                }),
-                              ]),
-                            ]
-                          ),
-                        ]),
-                      ]),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass:
-                        "text-center w-100 d-block mt-3 font-weight-bold",
-                      attrs: { href: "#" },
-                    },
-                    [_vm._v("See All Reviews")]
-                  ),
-                ]
+                { staticClass: "rating-list-right font-weight-bold small" },
+                [_vm._v("23 %")]
               ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "rating-list" }, [
+              _c(
+                "div",
+                { staticClass: "rating-list-left font-weight-bold small" },
+                [_vm._v("3 Star")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "rating-list-center" }, [
+                _c("div", { staticClass: "progress" }, [
+                  _c("div", {
+                    staticClass: "progress-bar bg-info",
+                    staticStyle: { width: "11%" },
+                    attrs: {
+                      role: "progressbar",
+                      "aria-valuenow": "11",
+                      "aria-valuemin": "0",
+                      "aria-valuemax": "100",
+                    },
+                  }),
+                ]),
+              ]),
               _vm._v(" "),
               _c(
                 "div",
+                { staticClass: "rating-list-right font-weight-bold small" },
+                [_vm._v("11 %")]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "rating-list" }, [
+              _c(
+                "div",
+                { staticClass: "rating-list-left font-weight-bold small" },
+                [_vm._v("2 Star")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "rating-list-center" }, [
+                _c("div", { staticClass: "progress" }, [
+                  _c("div", {
+                    staticClass: "progress-bar bg-info",
+                    staticStyle: { width: "6%" },
+                    attrs: {
+                      role: "progressbar",
+                      "aria-valuenow": "6",
+                      "aria-valuemin": "0",
+                      "aria-valuemax": "100",
+                    },
+                  }),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "rating-list-right font-weight-bold small" },
+                [_vm._v("6 %")]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "rating-list" }, [
+              _c(
+                "div",
+                { staticClass: "rating-list-left font-weight-bold small" },
+                [_vm._v("1 Star")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "rating-list-center" }, [
+                _c("div", { staticClass: "progress" }, [
+                  _c("div", {
+                    staticClass: "progress-bar bg-info",
+                    staticStyle: { width: "4%" },
+                    attrs: {
+                      role: "progressbar",
+                      "aria-valuenow": "4",
+                      "aria-valuemin": "0",
+                      "aria-valuemax": "100",
+                    },
+                  }),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "rating-list-right font-weight-bold small" },
+                [_vm._v("4 %")]
+              ),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "graph-star-rating-footer text-center mt-3" },
+            [
+              _c(
+                "button",
                 {
-                  staticClass:
-                    "bg-white p-3 rating-review-select-page rounded shadow-sm",
+                  staticClass: "btn btn-primary btn-block btn-sm",
+                  attrs: { type: "button" },
                 },
-                [
-                  _c("h6", { staticClass: "mb-3" }, [_vm._v("Leave Comment")]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "d-flex align-items-center mb-3" }, [
-                    _c("p", { staticClass: "m-0 small" }, [
-                      _vm._v("Rate the Place"),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "star-rating ml-auto" }, [
-                      _c("div", { staticClass: "d-inline-block" }, [
+                [_vm._v("Rate and Review")]
+              ),
+            ]
+          ),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "bg-white p-3 mb-3 restaurant-detailed-ratings-and-reviews shadow-sm rounded",
+        },
+        [
+          _c(
+            "a",
+            { staticClass: "text-primary float-right", attrs: { href: "#" } },
+            [_vm._v("Top Rated")]
+          ),
+          _vm._v(" "),
+          _c("h6", { staticClass: "mb-1" }, [
+            _vm._v("All Ratings and Reviews"),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "reviews-members py-3" }, [
+            _c("div", { staticClass: "media" }, [
+              _c("a", { attrs: { href: "#" } }, [
+                _c("img", {
+                  staticClass: "mr-3 rounded-pill",
+                  attrs: { alt: "#", src: "img/reviewer1.png" },
+                }),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "media-body" }, [
+                _c("div", { staticClass: "reviews-members-header" }, [
+                  _c("div", { staticClass: "star-rating float-right" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "d-inline-block",
+                        staticStyle: { "font-size": "14px" },
+                      },
+                      [
                         _c("i", { staticClass: "feather-star text-warning" }),
                         _vm._v(" "),
                         _c("i", { staticClass: "feather-star text-warning" }),
@@ -38763,494 +38907,517 @@ var staticRenderFns = [
                         _c("i", { staticClass: "feather-star text-warning" }),
                         _vm._v(" "),
                         _c("i", { staticClass: "feather-star" }),
-                      ]),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("form", [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label", { staticClass: "form-label small" }, [
-                        _vm._v("Your Comment"),
-                      ]),
-                      _c("textarea", { staticClass: "form-control" }),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group mb-0" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary btn-block",
-                          attrs: { type: "button" },
-                        },
-                        [_vm._v(" Submit Comment ")]
-                      ),
-                    ]),
-                  ]),
-                ]
-              ),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "osahan-cart-item rounded rounded shadow-sm overflow-hidden bg-white sticky_sidebar",
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "d-flex border-bottom osahan-cart-item-profile bg-white p-3",
-                  },
-                  [
-                    _c("img", {
-                      staticClass: "mr-3 rounded-circle img-fluid",
-                      attrs: { alt: "osahan", src: "img/starter1.jpg" },
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "d-flex flex-column" }, [
-                      _c("h6", { staticClass: "mb-1 font-weight-bold" }, [
-                        _vm._v("Spice Hut Indian Restaurant"),
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "mb-0 small text-muted" }, [
-                        _c("i", { staticClass: "feather-map-pin" }),
-                        _vm._v(" 2036 2ND AVE, NEW YORK, NY 10029"),
-                      ]),
-                    ]),
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "bg-white border-bottom py-2" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom",
-                    },
-                    [
-                      _c("div", { staticClass: "media align-items-center" }, [
-                        _c("div", { staticClass: "mr-2 text-danger" }, [
-                          _vm._v("·"),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "media-body" }, [
-                          _c("p", { staticClass: "m-0" }, [
-                            _vm._v("Chicken Tikka Sub"),
-                          ]),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "d-flex align-items-center" }, [
-                        _c(
-                          "span",
-                          { staticClass: "count-number float-right" },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "btn-sm left dec btn btn-outline-secondary",
-                                attrs: { type: "button" },
-                              },
-                              [_c("i", { staticClass: "feather-minus" })]
-                            ),
-                            _c("input", {
-                              staticClass: "count-number-input",
-                              attrs: { type: "text", readonly: "", value: "2" },
-                            }),
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "btn-sm right inc btn btn-outline-secondary",
-                                attrs: { type: "button" },
-                              },
-                              [_c("i", { staticClass: "feather-plus" })]
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "p",
-                          {
-                            staticClass:
-                              "text-gray mb-0 float-right ml-2 text-muted small",
-                          },
-                          [_vm._v("$628")]
-                        ),
-                      ]),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom",
-                    },
-                    [
-                      _c("div", { staticClass: "media align-items-center" }, [
-                        _c("div", { staticClass: "mr-2 text-danger" }, [
-                          _vm._v("·"),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "media-body" }, [
-                          _c("p", { staticClass: "m-0" }, [
-                            _vm._v(
-                              "Methi Chicken Dry\n                                        "
-                            ),
-                          ]),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "d-flex align-items-center" }, [
-                        _c(
-                          "span",
-                          { staticClass: "count-number float-right" },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "btn-sm left dec btn btn-outline-secondary",
-                                attrs: { type: "button" },
-                              },
-                              [_c("i", { staticClass: "feather-minus" })]
-                            ),
-                            _c("input", {
-                              staticClass: "count-number-input",
-                              attrs: { type: "text", readonly: "", value: "2" },
-                            }),
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "btn-sm right inc btn btn-outline-secondary",
-                                attrs: { type: "button" },
-                              },
-                              [_c("i", { staticClass: "feather-plus" })]
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "p",
-                          {
-                            staticClass:
-                              "text-gray mb-0 float-right ml-2 text-muted small",
-                          },
-                          [_vm._v("$628")]
-                        ),
-                      ]),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom",
-                    },
-                    [
-                      _c("div", { staticClass: "media align-items-center" }, [
-                        _c("div", { staticClass: "mr-2 text-danger" }, [
-                          _vm._v("·"),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "media-body" }, [
-                          _c("p", { staticClass: "m-0" }, [
-                            _vm._v(
-                              "Reshmi Kebab\n                                        "
-                            ),
-                          ]),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "d-flex align-items-center" }, [
-                        _c(
-                          "span",
-                          { staticClass: "count-number float-right" },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "btn-sm left dec btn btn-outline-secondary",
-                                attrs: { type: "button" },
-                              },
-                              [_c("i", { staticClass: "feather-minus" })]
-                            ),
-                            _c("input", {
-                              staticClass: "count-number-input",
-                              attrs: { type: "text", readonly: "", value: "2" },
-                            }),
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "btn-sm right inc btn btn-outline-secondary",
-                                attrs: { type: "button" },
-                              },
-                              [_c("i", { staticClass: "feather-plus" })]
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "p",
-                          {
-                            staticClass:
-                              "text-gray mb-0 float-right ml-2 text-muted small",
-                          },
-                          [_vm._v("$628")]
-                        ),
-                      ]),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom",
-                    },
-                    [
-                      _c("div", { staticClass: "media align-items-center" }, [
-                        _c("div", { staticClass: "mr-2 text-success" }, [
-                          _vm._v("·"),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "media-body" }, [
-                          _c("p", { staticClass: "m-0" }, [
-                            _vm._v(
-                              "Lemon Cheese Dry\n                                        "
-                            ),
-                          ]),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "d-flex align-items-center" }, [
-                        _c(
-                          "span",
-                          { staticClass: "count-number float-right" },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "btn-sm left dec btn btn-outline-secondary",
-                                attrs: { type: "button" },
-                              },
-                              [_c("i", { staticClass: "feather-minus" })]
-                            ),
-                            _c("input", {
-                              staticClass: "count-number-input",
-                              attrs: { type: "text", readonly: "", value: "2" },
-                            }),
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "btn-sm right inc btn btn-outline-secondary",
-                                attrs: { type: "button" },
-                              },
-                              [_c("i", { staticClass: "feather-plus" })]
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "p",
-                          {
-                            staticClass:
-                              "text-gray mb-0 float-right ml-2 text-muted small",
-                          },
-                          [_vm._v("$628")]
-                        ),
-                      ]),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "gold-members d-flex align-items-center justify-content-between px-3 py-2",
-                    },
-                    [
-                      _c("div", { staticClass: "media align-items-center" }, [
-                        _c("div", { staticClass: "mr-2 text-success" }, [
-                          _vm._v("·"),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "media-body" }, [
-                          _c("p", { staticClass: "m-0" }, [
-                            _vm._v("Rara Paneer"),
-                          ]),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "d-flex align-items-center" }, [
-                        _c(
-                          "span",
-                          { staticClass: "count-number float-right" },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "btn-sm left dec btn btn-outline-secondary",
-                                attrs: { type: "button" },
-                              },
-                              [_c("i", { staticClass: "feather-minus" })]
-                            ),
-                            _c("input", {
-                              staticClass: "count-number-input",
-                              attrs: { type: "text", readonly: "", value: "2" },
-                            }),
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "btn-sm right inc btn btn-outline-secondary",
-                                attrs: { type: "button" },
-                              },
-                              [_c("i", { staticClass: "feather-plus" })]
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "p",
-                          {
-                            staticClass:
-                              "text-gray mb-0 float-right ml-2 text-muted small",
-                          },
-                          [_vm._v("$628")]
-                        ),
-                      ]),
-                    ]
-                  ),
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "bg-white p-3 py-3 border-bottom clearfix" },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "input-group-sm mb-2 input-group" },
-                      [
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: {
-                            placeholder: "Enter promo code",
-                            type: "text",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "input-group-append" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-primary",
-                              attrs: { type: "button" },
-                            },
-                            [
-                              _c("i", { staticClass: "feather-percent" }),
-                              _vm._v(" APPLY"),
-                            ]
-                          ),
-                        ]),
                       ]
                     ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "mb-0 input-group" }, [
-                      _c("div", { staticClass: "input-group-prepend" }, [
-                        _c("span", { staticClass: "input-group-text" }, [
-                          _c("i", { staticClass: "feather-message-square" }),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("textarea", {
-                        staticClass: "form-control",
-                        attrs: {
-                          placeholder: "Any suggestions? We will pass it on...",
-                          "aria-label": "With textarea",
-                        },
-                      }),
-                    ]),
-                  ]
-                ),
+                  ]),
+                  _vm._v(" "),
+                  _c("h6", { staticClass: "mb-0" }, [
+                    _c(
+                      "a",
+                      { staticClass: "text-dark", attrs: { href: "#" } },
+                      [_vm._v("Trump")]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-muted small" }, [
+                    _vm._v("Tue, 20 Mar 2020"),
+                  ]),
+                ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "bg-white p-3 clearfix border-bottom" },
-                  [
-                    _c("p", { staticClass: "mb-1" }, [
-                      _vm._v("Item Total "),
-                      _c("span", { staticClass: "float-right text-dark" }, [
-                        _vm._v("$3140"),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "mb-1" }, [
-                      _vm._v("Restaurant Charges "),
-                      _c("span", { staticClass: "float-right text-dark" }, [
-                        _vm._v("$62.8"),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "mb-1" }, [
-                      _vm._v("Delivery Fee"),
-                      _c("span", { staticClass: "text-info ml-1" }, [
-                        _c("i", { staticClass: "feather-info" }),
-                      ]),
-                      _c("span", { staticClass: "float-right text-dark" }, [
-                        _vm._v("$10"),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "mb-1 text-success" }, [
-                      _vm._v("Total Discount"),
-                      _c("span", { staticClass: "float-right text-success" }, [
-                        _vm._v("$1884"),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("hr"),
-                    _vm._v(" "),
-                    _c("h6", { staticClass: "font-weight-bold mb-0" }, [
-                      _vm._v("TO PAY "),
-                      _c("span", { staticClass: "float-right" }, [
-                        _vm._v("$1329"),
-                      ]),
-                    ]),
-                  ]
-                ),
+                _c("div", { staticClass: "reviews-members-body" }, [
+                  _c("p", [
+                    _vm._v(
+                      "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classNameical Latin literature from 45 BC, making it over 2000 years old."
+                    ),
+                  ]),
+                ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "p-3" }, [
+                _c("div", { staticClass: "reviews-members-footer" }, [
                   _c(
                     "a",
                     {
-                      staticClass: "btn btn-success btn-block btn-lg",
-                      attrs: { href: "checkout" },
+                      staticClass: "total-like btn btn-sm btn-outline-primary",
+                      attrs: { href: "#" },
                     },
                     [
-                      _vm._v("Checkout"),
-                      _c("i", { staticClass: "feather-arrow-right" }),
+                      _c("i", { staticClass: "feather-thumbs-up" }),
+                      _vm._v(" 856M"),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "total-like btn btn-sm btn-outline-primary",
+                      attrs: { href: "#" },
+                    },
+                    [
+                      _c("i", { staticClass: "feather-thumbs-down" }),
+                      _vm._v(" 158K"),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "total-like-user-main ml-2",
+                      attrs: { dir: "rtl" },
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            href: "#",
+                            "aria-describedby": "tooltip-top0",
+                          },
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "total-like-user rounded-pill",
+                            attrs: { alt: "#", src: "img/reviewer3.png" },
+                          }),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            href: "#",
+                            "aria-describedby": "tooltip-top1",
+                          },
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "total-like-user rounded-pill",
+                            attrs: { alt: "#", src: "img/reviewer4.png" },
+                          }),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("a", { attrs: { href: "#" } }, [
+                        _c("img", {
+                          staticClass: "total-like-user rounded-pill",
+                          attrs: { alt: "#", src: "img/reviewer5.png" },
+                        }),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            href: "#",
+                            "aria-describedby": "tooltip-top3",
+                          },
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "total-like-user rounded-pill",
+                            attrs: { alt: "#", src: "img/reviewer6.png" },
+                          }),
+                        ]
+                      ),
                     ]
                   ),
                 ]),
-              ]
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c("div", { staticClass: "reviews-members py-3" }, [
+            _c("div", { staticClass: "media" }, [
+              _c("a", { attrs: { href: "#" } }, [
+                _c("img", {
+                  staticClass: "mr-3 rounded-pill",
+                  attrs: { alt: "#", src: "img/reviewer2.png" },
+                }),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "media-body" }, [
+                _c("div", { staticClass: "reviews-members-header" }, [
+                  _c("div", { staticClass: "star-rating float-right" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "d-inline-block",
+                        staticStyle: { "font-size": "14px" },
+                      },
+                      [
+                        _c("i", { staticClass: "feather-star text-warning" }),
+                        _vm._v(" "),
+                        _c("i", { staticClass: "feather-star text-warning" }),
+                        _vm._v(" "),
+                        _c("i", { staticClass: "feather-star text-warning" }),
+                        _vm._v(" "),
+                        _c("i", { staticClass: "feather-star text-warning" }),
+                        _vm._v(" "),
+                        _c("i", { staticClass: "feather-star" }),
+                      ]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("h6", { staticClass: "mb-0" }, [
+                    _c(
+                      "a",
+                      { staticClass: "text-dark", attrs: { href: "#" } },
+                      [_vm._v("Jhon Smith")]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-muted small" }, [
+                    _vm._v("Tue, 20 Mar 2020"),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "reviews-members-body" }, [
+                  _c("p", [
+                    _vm._v(
+                      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
+                    ),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "reviews-members-footer" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "total-like btn btn-sm btn-outline-primary",
+                      attrs: { href: "#" },
+                    },
+                    [
+                      _c("i", { staticClass: "feather-thumbs-up" }),
+                      _vm._v(" 88K"),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "total-like btn btn-sm btn-outline-primary",
+                      attrs: { href: "#" },
+                    },
+                    [
+                      _c("i", { staticClass: "feather-thumbs-down" }),
+                      _vm._v(" 1K"),
+                    ]
+                  ),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "total-like-user-main ml-2",
+                      attrs: { dir: "rtl" },
+                    },
+                    [
+                      _c("a", { attrs: { href: "#" } }, [
+                        _c("img", {
+                          staticClass: "total-like-user rounded-pill",
+                          attrs: { alt: "#", src: "img/reviewer3.png" },
+                        }),
+                      ]),
+                      _c("a", { attrs: { href: "#" } }, [
+                        _c("img", {
+                          staticClass: "total-like-user rounded-pill",
+                          attrs: { alt: "#", src: "img/reviewer4.png" },
+                        }),
+                      ]),
+                      _c("a", { attrs: { href: "#" } }, [
+                        _c("img", {
+                          staticClass: "total-like-user rounded-pill",
+                          attrs: { alt: "#", src: "img/reviewer5.png" },
+                        }),
+                      ]),
+                      _c("a", { attrs: { href: "#" } }, [
+                        _c("img", {
+                          staticClass: "total-like-user rounded-pill",
+                          attrs: { alt: "#", src: "img/reviewer6.png" },
+                        }),
+                      ]),
+                    ]
+                  ),
+                ]),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "text-center w-100 d-block mt-3 font-weight-bold",
+              attrs: { href: "#" },
+            },
+            [_vm._v("See All Reviews")]
+          ),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "bg-white p-3 rating-review-select-page rounded shadow-sm",
+        },
+        [
+          _c("h6", { staticClass: "mb-3" }, [_vm._v("Leave Comment")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "d-flex align-items-center mb-3" }, [
+            _c("p", { staticClass: "m-0 small" }, [_vm._v("Rate the Place")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "star-rating ml-auto" }, [
+              _c("div", { staticClass: "d-inline-block" }, [
+                _c("i", { staticClass: "feather-star text-warning" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "feather-star text-warning" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "feather-star text-warning" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "feather-star text-warning" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "feather-star" }),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("form", [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { staticClass: "form-label small" }, [
+                _vm._v("Your Comment"),
+              ]),
+              _c("textarea", { staticClass: "form-control" }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group mb-0" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary btn-block",
+                  attrs: { type: "button" },
+                },
+                [_vm._v(" Submit Comment ")]
+              ),
+            ]),
+          ]),
+        ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "bg-white border-bottom py-2" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom",
+        },
+        [
+          _c("div", { staticClass: "media align-items-center" }, [
+            _c("div", { staticClass: "mr-2 text-danger" }, [_vm._v("·")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "media-body" }, [
+              _c("p", { staticClass: "m-0" }, [_vm._v("Chicken Tikka Sub")]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "d-flex align-items-center" }, [
+            _c("span", { staticClass: "count-number float-right" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn-sm left dec btn btn-outline-secondary",
+                  attrs: { type: "button" },
+                },
+                [_c("i", { staticClass: "feather-minus" })]
+              ),
+              _c("input", {
+                staticClass: "count-number-input",
+                attrs: { type: "text", readonly: "", value: "2" },
+              }),
+              _c(
+                "button",
+                {
+                  staticClass: "btn-sm right inc btn btn-outline-secondary",
+                  attrs: { type: "button" },
+                },
+                [_c("i", { staticClass: "feather-plus" })]
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticClass: "text-gray mb-0 float-right ml-2 text-muted small",
+              },
+              [_vm._v("$628")]
             ),
           ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom",
+        },
+        [
+          _c("div", { staticClass: "media align-items-center" }, [
+            _c("div", { staticClass: "mr-2 text-danger" }, [_vm._v("·")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "media-body" }, [
+              _c("p", { staticClass: "m-0" }, [
+                _vm._v(
+                  "Methi Chicken Dry\n                                    "
+                ),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "d-flex align-items-center" }, [
+            _c("span", { staticClass: "count-number float-right" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn-sm left dec btn btn-outline-secondary",
+                  attrs: { type: "button" },
+                },
+                [_c("i", { staticClass: "feather-minus" })]
+              ),
+              _c("input", {
+                staticClass: "count-number-input",
+                attrs: { type: "text", readonly: "", value: "2" },
+              }),
+              _c(
+                "button",
+                {
+                  staticClass: "btn-sm right inc btn btn-outline-secondary",
+                  attrs: { type: "button" },
+                },
+                [_c("i", { staticClass: "feather-plus" })]
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticClass: "text-gray mb-0 float-right ml-2 text-muted small",
+              },
+              [_vm._v("$628")]
+            ),
+          ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom",
+        },
+        [
+          _c("div", { staticClass: "media align-items-center" }, [
+            _c("div", { staticClass: "mr-2 text-danger" }, [_vm._v("·")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "media-body" }, [
+              _c("p", { staticClass: "m-0" }, [
+                _vm._v("Reshmi Kebab\n                                    "),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "d-flex align-items-center" }, [
+            _c("span", { staticClass: "count-number float-right" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn-sm left dec btn btn-outline-secondary",
+                  attrs: { type: "button" },
+                },
+                [_c("i", { staticClass: "feather-minus" })]
+              ),
+              _c("input", {
+                staticClass: "count-number-input",
+                attrs: { type: "text", readonly: "", value: "2" },
+              }),
+              _c(
+                "button",
+                {
+                  staticClass: "btn-sm right inc btn btn-outline-secondary",
+                  attrs: { type: "button" },
+                },
+                [_c("i", { staticClass: "feather-plus" })]
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticClass: "text-gray mb-0 float-right ml-2 text-muted small",
+              },
+              [_vm._v("$628")]
+            ),
+          ]),
+        ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "bg-white p-3 clearfix border-bottom" }, [
+      _c("p", { staticClass: "mb-1" }, [
+        _vm._v("Item Total "),
+        _c("span", { staticClass: "float-right text-dark" }, [_vm._v("$3140")]),
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "mb-1" }, [
+        _vm._v("Restaurant Charges "),
+        _c("span", { staticClass: "float-right text-dark" }, [_vm._v("$62.8")]),
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "mb-1" }, [
+        _vm._v("Delivery Fee"),
+        _c("span", { staticClass: "text-info ml-1" }, [
+          _c("i", { staticClass: "feather-info" }),
+        ]),
+        _c("span", { staticClass: "float-right text-dark" }, [_vm._v("$10")]),
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "mb-1 text-success" }, [
+        _vm._v("Total Discount"),
+        _c("span", { staticClass: "float-right text-success" }, [
+          _vm._v("$1884"),
         ]),
       ]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("h6", { staticClass: "font-weight-bold mb-0" }, [
+        _vm._v("TO PAY "),
+        _c("span", { staticClass: "float-right" }, [_vm._v("$1329")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-3" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-success btn-block btn-lg",
+          attrs: { href: "checkout" },
+        },
+        [_vm._v("checkout"), _c("i", { staticClass: "feather-arrow-right" })]
+      ),
     ])
   },
 ]

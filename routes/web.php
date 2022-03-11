@@ -67,5 +67,5 @@ Route::get('/successful', function () {
 });
 
 Auth::routes();
-
+Route::get('/get-location', [App\Http\Controllers\userLocationController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
