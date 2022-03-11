@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-1">
-                    <a href="home.html" class="brand-wrap mb-0">
+                    <a href="/" class="brand-wrap mb-0">
                         <img alt="#" class="img-fluid" src="img/logo_web.png">
                     </a>
                     <!-- brand-wrap.// -->
@@ -66,18 +66,7 @@
                 <!-- col.// -->
                 <div class="col-8">
                     <div class="d-flex align-items-center justify-content-end pr-5">
-                        <!-- search -->
-                        <a href="search.html" class="widget-header mr-4 text-dark">
-                            <div class="icon d-flex align-items-center">
-                                <i class="feather-search h6 mr-2 mb-0"></i> <span>Search</span>
-                            </div>
-                        </a>
-                        <!-- offers -->
-                        <a href="offers.html" class="widget-header mr-4 text-white btn bg-primary m-none">
-                            <div class="icon d-flex align-items-center">
-                                <i class="feather-disc h6 mr-2 mb-0"></i> <span>Offers</span>
-                            </div>
-                        </a>
+
                         <!-- signin -->
                         <a href="/user-login" class="widget-header mr-4 text-dark m-none">
                             <div class="icon d-flex align-items-center">
@@ -90,16 +79,14 @@
                                 <img alt="#" src="img/user/1.jpg" class="img-fluid rounded-circle header-user mr-2 header-user"> Hi Osahan
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="profile.html">My account</a>
-                                <a class="dropdown-item" href="faq.html">Delivery support</a>
-                                <a class="dropdown-item" href="contact-us.html">Contant us</a>
-                                <a class="dropdown-item" href="terms.html">Term of use</a>
-                                <a class="dropdown-item" href="privacy.html">Privacy policy</a>
-                                <a class="dropdown-item" href="login.html">Logout</a>
+                                <a class="dropdown-item" href="user-profile">My account</a>
+                                <a class="dropdown-item" href="contact-us">Contant us</a>
+                                <a class="dropdown-item" href="privacy">Privacy policy</a>
+                                <a class="dropdown-item" href="user-login">Logout</a>
                             </div>
                         </div>
                         <!-- signin -->
-                        <a href="checkout.html" class="widget-header mr-4 text-dark">
+                        <a href="checkout" class="widget-header mr-4 text-dark">
                             <div class="icon d-flex align-items-center">
                                 <i class="feather-shopping-cart h6 mr-2 mb-0"></i> <span>Cart</span>
                             </div>

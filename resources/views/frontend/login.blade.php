@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Askbootstrap">
-    <meta name="author" content="Askbootstrap">
-    <link rel="icon" type="image/png" href="img/fav.png">
-    <title>Swiggiweb - Online Food Ordering Website Template</title>
-    <!-- Slick Slider -->
-    <link rel="stylesheet" type="text/css" href="vendor/slick/slick.min.css" />
-    <link rel="stylesheet" type="text/css" href="vendor/slick/slick-theme.min.css" />
-    <!-- Feather Icon-->
-    <link href="vendor/icons/feather.css" rel="stylesheet" type="text/css">
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
-    <!-- Sidebar CSS -->
-    <link href="vendor/sidebar/demo.css" rel="stylesheet">
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Askbootstrap">
+        <meta name="author" content="Askbootstrap">
+        <link rel="icon" type="image/png" href="{{ asset('img/fav.png') }}">
+        <title>Ozpos - Online Food Ordering Website</title>
+        <!-- Slick Slider -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('vendor/slick/slick.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('vendor/slick/slick-theme.min.css') }}" />
+        <!-- Feather Icon-->
+        <link href="{{ asset('vendor/icons/feather.css') }}" rel="stylesheet" type="text/css">
+        <!-- Bootstrap core CSS -->
+        <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        <!-- Sidebar CSS -->
+        <link href="{{ asset('vendor/sidebar/demo.css') }}" rel="stylesheet">
+        <!-- Scripts -->
+        {{--  <script src="{{ asset('js/app.js') }}" defer></script>  --}}
+        {{--  <script src="{{ asset('js/app.js') }}"></script>  --}}
+    </head>
 
 <body>
     <div class="login-page vh-100">
@@ -47,7 +50,7 @@
                             <button class="btn btn-lg btn-facebook btn-block"><i class="feather-facebook"></i> Connect with Facebook</button>
                         </div>
                     </form>
-                    <a href="forgot_password.html" class="text-decoration-none">
+                    <a href="forgot-password" class="text-decoration-none">
                         <p class="text-center">Forgot your password?</p>
                     </a>
                     <div class="d-flex align-items-center justify-content-center">
@@ -158,14 +161,14 @@
         </ul>
     </nav>
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- slick Slider JS-->
-    <script type="text/javascript" src="vendor/slick/slick.min.js"></script>
+    <script type="text/javascript" src="{{ asset('vendor/slick/slick.min.js') }}"></script>
     <!-- Sidebar JS-->
-    <script type="text/javascript" src="vendor/sidebar/hc-offcanvas-nav.js"></script>
+    <script type="text/javascript" src="{{ asset('vendor/sidebar/hc-offcanvas-nav.js') }}"></script>
     <!-- Custom scripts for all pages-->
-    <script type="text/javascript" src="js/osahan.js"></script>
+    <script type="text/javascript" src="{{ asset('js/osahan.js') }}"></script>
 </body>
 
 </html>

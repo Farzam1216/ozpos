@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,27 +33,14 @@
         <div class="d-flex align-items-center justify-content-center flex-column vh-100">
             <div class="px-5 col-md-6 ml-auto">
                 <div class="px-5 col-10 mx-auto">
-                    <h2 class="text-dark my-0">Hello There.</h2>
-                    <p class="text-50">Sign up to continue</p>
-                    <form class="mt-5 mb-4" action="verification.html">
+                    <h2>Forgot password</h2>
+                    <p>Enter your email address below and we'll send you an email with instructions on how to change your password</p>
+                    <form action="login.html" class="mt-5 mb-4">
                         <div class="form-group">
-                            <label for="exampleInputName1" class="text-dark">Name</label>
-                            <input type="text" placeholder="Enter Name" class="form-control" id="exampleInputName1" aria-describedby="nameHelp">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputNumber1" class="text-dark">Mobile Number</label>
-                            <input type="number" placeholder="Enter Mobile" class="form-control" id="exampleInputNumber1" aria-describedby="numberHelp">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1" class="text-dark">Password</label>
-                            <input type="password" placeholder="Enter Password" class="form-control" id="exampleInputPassword1">
-                        </div>
-                        <button class="btn btn-primary btn-lg btn-block">
-                           SIGN UP
-                        </button>
-                        <div class="py-2">
-                            <button class="btn btn-facebook btn-lg btn-block"><i class="feather-facebook"></i> Connect with Facebook</button>
-                        </div>
+                        <button class="btn btn-primary btn-lg btn-block">Send</button>
                     </form>
                 </div>
                 <div class="new-acc d-flex align-items-center justify-content-center">

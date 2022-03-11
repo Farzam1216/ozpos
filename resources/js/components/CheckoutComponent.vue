@@ -239,7 +239,7 @@
                             <h6 class="font-weight-bold mb-0">TO PAY <span class="float-right">$1329</span></h6>
                         </div>
                         <div class="p-3">
-                            <a class="btn btn-success btn-block btn-lg" href="successful.html">PAY $1329<i class="feather-arrow-right"></i></a>
+                            <a class="btn btn-success btn-block btn-lg" href="successful">PAY $1329<i class="feather-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>

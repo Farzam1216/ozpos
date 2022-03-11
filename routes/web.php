@@ -38,6 +38,34 @@ Route::get('/user-login', function () {
     return view('frontend.login');
 });
 
+Route::get('/user-profile', function () {
+    return view('frontend.profile');
+});
+
+Route::get('/forgot-password', function () {
+    return view('frontend.forgotPassword');
+});
+
+Route::get('/verification', function () {
+    return view('frontend.verification');
+});
+
+Route::get('/contact-us', function () {
+    return view('frontend.contactUS');
+});
+
+Route::get('/privacy', function () {
+    return view('frontend.privacy');
+});
+
+Route::get('/terms', function () {
+    return view('frontend.terms');
+});
+
+Route::get('/successful', function () {
+    return view('frontend.successful');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

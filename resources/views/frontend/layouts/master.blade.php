@@ -7,7 +7,7 @@
     <meta name="description" content="Askbootstrap">
     <meta name="author" content="Askbootstrap">
     <link rel="icon" type="image/png" href="{{ asset('img/fav.png') }}">
-    <title>Swiggiweb - Online Food Ordering Website Template</title>
+    <title>Ozpos - Online Food Ordering Website</title>
     <!-- Slick Slider -->
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/slick/slick.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/slick/slick-theme.min.css') }}" />
@@ -31,8 +31,8 @@
         @include('frontend.layouts.header')
         @endif
         @yield('content')
-        @include('frontend.layouts.footer')
         @include('frontend.layouts.navbar')
+        @include('frontend.layouts.footer')
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -118,14 +118,14 @@
         </div>
     </div>
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- slick Slider JS-->
-    <script type="text/javascript" src="vendor/slick/slick.min.js"></script>
+    <script type="text/javascript" src="{{ asset('vendor/slick/slick.min.js') }}"></script>
     <!-- Sidebar JS-->
-    <script type="text/javascript" src="vendor/sidebar/hc-offcanvas-nav.js"></script>
+    <script type="text/javascript" src="{{ asset('vendor/sidebar/hc-offcanvas-nav.js') }}"></script>
     <!-- Custom scripts for all pages-->
-    <script type="text/javascript" src="js/osahan.js"></script>
+    <script type="text/javascript" src="{{ asset('js/osahan.js') }}"></script>
 </body>
 
 </html>

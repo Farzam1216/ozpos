@@ -441,13 +441,13 @@ use App\Models\Cuisine;
       public function apiOrderSetting($vendor_id)
       {
          $User = auth()->user();
-         $UserAddress = UserAddress::where([['user_id', $User->id], ['selected', 1]])->first();
+         $UserAddress = UserAddress::where([['user_id', 155], ['selected', 1]])->first();
          $Vendor = Vendor::find($vendor_id);
 //         $Setting = OrderSetting::where('vendor_id', $vendor_id)->first();
          $Setting = OrderSetting::firstOrCreate([
-             'vendor_id' => $vendor_id,
+             'vendor_id' => 1,
          ], [
-             'vendor_id' => $vendor_id,
+             'vendor_id' => 1,
              'free_delivery' => 0,
              'free_delivery_distance' => 10,
              'free_delivery_amount' => 0,
@@ -463,7 +463,7 @@ use App\Models\Cuisine;
          ]);
 
 
-         $googleApiKey = 'AIzaSyCDcZlGMIvPlbwuDgQzlEkdhjVQVPnne4c';
+         $googleApiKey = 'AIzaSyCfl4ZvZl3ptxZDO_4D8J4F0T_yqzzIVes';
          $googleUrl = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&destinations="' . $UserAddress->lat . ',' . $UserAddress->lang . '"&origins="' . $Vendor->lat . ',' . $Vendor->lang . '"&key=' . $googleApiKey . '';
          $googleDistance =
              file_get_contents(
@@ -484,8 +484,10 @@ use App\Models\Cuisine;
       {
          $Vendor = Vendor::select('id', 'vendor_status', 'delivery_status', 'pickup_status')->find($vendor_id)->makeHidden('image', 'vendor_logo', 'cuisine', 'rate', 'review');
 
-         if (!$Vendor)
-            return response(['success' => false, 'msg' => 'vendor not found.']);
+         if (!$Vendor){
+
+          return response(['success' => false, 'msg' => 'vendor not found.']);
+         }
 
          return response(['success' => true, 'data' => $Vendor]);
       }

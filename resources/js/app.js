@@ -21,12 +21,21 @@ window.Vue = require('vue').default;
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('navbar-component', require('./components/NavbarComponent.vue').default);
+Vue.component('footer-component', require('./components/FooterComponent.vue').default);
 Vue.component('index-component', require('./components/IndexComponent.vue').default);
 Vue.component('login-component', require('./components/LoginComponent.vue').default);
 Vue.component('register-component', require('./components/RegisterComponent.vue').default);
+Vue.component('forgotpassword-component', require('./components/ForgotpasswordComponent.vue').default);
+Vue.component('verification-component', require('./components/VerificationComponent.vue').default);
 Vue.component('resturant-component', require('./components/ResturnatComponent.vue').default);
 Vue.component('checkout-component', require('./components/CheckoutComponent.vue').default);
+Vue.component('profile-component', require('./components/ProfileComponent.vue').default);
 Vue.component('myorder-component', require('./components/MyorderComponent.vue').default);
+Vue.component('contactus-component', require('./components/ContactusComponent.vue').default);
+Vue.component('privacy-component', require('./components/PrivacyComponent.vue').default);
+Vue.component('terms-component', require('./components/TermsComponent.vue').default);
+Vue.component('successfull-component', require('./components/SuccessfullComponent.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
