@@ -6996,93 +6996,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 //
 //
 //
@@ -7638,22 +7563,95 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      uniqueAddoncategory: [],
       vendor: null,
-      id: '',
-      name: '',
-      status: '',
-      editid: '',
-      editname: '',
-      editstatus: '',
-      info: null
+      menuAddon: null,
+      menuSizes: null,
+      addonCategory: null,
+      menuAddonWithSize: null,
+      // half and half
+      halfAndHalfSizes: null,
+      firstHalf: true,
+      secondHalf: false,
+      getMenuWithMenuSize: null,
+      // deals
+      deaslMenuItems: null
     };
   },
   methods: {
     getVendorDetails: function getVendorDetails() {
       var _this = this;
 
-      axios.get('http://ozpos.geekss.com.au/api/single_vendor/5').then(function (response) {
+      axios.get('http://192.168.18.27:5000/api/single_vendor/1').then(function (response) {
         _this.vendor = response.data;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    getMenuSizes: function getMenuSizes(vendor_id, menu_id) {
+      var _this2 = this;
+
+      axios.get('http://192.168.18.27:5000/api/menu_size/' + vendor_id + '/' + menu_id).then(function (response) {
+        _this2.menuSizes = response.data;
+        _this2.menuAddonWithSize = null;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    getMenuAddons: function getMenuAddons(vendor_id, menu_id) {
+      var _this3 = this;
+
+      axios.get('http://192.168.18.27:5000/api/menu_addon/' + vendor_id + '/' + menu_id).then(function (response) {
+        _this3.menuAddon = response.data;
+        _this3.menuAddonWithSize = null;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    getMenuAddonsWithSize: function getMenuAddonsWithSize(vendor_id, menu_id, size_id) {
+      var _this4 = this;
+
+      axios.get('http://192.168.18.27:5000/api/menu_size_addon/' + vendor_id + '/' + menu_id + '/' + size_id).then(function (response) {
+        _this4.menuAddonWithSize = response.data;
+
+        for (var i = 0; i < _this4.menuAddonWithSize.data.MenuAddon.length; i++) {
+          _this4.uniqueAddoncategory[i] = _this4.menuAddonWithSize.data.MenuAddon[i].addon_category.name;
+        }
+
+        _this4.uniqueAddoncategory = _toConsumableArray(new Set(_this4.uniqueAddoncategory));
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    // half and half
+    getHalfandHalfSizes: function getHalfandHalfSizes(vendor_id, half_n_half_menu_id) {
+      var _this5 = this;
+
+      axios.get('http://192.168.18.27:5000/api/single_vendor_retrieve_sizes/' + vendor_id + '/' + half_n_half_menu_id).then(function (response) {
+        _this5.halfAndHalfSizes = response.data;
+        _this5.menuSizes = null;
+        console.log(_this5.halfAndHalfSizes);
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    getMenuByPickingItemSize: function getMenuByPickingItemSize(vendor_id, item_size_id) {
+      var _this6 = this;
+
+      axios.get('http://192.168.18.27:5000/api/menu_size_item_size/' + vendor_id + '/' + item_size_id).then(function (response) {
+        _this6.getMenuWithMenuSize = response.data;
+        _this6.menuSizes = null;
+        console.log(_this6.getMenuWithMenuSize);
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    getDealsMenuItems: function getDealsMenuItems(vendor_id, deals_menu_id) {
+      var _this7 = this;
+
+      axios.get('http://192.168.18.27:5000/api/deals-menu-items/' + vendor_id + '/' + deals_menu_id).then(function (response) {
+        _this7.deaslMenuItems = response.data;
+        console.log(_this7.deaslMenuItems);
       })["catch"](function (error) {
         console.error(error);
       });
@@ -37412,10 +37410,6 @@ var render = function () {
     _vm._v(" "),
     _vm._m(1),
     _vm._v(" "),
-    _vm._m(2),
-    _vm._v(" "),
-    _vm._m(3),
-    _vm._v(" "),
     _c("div", { staticClass: "container backcolor" }, [
       _c(
         "div",
@@ -37455,10 +37449,13 @@ var render = function () {
                       {
                         staticClass:
                           "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: { href: "#", tabindex: "0" },
+                        attrs: {
+                          href: "#/" + MenuCategory.name.toUpperCase(),
+                          tabindex: "0",
+                        },
                       },
                       [
-                        _c("p", { staticClass: "m-0 small " }, [
+                        _c("p", { staticClass: "m-0 small text-nowrap" }, [
                           _vm._v(_vm._s(MenuCategory.name.toUpperCase())),
                         ]),
                       ]
@@ -37480,19 +37477,26 @@ var render = function () {
             "div",
             { staticClass: "shadow-sm rounded bg-white mb-3 overflow-hidden" },
             [
-              _vm._m(4),
+              _vm._m(2),
               _vm._v(" "),
               _vm._l(_vm.vendor.data.MenuCategory, function (MenuCategory) {
                 return _c(
                   "div",
                   { key: MenuCategory.id, staticClass: "row m-0" },
                   [
-                    _c("h6", { staticClass: "p-3 m-0 bg-light w-100" }, [
-                      _vm._v(_vm._s(MenuCategory.name.toUpperCase())),
-                      _c("small", { staticClass: "ml-2 text-black-50" }, [
-                        _vm._v("3 ITEMS"),
-                      ]),
-                    ]),
+                    _c(
+                      "h6",
+                      {
+                        staticClass: "p-3 m-0 bg-light w-100",
+                        attrs: { id: "/" + MenuCategory.name.toUpperCase() },
+                      },
+                      [
+                        _vm._v(_vm._s(MenuCategory.name.toUpperCase())),
+                        _c("small", { staticClass: "ml-2 text-black-50" }, [
+                          _vm._v("3 ITEMS"),
+                        ]),
+                      ]
+                    ),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-12 px-0 border-top" }, [
                       _c(
@@ -37506,7 +37510,375 @@ var render = function () {
                               staticClass: "p-3 border-bottom gold-members",
                             },
                             [
-                              _vm._m(5, true),
+                              _c("span", { staticClass: "float-right" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-secondary btn-sm",
+                                    attrs: {
+                                      href: "#",
+                                      id: "",
+                                      "data-toggle": "modal",
+                                      "data-target": "#singlemenuaddModal",
+                                    },
+                                    on: {
+                                      click: function ($event) {
+                                        _vm.getMenuAddons(
+                                          _vm.vendor.data.vendor.id,
+                                          singleMenu.id
+                                        ),
+                                          _vm.getMenuSizes(
+                                            _vm.vendor.data.vendor.id,
+                                            singleMenu.id
+                                          )
+                                      },
+                                    },
+                                  },
+                                  [_vm._v("ADD")]
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "modal fade ",
+                                  attrs: {
+                                    id: "singlemenuaddModal",
+                                    tabindex: "-1",
+                                    role: "dialog",
+                                    "aria-labelledby": "exampleModalLabel",
+                                    "aria-hidden": "true",
+                                    "data-backdrop": "static",
+                                    "data-keyboard": "false",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "modal-dialog modal-dialog-centered modal-lg",
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "modal-content" },
+                                        [
+                                          _vm._m(3, true),
+                                          _vm._v(" "),
+                                          _vm.menuSizes != null
+                                            ? _c(
+                                                "h5",
+                                                {
+                                                  staticClass:
+                                                    "font-weight-bold mt-1 ml-3",
+                                                },
+                                                [_vm._v("Pick Size")]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.menuSizes != null
+                                            ? _c(
+                                                "ul",
+                                                {
+                                                  staticClass:
+                                                    "nav nav-pills mt-1 ml-3",
+                                                },
+                                                _vm._l(
+                                                  _vm.menuSizes.data.MenuSizes,
+                                                  function (sizes) {
+                                                    return _c(
+                                                      "li",
+                                                      { key: sizes.id },
+                                                      [
+                                                        _c(
+                                                          "a",
+                                                          {
+                                                            staticClass:
+                                                              "btn btn-outline-primary btn-sm mb-3 mr-3",
+                                                            attrs: {
+                                                              id: "SingleMenuSizeBtn-1-1",
+                                                              "data-toggle":
+                                                                "pill",
+                                                              href:
+                                                                "/#/" +
+                                                                sizes.id,
+                                                            },
+                                                            on: {
+                                                              click: function (
+                                                                $event
+                                                              ) {
+                                                                return _vm.getMenuAddonsWithSize(
+                                                                  _vm.vendor
+                                                                    .data.vendor
+                                                                    .id,
+                                                                  singleMenu.id,
+                                                                  sizes.id
+                                                                )
+                                                              },
+                                                            },
+                                                          },
+                                                          [
+                                                            _c("b", [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  sizes
+                                                                    .item_size
+                                                                    .name
+                                                                )
+                                                              ),
+                                                            ]),
+                                                            _c("br"),
+                                                            _vm._v(" "),
+                                                            sizes.display_discount_price <=
+                                                              0 &&
+                                                            sizes.price > 0
+                                                              ? _c("b", [
+                                                                  _vm._v(
+                                                                    _vm._s(
+                                                                      sizes.price
+                                                                    ) + " AUD"
+                                                                  ),
+                                                                ])
+                                                              : _vm._e(),
+                                                            _vm._v(" "),
+                                                            sizes.display_discount_price >
+                                                            0
+                                                              ? _c("b", [
+                                                                  sizes.display_discount_price >
+                                                                  0
+                                                                    ? _c(
+                                                                        "del",
+                                                                        [
+                                                                          _vm._v(
+                                                                            " " +
+                                                                              _vm._s(
+                                                                                sizes.display_price
+                                                                              ) +
+                                                                              " "
+                                                                          ),
+                                                                        ]
+                                                                      )
+                                                                    : _vm._e(),
+                                                                  _vm._v(
+                                                                    " " +
+                                                                      _vm._s(
+                                                                        sizes.display_discount_price
+                                                                      ) +
+                                                                      " AUD"
+                                                                  ),
+                                                                ])
+                                                              : _vm._e(),
+                                                          ]
+                                                        ),
+                                                      ]
+                                                    )
+                                                  }
+                                                ),
+                                                0
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "modal-body" },
+                                            [
+                                              _vm.menuAddonWithSize != null
+                                                ? _c(
+                                                    "form",
+                                                    _vm._l(
+                                                      _vm.menuAddonWithSize.data
+                                                        .MenuAddon,
+                                                      function (sizes) {
+                                                        return _c(
+                                                          "div",
+                                                          {
+                                                            key: sizes.id,
+                                                            staticClass:
+                                                              "recepie-body",
+                                                          },
+                                                          _vm._l(
+                                                            sizes.addon_category
+                                                              .addon,
+                                                            function (addon) {
+                                                              return sizes.addon_id ===
+                                                                addon.id
+                                                                ? _c(
+                                                                    "div",
+                                                                    {
+                                                                      key: addon.id,
+                                                                      staticClass:
+                                                                        "custom-control custom-radio border-bottom py-2",
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "input",
+                                                                        {
+                                                                          staticClass:
+                                                                            "custom-control-input",
+                                                                          attrs:
+                                                                            {
+                                                                              type: "checkbox",
+                                                                              id: addon.name,
+                                                                              name: "",
+                                                                            },
+                                                                        }
+                                                                      ),
+                                                                      _vm._v(
+                                                                        " "
+                                                                      ),
+                                                                      sizes.addon_id ===
+                                                                      addon.id
+                                                                        ? _c(
+                                                                            "label",
+                                                                            {
+                                                                              staticClass:
+                                                                                "custom-control-label",
+                                                                              attrs:
+                                                                                {
+                                                                                  for: addon.name,
+                                                                                },
+                                                                            },
+                                                                            [
+                                                                              _vm._v(
+                                                                                _vm._s(
+                                                                                  addon.name
+                                                                                ) +
+                                                                                  " "
+                                                                              ),
+                                                                              _c(
+                                                                                "span",
+                                                                                {
+                                                                                  staticClass:
+                                                                                    "text-muted",
+                                                                                },
+                                                                                [
+                                                                                  _vm._v(
+                                                                                    "+ $" +
+                                                                                      _vm._s(
+                                                                                        sizes.price
+                                                                                      )
+                                                                                  ),
+                                                                                ]
+                                                                              ),
+                                                                            ]
+                                                                          )
+                                                                        : _vm._e(),
+                                                                    ]
+                                                                  )
+                                                                : _vm._e()
+                                                            }
+                                                          ),
+                                                          0
+                                                        )
+                                                      }
+                                                    ),
+                                                    0
+                                                  )
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              _vm.menuAddonWithSize === null &&
+                                              _vm.menuAddon != null
+                                                ? _c(
+                                                    "form",
+                                                    _vm._l(
+                                                      _vm.menuAddon.data
+                                                        .MenuAddon,
+                                                      function (sizes) {
+                                                        return _c(
+                                                          "div",
+                                                          {
+                                                            key: sizes.id,
+                                                            staticClass:
+                                                              "recepie-body",
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "div",
+                                                              {
+                                                                staticClass:
+                                                                  "custom-control custom-radio border-bottom py-2",
+                                                              },
+                                                              [
+                                                                _c("input", {
+                                                                  staticClass:
+                                                                    "custom-control-input",
+                                                                  attrs: {
+                                                                    type: "checkbox",
+                                                                    id: sizes
+                                                                      .addon
+                                                                      .name,
+                                                                    name: "",
+                                                                  },
+                                                                }),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "label",
+                                                                  {
+                                                                    staticClass:
+                                                                      "custom-control-label",
+                                                                    attrs: {
+                                                                      for: sizes
+                                                                        .addon
+                                                                        .name,
+                                                                    },
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      _vm._s(
+                                                                        sizes
+                                                                          .addon
+                                                                          .name
+                                                                      )
+                                                                    ),
+                                                                    _c(
+                                                                      "span",
+                                                                      {
+                                                                        staticClass:
+                                                                          "text-muted",
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          "+ $" +
+                                                                            _vm._s(
+                                                                              sizes.price
+                                                                            )
+                                                                        ),
+                                                                      ]
+                                                                    ),
+                                                                  ]
+                                                                ),
+                                                              ]
+                                                            ),
+                                                          ]
+                                                        )
+                                                      }
+                                                    ),
+                                                    0
+                                                  )
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              _c(
+                                                "h6",
+                                                {
+                                                  staticClass:
+                                                    "font-weight-bold mt-4",
+                                                },
+                                                [_vm._v("QUANTITY")]
+                                              ),
+                                              _vm._v(" "),
+                                              _vm._m(4, true),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm._m(5, true),
+                                        ]
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
                               _vm._v(" "),
                               _c("div", { staticClass: "media" }, [
                                 _c(
@@ -37518,31 +37890,58 @@ var render = function () {
                                   [_vm._v(".")]
                                 ),
                                 _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "media-body" },
-                                  [
-                                    _vm._l(singleMenu, function (menu) {
-                                      return _c(
-                                        "h6",
-                                        { key: menu.id, staticClass: "mb-1" },
-                                        [_vm._v(_vm._s(menu.name) + " ")]
-                                      )
-                                    }),
-                                    _vm._v(" "),
-                                    _vm._l(singleMenu, function (menu) {
-                                      return _c(
+                                _c("div", { staticClass: "media-body" }, [
+                                  _c("h6", { staticClass: "mb-1" }, [
+                                    _vm._v(_vm._s(singleMenu.menu.name) + " "),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("p", { staticClass: "text-muted mb-0" }, [
+                                    _vm._v(
+                                      " " + _vm._s(singleMenu.description)
+                                    ),
+                                  ]),
+                                  _vm._v(" "),
+                                  singleMenu.menu.display_discount_price <= 0 &&
+                                  singleMenu.menu.price > 0
+                                    ? _c(
                                         "p",
-                                        {
-                                          key: menu.id,
-                                          staticClass: "text-muted mb-0",
-                                        },
-                                        [_vm._v(_vm._s(menu.price))]
+                                        { staticClass: "text-muted mb-0" },
+                                        [
+                                          _vm._v(
+                                            "$ " + _vm._s(singleMenu.menu.price)
+                                          ),
+                                        ]
                                       )
-                                    }),
-                                  ],
-                                  2
-                                ),
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  singleMenu.menu.display_discount_price > 0
+                                    ? _c(
+                                        "p",
+                                        { staticClass: "text-muted mb-0" },
+                                        [
+                                          singleMenu.menu
+                                            .display_discount_price > 0
+                                            ? _c("del", [
+                                                _vm._v(
+                                                  "$ " +
+                                                    _vm._s(
+                                                      singleMenu.menu
+                                                        .display_price
+                                                    )
+                                                ),
+                                              ])
+                                            : _vm._e(),
+                                          _vm._v(
+                                            " $ " +
+                                              _vm._s(
+                                                singleMenu.menu
+                                                  .display_discount_price
+                                              )
+                                          ),
+                                        ]
+                                      )
+                                    : _vm._e(),
+                                ]),
                               ]),
                             ]
                           )
@@ -37565,7 +37964,513 @@ var render = function () {
                                 staticClass: "p-3 border-bottom gold-members",
                               },
                               [
-                                _vm._m(6, true),
+                                _c("span", { staticClass: "float-right" }, [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "btn btn-outline-secondary btn-sm",
+                                      attrs: {
+                                        href: "#",
+                                        "data-toggle": "modal",
+                                        "data-target": "#halfnhalf",
+                                      },
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.getHalfandHalfSizes(
+                                            _vm.vendor.data.vendor.id,
+                                            half_n_half_menu.id
+                                          )
+                                        },
+                                      },
+                                    },
+                                    [_vm._v("ADD")]
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "modal fade ",
+                                    attrs: {
+                                      id: "halfnhalf",
+                                      tabindex: "-1",
+                                      role: "dialog",
+                                      "aria-labelledby": "exampleModalLabel",
+                                      "aria-hidden": "true",
+                                      "data-backdrop": "static",
+                                      "data-keyboard": "false",
+                                    },
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "modal-dialog modal-dialog-centered modal-lg",
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          { staticClass: "modal-content" },
+                                          [
+                                            _vm._m(6, true),
+                                            _vm._v(" "),
+                                            _vm.halfAndHalfSizes != null
+                                              ? _c(
+                                                  "h5",
+                                                  {
+                                                    staticClass:
+                                                      "font-weight-bold mt-1 ml-3",
+                                                  },
+                                                  [_vm._v("Pick Size")]
+                                                )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.halfAndHalfSizes != null
+                                              ? _c(
+                                                  "ul",
+                                                  {
+                                                    staticClass:
+                                                      "nav nav-pills mt-1 ml-3",
+                                                  },
+                                                  _vm._l(
+                                                    _vm.halfAndHalfSizes.data,
+                                                    function (
+                                                      halfAndHalfSizes
+                                                    ) {
+                                                      return _c(
+                                                        "li",
+                                                        {
+                                                          key: halfAndHalfSizes.id,
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "a",
+                                                            {
+                                                              staticClass:
+                                                                "btn btn-outline-primary btn-sm mb-3 mr-3",
+                                                              attrs: {
+                                                                id: "SingleMenuSizeBtn-1-1",
+                                                                "data-toggle":
+                                                                  "pill",
+                                                              },
+                                                              on: {
+                                                                click:
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    return _vm.getMenuByPickingItemSize(
+                                                                      _vm.vendor
+                                                                        .data
+                                                                        .vendor
+                                                                        .id,
+                                                                      halfAndHalfSizes.id
+                                                                    )
+                                                                  },
+                                                              },
+                                                            },
+                                                            [
+                                                              _c("b", [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    halfAndHalfSizes.name
+                                                                  )
+                                                                ),
+                                                              ]),
+                                                              _c("br"),
+                                                            ]
+                                                          ),
+                                                        ]
+                                                      )
+                                                    }
+                                                  ),
+                                                  0
+                                                )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _c(
+                                              "h5",
+                                              {
+                                                staticClass:
+                                                  "font-weight-bold mt-1 ml-3",
+                                              },
+                                              [_vm._v("Pick Side")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "ul",
+                                              {
+                                                staticClass:
+                                                  "nav nav-pills mt-1 ml-3",
+                                              },
+                                              [
+                                                _c("li", [
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      staticClass:
+                                                        "btn btn-outline-primary btn-sm mb-3 mr-3",
+                                                      attrs: {
+                                                        "data-toggle": "pill",
+                                                      },
+                                                      on: {
+                                                        click: function (
+                                                          $event
+                                                        ) {
+                                                          ;(_vm.firstHalf = true),
+                                                            (_vm.secondHalf = false)
+                                                        },
+                                                      },
+                                                    },
+                                                    [
+                                                      _c("b", [
+                                                        _vm._v("First Half"),
+                                                      ]),
+                                                    ]
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("li", [
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      staticClass:
+                                                        "btn btn-outline-primary btn-sm mb-3 mr-3",
+                                                      attrs: {
+                                                        "data-toggle": "pill",
+                                                      },
+                                                      on: {
+                                                        click: function (
+                                                          $event
+                                                        ) {
+                                                          ;(_vm.secondHalf = true),
+                                                            (_vm.firstHalf = false)
+                                                        },
+                                                      },
+                                                    },
+                                                    [
+                                                      _c("b", [
+                                                        _vm._v("Second Half"),
+                                                      ]),
+                                                    ]
+                                                  ),
+                                                ]),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "modal-body" },
+                                              [
+                                                _vm.getMenuWithMenuSize != null
+                                                  ? _c(
+                                                      "form",
+                                                      {
+                                                        directives: [
+                                                          {
+                                                            name: "show",
+                                                            rawName: "v-show",
+                                                            value:
+                                                              _vm.firstHalf,
+                                                            expression:
+                                                              "firstHalf",
+                                                          },
+                                                        ],
+                                                      },
+                                                      [
+                                                        _c("h5", [
+                                                          _vm._v("First Half"),
+                                                        ]),
+                                                        _vm._v(" "),
+                                                        _vm._l(
+                                                          _vm
+                                                            .getMenuWithMenuSize
+                                                            .data.MenuSizes,
+                                                          function (menu) {
+                                                            return _c(
+                                                              "div",
+                                                              {
+                                                                key: menu.id,
+                                                                staticClass:
+                                                                  "recepie-body",
+                                                              },
+                                                              [
+                                                                _c(
+                                                                  "div",
+                                                                  {
+                                                                    staticClass:
+                                                                      "custom-control custom-radio border-bottom py-2",
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "input",
+                                                                      {
+                                                                        staticClass:
+                                                                          "custom-control-input",
+                                                                        attrs: {
+                                                                          type: "radio",
+                                                                          id:
+                                                                            "firsthalf" +
+                                                                            menu
+                                                                              .menu
+                                                                              .name,
+                                                                          name: "firsthalf",
+                                                                        },
+                                                                      }
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "label",
+                                                                      {
+                                                                        staticClass:
+                                                                          "custom-control-label",
+                                                                        attrs: {
+                                                                          for:
+                                                                            "firsthalf" +
+                                                                            menu
+                                                                              .menu
+                                                                              .name,
+                                                                        },
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          _vm._s(
+                                                                            menu
+                                                                              .menu
+                                                                              .name
+                                                                          )
+                                                                        ),
+                                                                        _c(
+                                                                          "br"
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        menu.display_discount_price <=
+                                                                          0 &&
+                                                                        menu.display_price >
+                                                                          0
+                                                                          ? _c(
+                                                                              "b",
+                                                                              [
+                                                                                _vm._v(
+                                                                                  _vm._s(
+                                                                                    menu.display_price
+                                                                                  ) +
+                                                                                    " A$"
+                                                                                ),
+                                                                              ]
+                                                                            )
+                                                                          : _vm._e(),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        menu.display_discount_price >
+                                                                        0
+                                                                          ? _c(
+                                                                              "b",
+                                                                              [
+                                                                                menu.display_discount_price >
+                                                                                0
+                                                                                  ? _c(
+                                                                                      "del",
+                                                                                      [
+                                                                                        _vm._v(
+                                                                                          " " +
+                                                                                            _vm._s(
+                                                                                              menu.display_price
+                                                                                            ) +
+                                                                                            " A$ "
+                                                                                        ),
+                                                                                      ]
+                                                                                    )
+                                                                                  : _vm._e(),
+                                                                                _vm._v(
+                                                                                  " " +
+                                                                                    _vm._s(
+                                                                                      menu.display_discount_price
+                                                                                    ) +
+                                                                                    " A$"
+                                                                                ),
+                                                                              ]
+                                                                            )
+                                                                          : _vm._e(),
+                                                                      ]
+                                                                    ),
+                                                                  ]
+                                                                ),
+                                                              ]
+                                                            )
+                                                          }
+                                                        ),
+                                                      ],
+                                                      2
+                                                    )
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                _vm.getMenuWithMenuSize != null
+                                                  ? _c(
+                                                      "form",
+                                                      {
+                                                        directives: [
+                                                          {
+                                                            name: "show",
+                                                            rawName: "v-show",
+                                                            value:
+                                                              _vm.secondHalf,
+                                                            expression:
+                                                              "secondHalf",
+                                                          },
+                                                        ],
+                                                      },
+                                                      [
+                                                        _c("h5", [
+                                                          _vm._v("Second Half"),
+                                                        ]),
+                                                        _vm._v(" "),
+                                                        _vm._l(
+                                                          _vm
+                                                            .getMenuWithMenuSize
+                                                            .data.MenuSizes,
+                                                          function (menu) {
+                                                            return _c(
+                                                              "div",
+                                                              {
+                                                                key: menu.id,
+                                                                staticClass:
+                                                                  "recepie-body",
+                                                              },
+                                                              [
+                                                                _c(
+                                                                  "div",
+                                                                  {
+                                                                    staticClass:
+                                                                      "custom-control custom-radio border-bottom py-2",
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "input",
+                                                                      {
+                                                                        staticClass:
+                                                                          "custom-control-input",
+                                                                        attrs: {
+                                                                          type: "radio",
+                                                                          id: menu
+                                                                            .menu
+                                                                            .name,
+                                                                          name: "seconfhalf",
+                                                                        },
+                                                                      }
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "label",
+                                                                      {
+                                                                        staticClass:
+                                                                          "custom-control-label",
+                                                                        attrs: {
+                                                                          for: menu
+                                                                            .menu
+                                                                            .name,
+                                                                        },
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          _vm._s(
+                                                                            menu
+                                                                              .menu
+                                                                              .name
+                                                                          )
+                                                                        ),
+                                                                        _c(
+                                                                          "br"
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        menu.display_discount_price <=
+                                                                          0 &&
+                                                                        menu.display_price >
+                                                                          0
+                                                                          ? _c(
+                                                                              "b",
+                                                                              [
+                                                                                _vm._v(
+                                                                                  _vm._s(
+                                                                                    menu.display_price
+                                                                                  ) +
+                                                                                    " A$"
+                                                                                ),
+                                                                              ]
+                                                                            )
+                                                                          : _vm._e(),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        menu.display_discount_price >
+                                                                        0
+                                                                          ? _c(
+                                                                              "b",
+                                                                              [
+                                                                                menu.display_discount_price >
+                                                                                0
+                                                                                  ? _c(
+                                                                                      "del",
+                                                                                      [
+                                                                                        _vm._v(
+                                                                                          " " +
+                                                                                            _vm._s(
+                                                                                              menu.display_price
+                                                                                            ) +
+                                                                                            " A$ "
+                                                                                        ),
+                                                                                      ]
+                                                                                    )
+                                                                                  : _vm._e(),
+                                                                                _vm._v(
+                                                                                  " " +
+                                                                                    _vm._s(
+                                                                                      menu.display_discount_price
+                                                                                    ) +
+                                                                                    " A$"
+                                                                                ),
+                                                                              ]
+                                                                            )
+                                                                          : _vm._e(),
+                                                                      ]
+                                                                    ),
+                                                                  ]
+                                                                ),
+                                                              ]
+                                                            )
+                                                          }
+                                                        ),
+                                                      ],
+                                                      2
+                                                    )
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "h6",
+                                                  {
+                                                    staticClass:
+                                                      "font-weight-bold mt-4",
+                                                  },
+                                                  [_vm._v("QUANTITY")]
+                                                ),
+                                                _vm._v(" "),
+                                                _vm._m(7, true),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._m(8, true),
+                                          ]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "media" }, [
                                   _c(
@@ -37605,73 +38510,172 @@ var render = function () {
                               staticClass: "p-3 border-bottom gold-members",
                             },
                             [
-                              _vm._m(7, true),
+                              _c("span", { staticClass: "float-right" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-secondary btn-sm",
+                                    attrs: {
+                                      href: "#",
+                                      "data-toggle": "modal",
+                                      "data-target": "#deals",
+                                    },
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.getDealsMenuItems(
+                                          _vm.vendor.data.vendor.id,
+                                          dealsMenu.id
+                                        )
+                                      },
+                                    },
+                                  },
+                                  [_vm._v("ADD")]
+                                ),
+                              ]),
                               _vm._v(" "),
                               _c(
                                 "div",
-                                { staticClass: "media" },
+                                {
+                                  staticClass: "modal fade",
+                                  attrs: {
+                                    id: "deals",
+                                    tabindex: "-1",
+                                    role: "dialog",
+                                    "aria-labelledby": "exampleModalLabel",
+                                    "aria-hidden": "true",
+                                    "data-backdrop": "static",
+                                    "data-keyboard": "false",
+                                  },
+                                },
                                 [
-                                  _vm._l(
-                                    MenuCategory.deals_menu,
-                                    function (menu) {
-                                      return _c(
-                                        "div",
-                                        {
-                                          key: menu.id,
-                                          staticClass:
-                                            "mr-3 font-weight-bold text-danger non_veg",
-                                        },
-                                        [
-                                          _c("img", {
-                                            staticClass:
-                                              "mr-3 rounded-circle img-fluid",
-                                            attrs: {
-                                              alt: "osahan",
-                                              src: menu.image,
-                                            },
-                                          }),
-                                        ]
-                                      )
-                                    }
-                                  ),
-                                  _vm._v(" "),
                                   _c(
                                     "div",
-                                    { staticClass: "media-body" },
+                                    {
+                                      staticClass:
+                                        "modal-dialog modal-dialog-centered modal-lg",
+                                    },
                                     [
-                                      _vm._l(
-                                        MenuCategory.deals_menu,
-                                        function (menu) {
-                                          return _c(
-                                            "h6",
-                                            {
-                                              key: menu.id,
-                                              staticClass: "mb-1",
-                                            },
-                                            [_vm._v(_vm._s(menu.name) + " ")]
-                                          )
-                                        }
+                                      _c(
+                                        "div",
+                                        { staticClass: "modal-content" },
+                                        [
+                                          _vm._m(9, true),
+                                          _vm._v(" "),
+                                          _vm.deaslMenuItems != ""
+                                            ? _c(
+                                                "h5",
+                                                {
+                                                  staticClass:
+                                                    "font-weight-bold mt-1 ml-3",
+                                                },
+                                                [_vm._v("Pick Items")]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.deaslMenuItems != null
+                                            ? _c(
+                                                "ul",
+                                                {
+                                                  staticClass:
+                                                    "nav nav-pills mt-1 ml-3",
+                                                },
+                                                _vm._l(
+                                                  _vm.deaslMenuItems.data,
+                                                  function (deals) {
+                                                    return _c(
+                                                      "li",
+                                                      { key: deals.id },
+                                                      [
+                                                        _c(
+                                                          "a",
+                                                          {
+                                                            staticClass:
+                                                              "btn btn-outline-primary btn-sm mb-3 mr-3",
+                                                            attrs: {
+                                                              id: "SingleMenuSizeBt+n-1-1",
+                                                              "data-toggle":
+                                                                "pill",
+                                                            },
+                                                          },
+                                                          [
+                                                            _c("b", [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  deals.name
+                                                                )
+                                                              ),
+                                                            ]),
+                                                            _c("br"),
+                                                          ]
+                                                        ),
+                                                      ]
+                                                    )
+                                                  }
+                                                ),
+                                                0
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm._m(10, true),
+                                          _vm._v(" "),
+                                          _vm._m(11, true),
+                                        ]
                                       ),
-                                      _vm._v(" "),
-                                      _vm._l(
-                                        MenuCategory.deals_menu,
-                                        function (menu) {
-                                          return _c(
-                                            "p",
-                                            {
-                                              key: menu.id,
-                                              staticClass: "text-muted mb-0",
-                                            },
-                                            [_vm._v(_vm._s(menu.price))]
-                                          )
-                                        }
-                                      ),
-                                    ],
-                                    2
+                                    ]
                                   ),
-                                ],
-                                2
+                                ]
                               ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "media" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "mr-3 font-weight-bold text-danger non_veg",
+                                  },
+                                  [_vm._v(".")]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "media-body" }, [
+                                  _c("h6", { staticClass: "mb-1" }, [
+                                    _vm._v(_vm._s(dealsMenu.name) + " "),
+                                  ]),
+                                  _vm._v(" "),
+                                  dealsMenu.display_discount_price <= 0
+                                    ? _c(
+                                        "p",
+                                        { staticClass: "text-muted mb-0" },
+                                        [_vm._v("$ " + _vm._s(dealsMenu.price))]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  dealsMenu.display_discount_price > 0
+                                    ? _c(
+                                        "p",
+                                        { staticClass: "text-muted mb-0" },
+                                        [
+                                          dealsMenu.display_discount_price > 0
+                                            ? _c("del", [
+                                                _vm._v(
+                                                  "$ " +
+                                                    _vm._s(
+                                                      dealsMenu.display_price
+                                                    )
+                                                ),
+                                              ])
+                                            : _vm._e(),
+                                          _vm._v(
+                                            " $ " +
+                                              _vm._s(
+                                                dealsMenu.display_discount_price
+                                              )
+                                          ),
+                                        ]
+                                      )
+                                    : _vm._e(),
+                                ]),
+                              ]),
                             ]
                           )
                         }),
@@ -37685,7 +38689,7 @@ var render = function () {
             2
           ),
           _vm._v(" "),
-          _vm._m(8),
+          _vm._m(12),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-4 mt-4" }, [
@@ -37722,11 +38726,11 @@ var render = function () {
                 ]
               ),
               _vm._v(" "),
-              _vm._m(9),
+              _vm._m(13),
               _vm._v(" "),
-              _vm._m(10),
+              _vm._m(14),
               _vm._v(" "),
-              _vm._m(11),
+              _vm._m(15),
             ]
           ),
         ]),
@@ -37837,754 +38841,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container-fluid" }, [_c("div", {})])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container backcolor" }, [
-      _c(
-        "div",
-        {
-          staticClass: "cat-slider slick-initialized slick-slider",
-          attrs: { id: "navbar-example2" },
-        },
-        [
-          _c(
-            "button",
-            {
-              staticClass: "slick-prev slick-arrow",
-              attrs: { "aria-label": "Previous", type: "button" },
-            },
-            [_vm._v("Previous")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "slick-list draggable" }, [
-            _c(
-              "div",
-              {
-                staticClass: "slick-track",
-                staticStyle: {
-                  opacity: "1",
-                  width: "5640px",
-                  transform: "translate3d(-1128px, 0px, 0px)",
-                },
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "cat-item px-1 py-3 slick-slide slick-current slick-active",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "0",
-                      "data-slick-index": "0",
-                      "aria-hidden": "false",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/1",
-                          tabindex: "0",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dcfb34a354.jpg",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [
-                          _vm._v("pizza updated"),
-                        ]),
-                      ]
-                    ),
-                  ]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cat-item px-1 py-3 slick-slide slick-active",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "0",
-                      "data-slick-index": "1",
-                      "aria-hidden": "false",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/2",
-                          tabindex: "0",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dcfc1aab68.jpg",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [
-                          _vm._v("Drinks"),
-                        ]),
-                      ]
-                    ),
-                  ]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cat-item px-1 py-3 slick-slide slick-active",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "0",
-                      "data-slick-index": "2",
-                      "aria-hidden": "false",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/5",
-                          tabindex: "0",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dd007d4766.jpg",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [_vm._v("Veg")]),
-                      ]
-                    ),
-                  ]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cat-item px-1 py-3 slick-slide slick-active",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "0",
-                      "data-slick-index": "3",
-                      "aria-hidden": "false",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/7",
-                          tabindex: "0",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dd01224e83.jpg",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [_vm._v("Def")]),
-                      ]
-                    ),
-                  ]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cat-item px-1 py-3 slick-slide slick-active",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "0",
-                      "data-slick-index": "4",
-                      "aria-hidden": "false",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/8",
-                          tabindex: "0",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dd09fac5e4.jpg",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [
-                          _vm._v("burger"),
-                        ]),
-                      ]
-                    ),
-                  ]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cat-item px-1 py-3 slick-slide slick-active",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "0",
-                      "data-slick-index": "5",
-                      "aria-hidden": "false",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/9",
-                          tabindex: "0",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dd0aede4f6.jpg",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [
-                          _vm._v("Breakfast"),
-                        ]),
-                      ]
-                    ),
-                  ]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cat-item px-1 py-3 slick-slide slick-active",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "0",
-                      "data-slick-index": "6",
-                      "aria-hidden": "false",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/10",
-                          tabindex: "0",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dd0b907331.jpg",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [
-                          _vm._v("Lunch"),
-                        ]),
-                      ]
-                    ),
-                  ]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cat-item px-1 py-3 slick-slide slick-active",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "0",
-                      "data-slick-index": "7",
-                      "aria-hidden": "false",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/11",
-                          tabindex: "0",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dd7140a1d3.jpg",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [
-                          _vm._v("Dinner"),
-                        ]),
-                      ]
-                    ),
-                  ]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cat-item px-1 py-3 slick-slide",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "-1",
-                      "data-slick-index": "8",
-                      "aria-hidden": "true",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/12",
-                          tabindex: "-1",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dd730da731.jpg",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [
-                          _vm._v("Steak"),
-                        ]),
-                      ]
-                    ),
-                  ]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cat-item px-1 py-3 slick-slide",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "-1",
-                      "data-slick-index": "9",
-                      "aria-hidden": "true",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/13",
-                          tabindex: "-1",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dd747edabb.png",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [
-                          _vm._v("Salad"),
-                        ]),
-                      ]
-                    ),
-                  ]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cat-item px-1 py-3 slick-slide",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "-1",
-                      "data-slick-index": "10",
-                      "aria-hidden": "true",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/14",
-                          tabindex: "-1",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dd755bb004.jpg",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [
-                          _vm._v("Fries"),
-                        ]),
-                      ]
-                    ),
-                  ]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cat-item px-1 py-3 slick-slide",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "-1",
-                      "data-slick-index": "11",
-                      "aria-hidden": "true",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/15",
-                          tabindex: "-1",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dd765c9169.png",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [
-                          _vm._v("Sea Food"),
-                        ]),
-                      ]
-                    ),
-                  ]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cat-item px-1 py-3 slick-slide",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "-1",
-                      "data-slick-index": "12",
-                      "aria-hidden": "true",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/16",
-                          tabindex: "-1",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dd775bfcd7.jpg",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [_vm._v("Beef")]),
-                      ]
-                    ),
-                  ]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cat-item px-1 py-3 slick-slide",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "-1",
-                      "data-slick-index": "13",
-                      "aria-hidden": "true",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/17",
-                          tabindex: "-1",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dd78406041.jpg",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [
-                          _vm._v("Sandwiches"),
-                        ]),
-                      ]
-                    ),
-                  ]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cat-item px-1 py-3 slick-slide",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "-1",
-                      "data-slick-index": "14",
-                      "aria-hidden": "true",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/21",
-                          tabindex: "-1",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dd791f2a83.jpg",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [_vm._v("dhfh")]),
-                      ]
-                    ),
-                  ]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cat-item px-1 py-3 slick-slide slick-cloned",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "-1",
-                      "data-slick-index": "16",
-                      "aria-hidden": "true",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/1",
-                          tabindex: "-1",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dcfb34a354.jpg",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [
-                          _vm._v("pizza updated"),
-                        ]),
-                      ]
-                    ),
-                  ]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cat-item px-1 py-3 slick-slide slick-cloned",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "-1",
-                      "data-slick-index": "17",
-                      "aria-hidden": "true",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/2",
-                          tabindex: "-1",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dcfc1aab68.jpg",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [
-                          _vm._v("Drinks"),
-                        ]),
-                      ]
-                    ),
-                  ]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cat-item px-1 py-3 slick-slide slick-cloned",
-                    staticStyle: { width: "141px" },
-                    attrs: {
-                      tabindex: "-1",
-                      "data-slick-index": "18",
-                      "aria-hidden": "true",
-                    },
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white rounded d-block p-2 text-center shadow-sm active",
-                        attrs: {
-                          href: "http://ozpos-new.test/customer/restaurant/1/itemCategory/5",
-                          tabindex: "-1",
-                        },
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mb-2",
-                          staticStyle: { height: "35px" },
-                          attrs: {
-                            alt: "#",
-                            src: "http://ozpos-new.test/images/upload/619dd007d4766.jpg",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "m-0 small" }, [_vm._v("Veg")]),
-                      ]
-                    ),
-                  ]
-                ),
-              ]
-            ),
-          ]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "slick-next slick-arrow",
-              attrs: { "aria-label": "Next", type: "button" },
-            },
-            [_vm._v("Next")]
-          ),
-        ]
-      ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "d-flex item-aligns-center" }, [
       _c(
         "p",
@@ -38597,18 +38853,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "float-right" }, [
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Extras")]),
+      _vm._v(" "),
       _c(
-        "a",
+        "button",
         {
-          staticClass: "btn btn-outline-secondary btn-sm",
+          staticClass: "close",
           attrs: {
-            href: "#",
-            "data-toggle": "modal",
-            "data-target": "#extras",
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close",
           },
         },
-        [_vm._v("ADD")]
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       ),
     ])
   },
@@ -38616,18 +38874,66 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "float-right" }, [
+    return _c("div", { staticClass: "d-flex align-items-center" }, [
+      _c("p", { staticClass: "m-0" }, [_vm._v("Select Quantity")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "ml-auto" }, [
+        _c("span", { staticClass: "count-number" }, [
+          _c("input", {
+            staticClass: "count-number-input",
+            staticStyle: { width: "100px" },
+            attrs: { type: "number", min: "1", value: "1" },
+          }),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer p-0 border-0" }, [
+      _c("div", { staticClass: "col-6 m-0 p-0" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn border-top btn-lg btn-block",
+            attrs: { type: "button", "data-dismiss": "modal" },
+          },
+          [_vm._v("Close")]
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6 m-0 p-0" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-lg btn-block",
+            attrs: { type: "button" },
+          },
+          [_vm._v("Add To Cart")]
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Extras")]),
+      _vm._v(" "),
       _c(
-        "a",
+        "button",
         {
-          staticClass: "btn btn-outline-secondary btn-sm",
+          staticClass: "close",
           attrs: {
-            href: "#",
-            "data-toggle": "modal",
-            "data-target": "#extras",
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close",
           },
         },
-        [_vm._v("ADD")]
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       ),
     ])
   },
@@ -38635,19 +38941,117 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "float-right" }, [
+    return _c("div", { staticClass: "d-flex align-items-center" }, [
+      _c("p", { staticClass: "m-0" }, [_vm._v("Select Quantity")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "ml-auto" }, [
+        _c("span", { staticClass: "count-number" }, [
+          _c("input", {
+            staticClass: "count-number-input",
+            staticStyle: { width: "100px" },
+            attrs: { type: "number", min: "1", value: "1" },
+          }),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer p-0 border-0" }, [
+      _c("div", { staticClass: "col-6 m-0 p-0" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn border-top btn-lg btn-block",
+            attrs: { type: "button", "data-dismiss": "modal" },
+          },
+          [_vm._v("Close")]
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6 m-0 p-0" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-lg btn-block",
+            attrs: { type: "button" },
+          },
+          [_vm._v("Add To Cart")]
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Extras")]),
+      _vm._v(" "),
       _c(
-        "a",
+        "button",
         {
-          staticClass: "btn btn-outline-secondary btn-sm",
+          staticClass: "close",
           attrs: {
-            href: "#",
-            "data-toggle": "modal",
-            "data-target": "#extras",
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close",
           },
         },
-        [_vm._v("ADD")]
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("h6", { staticClass: "font-weight-bold mt-4" }, [_vm._v("QUANTITY")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-flex align-items-center" }, [
+        _c("p", { staticClass: "m-0" }, [_vm._v("Select Quantity")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "ml-auto" }, [
+          _c("span", { staticClass: "count-number" }, [
+            _c("input", {
+              staticClass: "count-number-input",
+              staticStyle: { width: "100px" },
+              attrs: { type: "number", min: "1", value: "1" },
+            }),
+          ]),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer p-0 border-0" }, [
+      _c("div", { staticClass: "col-6 m-0 p-0" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn border-top btn-lg btn-block",
+            attrs: { type: "button", "data-dismiss": "modal" },
+          },
+          [_vm._v("Close")]
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6 m-0 p-0" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-lg btn-block",
+            attrs: { type: "button" },
+          },
+          [_vm._v("Add To Cart")]
+        ),
+      ]),
     ])
   },
   function () {

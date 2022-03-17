@@ -56,179 +56,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="">
-                <!-- <p class="font-weight-bold pt-4 m-0">FEATURED ITEMS</p> -->
-                <!-- slider -->
-                <!-- <div class="trending-slider rounded">
-                    <div class="osahan-slider-item">
-                        <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                            <div class="list-card-image">
-                                <a href="checkout">
-                                    <img alt="#" src="img/trending1.png" class="img-fluid item-img w-100">
-                                </a>
-                            </div>
-                            <div class="p-3 position-relative">
-                                <div class="list-card-body">
-                                    <h6 class="mb-1"><a href="checkout" class="text-black">Famous Dave's Bar-B-Que</a>
-                                    </h6>
-                                    <p class="text-gray mb-3">Vegetarian • Indian • Pure veg</p>
-                                    <p class="text-gray m-0"> <span class="text-black-50"> $350 FOR TWO</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="osahan-slider-item">
-                        <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                            <div class="list-card-image">
-                                <a href="checkout">
-                                    <img alt="#" src="img/trending2.png" class="img-fluid item-img w-100">
-                                </a>
-                            </div>
-                            <div class="p-3 position-relative">
-                                <div class="list-card-body">
-                                    <h6 class="mb-1"><a href="checkout" class="text-black">Thai Famous Cuisine</a></h6>
-                                    <p class="text-gray mb-3">North Indian • Indian • Pure veg</p>
-                                    <p class="text-gray m-0"> <span class="text-black-50"> $250 FOR TWO</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="osahan-slider-item">
-                        <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                            <div class="list-card-image">
-                                <a href="checkout">
-                                    <img alt="#" src="img/trending3.png" class="img-fluid item-img w-100">
-                                </a>
-                            </div>
-                            <div class="p-3 position-relative">
-                                <div class="list-card-body">
-                                    <h6 class="mb-1"><a href="checkout" class="text-black">The osahan Restaurant</a></h6>
-                                    <p class="text-gray mb-3">North • Hamburgers • Pure veg</p>
-                                    <p class="text-gray m-0"> <span class="text-black-50"> $500 FOR TWO</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="osahan-slider-item">
-                        <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                            <div class="list-card-image">
-                                <a href="checkout">
-                                    <img alt="#" src="img/trending2.png" class="img-fluid item-img w-100">
-                                </a>
-                            </div>
-                            <div class="p-3 position-relative">
-                                <div class="list-card-body">
-                                    <h6 class="mb-1"><a href="checkout" class="text-black">Thai Famous Cuisine</a></h6>
-                                    <p class="text-gray mb-3">North Indian • Indian • Pure veg</p>
-                                    <p class="text-gray m-0"> <span class="text-black-50"> $250 FOR TWO</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-            </div>
-        </div>
 
-        <!-- menu category slider -->
-        <div class="container backcolor">
-            <div class="cat-slider slick-initialized slick-slider" id="navbar-example2"><button class="slick-prev slick-arrow" aria-label="Previous" type="button" style="">Previous</button>
-            <div class="slick-list draggable">
-                <div class="slick-track" style="opacity: 1; width: 5640px; transform: translate3d(-1128px, 0px, 0px);">
-                    <div class="cat-item px-1 py-3 slick-slide slick-current slick-active" style="width: 141px;" tabindex="0" data-slick-index="0" aria-hidden="false">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/1" tabindex="0">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dcfb34a354.jpg" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">pizza updated</p>
-                        </a>
-                    </div><div class="cat-item px-1 py-3 slick-slide slick-active" style="width: 141px;" tabindex="0" data-slick-index="1" aria-hidden="false">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/2" tabindex="0">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dcfc1aab68.jpg" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">Drinks</p>
-                        </a>
-                    </div><div class="cat-item px-1 py-3 slick-slide slick-active" style="width: 141px;" tabindex="0" data-slick-index="2" aria-hidden="false">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/5" tabindex="0">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dd007d4766.jpg" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">Veg</p>
-                        </a>
-                    </div><div class="cat-item px-1 py-3 slick-slide slick-active" style="width: 141px;" tabindex="0" data-slick-index="3" aria-hidden="false">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/7" tabindex="0">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dd01224e83.jpg" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">Def</p>
-                        </a>
-                    </div><div class="cat-item px-1 py-3 slick-slide slick-active" style="width: 141px;" tabindex="0" data-slick-index="4" aria-hidden="false">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/8" tabindex="0">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dd09fac5e4.jpg" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">burger</p>
-                        </a>
-                    </div><div class="cat-item px-1 py-3 slick-slide slick-active" style="width: 141px;" tabindex="0" data-slick-index="5" aria-hidden="false">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/9" tabindex="0">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dd0aede4f6.jpg" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">Breakfast</p>
-                        </a>
-                    </div><div class="cat-item px-1 py-3 slick-slide slick-active" style="width: 141px;" tabindex="0" data-slick-index="6" aria-hidden="false">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/10" tabindex="0">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dd0b907331.jpg" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">Lunch</p>
-                        </a>
-                    </div><div class="cat-item px-1 py-3 slick-slide slick-active" style="width: 141px;" tabindex="0" data-slick-index="7" aria-hidden="false">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/11" tabindex="0">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dd7140a1d3.jpg" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">Dinner</p>
-                        </a>
-                    </div><div class="cat-item px-1 py-3 slick-slide" style="width: 141px;" tabindex="-1" data-slick-index="8" aria-hidden="true">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/12" tabindex="-1">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dd730da731.jpg" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">Steak</p>
-                        </a>
-                    </div><div class="cat-item px-1 py-3 slick-slide" style="width: 141px;" tabindex="-1" data-slick-index="9" aria-hidden="true">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/13" tabindex="-1">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dd747edabb.png" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">Salad</p>
-                        </a>
-                    </div><div class="cat-item px-1 py-3 slick-slide" style="width: 141px;" tabindex="-1" data-slick-index="10" aria-hidden="true">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/14" tabindex="-1">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dd755bb004.jpg" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">Fries</p>
-                        </a>
-                    </div><div class="cat-item px-1 py-3 slick-slide" style="width: 141px;" tabindex="-1" data-slick-index="11" aria-hidden="true">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/15" tabindex="-1">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dd765c9169.png" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">Sea Food</p>
-                        </a>
-                    </div><div class="cat-item px-1 py-3 slick-slide" style="width: 141px;" tabindex="-1" data-slick-index="12" aria-hidden="true">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/16" tabindex="-1">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dd775bfcd7.jpg" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">Beef</p>
-                        </a>
-                    </div><div class="cat-item px-1 py-3 slick-slide" style="width: 141px;" tabindex="-1" data-slick-index="13" aria-hidden="true">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/17" tabindex="-1">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dd78406041.jpg" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">Sandwiches</p>
-                        </a>
-                    </div><div class="cat-item px-1 py-3 slick-slide" style="width: 141px;" tabindex="-1" data-slick-index="14" aria-hidden="true">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/21" tabindex="-1">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dd791f2a83.jpg" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">dhfh</p>
-                        </a>
-                    </div><div class="cat-item px-1 py-3 slick-slide slick-cloned" style="width: 141px;" tabindex="-1" data-slick-index="16" aria-hidden="true">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/1" tabindex="-1">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dcfb34a354.jpg" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">pizza updated</p>
-                        </a>
-                    </div><div class="cat-item px-1 py-3 slick-slide slick-cloned" style="width: 141px;" tabindex="-1" data-slick-index="17" aria-hidden="true">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/2" tabindex="-1">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dcfc1aab68.jpg" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">Drinks</p>
-                        </a>
-                    </div><div class="cat-item px-1 py-3 slick-slide slick-cloned" style="width: 141px;" tabindex="-1" data-slick-index="18" aria-hidden="true">
-                        <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="http://ozpos-new.test/customer/restaurant/1/itemCategory/5" tabindex="-1">
-                            <img alt="#" src="http://ozpos-new.test/images/upload/619dd007d4766.jpg" style="height:35px" class="img-fluid mb-2">
-                            <p class="m-0 small">Veg</p>
-                        </a>
-                    </div></div>
-            </div>
-            <button class="slick-next slick-arrow" aria-label="Next" type="button" style="">Next</button></div>
-        </div>
 
         <!-- menu category from main site  -->
         <div class="container backcolor">
@@ -236,8 +64,8 @@
                 <div class="slick-list draggable">
                     <div class="slick-track" style="opacity: 1; width: 705px; transform: translate3d(0px, 0px, 0px);">
                         <div v-for="MenuCategory in vendor.data.MenuCategory" v-bind:key="MenuCategory.id" class="cat-item px-1 py-3 slick-slide slick-current slick-active" style="width: 141px;" tabindex="0" data-slick-index="0" aria-hidden="false">
-                            <a class="bg-white rounded d-block p-2 text-center shadow-sm active" href="#"  tabindex="0">
-                                <p class="m-0 small ">{{ MenuCategory.name.toUpperCase() }}</p>
+                            <a class="bg-white rounded d-block p-2 text-center shadow-sm active" :href="'#/' + MenuCategory.name.toUpperCase()"  tabindex="0">
+                                <p class="m-0 small text-nowrap">{{ MenuCategory.name.toUpperCase() }}</p>
                             </a>
                         </div>
                     </div>
@@ -256,17 +84,88 @@
                             <!-- <a class="small text-primary font-weight-bold ml-auto" href="#">View all <i class="feather-chevrons-right"></i></a> -->
                         </div>
                         <div v-for="MenuCategory in vendor.data.MenuCategory" v-bind:key="MenuCategory.id" class="row m-0">
-                            <h6 class="p-3 m-0 bg-light w-100">{{ MenuCategory.name.toUpperCase() }}<small class="ml-2 text-black-50">3 ITEMS</small></h6>
+                            <h6 :id="'/'+MenuCategory.name.toUpperCase()" class="p-3 m-0 bg-light w-100">{{ MenuCategory.name.toUpperCase() }}<small class="ml-2 text-black-50">3 ITEMS</small></h6>
                             <!-- single menu -->
                             <div class="col-md-12 px-0 border-top">
                                 <div class="">
                                     <div v-for="singleMenu in MenuCategory.single_menu" v-bind:key="singleMenu.id" class="p-3 border-bottom gold-members">
-                                        <span class="float-right"><a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#extras">ADD</a></span>
+                                        <span class="float-right"><a href="#" id="" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#singlemenuaddModal"   @click="getMenuAddons(vendor.data.vendor.id,singleMenu.id),getMenuSizes(vendor.data.vendor.id,singleMenu.id)">ADD</a></span>
+                                        <!-- add extras Modal -->
+                                        <div class="modal fade " id="singlemenuaddModal" tabindex="-1" role="dialog"   aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5  class="modal-title">Extras</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <h5 v-if="menuSizes != null" class="font-weight-bold mt-1 ml-3">Pick Size</h5>
+                                                    <ul v-if="menuSizes != null" class="nav nav-pills mt-1 ml-3">
+                                                        <li  v-for="sizes in menuSizes.data.MenuSizes" v-bind:key="sizes.id">
+                                                            <a id="SingleMenuSizeBtn-1-1"  @click="getMenuAddonsWithSize(vendor.data.vendor.id,singleMenu.id,sizes.id)" class="btn btn-outline-primary btn-sm mb-3 mr-3" data-toggle="pill" :href="'/#/' + sizes.id">
+                                                                <b >{{ sizes.item_size.name}}</b><br>
+                                                                <b v-if="sizes.display_discount_price <= 0 && sizes.price > 0">{{ sizes.price}} AUD</b>
+                                                                <b v-if="sizes.display_discount_price > 0 "><del v-if="sizes.display_discount_price > 0"> {{ sizes.display_price }} </del> {{ sizes.display_discount_price}} AUD</b>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                        <div class="modal-body">
+                                                            <form v-if="menuAddonWithSize != null" >
+
+                                                                <!-- extras body -->
+                                                                <div class="recepie-body" v-for="sizes in  menuAddonWithSize.data.MenuAddon" v-bind:key="sizes.id">
+
+                                                                    <!-- <h6 class="font-weight-bold mt-4" v-if="sizes.addon_category_id === sizes.addon_category_id" >{{ sizes.addon_category.name }}
+                                                                        <span class="text-muted"> ({{ sizes.addon_category.min }}-{{ sizes.addon_category.max  }}) </span>
+                                                                    </h6> -->
+                                                                    <div v-for="addon in sizes.addon_category.addon" v-bind:key="addon.id" v-if="sizes.addon_id === addon.id" class="custom-control custom-radio border-bottom py-2">
+                                                                        <input type="checkbox" :id=" addon.name " name="" class="custom-control-input" >
+                                                                        <label class="custom-control-label" v-if="sizes.addon_id === addon.id" :for="addon.name">{{ addon.name }} <span class="text-muted">+ ${{ sizes.price }}</span></label>
+                                                                    </div>
+
+                                                                </div>
+                                                            </form>
+                                                            <form v-if="menuAddonWithSize === null  && menuAddon != null" >
+                                                                <!-- extras body -->
+                                                                <div class="recepie-body" v-for="sizes in  menuAddon.data.MenuAddon" v-bind:key="sizes.id">
+                                                                    <!-- <h6 class="font-weight-bold mt-4">{{ sizes.addon.name }}
+                                                                        <span class="text-muted"> ({{ sizes.addon_category.min }}-{{ sizes.addon_category.max  }}) </span>
+                                                                    </h6> -->
+                                                                    <div  class="custom-control custom-radio border-bottom py-2">
+                                                                        <input type="checkbox" :id=" sizes.addon.name " name="" class="custom-control-input" >
+                                                                        <label class="custom-control-label"  :for="sizes.addon.name">{{ sizes.addon.name }}<span class="text-muted">+ ${{ sizes.price }}</span></label>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                            <h6 class="font-weight-bold mt-4">QUANTITY</h6>
+                                                                <div class="d-flex align-items-center">
+                                                                    <p class="m-0">Select Quantity</p>
+                                                                    <div class="ml-auto">
+                                                                        <span class="count-number">
+                                                                            <input style="width:100px;" class="count-number-input" type="number" min="1"  value="1">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="modal-footer p-0 border-0">
+                                                            <div class="col-6 m-0 p-0">
+                                                                <button type="button" class="btn border-top btn-lg btn-block" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                            <div class="col-6 m-0 p-0">
+                                                                <button type="button" class="btn btn-primary btn-lg btn-block">Add To Cart</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
                                         <div  class="media">
                                             <div class="mr-3 font-weight-bold text-danger non_veg">.</div>
                                             <div  class="media-body">
-                                                <h6 v-for="menu in singleMenu" v-bind:key="menu.id" class="mb-1">{{ menu.name }} </h6>
-                                                <p v-for="menu in singleMenu" v-bind:key="menu.id" class="text-muted mb-0">{{ menu.price }}</p>
+                                                <h6 class="mb-1">{{ singleMenu.menu.name }} </h6>
+                                                <p class="text-muted mb-0"> {{ singleMenu.description }}</p>
+                                                <p  class="text-muted mb-0" v-if="singleMenu.menu.display_discount_price <= 0 && singleMenu.menu.price > 0">$ {{ singleMenu.menu.price }}</p>
+                                                <p class="text-muted mb-0" v-if="singleMenu.menu.display_discount_price > 0"><del v-if="singleMenu.menu.display_discount_price > 0">$ {{ singleMenu.menu.display_price }}</del> $ {{ singleMenu.menu.display_discount_price }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -275,8 +174,87 @@
                             <!-- half and half menu -->
                             <div class="col-md-12 px-0 border-top">
                                 <div class="">
-                                    <div v-for="half_n_half_menu in MenuCategory.half_n_half_menu" v-bind:key="half_n_half_menu.id" class="p-3 border-bottom gold-members">
-                                        <span class="float-right"><a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#extras">ADD</a></span>
+                                    <div v-for="half_n_half_menu in MenuCategory.half_n_half_menu" v-bind:key="half_n_half_menu.id"  class="p-3 border-bottom gold-members">
+                                        <span class="float-right"><a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#halfnhalf"  @click="getHalfandHalfSizes(vendor.data.vendor.id,half_n_half_menu.id)">ADD</a></span>
+                                        <!-- add extras Modal -->
+                                        <div class="modal fade " id="halfnhalf" tabindex="-1" role="dialog"   aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5  class="modal-title">Extras</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <h5 v-if="halfAndHalfSizes != null" class="font-weight-bold mt-1 ml-3">Pick Size</h5>
+                                                    <ul v-if="halfAndHalfSizes != null" class="nav nav-pills mt-1 ml-3">
+                                                        <li v-for="halfAndHalfSizes in halfAndHalfSizes.data" v-bind:key="halfAndHalfSizes.id" >
+                                                            <a id="SingleMenuSizeBtn-1-1"  @click="getMenuByPickingItemSize(vendor.data.vendor.id,halfAndHalfSizes.id)"  class="btn btn-outline-primary btn-sm mb-3 mr-3" data-toggle="pill" >
+                                                                <b >{{ halfAndHalfSizes.name}}</b><br>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <h5 class="font-weight-bold mt-1 ml-3">Pick Side</h5>
+                                                    <ul class="nav nav-pills mt-1 ml-3">
+                                                        <li >
+                                                            <a @click="firstHalf = true , secondHalf=false"  class="btn btn-outline-primary btn-sm mb-3 mr-3" data-toggle="pill" >
+                                                                <b >First Half</b>
+                                                            </a>
+                                                        </li>
+                                                        <li >
+                                                            <a @click="secondHalf = true , firstHalf=false"   class="btn btn-outline-primary btn-sm mb-3 mr-3" data-toggle="pill" >
+                                                                <b >Second Half</b>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                        <div  class="modal-body">
+                                                            <form  v-if="getMenuWithMenuSize != null"  v-show="firstHalf">
+                                                                <!-- extras body -->
+                                                                <h5>First Half</h5>
+                                                                <div class="recepie-body" v-for="menu in getMenuWithMenuSize.data.MenuSizes" :key="menu.id">
+                                                                    <div class="custom-control custom-radio border-bottom py-2">
+                                                                        <input type="radio" :id=" 'firsthalf'+menu.menu.name " name="firsthalf" class="custom-control-input" >
+                                                                        <label class="custom-control-label" :for="'firsthalf'+menu.menu.name">{{menu.menu.name}}<br>
+                                                                            <b v-if="menu.display_discount_price <= 0 && menu.display_price > 0">{{ menu.display_price}} A$</b>
+                                                                            <b v-if="menu.display_discount_price > 0 "><del v-if="menu.display_discount_price > 0"> {{ menu.display_price }} A$ </del> {{ menu.display_discount_price}} A$</b>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                            <form   v-if="getMenuWithMenuSize != null"  v-show="secondHalf">
+                                                                <!-- extras body -->
+                                                                <h5>Second Half</h5>
+                                                                <div class="recepie-body" v-for="menu in getMenuWithMenuSize.data.MenuSizes" :key="menu.id">
+                                                                    <div class="custom-control custom-radio border-bottom py-2">
+                                                                        <input type="radio" :id=" menu.menu.name " name="seconfhalf" class="custom-control-input" >
+                                                                        <label class="custom-control-label" :for="menu.menu.name">{{menu.menu.name}}<br>
+                                                                            <b v-if="menu.display_discount_price <= 0 && menu.display_price > 0">{{ menu.display_price}} A$</b>
+                                                                            <b v-if="menu.display_discount_price > 0 "><del v-if="menu.display_discount_price > 0"> {{ menu.display_price }} A$ </del> {{ menu.display_discount_price}} A$</b>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                            <h6 class="font-weight-bold mt-4">QUANTITY</h6>
+                                                                <div class="d-flex align-items-center">
+                                                                    <p class="m-0">Select Quantity</p>
+                                                                    <div class="ml-auto">
+                                                                        <span class="count-number">
+                                                                            <input style="width:100px;" class="count-number-input" type="number" min="1" value="1">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="modal-footer p-0 border-0">
+                                                            <div class="col-6 m-0 p-0">
+                                                                <button type="button" class="btn border-top btn-lg btn-block" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                            <div class="col-6 m-0 p-0">
+                                                                <button type="button" class="btn btn-primary btn-lg btn-block">Add To Cart</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
                                         <div  class="media">
                                             <div class="mr-3 font-weight-bold text-danger non_veg">.</div>
                                             <div  class="media-body">
@@ -291,124 +269,59 @@
                             <div class="col-md-12 px-0 border-top">
                                 <div class="">
                                     <div v-for="dealsMenu in MenuCategory.deals_menu" v-bind:key="dealsMenu.id" class="p-3 border-bottom gold-members">
-                                        <span class="float-right"><a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#extras">ADD</a></span>
+                                        <span class="float-right"><a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#deals" @click="getDealsMenuItems(vendor.data.vendor.id,dealsMenu.id)">ADD</a></span>
+                                        <!-- add extras Modal -->
+                                        <div class="modal fade" id="deals" tabindex="-1" role="dialog"   aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5  class="modal-title">Extras</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <h5 v-if="deaslMenuItems != ''" class="font-weight-bold mt-1 ml-3">Pick Items</h5>
+                                                    <ul v-if="deaslMenuItems != null"  class="nav nav-pills mt-1 ml-3">
+                                                        <li v-for="deals in deaslMenuItems.data" :key="deals.id">
+                                                            <a id="SingleMenuSizeBt+n-1-1" class="btn btn-outline-primary btn-sm mb-3 mr-3" data-toggle="pill" >
+                                                                <b >{{ deals.name }}</b><br>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <div  class="modal-body">
+                                                        <h6 class="font-weight-bold mt-4">QUANTITY</h6>
+                                                            <div class="d-flex align-items-center">
+                                                                <p class="m-0">Select Quantity</p>
+                                                                <div class="ml-auto">
+                                                                    <span class="count-number">
+                                                                        <input style="width:100px;" class="count-number-input" type="number" min="1" value="1">
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                    </div>
+                                                    <div class="modal-footer p-0 border-0">
+                                                        <div class="col-6 m-0 p-0">
+                                                            <button type="button" class="btn border-top btn-lg btn-block" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                        <div class="col-6 m-0 p-0">
+                                                            <button type="button" class="btn btn-primary btn-lg btn-block">Add To Cart</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div  class="media">
-                                            <div v-for="menu in MenuCategory.deals_menu" v-bind:key="menu.id" class="mr-3 font-weight-bold text-danger non_veg">
-                                                <img alt="osahan" v-bind:src=" menu.image"  class="mr-3 rounded-circle img-fluid">
-                                            </div>
+                                            <div class="mr-3 font-weight-bold text-danger non_veg">.</div>
                                             <div  class="media-body">
-                                                <h6 v-for="menu in MenuCategory.deals_menu" v-bind:key="menu.id" class="mb-1">{{ menu.name }} </h6>
-                                                <p v-for="menu in MenuCategory.deals_menu" v-bind:key="menu.id" class="text-muted mb-0">{{ menu.price }}</p>
+                                                <h6 class="mb-1">{{ dealsMenu.name }} </h6>
+                                                <p class="text-muted mb-0" v-if="dealsMenu.display_discount_price <= 0">$ {{ dealsMenu.price }}</p>
+                                                 <p class="text-muted mb-0" v-if="dealsMenu.display_discount_price > 0" ><del v-if="dealsMenu.display_discount_price > 0">$ {{ dealsMenu.display_price }}</del> $ {{ dealsMenu.display_discount_price }}</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="row m-0">
-                            <h6 class="p-3 m-0 bg-light w-100">Starters <small class="text-black-50">3 ITEMS</small></h6>
-                            <div class="col-md-12 px-0 border-top">
-                                <div class="">
-                                    <div class="p-3 border-bottom menu-list">
-                                        <span class="float-right"><a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#extras">ADD</a></span>
-                                        <div class="media">
-                                            <img alt="#" src="img/starter1.jpg"  class="mr-3 rounded-pill ">
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Chicken Tikka Sub </h6>
-                                                <p class="text-muted mb-0">$250</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="p-3 border-bottom menu-list">
-                                        <span class="float-right"><a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#extras">ADD</a></span>
-                                        <div class="media">
-                                            <img alt="#" src="img/starter2.jpg"  class="mr-3 rounded-pill ">
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Cheese corn Roll <span class="badge badge-danger">BEST SELLER</span></h6>
-                                                <p class="text-muted mb-0">$600</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="p-3 border-bottom menu-list">
-                                        <span class="float-right"><a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#extras">ADD</a></span>
-                                        <div class="media">
-                                            <img alt="#" src="img/starter3.jpg"  class="mr-3 rounded-pill ">
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Chicken Tikka Sub <span class="badge badge-success">Pure Veg</span></h6>
-                                                <p class="text-muted mb-0">$250</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-0">
-                            <h6 class="p-3 m-0 bg-light w-100">Soups <small class="text-black-50">8 ITEMS</small></h6>
-                            <div class="col-md-12 px-0 border-top">
-                                <div class="bg-white">
-                                    <div class="p-3 border-bottom gold-members">
-                                        <span class="float-right"><a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#extras">ADD</a></span>
-                                        <div class="media">
-                                            <div class="mr-3 font-weight-bold text-danger non_veg">.</div>
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Chicken Tikka Sub </h6>
-                                                <p class="text-muted mb-0">$250</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="p-3 border-bottom gold-members">
-                                        <span class="float-right"><a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#extras">ADD</a></span>
-                                        <div class="media">
-                                            <div class="mr-3 font-weight-bold text-danger non_veg">.</div>
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Cheese corn Roll <span class="badge badge-danger">BEST SELLER</span></h6>
-                                                <p class="text-muted mb-0">$600</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="p-3 border-bottom gold-members">
-                                        <span class="float-right"><a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#extras">ADD</a></span>
-                                        <div class="media">
-                                            <div class="mr-3 font-weight-bold text-success veg">.</div>
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Chicken Tikka Sub <span class="badge badge-success">Pure Veg</span></h6>
-                                                <p class="text-muted mb-0">$250</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="p-3 border-bottom gold-members">
-                                        <span class="float-right"><a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#extras">ADD</a></span>
-                                        <div class="media">
-                                            <div class="mr-3 font-weight-bold text-success veg">.</div>
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Chicken Tikka Sub </h6>
-                                                <p class="text-muted mb-0">$250</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="p-3 border-bottom gold-members">
-                                        <span class="float-right"><a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#extras">ADD</a></span>
-                                        <div class="media">
-                                            <div class="mr-3 font-weight-bold text-danger non_veg">.</div>
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Cheese corn Roll <span class="badge badge-danger">BEST SELLER</span></h6>
-                                                <p class="text-muted mb-0">$600</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="p-3 gold-members">
-                                        <span class="float-right"><a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#extras">ADD</a></span>
-                                        <div class="media">
-                                            <div class="mr-3 font-weight-bold text-success veg">.</div>
-                                            <div class="media-body">
-                                                <h6 class="mb-1">Chicken Tikka Sub <span class="badge badge-success">Pure Veg</span></h6>
-                                                <p class="text-muted mb-0">$250</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                     <div class="mb-3">
                         <div id="ratings-and-reviews" class="bg-white shadow-sm d-flex align-items-center rounded p-3 mb-3 clearfix restaurant-detailed-star-rating">
@@ -641,26 +554,108 @@
         },
         data(){
             return{
+                uniqueAddoncategory:[],
                 vendor: null,
-                id : '',
-                name : '',
-                status : '',
-                editid : '',
-                editname : '',
-                editstatus : '',
-                info:null,
+                menuAddon:null,
+                menuSizes:null,
+                addonCategory:null,
+                menuAddonWithSize:null,
+                // half and half
+                halfAndHalfSizes:null,
+                firstHalf:true,
+                secondHalf:false,
+                getMenuWithMenuSize:null,
+                // deals
+                deaslMenuItems:null,
             }
         },
         methods : {
             getVendorDetails()
             {
-                axios.get('http://ozpos.geekss.com.au/api/single_vendor/5').then((response) => {
+                axios.get('http://192.168.18.27:5000/api/single_vendor/1').then((response) => {
                     this.vendor = response.data;
 				})
 				.catch((error) => {
 					console.error(error);
 				});
             },
+
+            getMenuSizes(vendor_id,menu_id)
+            {
+                axios.get('http://192.168.18.27:5000/api/menu_size/'+vendor_id+'/'+menu_id).then((response) => {
+                    this.menuSizes = response.data;
+                    this.menuAddonWithSize=null;
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+            },
+
+            getMenuAddons(vendor_id,menu_id)
+            {
+                axios.get('http://192.168.18.27:5000/api/menu_addon/'+vendor_id+'/'+menu_id).then((response) => {
+                    this.menuAddon = response.data;
+                    this.menuAddonWithSize = null;
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+            },
+
+            getMenuAddonsWithSize(vendor_id,menu_id,size_id)
+            {
+                axios.get('http://192.168.18.27:5000/api/menu_size_addon/'+vendor_id+'/'+menu_id+'/'+size_id).then((response) => {
+                    this.menuAddonWithSize = response.data;
+                    for (let i = 0; i < this.menuAddonWithSize.data.MenuAddon.length; i++) {
+                        this.uniqueAddoncategory[i] = this.menuAddonWithSize.data.MenuAddon[i].addon_category.name;
+                    }
+                    this.uniqueAddoncategory = [ ...new Set(this.uniqueAddoncategory) ]
+				})
+                .catch((error) => {
+					console.error(error);
+				});
+
+            },
+
+            // half and half
+            getHalfandHalfSizes(vendor_id,half_n_half_menu_id)
+            {
+                axios.get('http://192.168.18.27:5000/api/single_vendor_retrieve_sizes/'+vendor_id+'/'+half_n_half_menu_id).then((response) => {
+                    this.halfAndHalfSizes = response.data;
+                    this.menuSizes = null;
+                    console.log(this.halfAndHalfSizes);
+				})
+                .catch((error) => {
+					console.error(error);
+				});
+
+            },
+
+            getMenuByPickingItemSize(vendor_id,item_size_id)
+            {
+                axios.get('http://192.168.18.27:5000/api/menu_size_item_size/'+vendor_id+'/'+item_size_id).then((response) => {
+                    this.getMenuWithMenuSize = response.data;
+                    this.menuSizes = null;
+                    console.log(this.getMenuWithMenuSize);
+				})
+                .catch((error) => {
+					console.error(error);
+				});
+
+            },
+
+            getDealsMenuItems(vendor_id,deals_menu_id)
+            {
+                axios.get('http://192.168.18.27:5000/api/deals-menu-items/'+vendor_id+'/'+deals_menu_id).then((response) => {
+                    this.deaslMenuItems = response.data;
+                    console.log(this.deaslMenuItems);
+				})
+                .catch((error) => {
+					console.error(error);
+				});
+
+            },
+
 
         }
     }
