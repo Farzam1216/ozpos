@@ -7,6 +7,9 @@
 require('./bootstrap');
 
 window.Vue = require('vue').default;
+// ES6 Modules or TypeScript
+import swal from 'sweetalert'
+
 
 /**
  * The following block of code may be used to automatically register your
