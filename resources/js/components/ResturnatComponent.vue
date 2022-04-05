@@ -208,56 +208,44 @@
                                                         </li>
                                                     </ul>
                                                         <div  class="modal-body">
-
-                                                        <div class="modal" id="myModal2" data-backdrop="static" data-keyboard="false">
-                                                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                    <h4 class="modal-title">2nd Modal title</h4>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                                    </div><div class="container"></div>
-                                                                    <div class="modal-body">
-                                                                    Content for the dialog / modal goes here.
-                                                                    Content for the dialog / modal goes here.
-                                                                    Content for the dialog / modal goes here.
-                                                                    Content for the dialog / modal goes here.
-                                                                    Content for the dialog / modal goes here.
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                    <a href="#" data-dismiss="modal" class="btn">Close</a>
-                                                                    <a href="#" class="btn btn-primary">Save changes</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                             <form  v-if="getMenuWithMenuSize != null"  v-show="firstHalf">
                                                                 <!-- extras body -->
                                                                 <h5>First Half</h5>
                                                                 <div class="recepie-body" v-for="menu in getMenuWithMenuSize.data.MenuSizes" :key="menu.id">
                                                                     <div class="custom-control custom-radio border-bottom py-2">
-                                                                        <span class="float-right">
-                                                                            <a class="btn btn-outline-secondary btn-sm" data-toggle="modal" href="#myModal2">Pick ADDONS</a>
-                                                                        </span>
-                                                                        <input type="radio" :id=" 'firsthalf'+menu.menu.name " v-model="halfnhalf" name="firsthalf" :value="menu.menu.name" class="custom-control-input" >
+                                                                            <span v-if="options.length > 0 && optionMenuId == menu.menu.id" class="float-right">
+                                                                                <!-- <a class="btn btn-outline-secondary btn-sm" data-toggle="modal" href="#myModal2">Pick ADDONS</a> -->
+                                                                                <multiselect style="
+                                                                                    width: 300px;" v-model="addon_id" :options="options" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick Addons" label="name" track-by="name" :preselect-first="false">
+                                                                                    <template slot="selection" slot-scope="{ values, search, isOpen }">
+                                                                                    <span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} addon selected</span></template>
+                                                                                </multiselect>
+                                                                            </span>
+                                                                        <input type="radio" @click="getMenuAddonsHalfnHalf(vendor.data.vendor.id,menu.menu.id)" :id=" 'firsthalf'+menu.menu.name " v-model="first_half_id" name="firsthalf" :value="menu.menu.id" class="custom-control-input" >
                                                                         <label class="custom-control-label" :for="'firsthalf'+menu.menu.name">{{menu.menu.name}}<br>
-                                                                            <b v-if="menu.display_discount_price <= 0 && menu.display_price > 0">{{ menu.display_price}} A$</b>
-                                                                            <b v-if="menu.display_discount_price > 0 "><del v-if="menu.display_discount_price > 0"> {{ menu.display_price }} A$ </del> {{ menu.display_discount_price}} A$</b>
+                                                                            <b v-if="menu.display_discount_price <= 0 && menu.display_price > 0">{{ menu.display_price / 2}} A$</b>
+                                                                            <b v-if="menu.display_discount_price > 0 "><del v-if="menu.display_discount_price > 0"> {{ menu.display_price / 2 }} A$ </del> {{ menu.display_discount_price / 2}} A$</b>
                                                                         </label>
+
                                                                     </div>
                                                                 </div>
                                                             </form>
-                                                            <form   v-if="getMenuWithMenuSize != null"  v-show="secondHalf">
+                                                            <form v-if="getMenuWithMenuSize != null" v-show="secondHalf">
                                                                 <!-- extras body -->
                                                                 <h5>Second Half</h5>
-                                                                <span class="float-right">
-                                                                    <a href="#" class="btn btn-outline-secondary btn-sm">Pick ADDONS</a>
-                                                                </span>
                                                                 <div class="recepie-body" v-for="menu in getMenuWithMenuSize.data.MenuSizes" :key="menu.id">
                                                                     <div class="custom-control custom-radio border-bottom py-2">
-                                                                        <input type="radio" :id=" menu.menu.name " name="seconfhalf" class="custom-control-input" >
-                                                                        <label class="custom-control-label" :for="menu.menu.name">{{menu.menu.name}}<br>
-                                                                            <b v-if="menu.display_discount_price <= 0 && menu.display_price > 0">{{ menu.display_price}} A$</b>
-                                                                            <b v-if="menu.display_discount_price > 0 "><del v-if="menu.display_discount_price > 0"> {{ menu.display_price }} A$ </del> {{ menu.display_discount_price}} A$</b>
+                                                                    <span  v-if="options.length > 0 && optionMenuId == menu.menu.id" class="float-right">
+                                                                        <multiselect style="
+                                                                                width: 300px;" v-model="addon_id" :options="options" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick Addons" label="name" track-by="name" :preselect-first="false">
+                                                                                <template slot="selection" slot-scope="{ values, search, isOpen }">
+                                                                                <span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} addon selected</span></template>
+                                                                        </multiselect>
+                                                                    </span>
+                                                                        <input type="radio" @click="getMenuAddonsHalfnHalf(vendor.data.vendor.id,menu.menu.id)" :id=" 'secondhalf'+menu.menu.name " v-model="second_half_id"  :value="menu.menu.id" name="secondhalf" class="custom-control-input" >
+                                                                        <label class="custom-control-label" :for="'secondhalf'+menu.menu.name">{{menu.menu.name}}<br>
+                                                                            <b v-if="menu.display_discount_price <= 0 && menu.display_price > 0">{{ menu.display_price / 2}} A$</b>
+                                                                            <b v-if="menu.display_discount_price > 0 "><del v-if="menu.display_discount_price > 0"> {{ menu.display_price / 2}} A$ </del> {{ menu.display_discount_price / 2}} A$</b>
                                                                         </label>
                                                                     </div>
                                                                 </div>
@@ -267,7 +255,7 @@
                                                                     <p class="m-0">Select Quantity</p>
                                                                     <div class="ml-auto">
                                                                         <span class="count-number">
-                                                                            <input style="width:100px;" class="count-number-input" type="number" min="1" value="1">
+                                                                            <input style="width:100px;" class="count-number-input" v-model="quantity" type="number" min="1" value="1">
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -277,7 +265,7 @@
                                                                 <button type="button" class="btn border-top btn-lg btn-block" data-dismiss="modal">Close</button>
                                                             </div>
                                                             <div class="col-6 m-0 p-0">
-                                                                <button type="button" class="btn btn-primary btn-lg btn-block">Add To Cart</button>
+                                                                <button type="button" @click="addToCartHalfnHalf()" class="btn btn-primary btn-lg btn-block">Add To Cart</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -553,7 +541,7 @@
                             <h6 class="font-weight-bold mb-0">TO PAY <span class="float-right">${{total}}</span></h6>
                         </div>
                         <div class="p-3">
-                            <a class="btn btn-success btn-block btn-lg" href="checkout">checkout<i class="feather-arrow-right"></i></a>
+                            <a class="btn btn-success btn-block btn-lg" href="/checkout">checkout<i class="feather-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -565,14 +553,23 @@
 <script>
     import * as $ from "jquery";
     import * as bootstrap from "bootstrap";
+    import Multiselect from 'vue-multiselect'
 
     export default {
         created() {
             console.log('Component mounted.')
             this.getVendorDetails();
         },
+        components: {
+            Multiselect
+        },
         data(){
             return{
+                // select dropdown
+                value: [],
+                options: {},
+                optionMenuId : '',
+                // end dropdown
                 halfnhalf:'',
                 uniqueAddoncategory:[],
                 vendor: null,
@@ -592,6 +589,11 @@
                 menu_id:'',
                 size_id : '',
                 addon_id: [],
+                single_menu_id:'',
+                half_and_half_id:'',
+                first_half_id : '',
+                second_half_id : '',
+                deals_menus_id : '',
                 cart : null,
                 cartData : null,
                 session_id: '',
@@ -599,9 +601,7 @@
                 vendor_id : '',
                 cartQuantity:'',
                 total:'',
-
                 // end single menu cart
-
                 // end cart details
             }
         },
@@ -626,13 +626,18 @@
 
             addToCart()
             {
-                axios.post('http://192.168.18.27:5000/api/addToCart/',{
+                axios.post('http://192.168.18.27:5000/api/addToCart',{
                     vendor_id : this.vendor_id,
                     session_id: this.session_id,
                     menu_id: this.menu_id,
                     size_id : this.size_id,
                     addon_id: this.addon_id,
                     quantity: this.quantity,
+                    single_menu_id : this.single_menu_id,
+                    half_and_half_id : this.halfnhalf,
+                    deals_menus_id : this.deals_menus_id,
+                    first_half_id : this.first_half_id,
+                    second_half_id : this.second_half_id,
                 }).then((response) => {
                     // this.cart.push(response.data);
                     if (response.status == 200) {
@@ -642,7 +647,8 @@
                         this.size_id ='';
                         this.addon_id= [];
                         this.quantity = 1;
-                        // $('#singlemenuaddModal').modal('hide');
+                        this.halfnhalf = '';
+                        this.deals_menus_id = '';
                         swal({
                         title: "Item Added!",
                         text: "Item Added To Cart Successfully.",
@@ -658,6 +664,53 @@
                     title: "Some Thing Wrong!",
                     // text: error.response.data.message,
                     text: "Sizes are required. Please pick size.",
+                    icon: "error",
+                    buttons: true,
+                    timer: 3000
+                });
+				});
+            },
+
+            addToCartHalfnHalf()
+            {
+                axios.post('http://192.168.18.27:5000/api/addToCart',{
+                    vendor_id : this.vendor_id,
+                    session_id: this.session_id,
+                    menu_id: this.halfnhalf,
+                    size_id : this.size_id,
+                    addon_id: this.addon_id,
+                    quantity: this.quantity,
+                    single_menu_id : this.single_menu_id,
+                    half_and_half_id : this.halfnhalf,
+                    deals_menus_id : this.deals_menus_id,
+                    first_half_id : this.first_half_id,
+                    second_half_id : this.second_half_id,
+                }).then((response) => {
+                    // this.cart.push(response.data);
+                    if (response.status == 200) {
+                        this.session_id = response.data.data.session_id;
+                        this.getCartDetails(this.session_id);
+                        this.menu_id ='';
+                        this.size_id ='';
+                        this.addon_id= [];
+                        this.quantity = 1;
+                        this.halfnhalf = '';
+                        this.deals_menus_id = '';
+                        swal({
+                        title: "Item Added!",
+                        text: response.data.message,
+                        icon: "success",
+                        buttons: true,
+                        timer: 3000
+                    });
+                    }
+				})
+				.catch((error) => {
+					console.error(error);
+                     swal({
+                    title: "Some Thing Wrong!",
+                    text: error.response.data.message,
+                    // text: "Sizes are required. Please pick size.",
                     icon: "error",
                     buttons: true,
                     timer: 3000
@@ -712,6 +765,9 @@
             {
                 this.vendor_id =vendor_id;
                 this.menu_id = menu_id;
+                this.options = [];
+                this.addon_id= [''];
+                this.optionMenuId = menu_id;
                 axios.get('http://192.168.18.27:5000/api/menu_addon/'+vendor_id+'/'+menu_id).then((response) => {
                     this.menuAddon = response.data;
                     this.menuAddonWithSize = null;
@@ -721,9 +777,33 @@
 				});
             },
 
-            getMenuAddonsWithSize(vendor_id,menu_id,size_id)
+            getMenuAddonsHalfnHalf(vendor_id,menu_id)
             {
                 this.vendor_id =vendor_id;
+                this.menu_id = menu_id;
+                this.options = [];
+                this.optionMenuId = menu_id;
+                axios.get('http://192.168.18.27:5000/api/menu_addon/'+vendor_id+'/'+menu_id).then((response) => {
+                    this.menuAddon = response.data;
+                    this.menuAddonWithSize = null;
+                    if(response.data != null){
+                        for (let i = 0; i < this.menuAddon.data.MenuAddon.length; i++) {
+                        this.options[i] = {
+                            id : this.menuAddon.data.MenuAddon[i].addon_id,
+                            name : this.menuAddon.data.MenuAddon[i].addon.name
+                        }
+                    }
+                }
+                    console.log(this.options);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+            },
+
+            getMenuAddonsWithSize(vendor_id,menu_id,size_id)
+            {
+                this.vendor_id = vendor_id;
                 this.menu_id = menu_id;
                 this.size_id = size_id;
                 axios.get('http://192.168.18.27:5000/api/menu_size_addon/'+vendor_id+'/'+menu_id+'/'+size_id).then((response) => {
@@ -743,10 +823,10 @@
             getHalfandHalfSizes(vendor_id,half_n_half_menu_id)
             {
                 this.vendor_id =vendor_id;
+                this.halfnhalf = half_n_half_menu_id;
                 axios.get('http://192.168.18.27:5000/api/single_vendor_retrieve_sizes/'+vendor_id+'/'+half_n_half_menu_id).then((response) => {
                     this.halfAndHalfSizes = response.data;
                     this.menuSizes = null;
-                    console.log(this.halfAndHalfSizes);
 				})
                 .catch((error) => {
 					console.error(error);
@@ -757,10 +837,10 @@
             getMenuByPickingItemSize(vendor_id,item_size_id)
             {
                 this.vendor_id =vendor_id;
+                this.menuAddon = null;
                 axios.get('http://192.168.18.27:5000/api/menu_size_item_size/'+vendor_id+'/'+item_size_id).then((response) => {
                     this.getMenuWithMenuSize = response.data;
                     this.menuSizes = null;
-                    console.log(this.getMenuWithMenuSize);
 				})
                 .catch((error) => {
 					console.error(error);
@@ -782,3 +862,4 @@
         }
     }
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
