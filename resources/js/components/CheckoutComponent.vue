@@ -12,6 +12,104 @@
             <div class="py-5 row">
                 <div class="col-md-8 mb-3">
                     <div>
+                    <div class="accordion mb-3 rounded shadow-sm bg-white overflow-hidden" id="accordionExample">
+                            <div class="osahan-card bg-white border-bottom overflow-hidden">
+                                <div class="osahan-card-header" id="headingTwo">
+                                    <h2 class="mb-0">
+                                        <button class="d-flex p-3 align-items-center btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                 <i class="feather-globe mr-3"></i> Login or Signup
+                                 <i class="feather-chevron-down ml-auto"></i>
+                                 </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                    <div class="osahan-card-body border-top p-3">
+                                        <form>
+                                            <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                                                <label class="btn btn-outline-secondary active">
+                                                <input @click="login = true , signup=false" type="radio" name="options" id="option1" checked> Login
+                                                </label>
+                                                <label class="btn btn-outline-secondary">
+                                                <input @click="login = false , signup=true" type="radio" name="options" id="option2"> Signup
+                                                </label>
+                                            </div>
+                                            <hr>
+                                            <div v-show="signup" class="form-row">
+                                                <div class="col-md-12 form-group mb-0">
+                                                   <form class="">
+
+                                                        <div class="form-row">
+                                                        <div class="col-md-12">
+                                                            <p v-if="signupErrors.length">
+                                                            <b class="text-danger">Please correct the following errors:</b>
+                                                                <ul >
+                                                                    <li class="text-danger" v-for="signupErrors in signupErrors" :key="signupErrors.id">{{ signupErrors }}</li>
+                                                                </ul>
+                                                            </p>
+                                                        </div>
+                                                            <div class="col-md-6 form-group">
+                                                                <label class="form-label">Name</label>
+                                                                <input placeholder="Enter Name..." v-model="name" type="text" class="form-control">
+                                                            </div>
+                                                            <div class="col-md-6 form-group">
+                                                                <label class="form-label">Email</label>
+                                                                <input placeholder="Enter Email..." v-model="email" type="email" class="form-control">
+                                                            </div>
+                                                            <!-- <div class="col-md-6 form-group">
+                                                                <label class="form-label">Phone Code</label>
+                                                                <input placeholder="Enter Phone Code..." type="number" class="form-control">
+                                                            </div> -->
+                                                            <div class="col-md-6 form-group">
+                                                                <label class="form-label">Mobile  Number</label>
+                                                                <input placeholder="Enter Mobile  Number..." v-model="mobileNumber" type="number" class="form-control">
+                                                            </div>
+                                                            <div class="col-md-6 form-group">
+                                                                <label class="form-label">Password</label>
+                                                                <input placeholder="Enter Password..." v-model="password" type="password" class="form-control">
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <a class="btn btn-primary" @click="signup()"  href="#">Sign up</a>
+                                                            </div>
+
+                                                        </div>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                            <div v-show="login" v-if="LoginStatus == true" class="form-row">
+                                                <div class="col-md-12 form-group mb-0">
+                                                    <form class="">
+                                                        <div class="form-row">
+                                                        <div class="col-md-12">
+                                                            <p v-if="loginErrors.length">
+                                                            <b class="text-danger">Please correct the following errors:</b>
+                                                                <ul >
+                                                                    <li class="text-danger" v-for="loginErrors in loginErrors" :key="loginErrors.id">{{ loginErrors }}</li>
+                                                                </ul>
+                                                            </p>
+                                                        </div>
+                                                            <div class="col-md-6 form-group">
+                                                                <label class="form-label">Email</label>
+                                                                <input placeholder="Enter Email..." v-model="loginEmail" type="email" class="form-control">
+                                                            </div>
+                                                            <div class="col-md-6 form-group">
+                                                                <label class="form-label">Password</label>
+                                                                <input placeholder="Enter Password..." v-model="loginPassword" type="password" class="form-control">
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <a class="btn btn-primary" @click="userlogin()" href="#">Login</a>
+                                                            </div>
+
+                                                        </div>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="osahan-cart-item mb-3 rounded shadow-sm bg-white overflow-hidden">
                             <div class="osahan-cart-item-profile bg-white p-3">
                                 <div class="d-flex flex-column">
@@ -88,45 +186,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="osahan-card bg-white border-bottom overflow-hidden">
-                                <div class="osahan-card-header" id="headingTwo">
-                                    <h2 class="mb-0">
-                                        <button class="d-flex p-3 align-items-center btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                 <i class="feather-globe mr-3"></i> Net Banking
-                                 <i class="feather-chevron-down ml-auto"></i>
-                                 </button>
-                                    </h2>
-                                </div>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                    <div class="osahan-card-body border-top p-3">
-                                        <form>
-                                            <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                                                <label class="btn btn-outline-secondary active">
-                                       <input type="radio" name="options" id="option1" checked> HDFC
-                                       </label>
-                                                <label class="btn btn-outline-secondary">
-                                       <input type="radio" name="options" id="option2"> ICICI
-                                       </label>
-                                                <label class="btn btn-outline-secondary">
-                                       <input type="radio" name="options" id="option3"> AXIS
-                                       </label>
-                                            </div>
-                                            <hr>
-                                            <div class="form-row">
-                                                <div class="col-md-12 form-group mb-0">
-                                                    <label class="form-label small font-weight-bold">Select Bank</label><br>
-                                                    <select class="custom-select form-control">
-                                             <option>Bank</option>
-                                             <option>KOTAK</option>
-                                             <option>SBI</option>
-                                             <option>UCO</option>
-                                          </select>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="osahan-card bg-white overflow-hidden">
                                 <div class="osahan-card-header" id="headingThree">
                                     <h2 class="mb-0">
@@ -149,74 +209,23 @@
                 <div class="col-md-4">
                     <div class="osahan-cart-item rounded rounded shadow-sm overflow-hidden bg-white sticky_sidebar">
                         <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3">
-                            <img alt="osahan" src="img/starter1.jpg" class="mr-3 rounded-circle img-fluid">
+                            <img alt="osahan" v-bind:src=" vendor.data.vendor.image" style="width:50px;" class="mr-1 rounded-circle img-fluid">
                             <div class="d-flex flex-column">
-                                <h6 class="mb-1 font-weight-bold">Spice Hut Indian Restaurant</h6>
-                                <p class="mb-0 small text-muted"><i class="feather-map-pin"></i> 2036 2ND AVE, NEW YORK, NY 10029</p>
+                                <h6 class="mb-1 font-weight-bold">{{vendor.data.vendor.name}}</h6>
+                                <p class="mb-0 small text-muted"><i class="feather-map-pin"></i> {{vendor.data.vendor.address}}</p>
                             </div>
                         </div>
-                        <div class="bg-white border-bottom py-2">
-                            <div class="gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
+                        <div v-if="cartData != null" class="bg-white border-bottom py-2">
+                            <div  v-for="cartData in cartData.data.cart" :key="cartData.id" class="gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
                                 <div class="media align-items-center">
-                                    <div class="mr-2 text-danger">&middot;</div>
+                                    <div class="mr-2 text-danger" style="margin-bottom: 15px;">&middot;</div>
                                     <div class="media-body">
-                                        <p class="m-0">Chicken Tikka Sub</p>
+                                        <h6 class="mb-1">{{cartData.menu_name}}</h6>
+                                        <p class="text-gray mb-0 ml-2 text-muted small">${{cartData.unit_price}}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <span class="count-number float-right"><button type="button" class="btn-sm left dec btn btn-outline-secondary"> <i class="feather-minus"></i> </button><input class="count-number-input" type="text" readonly="" value="2"><button type="button" class="btn-sm right inc btn btn-outline-secondary"> <i class="feather-plus"></i> </button></span>
-                                    <p class="text-gray mb-0 float-right ml-2 text-muted small">$628</p>
-                                </div>
-                            </div>
-                            <div class="gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
-                                <div class="media align-items-center">
-                                    <div class="mr-2 text-danger">&middot;</div>
-                                    <div class="media-body">
-                                        <p class="m-0">Methi Chicken Dry
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <span class="count-number float-right"><button type="button" class="btn-sm left dec btn btn-outline-secondary"> <i class="feather-minus"></i> </button><input class="count-number-input" type="text" readonly="" value="2"><button type="button" class="btn-sm right inc btn btn-outline-secondary"> <i class="feather-plus"></i> </button></span>
-                                    <p class="text-gray mb-0 float-right ml-2 text-muted small">$628</p>
-                                </div>
-                            </div>
-                            <div class="gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
-                                <div class="media align-items-center">
-                                    <div class="mr-2 text-danger">&middot;</div>
-                                    <div class="media-body">
-                                        <p class="m-0">Reshmi Kebab
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <span class="count-number float-right"><button type="button" class="btn-sm left dec btn btn-outline-secondary"> <i class="feather-minus"></i> </button><input class="count-number-input" type="text" readonly="" value="2"><button type="button" class="btn-sm right inc btn btn-outline-secondary"> <i class="feather-plus"></i> </button></span>
-                                    <p class="text-gray mb-0 float-right ml-2 text-muted small">$628</p>
-                                </div>
-                            </div>
-                            <div class="gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
-                                <div class="media align-items-center">
-                                    <div class="mr-2 text-success">&middot;</div>
-                                    <div class="media-body">
-                                        <p class="m-0">Lemon Cheese Dry
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <span class="count-number float-right"><button type="button" class="btn-sm left dec btn btn-outline-secondary"> <i class="feather-minus"></i> </button><input class="count-number-input" type="text" readonly="" value="2"><button type="button" class="btn-sm right inc btn btn-outline-secondary"> <i class="feather-plus"></i> </button></span>
-                                    <p class="text-gray mb-0 float-right ml-2 text-muted small">$628</p>
-                                </div>
-                            </div>
-                            <div class="gold-members d-flex align-items-center justify-content-between px-3 py-2">
-                                <div class="media align-items-center">
-                                    <div class="mr-2 text-success">&middot;</div>
-                                    <div class="media-body">
-                                        <p class="m-0">Rara Paneer</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <span class="count-number float-right"><button type="button" class="btn-sm left dec btn btn-outline-secondary"> <i class="feather-minus"></i> </button><input class="count-number-input" type="text" readonly="" value="2"><button type="button" class="btn-sm right inc btn btn-outline-secondary"> <i class="feather-plus"></i> </button></span>
-                                    <p class="text-gray mb-0 float-right ml-2 text-muted small">$628</p>
+                                    <span class="count-number float-right"><button type="button" class="btn-sm left dec btn btn-outline-secondary" @click="minusQuantity(cartData.id)"> <i class="feather-minus"></i> </button><input class="count-number-input"  type="text" readonly="" :value="cartData.quantity"><button type="button" class="btn-sm right inc btn btn-outline-secondary" @click="addQuantity(cartData.id)"> <i class="feather-plus"></i> </button></span>
                                 </div>
                             </div>
                         </div>
@@ -231,16 +240,72 @@
                             </div>
                         </div>
                         <div class="bg-white p-3 clearfix border-bottom">
-                            <p class="mb-1">Item Total <span class="float-right text-dark">$3140</span></p>
-                            <p class="mb-1">Restaurant Charges <span class="float-right text-dark">$62.8</span></p>
-                            <p class="mb-1">Delivery Fee<span class="text-info ml-1"><i class="feather-info"></i></span><span class="float-right text-dark">$10</span></p>
-                            <p class="mb-1 text-success">Total Discount<span class="float-right text-success">$1884</span></p>
+                            <p class="mb-1">Item Total <span class="float-right text-dark">${{total}}</span></p>
+                            <!-- <p class="mb-1">Restaurant Charges <span class="float-right text-dark">$62.8</span></p> -->
+                            <!-- <p class="mb-1">Delivery Fee<span class="text-info ml-1"><i class="feather-info"></i></span><span class="float-right text-dark">$10</span></p> -->
+                            <p class="mb-1 text-success">Total Discount<span class="float-right text-success">$0</span></p>
                             <hr>
-                            <h6 class="font-weight-bold mb-0">TO PAY <span class="float-right">$1329</span></h6>
+                            <h6 class="font-weight-bold mb-0">TO PAY <span class="float-right">${{total}}</span></h6>
                         </div>
                         <div class="p-3">
-                            <a class="btn btn-success btn-block btn-lg" href="successful">PAY $1329<i class="feather-arrow-right"></i></a>
+                            <p v-if="errors.length">
+                            <b class="text-danger">Please correct the following errors:</b>
+                                <ul >
+                                    <li class="text-danger" v-for="error in errors" :key="error.id">{{ error }}</li>
+                                </ul>
+                            </p>
+                            <!-- <a class="btn btn-success btn-block btn-lg" href="successful">PAY ${{total}}<i class="feather-arrow-right"></i></a> -->
+                            <a class="btn btn-success btn-block btn-lg" @click="payment()">PAY ${{total}}<i class="feather-arrow-right"></i></a>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Delivery Address</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form class="">
+                        <div class="form-row">
+                            <div class="col-md-12 form-group">
+                                <label class="form-label">Delivery Area</label>
+                                <div class="input-group">
+                                    <input placeholder="Delivery Area" type="text" class="form-control">
+                                    <div class="input-group-append"><button type="button" class="btn btn-outline-secondary"><i class="feather-map-pin"></i></button></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 form-group"><label class="form-label">Complete Address</label><input placeholder="Complete Address e.g. house number, street name, landmark" type="text" class="form-control"></div>
+                            <div class="col-md-12 form-group"><label class="form-label">Delivery Instructions</label><input placeholder="Delivery Instructions e.g. Opposite Gold Souk Mall" type="text" class="form-control"></div>
+                            <div class="mb-0 col-md-12 form-group">
+                                <label class="form-label">Nickname</label>
+                                <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                                    <label class="btn btn-outline-secondary active">
+                              <input type="radio" name="options" id="option12" checked> Home
+                              </label>
+                                    <label class="btn btn-outline-secondary">
+                              <input type="radio" name="options" id="option22"> Work
+                              </label>
+                                    <label class="btn btn-outline-secondary">
+                              <input type="radio" name="options" id="option32"> Other
+                              </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer p-0 border-0">
+                    <div class="col-6 m-0 p-0">
+                        <button type="button" class="btn border-top btn-lg btn-block" data-dismiss="modal">Close</button>
+                    </div>
+                    <div class="col-6 m-0 p-0">
+                        <button type="button" class="btn btn-primary btn-lg btn-block">Save changes</button>
                     </div>
                 </div>
             </div>
@@ -250,9 +315,152 @@
 </template>
 
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
-    }
+export default {
+  mounted() {
+    this.setdata();
+    this.cartDataa();
+    this.getVendorDetails();
+  },
+  props: {
+    cart_prop: String,
+  },
+  data() {
+    return {
+      errors: [],
+      loginErrors:[],
+      signupErrors:[],
+      cartID: null,
+      cartData: "",
+      vendor: "",
+      vendor_id: "",
+      total: "",
+      paymentMethod: null,
+      userAddress: null,
+
+    //   login
+      login:true,
+      loginEmail:'',
+      loginPassword:'',
+      LoginStatus:true,
+    // Signup
+     signup:false,
+     name:'',
+     email:'',
+     mobileNumber:'',
+     password:'',
+
+    };
+  },
+  methods: {
+    setdata() {
+      this.cartID = this.cart_prop;
+    },
+    cartDataa() {
+      axios
+        .get("http://ozpos.geekss.com.au/api/cartData/" + this.cartID)
+        .then((response) => {
+          this.cartData = response.data;
+          this.total = 0.0;
+          this.cartData.data.cart.forEach((cartData) => {
+            this.total = this.total + cartData.price;
+          });
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    addQuantity(cart_id) {
+      axios
+        .get("http://ozpos.geekss.com.au/api/addQuantity/" + cart_id)
+        .then((response) => {
+          this.cartDataa();
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+
+    minusQuantity(cart_id) {
+      axios
+        .get("http://ozpos.geekss.com.au/api/minusQuantity/" + cart_id)
+        .then((response) => {
+          this.cartDataa();
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    getVendorDetails() {
+      axios
+        .get("http://ozpos.geekss.com.au/api/single_vendor/5")
+        .then((response) => {
+          this.vendor = response.data;
+          this.vendor_id = response.data.data.vendor.id;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    userlogin(){
+        axios.post('http://ozpos.geekss.com.au/api/user_login',{
+            email_id : this.loginEmail,
+            password : this.loginPassword,
+            provider : "LOCAL",
+                }).then( (response) => {
+                if (response.status == 200) {
+                    this.loginErrors = [];
+                    if(response.data.success == false){
+                        this.loginErrors.push(response.data.message);
+                        swal({
+                            title: "Login UnSuccessfull!",
+                            text: response.data.message,
+                            icon: "error",
+                            buttons: true,
+                            timer: 3000
+                        })
+                    }else{
+                        this.LoginStatus = false;
+                        swal({
+                            title: "Login Successfull!",
+                            text: response.data.message,
+                            icon: "success",
+                            buttons: true,
+                            timer: 3000
+                        })
+                    }
+                    ;
+                }else {
+                    console.warn(response.data);
+                }
+                }).catch( (error)=> {
+                    console.log( error.response.data.errors )
+                    this.loginErrors = [];
+
+                        if(error.response.data.errors.email_id){
+                            this.loginErrors.push(error.response.data.errors.email_id);
+                        }
+                        if(error.response.data.errors.password){
+                            this.loginErrors.push(error.response.data.errors.password);
+                        };
+
+            })
+    },
+    usersignup(){
+
+    },
+    payment() {
+      this.errors = [];
+      if ( this.LoginStatus == true) {
+        this.errors.push("Please Login or Sign up.");
+      }
+      if (!this.userAddress) {
+        this.errors.push("Please Add Delivery Address.");
+      }
+      if (!this.paymentMethod) {
+        this.errors.push("Please Select Payment Method.");
+      }
+    },
+  },
+};
 </script>

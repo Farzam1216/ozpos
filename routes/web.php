@@ -22,9 +22,11 @@ Route::get('/', function () {
     return view('frontend.resturant');
 });
 
-Route::get('/checkout', function () {
-    return view('frontend.checkout');
-});
+// Route::get('/checkout/{id}', function () {
+//     return view('frontend.checkout');
+// });
+
+Route::get('checkout/{id}', [App\Http\Controllers\CheckoutController::class, 'checkout'])->name('checkout');
 
 Route::get('/my-order', function () {
     return view('frontend.myOrder');

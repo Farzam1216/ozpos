@@ -5513,9 +5513,220 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
-    console.log('Component mounted.');
+    this.setdata();
+    this.cartDataa();
+    this.getVendorDetails();
+  },
+  props: {
+    cart_prop: String
+  },
+  data: function data() {
+    return {
+      errors: [],
+      loginErrors: [],
+      signupErrors: [],
+      cartID: null,
+      cartData: "",
+      vendor: "",
+      vendor_id: "",
+      total: "",
+      paymentMethod: null,
+      userAddress: null,
+      //   login
+      login: true,
+      loginEmail: '',
+      loginPassword: '',
+      LoginStatus: true,
+      // Signup
+      signup: false,
+      name: '',
+      email: '',
+      mobileNumber: '',
+      password: ''
+    };
+  },
+  methods: {
+    setdata: function setdata() {
+      this.cartID = this.cart_prop;
+    },
+    cartDataa: function cartDataa() {
+      var _this = this;
+
+      axios.get("http://ozpos.geekss.com.au/api/cartData/" + this.cartID).then(function (response) {
+        _this.cartData = response.data;
+        _this.total = 0.0;
+
+        _this.cartData.data.cart.forEach(function (cartData) {
+          _this.total = _this.total + cartData.price;
+        });
+
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    addQuantity: function addQuantity(cart_id) {
+      var _this2 = this;
+
+      axios.get("http://ozpos.geekss.com.au/api/addQuantity/" + cart_id).then(function (response) {
+        _this2.cartDataa();
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    minusQuantity: function minusQuantity(cart_id) {
+      var _this3 = this;
+
+      axios.get("http://ozpos.geekss.com.au/api/minusQuantity/" + cart_id).then(function (response) {
+        _this3.cartDataa();
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    getVendorDetails: function getVendorDetails() {
+      var _this4 = this;
+
+      axios.get("http://ozpos.geekss.com.au/api/single_vendor/5").then(function (response) {
+        _this4.vendor = response.data;
+        _this4.vendor_id = response.data.data.vendor.id;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    userlogin: function userlogin() {
+      var _this5 = this;
+
+      axios.post('http://ozpos.geekss.com.au/api/user_login', {
+        email_id: this.loginEmail,
+        password: this.loginPassword,
+        provider: "LOCAL"
+      }).then(function (response) {
+        if (response.status == 200) {
+          _this5.loginErrors = [];
+
+          if (response.data.success == false) {
+            _this5.loginErrors.push(response.data.message);
+
+            swal({
+              title: "Login UnSuccessfull!",
+              text: response.data.message,
+              icon: "error",
+              buttons: true,
+              timer: 3000
+            });
+          } else {
+            _this5.LoginStatus = false;
+            swal({
+              title: "Login Successfull!",
+              text: response.data.message,
+              icon: "success",
+              buttons: true,
+              timer: 3000
+            });
+          }
+
+          ;
+        } else {
+          console.warn(response.data);
+        }
+      })["catch"](function (error) {
+        console.log(error.response.data.errors);
+        _this5.loginErrors = [];
+
+        if (error.response.data.errors.email_id) {
+          _this5.loginErrors.push(error.response.data.errors.email_id);
+        }
+
+        if (error.response.data.errors.password) {
+          _this5.loginErrors.push(error.response.data.errors.password);
+        }
+
+        ;
+      });
+    },
+    usersignup: function usersignup() {},
+    payment: function payment() {
+      this.errors = [];
+
+      if (this.LoginStatus == true) {
+        this.errors.push("Please Login or Sign up.");
+      }
+
+      if (!this.userAddress) {
+        this.errors.push("Please Add Delivery Address.");
+      }
+
+      if (!this.paymentMethod) {
+        this.errors.push("Please Select Payment Method.");
+      }
+    }
   }
 });
 
@@ -7549,22 +7760,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -7578,6 +7773,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   data: function data() {
     return {
+      errors: [],
       // select dropdown
       value: [],
       options: {},
@@ -7597,6 +7793,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       getMenuWithMenuSize: null,
       // deals
       deaslMenuItems: null,
+      dealsItems: null,
+      dealsCartItems: [],
+      cartID: null,
       // cart details
       // single menu cart
       menu_id: '',
@@ -7623,17 +7822,17 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     getCartDetails: function getCartDetails(session_id) {
       var _this = this;
 
-      console.log(session_id);
-      axios.get('http://192.168.18.27:5000/api/getCartData/' + this.vendor_id + '/' + session_id).then(function (response) {
+      axios.get('http://ozpos.geekss.com.au/api/getCartData/' + this.vendor_id + '/' + session_id).then(function (response) {
         _this.cartData = response.data;
         console.log(_this.cartData);
         _this.total = 0.0;
 
         _this.cartData.data.cart.forEach(function (cartData) {
           _this.total = _this.total + cartData.price;
+          _this.cartID = cartData.id;
         });
 
-        console.log(_this.total);
+        console.log(_this.cartID);
       })["catch"](function (error) {
         console.error(error);
       });
@@ -7641,7 +7840,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     addToCart: function addToCart() {
       var _this2 = this;
 
-      axios.post('http://192.168.18.27:5000/api/addToCart', {
+      axios.post('http://ozpos.geekss.com.au/api/addToCart', {
         vendor_id: this.vendor_id,
         session_id: this.session_id,
         menu_id: this.menu_id,
@@ -7689,7 +7888,17 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     addToCartHalfnHalf: function addToCartHalfnHalf() {
       var _this3 = this;
 
-      axios.post('http://192.168.18.27:5000/api/addToCart', {
+      this.errors = [];
+
+      if (!this.first_half_id) {
+        this.errors.push('Please Select item for First Half.');
+      }
+
+      if (!this.second_half_id) {
+        this.errors.push('Please Select item for Second Half.');
+      }
+
+      axios.post('http://ozpos.geekss.com.au/api/addToCart', {
         vendor_id: this.vendor_id,
         session_id: this.session_id,
         menu_id: this.halfnhalf,
@@ -7714,6 +7923,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           _this3.quantity = 1;
           _this3.halfnhalf = '';
           _this3.deals_menus_id = '';
+          _this3.single_menu_id = '';
+          _this3.first_half_id = '';
+          _this3.second_half_id = '';
           swal({
             title: "Item Added!",
             text: response.data.message,
@@ -7722,22 +7934,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
             timer: 3000
           });
         }
-      })["catch"](function (error) {
-        console.error(error);
-        swal({
-          title: "Some Thing Wrong!",
-          text: error.response.data.message,
-          // text: "Sizes are required. Please pick size.",
-          icon: "error",
-          buttons: true,
-          timer: 3000
-        });
       });
     },
     addQuantity: function addQuantity(vendor_id, session_id, cart_id) {
       var _this4 = this;
 
-      axios.get('http://192.168.18.27:5000/api/addQuantity/' + cart_id).then(function (response) {
+      axios.get('http://ozpos.geekss.com.au/api/addQuantity/' + cart_id).then(function (response) {
         _this4.getCartDetails(session_id);
       })["catch"](function (error) {
         console.error(error);
@@ -7746,7 +7948,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     minusQuantity: function minusQuantity(vendor_id, session_id, cart_id) {
       var _this5 = this;
 
-      axios.get('http://192.168.18.27:5000/api/minusQuantity/' + cart_id).then(function (response) {
+      axios.get('http://ozpos.geekss.com.au/api/minusQuantity/' + cart_id).then(function (response) {
         _this5.getCartDetails(session_id);
       })["catch"](function (error) {
         console.error(error);
@@ -7756,7 +7958,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     getVendorDetails: function getVendorDetails() {
       var _this6 = this;
 
-      axios.get('http://192.168.18.27:5000/api/single_vendor/1').then(function (response) {
+      axios.get('http://ozpos.geekss.com.au/api/single_vendor/5').then(function (response) {
         _this6.vendor = response.data;
         _this6.vendor_id = response.data.data.vendor.id;
       })["catch"](function (error) {
@@ -7768,7 +7970,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       this.vendor_id = vendor_id;
       this.menu_id = menu_id;
-      axios.get('http://192.168.18.27:5000/api/menu_size/' + vendor_id + '/' + menu_id).then(function (response) {
+      axios.get('http://ozpos.geekss.com.au/api/menu_size/' + vendor_id + '/' + menu_id).then(function (response) {
         _this7.menuSizes = response.data;
         _this7.menuAddonWithSize = null;
       })["catch"](function (error) {
@@ -7783,7 +7985,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.options = [];
       this.addon_id = [''];
       this.optionMenuId = menu_id;
-      axios.get('http://192.168.18.27:5000/api/menu_addon/' + vendor_id + '/' + menu_id).then(function (response) {
+      axios.get('http://ozpos.geekss.com.au/api/menu_addon/' + vendor_id + '/' + menu_id).then(function (response) {
         _this8.menuAddon = response.data;
         _this8.menuAddonWithSize = null;
       })["catch"](function (error) {
@@ -7797,7 +7999,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.menu_id = menu_id;
       this.options = [];
       this.optionMenuId = menu_id;
-      axios.get('http://192.168.18.27:5000/api/menu_addon/' + vendor_id + '/' + menu_id).then(function (response) {
+      axios.get('http://ozpos.geekss.com.au/api/menu_addon/' + vendor_id + '/' + menu_id).then(function (response) {
         _this9.menuAddon = response.data;
         _this9.menuAddonWithSize = null;
 
@@ -7821,7 +8023,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.vendor_id = vendor_id;
       this.menu_id = menu_id;
       this.size_id = size_id;
-      axios.get('http://192.168.18.27:5000/api/menu_size_addon/' + vendor_id + '/' + menu_id + '/' + size_id).then(function (response) {
+      axios.get('http://ozpos.geekss.com.au/api/menu_size_addon/' + vendor_id + '/' + menu_id + '/' + size_id).then(function (response) {
         _this10.menuAddonWithSize = response.data;
 
         for (var i = 0; i < _this10.menuAddonWithSize.data.MenuAddon.length; i++) {
@@ -7839,7 +8041,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       this.vendor_id = vendor_id;
       this.halfnhalf = half_n_half_menu_id;
-      axios.get('http://192.168.18.27:5000/api/single_vendor_retrieve_sizes/' + vendor_id + '/' + half_n_half_menu_id).then(function (response) {
+      axios.get('http://ozpos.geekss.com.au/api/single_vendor_retrieve_sizes/' + vendor_id + '/' + half_n_half_menu_id).then(function (response) {
         _this11.halfAndHalfSizes = response.data;
         _this11.menuSizes = null;
       })["catch"](function (error) {
@@ -7851,7 +8053,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       this.vendor_id = vendor_id;
       this.menuAddon = null;
-      axios.get('http://192.168.18.27:5000/api/menu_size_item_size/' + vendor_id + '/' + item_size_id).then(function (response) {
+      axios.get('http://ozpos.geekss.com.au/api/menu_size_item_size/' + vendor_id + '/' + item_size_id).then(function (response) {
         _this12.getMenuWithMenuSize = response.data;
         _this12.menuSizes = null;
       })["catch"](function (error) {
@@ -7862,8 +8064,18 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var _this13 = this;
 
       this.vendor_id = vendor_id;
-      axios.get('http://192.168.18.27:5000/api/deals-menu-items/' + vendor_id + '/' + deals_menu_id).then(function (response) {
+      axios.get('http://ozpos.geekss.com.au/api/deals-menu-items/' + vendor_id + '/' + deals_menu_id).then(function (response) {
         _this13.deaslMenuItems = response.data;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    getDealsItems: function getDealsItems(vendor_id, deals_menu_id) {
+      var _this14 = this;
+
+      this.vendor_id = vendor_id;
+      axios.get('http://ozpos.geekss.com.au/api/deals-items/' + vendor_id + '/' + deals_menu_id).then(function (response) {
+        _this14.dealsItems = response.data;
       })["catch"](function (error) {
         console.error(error);
       });
@@ -43145,1199 +43357,1208 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "osahan-checkout" }, [
-        _c("div", { staticClass: "d-none" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "bg-primary border-bottom p-3 d-flex align-items-center",
-            },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "toggle togglew toggle-2",
-                  attrs: { href: "#" },
-                },
-                [_c("span")]
-              ),
-              _vm._v(" "),
-              _c("h4", { staticClass: "font-weight-bold m-0 text-white" }, [
-                _vm._v("Checkout"),
-              ]),
-            ]
-          ),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "container position-relative" }, [
-          _c("div", { staticClass: "py-5 row" }, [
-            _c("div", { staticClass: "col-md-8 mb-3" }, [
-              _c("div", [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "osahan-cart-item mb-3 rounded shadow-sm bg-white overflow-hidden",
-                  },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "osahan-cart-item-profile bg-white p-3" },
-                      [
-                        _c("div", { staticClass: "d-flex flex-column" }, [
-                          _c("h6", { staticClass: "mb-3 font-weight-bold" }, [
-                            _vm._v("Delivery Address"),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "row" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "custom-control col-lg-6 custom-radio mb-3 position-relative border-custom-radio",
-                              },
-                              [
-                                _c("input", {
-                                  staticClass: "custom-control-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "customRadioInline1",
-                                    name: "customRadioInline1",
-                                    checked: "",
-                                  },
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-control-label w-100",
-                                    attrs: { for: "customRadioInline1" },
-                                  },
-                                  [
-                                    _c("div", [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "p-3 bg-white rounded shadow-sm w-100",
-                                        },
-                                        [
-                                          _c(
-                                            "div",
-                                            {
-                                              staticClass:
-                                                "d-flex align-items-center mb-2",
-                                            },
-                                            [
-                                              _c(
-                                                "h6",
-                                                { staticClass: "mb-0" },
-                                                [_vm._v("Home")]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "p",
-                                                {
-                                                  staticClass:
-                                                    "mb-0 badge badge-success ml-auto",
-                                                },
-                                                [
-                                                  _c("i", {
-                                                    staticClass:
-                                                      "icofont-check-circled",
-                                                  }),
-                                                  _vm._v(" Default"),
-                                                ]
-                                              ),
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            {
-                                              staticClass:
-                                                "small text-muted m-0",
-                                            },
-                                            [_vm._v("1001 Veterans Blvd")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            {
-                                              staticClass:
-                                                "small text-muted m-0",
-                                            },
-                                            [_vm._v("Redwood City, CA 94063")]
-                                          ),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "a",
-                                        {
-                                          staticClass:
-                                            "btn btn-block btn-light border-top",
-                                          attrs: {
-                                            href: "#",
-                                            "data-toggle": "modal",
-                                            "data-target": "#exampleModal",
-                                          },
-                                        },
-                                        [_vm._v("Edit")]
-                                      ),
-                                    ]),
-                                  ]
-                                ),
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "custom-control col-lg-6 custom-radio position-relative border-custom-radio",
-                              },
-                              [
-                                _c("input", {
-                                  staticClass: "custom-control-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "customRadioInline2",
-                                    name: "customRadioInline1",
-                                  },
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-control-label w-100",
-                                    attrs: { for: "customRadioInline2" },
-                                  },
-                                  [
-                                    _c("div", [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "p-3 rounded bg-white shadow-sm w-100",
-                                        },
-                                        [
-                                          _c(
-                                            "div",
-                                            {
-                                              staticClass:
-                                                "d-flex align-items-center mb-2",
-                                            },
-                                            [
-                                              _c(
-                                                "h6",
-                                                { staticClass: "mb-0" },
-                                                [_vm._v("Work")]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "p",
-                                                {
-                                                  staticClass:
-                                                    "mb-0 badge badge-light ml-auto",
-                                                },
-                                                [
-                                                  _c("i", {
-                                                    staticClass:
-                                                      "icofont-check-circled",
-                                                  }),
-                                                  _vm._v(" Select"),
-                                                ]
-                                              ),
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            {
-                                              staticClass:
-                                                "small text-muted m-0",
-                                            },
-                                            [_vm._v("Model Town, Ludhiana")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            {
-                                              staticClass:
-                                                "small text-muted m-0",
-                                            },
-                                            [_vm._v("Punjab 141002, India")]
-                                          ),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "a",
-                                        {
-                                          staticClass:
-                                            "btn btn-block btn-light border-top",
-                                          attrs: {
-                                            href: "#",
-                                            "data-toggle": "modal",
-                                            "data-target": "#exampleModal",
-                                          },
-                                        },
-                                        [_vm._v("Edit")]
-                                      ),
-                                    ]),
-                                  ]
-                                ),
-                              ]
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-primary",
-                              attrs: {
-                                href: "#",
-                                "data-toggle": "modal",
-                                "data-target": "#exampleModal",
-                              },
-                            },
-                            [_vm._v(" ADD NEW ADDRESS ")]
-                          ),
-                        ]),
-                      ]
-                    ),
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "accordion mb-3 rounded shadow-sm bg-white overflow-hidden",
-                    attrs: { id: "accordionExample" },
-                  },
-                  [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "osahan-card bg-white border-bottom overflow-hidden",
-                      },
-                      [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "osahan-card-header",
-                            attrs: { id: "headingOne" },
-                          },
-                          [
-                            _c("h2", { staticClass: "mb-0" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "d-flex p-3 align-items-center btn btn-link w-100",
-                                  attrs: {
-                                    type: "button",
-                                    "data-toggle": "collapse",
-                                    "data-target": "#collapseOne",
-                                    "aria-expanded": "true",
-                                    "aria-controls": "collapseOne",
-                                  },
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "feather-credit-card mr-3",
-                                  }),
-                                  _vm._v(
-                                    " Credit/Debit Card\n                             "
-                                  ),
-                                  _c("i", {
-                                    staticClass: "feather-chevron-down ml-auto",
-                                  }),
-                                ]
-                              ),
-                            ]),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "collapse show",
-                            attrs: {
-                              id: "collapseOne",
-                              "aria-labelledby": "headingOne",
-                              "data-parent": "#accordionExample",
-                            },
-                          },
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass: "osahan-card-body border-top p-3",
-                              },
-                              [
-                                _c("h6", { staticClass: "m-0" }, [
-                                  _vm._v("Add new card"),
-                                ]),
-                                _vm._v(" "),
-                                _c("p", { staticClass: "small" }, [
-                                  _vm._v("WE ACCEPT "),
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "osahan-card ml-2 font-weight-bold",
-                                    },
-                                    [
-                                      _vm._v(
-                                        "( Master Card / Visa Card / Rupay )"
-                                      ),
-                                    ]
-                                  ),
-                                ]),
-                                _vm._v(" "),
-                                _c("form", [
-                                  _c("div", { staticClass: "form-row" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-12 form-group" },
-                                      [
-                                        _c(
-                                          "label",
-                                          {
-                                            staticClass:
-                                              "form-label font-weight-bold small",
-                                          },
-                                          [_vm._v("Card number")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          { staticClass: "input-group" },
-                                          [
-                                            _c("input", {
-                                              staticClass: "form-control",
-                                              attrs: {
-                                                placeholder: "Card number",
-                                                type: "number",
-                                              },
-                                            }),
-                                            _vm._v(" "),
-                                            _c(
-                                              "div",
-                                              {
-                                                staticClass:
-                                                  "input-group-append",
-                                              },
-                                              [
-                                                _c(
-                                                  "button",
-                                                  {
-                                                    staticClass:
-                                                      "btn btn-outline-secondary",
-                                                    attrs: { type: "button" },
-                                                  },
-                                                  [
-                                                    _c("i", {
-                                                      staticClass:
-                                                        "feather-credit-card",
-                                                    }),
-                                                  ]
-                                                ),
-                                              ]
-                                            ),
-                                          ]
-                                        ),
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-8 form-group" },
-                                      [
-                                        _c(
-                                          "label",
-                                          {
-                                            staticClass:
-                                              "form-label font-weight-bold small",
-                                          },
-                                          [_vm._v("Valid through(MM/YY)")]
-                                        ),
-                                        _c("input", {
-                                          staticClass: "form-control",
-                                          attrs: {
-                                            placeholder:
-                                              "Enter Valid through(MM/YY)",
-                                            type: "number",
-                                          },
-                                        }),
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-4 form-group" },
-                                      [
-                                        _c(
-                                          "label",
-                                          {
-                                            staticClass:
-                                              "form-label font-weight-bold small",
-                                          },
-                                          [_vm._v("CVV")]
-                                        ),
-                                        _c("input", {
-                                          staticClass: "form-control",
-                                          attrs: {
-                                            placeholder: "Enter CVV Number",
-                                            type: "number",
-                                          },
-                                        }),
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-md-12 form-group" },
-                                      [
-                                        _c(
-                                          "label",
-                                          {
-                                            staticClass:
-                                              "form-label font-weight-bold small",
-                                          },
-                                          [_vm._v("Name on card")]
-                                        ),
-                                        _c("input", {
-                                          staticClass: "form-control",
-                                          attrs: {
-                                            placeholder: "Enter Card number",
-                                            type: "text",
-                                          },
-                                        }),
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "col-md-12 form-group mb-0",
-                                      },
-                                      [
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "custom-control custom-checkbox",
-                                          },
-                                          [
-                                            _c("input", {
-                                              staticClass:
-                                                "custom-control-input",
-                                              attrs: {
-                                                type: "checkbox",
-                                                id: "custom-checkbox1",
-                                              },
-                                            }),
-                                            _c(
-                                              "label",
-                                              {
-                                                staticClass:
-                                                  "custom-control-label small pt-1",
-                                                attrs: {
-                                                  title: "",
-                                                  type: "checkbox",
-                                                  for: "custom-checkbox1",
-                                                },
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "Securely save this card for a faster checkout next time."
-                                                ),
-                                              ]
-                                            ),
-                                          ]
-                                        ),
-                                      ]
-                                    ),
-                                  ]),
-                                ]),
-                              ]
-                            ),
-                          ]
-                        ),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "osahan-card bg-white border-bottom overflow-hidden",
-                      },
-                      [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "osahan-card-header",
-                            attrs: { id: "headingTwo" },
-                          },
-                          [
-                            _c("h2", { staticClass: "mb-0" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "d-flex p-3 align-items-center btn btn-link w-100",
-                                  attrs: {
-                                    type: "button",
-                                    "data-toggle": "collapse",
-                                    "data-target": "#collapseTwo",
-                                    "aria-expanded": "false",
-                                    "aria-controls": "collapseTwo",
-                                  },
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "feather-globe mr-3",
-                                  }),
-                                  _vm._v(
-                                    " Net Banking\n                             "
-                                  ),
-                                  _c("i", {
-                                    staticClass: "feather-chevron-down ml-auto",
-                                  }),
-                                ]
-                              ),
-                            ]),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "collapse",
-                            attrs: {
-                              id: "collapseTwo",
-                              "aria-labelledby": "headingTwo",
-                              "data-parent": "#accordionExample",
-                            },
-                          },
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass: "osahan-card-body border-top p-3",
-                              },
-                              [
-                                _c("form", [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "btn-group btn-group-toggle w-100",
-                                      attrs: { "data-toggle": "buttons" },
-                                    },
-                                    [
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "btn btn-outline-secondary active",
-                                        },
-                                        [
-                                          _c("input", {
-                                            attrs: {
-                                              type: "radio",
-                                              name: "options",
-                                              id: "option1",
-                                              checked: "",
-                                            },
-                                          }),
-                                          _vm._v(
-                                            " HDFC\n                                   "
-                                          ),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "btn btn-outline-secondary",
-                                        },
-                                        [
-                                          _c("input", {
-                                            attrs: {
-                                              type: "radio",
-                                              name: "options",
-                                              id: "option2",
-                                            },
-                                          }),
-                                          _vm._v(
-                                            " ICICI\n                                   "
-                                          ),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "btn btn-outline-secondary",
-                                        },
-                                        [
-                                          _c("input", {
-                                            attrs: {
-                                              type: "radio",
-                                              name: "options",
-                                              id: "option3",
-                                            },
-                                          }),
-                                          _vm._v(
-                                            " AXIS\n                                   "
-                                          ),
-                                        ]
-                                      ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("hr"),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "form-row" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "col-md-12 form-group mb-0",
-                                      },
-                                      [
-                                        _c(
-                                          "label",
-                                          {
-                                            staticClass:
-                                              "form-label small font-weight-bold",
-                                          },
-                                          [_vm._v("Select Bank")]
-                                        ),
-                                        _c("br"),
-                                        _vm._v(" "),
-                                        _c(
-                                          "select",
-                                          {
-                                            staticClass:
-                                              "custom-select form-control",
-                                          },
-                                          [
-                                            _c("option", [_vm._v("Bank")]),
-                                            _vm._v(" "),
-                                            _c("option", [_vm._v("KOTAK")]),
-                                            _vm._v(" "),
-                                            _c("option", [_vm._v("SBI")]),
-                                            _vm._v(" "),
-                                            _c("option", [_vm._v("UCO")]),
-                                          ]
-                                        ),
-                                      ]
-                                    ),
-                                  ]),
-                                ]),
-                              ]
-                            ),
-                          ]
-                        ),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "osahan-card bg-white overflow-hidden" },
-                      [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "osahan-card-header",
-                            attrs: { id: "headingThree" },
-                          },
-                          [
-                            _c("h2", { staticClass: "mb-0" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "d-flex p-3 align-items-center btn btn-link w-100",
-                                  attrs: {
-                                    type: "button",
-                                    "data-toggle": "collapse",
-                                    "data-target": "#collapseThree",
-                                    "aria-expanded": "false",
-                                    "aria-controls": "collapseThree",
-                                  },
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "feather-dollar-sign mr-3",
-                                  }),
-                                  _vm._v(
-                                    " Cash on Delivery\n                             "
-                                  ),
-                                  _c("i", {
-                                    staticClass: "feather-chevron-down ml-auto",
-                                  }),
-                                ]
-                              ),
-                            ]),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "collapse",
-                            attrs: {
-                              id: "collapseThree",
-                              "aria-labelledby": "headingThree",
-                              "data-parent": "#accordionExample",
-                            },
-                          },
-                          [
-                            _c("div", { staticClass: "card-body border-top" }, [
-                              _c(
-                                "h6",
-                                {
-                                  staticClass:
-                                    "mb-3 mt-0 mb-3 font-weight-bold",
-                                },
-                                [_vm._v("Cash")]
-                              ),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "m-0" }, [
-                                _vm._v(
-                                  "Please keep exact change handy to help us serve you better"
-                                ),
-                              ]),
-                            ]),
-                          ]
-                        ),
-                      ]
-                    ),
-                  ]
-                ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "osahan-checkout" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "container position-relative" }, [
+        _c("div", { staticClass: "py-5 row" }, [
+          _c("div", { staticClass: "col-md-8 mb-3" }, [
+            _c("div", [
               _c(
                 "div",
                 {
                   staticClass:
-                    "osahan-cart-item rounded rounded shadow-sm overflow-hidden bg-white sticky_sidebar",
+                    "accordion mb-3 rounded shadow-sm bg-white overflow-hidden",
+                  attrs: { id: "accordionExample" },
                 },
                 [
                   _c(
                     "div",
                     {
                       staticClass:
-                        "d-flex border-bottom osahan-cart-item-profile bg-white p-3",
+                        "osahan-card bg-white border-bottom overflow-hidden",
                     },
                     [
-                      _c("img", {
-                        staticClass: "mr-3 rounded-circle img-fluid",
-                        attrs: { alt: "osahan", src: "img/starter1.jpg" },
-                      }),
+                      _vm._m(1),
                       _vm._v(" "),
-                      _c("div", { staticClass: "d-flex flex-column" }, [
-                        _c("h6", { staticClass: "mb-1 font-weight-bold" }, [
-                          _vm._v("Spice Hut Indian Restaurant"),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "collapse",
+                          attrs: {
+                            id: "collapseTwo",
+                            "aria-labelledby": "headingTwo",
+                            "data-parent": "#accordionExample",
+                          },
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "osahan-card-body border-top p-3" },
+                            [
+                              _c("form", [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "btn-group btn-group-toggle w-100",
+                                    attrs: { "data-toggle": "buttons" },
+                                  },
+                                  [
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass:
+                                          "btn btn-outline-secondary active",
+                                      },
+                                      [
+                                        _c("input", {
+                                          attrs: {
+                                            type: "radio",
+                                            name: "options",
+                                            id: "option1",
+                                            checked: "",
+                                          },
+                                          on: {
+                                            click: function ($event) {
+                                              ;(_vm.login = true),
+                                                (_vm.signup = false)
+                                            },
+                                          },
+                                        }),
+                                        _vm._v(
+                                          " Login\n                                            "
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass:
+                                          "btn btn-outline-secondary",
+                                      },
+                                      [
+                                        _c("input", {
+                                          attrs: {
+                                            type: "radio",
+                                            name: "options",
+                                            id: "option2",
+                                          },
+                                          on: {
+                                            click: function ($event) {
+                                              ;(_vm.login = false),
+                                                (_vm.signup = true)
+                                            },
+                                          },
+                                        }),
+                                        _vm._v(
+                                          " Signup\n                                            "
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("hr"),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.signup,
+                                        expression: "signup",
+                                      },
+                                    ],
+                                    staticClass: "form-row",
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "col-md-12 form-group mb-0",
+                                      },
+                                      [
+                                        _c("form", {}, [
+                                          _c(
+                                            "div",
+                                            { staticClass: "form-row" },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "col-md-12" },
+                                                [
+                                                  _vm.signupErrors.length
+                                                    ? _c("p", [
+                                                        _c(
+                                                          "b",
+                                                          {
+                                                            staticClass:
+                                                              "text-danger",
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "Please correct the following errors:"
+                                                            ),
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "ul",
+                                                          _vm._l(
+                                                            _vm.signupErrors,
+                                                            function (
+                                                              signupErrors
+                                                            ) {
+                                                              return _c(
+                                                                "li",
+                                                                {
+                                                                  key: signupErrors.id,
+                                                                  staticClass:
+                                                                    "text-danger",
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    _vm._s(
+                                                                      signupErrors
+                                                                    )
+                                                                  ),
+                                                                ]
+                                                              )
+                                                            }
+                                                          ),
+                                                          0
+                                                        ),
+                                                      ])
+                                                    : _vm._e(),
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "col-md-6 form-group",
+                                                },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass: "form-label",
+                                                    },
+                                                    [_vm._v("Name")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value: _vm.name,
+                                                        expression: "name",
+                                                      },
+                                                    ],
+                                                    staticClass: "form-control",
+                                                    attrs: {
+                                                      placeholder:
+                                                        "Enter Name...",
+                                                      type: "text",
+                                                    },
+                                                    domProps: {
+                                                      value: _vm.name,
+                                                    },
+                                                    on: {
+                                                      input: function ($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.name =
+                                                          $event.target.value
+                                                      },
+                                                    },
+                                                  }),
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "col-md-6 form-group",
+                                                },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass: "form-label",
+                                                    },
+                                                    [_vm._v("Email")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value: _vm.email,
+                                                        expression: "email",
+                                                      },
+                                                    ],
+                                                    staticClass: "form-control",
+                                                    attrs: {
+                                                      placeholder:
+                                                        "Enter Email...",
+                                                      type: "email",
+                                                    },
+                                                    domProps: {
+                                                      value: _vm.email,
+                                                    },
+                                                    on: {
+                                                      input: function ($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.email =
+                                                          $event.target.value
+                                                      },
+                                                    },
+                                                  }),
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "col-md-6 form-group",
+                                                },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass: "form-label",
+                                                    },
+                                                    [_vm._v("Mobile  Number")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value: _vm.mobileNumber,
+                                                        expression:
+                                                          "mobileNumber",
+                                                      },
+                                                    ],
+                                                    staticClass: "form-control",
+                                                    attrs: {
+                                                      placeholder:
+                                                        "Enter Mobile  Number...",
+                                                      type: "number",
+                                                    },
+                                                    domProps: {
+                                                      value: _vm.mobileNumber,
+                                                    },
+                                                    on: {
+                                                      input: function ($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.mobileNumber =
+                                                          $event.target.value
+                                                      },
+                                                    },
+                                                  }),
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "col-md-6 form-group",
+                                                },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass: "form-label",
+                                                    },
+                                                    [_vm._v("Password")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value: _vm.password,
+                                                        expression: "password",
+                                                      },
+                                                    ],
+                                                    staticClass: "form-control",
+                                                    attrs: {
+                                                      placeholder:
+                                                        "Enter Password...",
+                                                      type: "password",
+                                                    },
+                                                    domProps: {
+                                                      value: _vm.password,
+                                                    },
+                                                    on: {
+                                                      input: function ($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.password =
+                                                          $event.target.value
+                                                      },
+                                                    },
+                                                  }),
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "col-md-12" },
+                                                [
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      staticClass:
+                                                        "btn btn-primary",
+                                                      attrs: { href: "#" },
+                                                      on: {
+                                                        click: function (
+                                                          $event
+                                                        ) {
+                                                          return _vm.signup()
+                                                        },
+                                                      },
+                                                    },
+                                                    [_vm._v("Sign up")]
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          ),
+                                        ]),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm.LoginStatus == true
+                                  ? _c(
+                                      "div",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.login,
+                                            expression: "login",
+                                          },
+                                        ],
+                                        staticClass: "form-row",
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "col-md-12 form-group mb-0",
+                                          },
+                                          [
+                                            _c("form", {}, [
+                                              _c(
+                                                "div",
+                                                { staticClass: "form-row" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass: "col-md-12",
+                                                    },
+                                                    [
+                                                      _vm.loginErrors.length
+                                                        ? _c("p", [
+                                                            _c(
+                                                              "b",
+                                                              {
+                                                                staticClass:
+                                                                  "text-danger",
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  "Please correct the following errors:"
+                                                                ),
+                                                              ]
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "ul",
+                                                              _vm._l(
+                                                                _vm.loginErrors,
+                                                                function (
+                                                                  loginErrors
+                                                                ) {
+                                                                  return _c(
+                                                                    "li",
+                                                                    {
+                                                                      key: loginErrors.id,
+                                                                      staticClass:
+                                                                        "text-danger",
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        _vm._s(
+                                                                          loginErrors
+                                                                        )
+                                                                      ),
+                                                                    ]
+                                                                  )
+                                                                }
+                                                              ),
+                                                              0
+                                                            ),
+                                                          ])
+                                                        : _vm._e(),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "col-md-6 form-group",
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "label",
+                                                        {
+                                                          staticClass:
+                                                            "form-label",
+                                                        },
+                                                        [_vm._v("Email")]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c("input", {
+                                                        directives: [
+                                                          {
+                                                            name: "model",
+                                                            rawName: "v-model",
+                                                            value:
+                                                              _vm.loginEmail,
+                                                            expression:
+                                                              "loginEmail",
+                                                          },
+                                                        ],
+                                                        staticClass:
+                                                          "form-control",
+                                                        attrs: {
+                                                          placeholder:
+                                                            "Enter Email...",
+                                                          type: "email",
+                                                        },
+                                                        domProps: {
+                                                          value: _vm.loginEmail,
+                                                        },
+                                                        on: {
+                                                          input: function (
+                                                            $event
+                                                          ) {
+                                                            if (
+                                                              $event.target
+                                                                .composing
+                                                            ) {
+                                                              return
+                                                            }
+                                                            _vm.loginEmail =
+                                                              $event.target.value
+                                                          },
+                                                        },
+                                                      }),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "col-md-6 form-group",
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "label",
+                                                        {
+                                                          staticClass:
+                                                            "form-label",
+                                                        },
+                                                        [_vm._v("Password")]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c("input", {
+                                                        directives: [
+                                                          {
+                                                            name: "model",
+                                                            rawName: "v-model",
+                                                            value:
+                                                              _vm.loginPassword,
+                                                            expression:
+                                                              "loginPassword",
+                                                          },
+                                                        ],
+                                                        staticClass:
+                                                          "form-control",
+                                                        attrs: {
+                                                          placeholder:
+                                                            "Enter Password...",
+                                                          type: "password",
+                                                        },
+                                                        domProps: {
+                                                          value:
+                                                            _vm.loginPassword,
+                                                        },
+                                                        on: {
+                                                          input: function (
+                                                            $event
+                                                          ) {
+                                                            if (
+                                                              $event.target
+                                                                .composing
+                                                            ) {
+                                                              return
+                                                            }
+                                                            _vm.loginPassword =
+                                                              $event.target.value
+                                                          },
+                                                        },
+                                                      }),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass: "col-md-12",
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "a",
+                                                        {
+                                                          staticClass:
+                                                            "btn btn-primary",
+                                                          attrs: { href: "#" },
+                                                          on: {
+                                                            click: function (
+                                                              $event
+                                                            ) {
+                                                              return _vm.userlogin()
+                                                            },
+                                                          },
+                                                        },
+                                                        [_vm._v("Login")]
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]
+                                              ),
+                                            ]),
+                                          ]
+                                        ),
+                                      ]
+                                    )
+                                  : _vm._e(),
+                              ]),
+                            ]
+                          ),
+                        ]
+                      ),
+                    ]
+                  ),
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "osahan-cart-item rounded rounded shadow-sm overflow-hidden bg-white sticky_sidebar",
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "d-flex border-bottom osahan-cart-item-profile bg-white p-3",
+                  },
+                  [
+                    _c("img", {
+                      staticClass: "mr-1 rounded-circle img-fluid",
+                      staticStyle: { width: "50px" },
+                      attrs: {
+                        alt: "osahan",
+                        src: _vm.vendor.data.vendor.image,
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "d-flex flex-column" }, [
+                      _c("h6", { staticClass: "mb-1 font-weight-bold" }, [
+                        _vm._v(_vm._s(_vm.vendor.data.vendor.name)),
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "mb-0 small text-muted" }, [
+                        _c("i", { staticClass: "feather-map-pin" }),
+                        _vm._v(" " + _vm._s(_vm.vendor.data.vendor.address)),
+                      ]),
+                    ]),
+                  ]
+                ),
+                _vm._v(" "),
+                _vm.cartData != null
+                  ? _c(
+                      "div",
+                      { staticClass: "bg-white border-bottom py-2" },
+                      _vm._l(_vm.cartData.data.cart, function (cartData) {
+                        return _c(
+                          "div",
+                          {
+                            key: cartData.id,
+                            staticClass:
+                              "gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom",
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "media align-items-center" },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "mr-2 text-danger",
+                                    staticStyle: { "margin-bottom": "15px" },
+                                  },
+                                  [_vm._v("·")]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "media-body" }, [
+                                  _c("h6", { staticClass: "mb-1" }, [
+                                    _vm._v(_vm._s(cartData.menu_name)),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass:
+                                        "text-gray mb-0 ml-2 text-muted small",
+                                    },
+                                    [_vm._v("$" + _vm._s(cartData.unit_price))]
+                                  ),
+                                ]),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "d-flex align-items-center" },
+                              [
+                                _c(
+                                  "span",
+                                  { staticClass: "count-number float-right" },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn-sm left dec btn btn-outline-secondary",
+                                        attrs: { type: "button" },
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.minusQuantity(
+                                              cartData.id
+                                            )
+                                          },
+                                        },
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "feather-minus",
+                                        }),
+                                      ]
+                                    ),
+                                    _c("input", {
+                                      staticClass: "count-number-input",
+                                      attrs: { type: "text", readonly: "" },
+                                      domProps: { value: cartData.quantity },
+                                    }),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn-sm right inc btn btn-outline-secondary",
+                                        attrs: { type: "button" },
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.addQuantity(cartData.id)
+                                          },
+                                        },
+                                      },
+                                      [_c("i", { staticClass: "feather-plus" })]
+                                    ),
+                                  ]
+                                ),
+                              ]
+                            ),
+                          ]
+                        )
+                      }),
+                      0
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._m(4),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "bg-white p-3 clearfix border-bottom" },
+                  [
+                    _c("p", { staticClass: "mb-1" }, [
+                      _vm._v("Item Total "),
+                      _c("span", { staticClass: "float-right text-dark" }, [
+                        _vm._v("$" + _vm._s(_vm.total)),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c("h6", { staticClass: "font-weight-bold mb-0" }, [
+                      _vm._v("TO PAY "),
+                      _c("span", { staticClass: "float-right" }, [
+                        _vm._v("$" + _vm._s(_vm.total)),
+                      ]),
+                    ]),
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "p-3" }, [
+                  _vm.errors.length
+                    ? _c("p", [
+                        _c("b", { staticClass: "text-danger" }, [
+                          _vm._v("Please correct the following errors:"),
                         ]),
                         _vm._v(" "),
-                        _c("p", { staticClass: "mb-0 small text-muted" }, [
-                          _c("i", { staticClass: "feather-map-pin" }),
-                          _vm._v(" 2036 2ND AVE, NEW YORK, NY 10029"),
-                        ]),
+                        _c(
+                          "ul",
+                          _vm._l(_vm.errors, function (error) {
+                            return _c(
+                              "li",
+                              { key: error.id, staticClass: "text-danger" },
+                              [_vm._v(_vm._s(error))]
+                            )
+                          }),
+                          0
+                        ),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-success btn-block btn-lg",
+                      on: {
+                        click: function ($event) {
+                          return _vm.payment()
+                        },
+                      },
+                    },
+                    [
+                      _vm._v("PAY $" + _vm._s(_vm.total)),
+                      _c("i", { staticClass: "feather-arrow-right" }),
+                    ]
+                  ),
+                ]),
+              ]
+            ),
+          ]),
+        ]),
+      ]),
+    ]),
+    _vm._v(" "),
+    _vm._m(6),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-none" }, [
+      _c(
+        "div",
+        {
+          staticClass: "bg-primary border-bottom p-3 d-flex align-items-center",
+        },
+        [
+          _c(
+            "a",
+            { staticClass: "toggle togglew toggle-2", attrs: { href: "#" } },
+            [_c("span")]
+          ),
+          _vm._v(" "),
+          _c("h4", { staticClass: "font-weight-bold m-0 text-white" }, [
+            _vm._v("Checkout"),
+          ]),
+        ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "osahan-card-header", attrs: { id: "headingTwo" } },
+      [
+        _c("h2", { staticClass: "mb-0" }, [
+          _c(
+            "button",
+            {
+              staticClass: "d-flex p-3 align-items-center btn btn-link w-100",
+              attrs: {
+                type: "button",
+                "data-toggle": "collapse",
+                "data-target": "#collapseTwo",
+                "aria-expanded": "false",
+                "aria-controls": "collapseTwo",
+              },
+            },
+            [
+              _c("i", { staticClass: "feather-globe mr-3" }),
+              _vm._v(" Login or Signup\n                             "),
+              _c("i", { staticClass: "feather-chevron-down ml-auto" }),
+            ]
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "osahan-cart-item mb-3 rounded shadow-sm bg-white overflow-hidden",
+      },
+      [
+        _c("div", { staticClass: "osahan-cart-item-profile bg-white p-3" }, [
+          _c("div", { staticClass: "d-flex flex-column" }, [
+            _c("h6", { staticClass: "mb-3 font-weight-bold" }, [
+              _vm._v("Delivery Address"),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "custom-control col-lg-6 custom-radio mb-3 position-relative border-custom-radio",
+                },
+                [
+                  _c("input", {
+                    staticClass: "custom-control-input",
+                    attrs: {
+                      type: "radio",
+                      id: "customRadioInline1",
+                      name: "customRadioInline1",
+                      checked: "",
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "custom-control-label w-100",
+                      attrs: { for: "customRadioInline1" },
+                    },
+                    [
+                      _c("div", [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "p-3 bg-white rounded shadow-sm w-100",
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "d-flex align-items-center mb-2" },
+                              [
+                                _c("h6", { staticClass: "mb-0" }, [
+                                  _vm._v("Home"),
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "p",
+                                  {
+                                    staticClass:
+                                      "mb-0 badge badge-success ml-auto",
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "icofont-check-circled",
+                                    }),
+                                    _vm._v(" Default"),
+                                  ]
+                                ),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("p", { staticClass: "small text-muted m-0" }, [
+                              _vm._v("1001 Veterans Blvd"),
+                            ]),
+                            _vm._v(" "),
+                            _c("p", { staticClass: "small text-muted m-0" }, [
+                              _vm._v("Redwood City, CA 94063"),
+                            ]),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-block btn-light border-top",
+                            attrs: {
+                              href: "#",
+                              "data-toggle": "modal",
+                              "data-target": "#exampleModal",
+                            },
+                          },
+                          [_vm._v("Edit")]
+                        ),
                       ]),
                     ]
                   ),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "custom-control col-lg-6 custom-radio position-relative border-custom-radio",
+                },
+                [
+                  _c("input", {
+                    staticClass: "custom-control-input",
+                    attrs: {
+                      type: "radio",
+                      id: "customRadioInline2",
+                      name: "customRadioInline1",
+                    },
+                  }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "bg-white border-bottom py-2" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom",
-                      },
-                      [
-                        _c("div", { staticClass: "media align-items-center" }, [
-                          _c("div", { staticClass: "mr-2 text-danger" }, [
-                            _vm._v("·"),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media-body" }, [
-                            _c("p", { staticClass: "m-0" }, [
-                              _vm._v("Chicken Tikka Sub"),
-                            ]),
-                          ]),
-                        ]),
-                        _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "custom-control-label w-100",
+                      attrs: { for: "customRadioInline2" },
+                    },
+                    [
+                      _c("div", [
                         _c(
                           "div",
-                          { staticClass: "d-flex align-items-center" },
+                          {
+                            staticClass: "p-3 rounded bg-white shadow-sm w-100",
+                          },
                           [
                             _c(
-                              "span",
-                              { staticClass: "count-number float-right" },
+                              "div",
+                              { staticClass: "d-flex align-items-center mb-2" },
                               [
+                                _c("h6", { staticClass: "mb-0" }, [
+                                  _vm._v("Work"),
+                                ]),
+                                _vm._v(" "),
                                 _c(
-                                  "button",
+                                  "p",
                                   {
                                     staticClass:
-                                      "btn-sm left dec btn btn-outline-secondary",
-                                    attrs: { type: "button" },
+                                      "mb-0 badge badge-light ml-auto",
                                   },
-                                  [_c("i", { staticClass: "feather-minus" })]
-                                ),
-                                _c("input", {
-                                  staticClass: "count-number-input",
-                                  attrs: {
-                                    type: "text",
-                                    readonly: "",
-                                    value: "2",
-                                  },
-                                }),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn-sm right inc btn btn-outline-secondary",
-                                    attrs: { type: "button" },
-                                  },
-                                  [_c("i", { staticClass: "feather-plus" })]
+                                  [
+                                    _c("i", {
+                                      staticClass: "icofont-check-circled",
+                                    }),
+                                    _vm._v(" Select"),
+                                  ]
                                 ),
                               ]
                             ),
                             _vm._v(" "),
-                            _c(
-                              "p",
-                              {
-                                staticClass:
-                                  "text-gray mb-0 float-right ml-2 text-muted small",
-                              },
-                              [_vm._v("$628")]
-                            ),
+                            _c("p", { staticClass: "small text-muted m-0" }, [
+                              _vm._v("Model Town, Ludhiana"),
+                            ]),
+                            _vm._v(" "),
+                            _c("p", { staticClass: "small text-muted m-0" }, [
+                              _vm._v("Punjab 141002, India"),
+                            ]),
                           ]
                         ),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom",
-                      },
-                      [
-                        _c("div", { staticClass: "media align-items-center" }, [
-                          _c("div", { staticClass: "mr-2 text-danger" }, [
-                            _vm._v("·"),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media-body" }, [
-                            _c("p", { staticClass: "m-0" }, [
-                              _vm._v(
-                                "Methi Chicken Dry\n                                    "
-                              ),
-                            ]),
-                          ]),
-                        ]),
                         _vm._v(" "),
                         _c(
-                          "div",
-                          { staticClass: "d-flex align-items-center" },
-                          [
-                            _c(
-                              "span",
-                              { staticClass: "count-number float-right" },
-                              [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn-sm left dec btn btn-outline-secondary",
-                                    attrs: { type: "button" },
-                                  },
-                                  [_c("i", { staticClass: "feather-minus" })]
-                                ),
-                                _c("input", {
-                                  staticClass: "count-number-input",
-                                  attrs: {
-                                    type: "text",
-                                    readonly: "",
-                                    value: "2",
-                                  },
-                                }),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn-sm right inc btn btn-outline-secondary",
-                                    attrs: { type: "button" },
-                                  },
-                                  [_c("i", { staticClass: "feather-plus" })]
-                                ),
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "p",
-                              {
-                                staticClass:
-                                  "text-gray mb-0 float-right ml-2 text-muted small",
-                              },
-                              [_vm._v("$628")]
-                            ),
-                          ]
+                          "a",
+                          {
+                            staticClass: "btn btn-block btn-light border-top",
+                            attrs: {
+                              href: "#",
+                              "data-toggle": "modal",
+                              "data-target": "#exampleModal",
+                            },
+                          },
+                          [_vm._v("Edit")]
                         ),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom",
+                      ]),
+                    ]
+                  ),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-primary",
+                attrs: {
+                  href: "#",
+                  "data-toggle": "modal",
+                  "data-target": "#exampleModal",
+                },
+              },
+              [_vm._v(" ADD NEW ADDRESS ")]
+            ),
+          ]),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "accordion mb-3 rounded shadow-sm bg-white overflow-hidden",
+        attrs: { id: "accordionExample" },
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "osahan-card bg-white border-bottom overflow-hidden" },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "osahan-card-header",
+                attrs: { id: "headingOne" },
+              },
+              [
+                _c("h2", { staticClass: "mb-0" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "d-flex p-3 align-items-center btn btn-link w-100",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "collapse",
+                        "data-target": "#collapseOne",
+                        "aria-expanded": "true",
+                        "aria-controls": "collapseOne",
                       },
-                      [
-                        _c("div", { staticClass: "media align-items-center" }, [
-                          _c("div", { staticClass: "mr-2 text-danger" }, [
-                            _vm._v("·"),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media-body" }, [
-                            _c("p", { staticClass: "m-0" }, [
-                              _vm._v(
-                                "Reshmi Kebab\n                                    "
-                              ),
-                            ]),
-                          ]),
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "d-flex align-items-center" },
-                          [
-                            _c(
-                              "span",
-                              { staticClass: "count-number float-right" },
-                              [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn-sm left dec btn btn-outline-secondary",
-                                    attrs: { type: "button" },
-                                  },
-                                  [_c("i", { staticClass: "feather-minus" })]
-                                ),
-                                _c("input", {
-                                  staticClass: "count-number-input",
-                                  attrs: {
-                                    type: "text",
-                                    readonly: "",
-                                    value: "2",
-                                  },
-                                }),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn-sm right inc btn btn-outline-secondary",
-                                    attrs: { type: "button" },
-                                  },
-                                  [_c("i", { staticClass: "feather-plus" })]
-                                ),
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "p",
-                              {
-                                staticClass:
-                                  "text-gray mb-0 float-right ml-2 text-muted small",
-                              },
-                              [_vm._v("$628")]
-                            ),
-                          ]
-                        ),
-                      ]
-                    ),
-                    _vm._v(" "),
+                    },
+                    [
+                      _c("i", { staticClass: "feather-credit-card mr-3" }),
+                      _vm._v(
+                        " Credit/Debit Card\n                             "
+                      ),
+                      _c("i", { staticClass: "feather-chevron-down ml-auto" }),
+                    ]
+                  ),
+                ]),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "collapse show",
+                attrs: {
+                  id: "collapseOne",
+                  "aria-labelledby": "headingOne",
+                  "data-parent": "#accordionExample",
+                },
+              },
+              [
+                _c("div", { staticClass: "osahan-card-body border-top p-3" }, [
+                  _c("h6", { staticClass: "m-0" }, [_vm._v("Add new card")]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "small" }, [
+                    _vm._v("WE ACCEPT "),
                     _c(
-                      "div",
-                      {
-                        staticClass:
-                          "gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom",
-                      },
-                      [
-                        _c("div", { staticClass: "media align-items-center" }, [
-                          _c("div", { staticClass: "mr-2 text-success" }, [
-                            _vm._v("·"),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media-body" }, [
-                            _c("p", { staticClass: "m-0" }, [
-                              _vm._v(
-                                "Lemon Cheese Dry\n                                    "
-                              ),
-                            ]),
-                          ]),
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "d-flex align-items-center" },
-                          [
-                            _c(
-                              "span",
-                              { staticClass: "count-number float-right" },
-                              [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn-sm left dec btn btn-outline-secondary",
-                                    attrs: { type: "button" },
-                                  },
-                                  [_c("i", { staticClass: "feather-minus" })]
-                                ),
-                                _c("input", {
-                                  staticClass: "count-number-input",
-                                  attrs: {
-                                    type: "text",
-                                    readonly: "",
-                                    value: "2",
-                                  },
-                                }),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn-sm right inc btn btn-outline-secondary",
-                                    attrs: { type: "button" },
-                                  },
-                                  [_c("i", { staticClass: "feather-plus" })]
-                                ),
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "p",
-                              {
-                                staticClass:
-                                  "text-gray mb-0 float-right ml-2 text-muted small",
-                              },
-                              [_vm._v("$628")]
-                            ),
-                          ]
-                        ),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "gold-members d-flex align-items-center justify-content-between px-3 py-2",
-                      },
-                      [
-                        _c("div", { staticClass: "media align-items-center" }, [
-                          _c("div", { staticClass: "mr-2 text-success" }, [
-                            _vm._v("·"),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media-body" }, [
-                            _c("p", { staticClass: "m-0" }, [
-                              _vm._v("Rara Paneer"),
-                            ]),
-                          ]),
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "d-flex align-items-center" },
-                          [
-                            _c(
-                              "span",
-                              { staticClass: "count-number float-right" },
-                              [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn-sm left dec btn btn-outline-secondary",
-                                    attrs: { type: "button" },
-                                  },
-                                  [_c("i", { staticClass: "feather-minus" })]
-                                ),
-                                _c("input", {
-                                  staticClass: "count-number-input",
-                                  attrs: {
-                                    type: "text",
-                                    readonly: "",
-                                    value: "2",
-                                  },
-                                }),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn-sm right inc btn btn-outline-secondary",
-                                    attrs: { type: "button" },
-                                  },
-                                  [_c("i", { staticClass: "feather-plus" })]
-                                ),
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "p",
-                              {
-                                staticClass:
-                                  "text-gray mb-0 float-right ml-2 text-muted small",
-                              },
-                              [_vm._v("$628")]
-                            ),
-                          ]
-                        ),
-                      ]
+                      "span",
+                      { staticClass: "osahan-card ml-2 font-weight-bold" },
+                      [_vm._v("( Master Card / Visa Card / Rupay )")]
                     ),
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "bg-white p-3 py-3 border-bottom clearfix" },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "input-group-sm mb-2 input-group" },
-                        [
+                  _c("form", [
+                    _c("div", { staticClass: "form-row" }, [
+                      _c("div", { staticClass: "col-md-12 form-group" }, [
+                        _c(
+                          "label",
+                          { staticClass: "form-label font-weight-bold small" },
+                          [_vm._v("Card number")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group" }, [
                           _c("input", {
                             staticClass: "form-control",
                             attrs: {
-                              placeholder: "Enter promo code",
-                              type: "text",
+                              placeholder: "Card number",
+                              type: "number",
                             },
                           }),
                           _vm._v(" "),
@@ -44345,105 +44566,397 @@ var staticRenderFns = [
                             _c(
                               "button",
                               {
-                                staticClass: "btn btn-primary",
+                                staticClass: "btn btn-outline-secondary",
                                 attrs: { type: "button" },
                               },
-                              [
-                                _c("i", { staticClass: "feather-percent" }),
-                                _vm._v(" APPLY"),
-                              ]
+                              [_c("i", { staticClass: "feather-credit-card" })]
                             ),
                           ]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "mb-0 input-group" }, [
-                        _c("div", { staticClass: "input-group-prepend" }, [
-                          _c("span", { staticClass: "input-group-text" }, [
-                            _c("i", { staticClass: "feather-message-square" }),
-                          ]),
                         ]),
-                        _vm._v(" "),
-                        _c("textarea", {
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8 form-group" }, [
+                        _c(
+                          "label",
+                          { staticClass: "form-label font-weight-bold small" },
+                          [_vm._v("Valid through(MM/YY)")]
+                        ),
+                        _c("input", {
                           staticClass: "form-control",
                           attrs: {
-                            placeholder:
-                              "Any suggestions? We will pass it on...",
-                            "aria-label": "With textarea",
+                            placeholder: "Enter Valid through(MM/YY)",
+                            type: "number",
                           },
                         }),
                       ]),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "bg-white p-3 clearfix border-bottom" },
-                    [
-                      _c("p", { staticClass: "mb-1" }, [
-                        _vm._v("Item Total "),
-                        _c("span", { staticClass: "float-right text-dark" }, [
-                          _vm._v("$3140"),
-                        ]),
-                      ]),
                       _vm._v(" "),
-                      _c("p", { staticClass: "mb-1" }, [
-                        _vm._v("Restaurant Charges "),
-                        _c("span", { staticClass: "float-right text-dark" }, [
-                          _vm._v("$62.8"),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "mb-1" }, [
-                        _vm._v("Delivery Fee"),
-                        _c("span", { staticClass: "text-info ml-1" }, [
-                          _c("i", { staticClass: "feather-info" }),
-                        ]),
-                        _c("span", { staticClass: "float-right text-dark" }, [
-                          _vm._v("$10"),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "mb-1 text-success" }, [
-                        _vm._v("Total Discount"),
+                      _c("div", { staticClass: "col-md-4 form-group" }, [
                         _c(
-                          "span",
-                          { staticClass: "float-right text-success" },
-                          [_vm._v("$1884")]
+                          "label",
+                          { staticClass: "form-label font-weight-bold small" },
+                          [_vm._v("CVV")]
+                        ),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            placeholder: "Enter CVV Number",
+                            type: "number",
+                          },
+                        }),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-12 form-group" }, [
+                        _c(
+                          "label",
+                          { staticClass: "form-label font-weight-bold small" },
+                          [_vm._v("Name on card")]
+                        ),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            placeholder: "Enter Card number",
+                            type: "text",
+                          },
+                        }),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-12 form-group mb-0" }, [
+                        _c(
+                          "div",
+                          { staticClass: "custom-control custom-checkbox" },
+                          [
+                            _c("input", {
+                              staticClass: "custom-control-input",
+                              attrs: {
+                                type: "checkbox",
+                                id: "custom-checkbox1",
+                              },
+                            }),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "custom-control-label small pt-1",
+                                attrs: {
+                                  title: "",
+                                  type: "checkbox",
+                                  for: "custom-checkbox1",
+                                },
+                              },
+                              [
+                                _vm._v(
+                                  "Securely save this card for a faster checkout next time."
+                                ),
+                              ]
+                            ),
+                          ]
                         ),
                       ]),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c("h6", { staticClass: "font-weight-bold mb-0" }, [
-                        _vm._v("TO PAY "),
-                        _c("span", { staticClass: "float-right" }, [
-                          _vm._v("$1329"),
-                        ]),
-                      ]),
-                    ]
+                    ]),
+                  ]),
+                ]),
+              ]
+            ),
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "osahan-card bg-white overflow-hidden" }, [
+          _c(
+            "div",
+            {
+              staticClass: "osahan-card-header",
+              attrs: { id: "headingThree" },
+            },
+            [
+              _c("h2", { staticClass: "mb-0" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "d-flex p-3 align-items-center btn btn-link w-100",
+                    attrs: {
+                      type: "button",
+                      "data-toggle": "collapse",
+                      "data-target": "#collapseThree",
+                      "aria-expanded": "false",
+                      "aria-controls": "collapseThree",
+                    },
+                  },
+                  [
+                    _c("i", { staticClass: "feather-dollar-sign mr-3" }),
+                    _vm._v(" Cash on Delivery\n                             "),
+                    _c("i", { staticClass: "feather-chevron-down ml-auto" }),
+                  ]
+                ),
+              ]),
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "collapse",
+              attrs: {
+                id: "collapseThree",
+                "aria-labelledby": "headingThree",
+                "data-parent": "#accordionExample",
+              },
+            },
+            [
+              _c("div", { staticClass: "card-body border-top" }, [
+                _c("h6", { staticClass: "mb-3 mt-0 mb-3 font-weight-bold" }, [
+                  _vm._v("Cash"),
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "m-0" }, [
+                  _vm._v(
+                    "Please keep exact change handy to help us serve you better"
                   ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "p-3" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-success btn-block btn-lg",
-                        attrs: { href: "successful" },
-                      },
-                      [
-                        _vm._v("PAY $1329"),
-                        _c("i", { staticClass: "feather-arrow-right" }),
-                      ]
-                    ),
+                ]),
+              ]),
+            ]
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "bg-white p-3 py-3 border-bottom clearfix" },
+      [
+        _c("div", { staticClass: "input-group-sm mb-2 input-group" }, [
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { placeholder: "Enter promo code", type: "text" },
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group-append" }, [
+            _c(
+              "button",
+              { staticClass: "btn btn-primary", attrs: { type: "button" } },
+              [_c("i", { staticClass: "feather-percent" }), _vm._v(" APPLY")]
+            ),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-0 input-group" }, [
+          _c("div", { staticClass: "input-group-prepend" }, [
+            _c("span", { staticClass: "input-group-text" }, [
+              _c("i", { staticClass: "feather-message-square" }),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("textarea", {
+            staticClass: "form-control",
+            attrs: {
+              placeholder: "Any suggestions? We will pass it on...",
+              "aria-label": "With textarea",
+            },
+          }),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "mb-1 text-success" }, [
+      _vm._v("Total Discount"),
+      _c("span", { staticClass: "float-right text-success" }, [_vm._v("$0")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true",
+        },
+      },
+      [
+        _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c("h5", { staticClass: "modal-title" }, [
+                _vm._v("Add Delivery Address"),
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "close",
+                  attrs: {
+                    type: "button",
+                    "data-dismiss": "modal",
+                    "aria-label": "Close",
+                  },
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("×"),
                   ]),
                 ]
               ),
             ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("form", {}, [
+                _c("div", { staticClass: "form-row" }, [
+                  _c("div", { staticClass: "col-md-12 form-group" }, [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v("Delivery Area"),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group" }, [
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: { placeholder: "Delivery Area", type: "text" },
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group-append" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-outline-secondary",
+                            attrs: { type: "button" },
+                          },
+                          [_c("i", { staticClass: "feather-map-pin" })]
+                        ),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-12 form-group" }, [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v("Complete Address"),
+                    ]),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        placeholder:
+                          "Complete Address e.g. house number, street name, landmark",
+                        type: "text",
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-12 form-group" }, [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v("Delivery Instructions"),
+                    ]),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        placeholder:
+                          "Delivery Instructions e.g. Opposite Gold Souk Mall",
+                        type: "text",
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "mb-0 col-md-12 form-group" }, [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v("Nickname"),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "btn-group btn-group-toggle w-100",
+                        attrs: { "data-toggle": "buttons" },
+                      },
+                      [
+                        _c(
+                          "label",
+                          { staticClass: "btn btn-outline-secondary active" },
+                          [
+                            _c("input", {
+                              attrs: {
+                                type: "radio",
+                                name: "options",
+                                id: "option12",
+                                checked: "",
+                              },
+                            }),
+                            _vm._v(" Home\n                          "),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { staticClass: "btn btn-outline-secondary" },
+                          [
+                            _c("input", {
+                              attrs: {
+                                type: "radio",
+                                name: "options",
+                                id: "option22",
+                              },
+                            }),
+                            _vm._v(" Work\n                          "),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { staticClass: "btn btn-outline-secondary" },
+                          [
+                            _c("input", {
+                              attrs: {
+                                type: "radio",
+                                name: "options",
+                                id: "option32",
+                              },
+                            }),
+                            _vm._v(" Other\n                          "),
+                          ]
+                        ),
+                      ]
+                    ),
+                  ]),
+                ]),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer p-0 border-0" }, [
+              _c("div", { staticClass: "col-6 m-0 p-0" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn border-top btn-lg btn-block",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                  },
+                  [_vm._v("Close")]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-6 m-0 p-0" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-lg btn-block",
+                    attrs: { type: "button" },
+                  },
+                  [_vm._v("Save changes")]
+                ),
+              ]),
+            ]),
           ]),
         ]),
-      ]),
-    ])
+      ]
+    )
   },
 ]
 render._withStripped = true
@@ -48907,7 +49420,7 @@ var render = function () {
             _vm._v(
               "\n                " +
                 _vm._s(_vm.vendor.data.vendor.name) +
-                "\n                    "
+                "\n                "
             ),
           ]),
           _vm._v(" "),
@@ -48915,7 +49428,7 @@ var render = function () {
             _vm._v(
               "\n                " +
                 _vm._s(_vm.vendor.data.vendor.address) +
-                "\n                    "
+                "\n                "
             ),
           ]),
           _vm._v(" "),
@@ -49060,6 +49573,10 @@ var render = function () {
                                   {
                                     staticClass:
                                       "btn btn-outline-secondary btn-sm",
+                                    staticStyle: {
+                                      "margin-left": "25px",
+                                      "margin-top": "25px",
+                                    },
                                     attrs: {
                                       href: "#",
                                       id: "",
@@ -49765,25 +50282,39 @@ var render = function () {
                               ),
                               _vm._v(" "),
                               _c("div", { staticClass: "media" }, [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "mr-3 font-weight-bold text-danger non_veg",
-                                  },
-                                  [_vm._v(".")]
-                                ),
+                                _c("div", [
+                                  _c("img", {
+                                    staticClass: "mr-3 rounded-pill ",
+                                    staticStyle: {
+                                      width: "60px",
+                                      height: "60px",
+                                      "object-fit": "cover",
+                                    },
+                                    attrs: {
+                                      src: singleMenu.menu.image,
+                                      alt: "",
+                                    },
+                                  }),
+                                ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "media-body" }, [
                                   _c("h6", { staticClass: "mb-1" }, [
                                     _vm._v(_vm._s(singleMenu.menu.name) + " "),
                                   ]),
                                   _vm._v(" "),
-                                  _c("p", { staticClass: "text-muted mb-0" }, [
-                                    _vm._v(
-                                      " " + _vm._s(singleMenu.description)
-                                    ),
-                                  ]),
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass:
+                                        "text-muted mb-0 text-justify",
+                                    },
+                                    [
+                                      _vm._v(
+                                        " " +
+                                          _vm._s(singleMenu.menu.description)
+                                      ),
+                                    ]
+                                  ),
                                   _vm._v(" "),
                                   singleMenu.menu.display_discount_price <= 0 &&
                                   singleMenu.menu.price > 0
@@ -49854,6 +50385,10 @@ var render = function () {
                                     {
                                       staticClass:
                                         "btn btn-outline-secondary btn-sm",
+                                      staticStyle: {
+                                        "margin-left": "25px",
+                                        "margin-top": "25px",
+                                      },
                                       attrs: {
                                         href: "#",
                                         "data-toggle": "modal",
@@ -50042,6 +50577,54 @@ var render = function () {
                                                 ]),
                                               ]
                                             ),
+                                            _vm._v(" "),
+                                            _vm.errors.length
+                                              ? _c(
+                                                  "p",
+                                                  {
+                                                    staticStyle: {
+                                                      "margin-left": "16px",
+                                                    },
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "b",
+                                                      {
+                                                        staticClass:
+                                                          "text-danger",
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "Please correct the following error(s):"
+                                                        ),
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "ul",
+                                                      _vm._l(
+                                                        _vm.errors,
+                                                        function (error) {
+                                                          return _c(
+                                                            "li",
+                                                            {
+                                                              key: error.id,
+                                                              staticClass:
+                                                                "text-danger",
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                _vm._s(error)
+                                                              ),
+                                                            ]
+                                                          )
+                                                        }
+                                                      ),
+                                                      0
+                                                    ),
+                                                  ]
+                                                )
+                                              : _vm._e(),
                                             _vm._v(" "),
                                             _c(
                                               "div",
@@ -50778,14 +51361,20 @@ var render = function () {
                                 ),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "media" }, [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "mr-3 font-weight-bold text-danger non_veg",
-                                    },
-                                    [_vm._v(".")]
-                                  ),
+                                  _c("div", [
+                                    _c("img", {
+                                      staticClass: "mr-3 rounded-pill ",
+                                      staticStyle: {
+                                        width: "60px",
+                                        height: "60px",
+                                        "object-fit": "cover",
+                                      },
+                                      attrs: {
+                                        src: half_n_half_menu.image,
+                                        alt: "",
+                                      },
+                                    }),
+                                  ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "media-body" }, [
                                     _c("h6", { staticClass: "mb-1" }, [
@@ -50793,6 +51382,19 @@ var render = function () {
                                         _vm._s(half_n_half_menu.name) + " "
                                       ),
                                     ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      {
+                                        staticClass:
+                                          "text-muted mb-0 text-justify",
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(half_n_half_menu.description)
+                                        ),
+                                      ]
+                                    ),
                                   ]),
                                 ]),
                               ]
@@ -50821,6 +51423,10 @@ var render = function () {
                                   {
                                     staticClass:
                                       "btn btn-outline-secondary btn-sm",
+                                    staticStyle: {
+                                      "margin-left": "25px",
+                                      "margin-top": "25px",
+                                    },
                                     attrs: {
                                       href: "#",
                                       "data-toggle": "modal",
@@ -50868,40 +51474,97 @@ var render = function () {
                                           _vm._m(7, true),
                                           _vm._v(" "),
                                           _c(
+                                            "h5",
+                                            {
+                                              staticClass:
+                                                "font-weight-bold mt-1 ml-3",
+                                            },
+                                            [_vm._v("Pick Items")]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm.deaslMenuItems != null
+                                            ? _c(
+                                                "ul",
+                                                {
+                                                  staticClass:
+                                                    "nav nav-pills mt-1 ml-3",
+                                                },
+                                                _vm._l(
+                                                  _vm.deaslMenuItems.data,
+                                                  function (deals) {
+                                                    return _c(
+                                                      "li",
+                                                      { key: deals.id },
+                                                      [
+                                                        _c(
+                                                          "a",
+                                                          {
+                                                            staticClass:
+                                                              "btn btn-outline-primary btn-sm mb-3 mr-3",
+                                                            attrs: {
+                                                              "data-toggle":
+                                                                "pill",
+                                                            },
+                                                            on: {
+                                                              click: function (
+                                                                $event
+                                                              ) {
+                                                                return _vm.getDealsItems(
+                                                                  _vm.vendor
+                                                                    .data.vendor
+                                                                    .id,
+                                                                  deals.id
+                                                                )
+                                                              },
+                                                            },
+                                                          },
+                                                          [
+                                                            _c("b", [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  deals.name
+                                                                )
+                                                              ),
+                                                            ]),
+                                                          ]
+                                                        ),
+                                                      ]
+                                                    )
+                                                  }
+                                                ),
+                                                0
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _c(
                                             "div",
                                             { staticClass: "modal-body" },
                                             [
-                                              _vm.deaslMenuItems != null
+                                              _vm.dealsItems != null
                                                 ? _c(
                                                     "form",
-                                                    [
-                                                      _c("h5", [
-                                                        _vm._v("Pick Items"),
-                                                      ]),
-                                                      _vm._v(" "),
-                                                      _vm._l(
-                                                        _vm.deaslMenuItems.data,
-                                                        function (deals) {
-                                                          return _c(
-                                                            "div",
-                                                            {
-                                                              key: deals.id,
-                                                              staticClass:
-                                                                "recepie-body",
-                                                            },
-                                                            [
-                                                              _c(
+                                                    _vm._l(
+                                                      _vm.dealsItems.data,
+                                                      function (deals) {
+                                                        return _c(
+                                                          "div",
+                                                          {
+                                                            key: deals.id,
+                                                            staticClass:
+                                                              "recepie-body",
+                                                          },
+                                                          _vm._l(
+                                                            deals.item_category
+                                                              .single_menu_item_category,
+                                                            function (items) {
+                                                              return _c(
                                                                 "div",
                                                                 {
+                                                                  key: items.id,
                                                                   staticClass:
                                                                     "custom-control custom-radio border-bottom py-2",
                                                                 },
                                                                 [
-                                                                  _vm._m(
-                                                                    8,
-                                                                    true
-                                                                  ),
-                                                                  _vm._v(" "),
                                                                   _c("input", {
                                                                     staticClass:
                                                                       "custom-control-input",
@@ -50909,8 +51572,10 @@ var render = function () {
                                                                       type: "radio",
                                                                       id:
                                                                         "firsthalf" +
-                                                                        deals.name,
-                                                                      name: "firsthalf",
+                                                                        items
+                                                                          .single_menu
+                                                                          .menu
+                                                                          .name,
                                                                     },
                                                                   }),
                                                                   _vm._v(" "),
@@ -50922,13 +51587,19 @@ var render = function () {
                                                                       attrs: {
                                                                         for:
                                                                           "firsthalf" +
-                                                                          deals.name,
+                                                                          items
+                                                                            .single_menu
+                                                                            .menu
+                                                                            .name,
                                                                       },
                                                                     },
                                                                     [
                                                                       _vm._v(
                                                                         _vm._s(
-                                                                          deals.name
+                                                                          items
+                                                                            .single_menu
+                                                                            .menu
+                                                                            .name
                                                                         )
                                                                       ),
                                                                       _c("br"),
@@ -50937,13 +51608,14 @@ var render = function () {
                                                                   _vm._v(" "),
                                                                   _c("br"),
                                                                 ]
-                                                              ),
-                                                            ]
-                                                          )
-                                                        }
-                                                      ),
-                                                    ],
-                                                    2
+                                                              )
+                                                            }
+                                                          ),
+                                                          0
+                                                        )
+                                                      }
+                                                    ),
+                                                    0
                                                   )
                                                 : _vm._e(),
                                               _vm._v(" "),
@@ -50956,11 +51628,11 @@ var render = function () {
                                                 [_vm._v("QUANTITY")]
                                               ),
                                               _vm._v(" "),
-                                              _vm._m(9, true),
+                                              _vm._m(8, true),
                                             ]
                                           ),
                                           _vm._v(" "),
-                                          _vm._m(10, true),
+                                          _vm._m(9, true),
                                         ]
                                       ),
                                     ]
@@ -50969,19 +51641,31 @@ var render = function () {
                               ),
                               _vm._v(" "),
                               _c("div", { staticClass: "media" }, [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "mr-3 font-weight-bold text-danger non_veg",
-                                  },
-                                  [_vm._v(".")]
-                                ),
+                                _c("div", [
+                                  _c("img", {
+                                    staticClass: "mr-3 rounded-pill ",
+                                    staticStyle: {
+                                      width: "60px",
+                                      height: "60px",
+                                      "object-fit": "cover",
+                                    },
+                                    attrs: { src: dealsMenu.image, alt: "" },
+                                  }),
+                                ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "media-body" }, [
                                   _c("h6", { staticClass: "mb-1" }, [
-                                    _vm._v(_vm._s(dealsMenu.name) + " "),
+                                    _vm._v(_vm._s(dealsMenu.name)),
                                   ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass:
+                                        "text-muted mb-0 text-justify",
+                                    },
+                                    [_vm._v(_vm._s(dealsMenu.description))]
+                                  ),
                                   _vm._v(" "),
                                   dealsMenu.display_discount_price <= 0
                                     ? _c(
@@ -51030,7 +51714,7 @@ var render = function () {
             2
           ),
           _vm._v(" "),
-          _vm._m(11),
+          _vm._m(10),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-4 mt-4" }, [
@@ -51206,7 +51890,21 @@ var render = function () {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              _vm._m(12),
+              _c("div", { staticClass: "p-3" }, [
+                _vm.cartID != null
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-success btn-block btn-lg",
+                        attrs: { href: "checkout/" + _vm.cartID },
+                      },
+                      [
+                        _vm._v("checkout"),
+                        _c("i", { staticClass: "feather-arrow-right" }),
+                      ]
+                    )
+                  : _vm._e(),
+              ]),
             ]
           ),
         ]),
@@ -51415,21 +52113,6 @@ var staticRenderFns = [
           },
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "float-right" }, [
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-outline-secondary btn-sm",
-          attrs: { href: "#" },
-        },
-        [_vm._v("Pick ADDONS")]
       ),
     ])
   },
@@ -52031,21 +52714,6 @@ var staticRenderFns = [
             ]),
           ]),
         ]
-      ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-3" }, [
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-success btn-block btn-lg",
-          attrs: { href: "/checkout" },
-        },
-        [_vm._v("checkout"), _c("i", { staticClass: "feather-arrow-right" })]
       ),
     ])
   },

@@ -2,16 +2,13 @@
     <section class="container-fluid p-2">
         <div class="offer-section py-4">
             <div class="container position-relative">
-                <!-- v-bind:src=" vendor.data.vendor.image " -->
                 <img alt="#" style="width:200px" v-bind:src=" vendor.data.vendor.image "  class="restaurant-pic">
                 <div class="pt-3 text-white">
                     <h2 class="font-weight-bold">
                     {{ vendor.data.vendor.name }}
-                        <!-- Conrad Chicago Restaurant -->
                     </h2>
                     <p class="text-white m-0">
                     {{ vendor.data.vendor.address }}
-                        <!-- 963 Madyson Drive Suite 679 -->
                     </p>
                     <div class="rating-wrap d-flex align-items-center mt-2">
                         <ul class="rating-stars list-unstyled">
@@ -28,10 +25,6 @@
                 </div>
                 <div class="pb-4">
                     <div class="row">
-                        <!-- <div class="col-6 col-md-1">
-                            <p class="text-white-50 font-weight-bold m-0 small">Delivery</p>
-                            <p class="text-white m-0">Free</p>
-                        </div> -->
                         <div class="col-6 col-md-1">
                             <p class="text-white-50 font-weight-bold m-0 small">Open time</p>
                             <p class="text-white m-0">{{ vendor.data.vendor.start_time }}</p>
@@ -72,8 +65,6 @@
                 </div>
             </div>
         </div>
-
-
         <!-- Menu -->
         <div class="container position-relative">
             <div class="row">
@@ -81,7 +72,6 @@
                     <div class="shadow-sm rounded bg-white mb-3 overflow-hidden">
                         <div class="d-flex item-aligns-center">
                             <p class="font-weight-bold h6 p-3 border-bottom mb-0 w-100">Menu</p>
-                            <!-- <a class="small text-primary font-weight-bold ml-auto" href="#">View all <i class="feather-chevrons-right"></i></a> -->
                         </div>
                         <div v-for="MenuCategory in vendor.data.MenuCategory" v-bind:key="MenuCategory.id" class="row m-0">
                             <h6 :id="'/'+MenuCategory.name.toUpperCase()" class="p-3 m-0 bg-light w-100">{{ MenuCategory.name.toUpperCase() }}<small class="ml-2 text-black-50">3 ITEMS</small></h6>
@@ -89,7 +79,7 @@
                             <div class="col-md-12 px-0 border-top">
                                 <div class="">
                                     <div v-for="singleMenu in MenuCategory.single_menu" v-bind:key="singleMenu.id" class="p-3 border-bottom gold-members">
-                                        <span class="float-right"><a href="#" id="" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#singlemenuaddModal"   @click="getMenuAddons(vendor.data.vendor.id,singleMenu.menu.id),getMenuSizes(vendor.data.vendor.id,singleMenu.menu.id)">ADD</a></span>
+                                        <span class="float-right"><a style="margin-left: 25px;margin-top: 25px;" href="#" id="" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#singlemenuaddModal"   @click="getMenuAddons(vendor.data.vendor.id,singleMenu.menu.id),getMenuSizes(vendor.data.vendor.id,singleMenu.menu.id)">ADD</a></span>
                                         <!-- add extras Modal -->
                                         <div class="modal fade " id="singlemenuaddModal" tabindex="-1" role="dialog"   aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
                                             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -112,26 +102,15 @@
                                                     </ul>
                                                         <div class="modal-body">
                                                             <form v-if="menuAddonWithSize != null" >
-
-                                                                <!-- extras body -->
                                                                 <div class="recepie-body" v-for="sizes in  menuAddonWithSize.data.MenuAddon" v-bind:key="sizes.id">
-
-                                                                    <!-- <h6 class="font-weight-bold mt-4" v-if="sizes.addon_category_id === sizes.addon_category_id" >{{ sizes.addon_category.name }}
-                                                                        <span class="text-muted"> ({{ sizes.addon_category.min }}-{{ sizes.addon_category.max  }}) </span>
-                                                                    </h6> -->
                                                                     <div v-for="addon in sizes.addon_category.addon" v-bind:key="addon.id" v-if="sizes.addon_id === addon.id" class="custom-control custom-radio border-bottom py-2">
                                                                         <input type="checkbox" :id=" addon.name " v-if="sizes.addon_id === addon.id" :value="addon.id" v-model="addon_id[addon.id]" class="custom-control-input" >
                                                                         <label class="custom-control-label" v-if="sizes.addon_id === addon.id" :for="addon.name">{{ addon.name }} <span class="text-muted">+ ${{ sizes.price }}</span></label>
                                                                     </div>
-
                                                                 </div>
                                                             </form>
                                                             <form v-if="menuAddonWithSize === null  && menuAddon != null" >
-                                                                <!-- extras body -->
                                                                 <div class="recepie-body" v-for="sizes in  menuAddon.data.MenuAddon" v-bind:key="sizes.id">
-                                                                    <!-- <h6 class="font-weight-bold mt-4">{{ sizes.addon.name }}
-                                                                        <span class="text-muted"> ({{ sizes.addon_category.min }}-{{ sizes.addon_category.max  }}) </span>
-                                                                    </h6> -->
                                                                     <div  class="custom-control custom-radio border-bottom py-2">
                                                                         <input type="checkbox" :id=" sizes.addon.name " v-model="addon_id[sizes.addon.id]" class="custom-control-input" >
                                                                         <label class="custom-control-label"  :for="sizes.addon.name">{{ sizes.addon.name }}<span class="text-muted">+ ${{ sizes.price }}</span></label>
@@ -160,10 +139,13 @@
                                             </div>
                                         </div>
                                         <div  class="media">
-                                            <div class="mr-3 font-weight-bold text-danger non_veg">.</div>
+                                            <!-- <div class="mr-3 font-weight-bold text-danger non_veg">.</div> -->
+                                            <div>
+                                                <img style="width: 60px; height: 60px; object-fit: cover;" :src="singleMenu.menu.image" alt="" class="mr-3 rounded-pill ">
+                                            </div>
                                             <div  class="media-body">
                                                 <h6 class="mb-1">{{ singleMenu.menu.name }} </h6>
-                                                <p class="text-muted mb-0"> {{ singleMenu.description }}</p>
+                                                <p class="text-muted mb-0 text-justify"> {{ singleMenu.menu.description }}</p>
                                                 <p  class="text-muted mb-0" v-if="singleMenu.menu.display_discount_price <= 0 && singleMenu.menu.price > 0">$ {{ singleMenu.menu.price }}</p>
                                                 <p class="text-muted mb-0" v-if="singleMenu.menu.display_discount_price > 0"><del v-if="singleMenu.menu.display_discount_price > 0">$ {{ singleMenu.menu.display_price }}</del> $ {{ singleMenu.menu.display_discount_price }}</p>
                                             </div>
@@ -175,7 +157,7 @@
                             <div class="col-md-12 px-0 border-top">
                                 <div class="">
                                     <div v-for="half_n_half_menu in MenuCategory.half_n_half_menu" v-bind:key="half_n_half_menu.id"  class="p-3 border-bottom gold-members">
-                                        <span class="float-right"><a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#halfnhalf"  @click="getHalfandHalfSizes(vendor.data.vendor.id,half_n_half_menu.id)">ADD</a></span>
+                                        <span class="float-right"><a style="margin-left: 25px;margin-top: 25px;" href="#" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#halfnhalf"  @click="getHalfandHalfSizes(vendor.data.vendor.id,half_n_half_menu.id)">ADD</a></span>
                                         <!-- add extras Modal -->
                                         <div class="modal fade " id="halfnhalf" tabindex="-1" role="dialog"   aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
                                             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -207,6 +189,12 @@
                                                             </a>
                                                         </li>
                                                     </ul>
+                                                        <p style="margin-left: 16px;" v-if="errors.length">
+                                                            <b class="text-danger">Please correct the following error(s):</b>
+                                                            <ul >
+                                                                <li class="text-danger" v-for="error in errors" :key="error.id">{{ error }}</li>
+                                                            </ul>
+                                                        </p>
                                                         <div  class="modal-body">
                                                             <form  v-if="getMenuWithMenuSize != null"  v-show="firstHalf">
                                                                 <!-- extras body -->
@@ -272,10 +260,13 @@
                                             </div>
                                         </div>
                                         <div  class="media">
-                                            <div class="mr-3 font-weight-bold text-danger non_veg">.</div>
+                                            <!-- <div class="mr-3 font-weight-bold text-danger non_veg">.</div> -->
+                                            <div>
+                                                <img style="width: 60px; height: 60px; object-fit: cover;" :src="half_n_half_menu.image" alt="" class="mr-3 rounded-pill ">
+                                            </div>
                                             <div  class="media-body">
                                                 <h6  class="mb-1">{{ half_n_half_menu.name }} </h6>
-                                                <!-- <p v-for="menu in half_n_half_menu" v-bind:key="menu.id" class="text-muted mb-0">{{ menu.price }}</p> -->
+                                                <p class="text-muted mb-0 text-justify">{{ half_n_half_menu.description }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -285,7 +276,7 @@
                             <div class="col-md-12 px-0 border-top">
                                 <div class="">
                                     <div v-for="dealsMenu in MenuCategory.deals_menu" v-bind:key="dealsMenu.id" class="p-3 border-bottom gold-members">
-                                        <span class="float-right"><a href="#" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#deals" @click="getDealsMenuItems(vendor.data.vendor.id,dealsMenu.id)">ADD</a></span>
+                                        <span class="float-right"><a href="#" style="margin-left: 25px;margin-top: 25px;" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#deals" @click="getDealsMenuItems(vendor.data.vendor.id,dealsMenu.id)">ADD</a></span>
                                         <!-- add extras Modal -->
                                         <div class="modal fade" id="deals" tabindex="-1" role="dialog"   aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
                                             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -296,24 +287,29 @@
                                                             <span aria-hidden="true">×</span>
                                                         </button>
                                                     </div>
+                                                    <h5 class="font-weight-bold mt-1 ml-3">Pick Items</h5>
+                                                    <ul v-if="deaslMenuItems != null" class="nav nav-pills mt-1 ml-3">
+                                                        <li v-for="deals in deaslMenuItems.data" :key="deals.id">
+                                                            <a @click="getDealsItems(vendor.data.vendor.id,deals.id)" class="btn btn-outline-primary btn-sm mb-3 mr-3" data-toggle="pill" >
+                                                                <b >{{deals.name}}</b>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
                                                     <div  class="modal-body">
-                                                    <form  v-if="deaslMenuItems != null"  >
-                                                                <!-- extras body -->
-                                                                <h5>Pick Items</h5>
-                                                                <div class="recepie-body" v-for="deals in deaslMenuItems.data" :key="deals.id">
-                                                                    <div class="custom-control custom-radio border-bottom py-2">
-                                                                        <span class="float-right">
-                                                                            <a href="#" class="btn btn-outline-secondary btn-sm">Pick ADDONS</a>
-                                                                        </span>
-                                                                        <input type="radio" :id=" 'firsthalf'+deals.name " name="firsthalf" class="custom-control-input" >
-                                                                        <label class="custom-control-label" :for="'firsthalf'+deals.name">{{deals.name}}<br>
-                                                                            <!-- <b v-if="menu.display_discount_price <= 0 && menu.display_price > 0">{{ menu.display_price}} A$</b>
-                                                                            <b v-if="menu.display_discount_price > 0 "><del v-if="menu.display_discount_price > 0"> {{ menu.display_price }} A$ </del> {{ menu.display_discount_price}} A$</b> -->
-                                                                        </label>
-                                                                        <br>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
+                                                    <form  v-if="dealsItems != null"  >
+                                                        <div class="recepie-body" v-for="deals in dealsItems.data" :key="deals.id">
+                                                            <div v-for="items in deals.item_category.single_menu_item_category " :key="items.id" class="custom-control custom-radio border-bottom py-2">
+                                                                <input  type="radio" :id=" 'firsthalf'+items.single_menu.menu.name" class="custom-control-input" >
+                                                                <label  class="custom-control-label" :for="'firsthalf'+items.single_menu.menu.name">{{items.single_menu.menu.name}}<br>
+                                                                <!-- <b>{{deals.item_category.single_menu_item_category.single_menu_id}}</b> -->
+                                                                    <!-- <b v-for="items in deals.item_category.single_menu_item_category" :key="items.id">{{items.single_menu_id}}</b> -->
+                                                                    <!-- <b v-if="menu.display_discount_price <= 0 && menu.display_price > 0">{{ menu.display_price}} A$</b>
+                                                                    <b v-if="menu.display_discount_price > 0 "><del v-if="menu.display_discount_price > 0"> {{ menu.display_price }} A$ </del> {{ menu.display_discount_price}} A$</b> -->
+                                                                </label>
+                                                                <br>
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                         <h6 class="font-weight-bold mt-4">QUANTITY</h6>
                                                             <div class="d-flex align-items-center">
                                                                 <p class="m-0">Select Quantity</p>
@@ -336,9 +332,12 @@
                                             </div>
                                         </div>
                                         <div  class="media">
-                                            <div class="mr-3 font-weight-bold text-danger non_veg">.</div>
+                                            <div>
+                                                <img style="width: 60px; height: 60px; object-fit: cover;" :src="dealsMenu.image" alt="" class="mr-3 rounded-pill ">
+                                            </div>
                                             <div  class="media-body">
-                                                <h6 class="mb-1">{{ dealsMenu.name }} </h6>
+                                                <h6 class="mb-1">{{ dealsMenu.name }}</h6>
+                                                <p class="text-muted mb-0 text-justify">{{ dealsMenu.description }}</p>
                                                 <p class="text-muted mb-0" v-if="dealsMenu.display_discount_price <= 0">$ {{ dealsMenu.price }}</p>
                                                  <p class="text-muted mb-0" v-if="dealsMenu.display_discount_price > 0" ><del v-if="dealsMenu.display_discount_price > 0">$ {{ dealsMenu.display_price }}</del> $ {{ dealsMenu.display_discount_price }}</p>
                                             </div>
@@ -509,39 +508,24 @@
                                     <div class="mr-2 text-danger" style="margin-bottom: 15px;">&middot;</div>
                                     <div class="media-body">
                                         <h6 class="mb-1">{{cartData.menu_name}}</h6>
-                                        <!-- <p class="m-0">{{cartData.menu_name}}</p> -->
                                         <p class="text-gray mb-0 ml-2 text-muted small">${{cartData.unit_price}}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <span class="count-number float-right"><button type="button" class="btn-sm left dec btn btn-outline-secondary" @click="minusQuantity(vendor.data.vendor.id,cartData.session_id,cartData.id)"> <i class="feather-minus"></i> </button><input class="count-number-input"  type="text" readonly="" :value="cartData.quantity"><button type="button" class="btn-sm right inc btn btn-outline-secondary" @click="addQuantity(vendor.data.vendor.id,cartData.session_id,cartData.id)"> <i class="feather-plus"></i> </button></span>
-                                    <!-- <p class="text-gray mb-0 float-right ml-2 text-muted small">${{cartData.price}}</p> -->
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="bg-white p-3 py-3 border-bottom clearfix">
-                            <div class="input-group-sm mb-2 input-group">
-                                <input placeholder="Enter promo code" type="text" class="form-control">
-                                <div class="input-group-append"><button type="button" class="btn btn-primary"><i class="feather-percent"></i> APPLY</button></div>
-                            </div>
-                            <div class="mb-0 input-group">
-                                <div class="input-group-prepend"><span class="input-group-text"><i class="feather-message-square"></i></span></div>
-                                <textarea placeholder="Any suggestions? We will pass it on..." aria-label="With textarea" class="form-control"></textarea>
-                            </div>
-                        </div> -->
                         <div v-if="cartData == null" class="bg-white p-3 clearfix border-bottom">
                             <h6 class="font-weight-bold mb-0">No data in cart.</h6>
                         </div>
                         <div v-if="cartData != null" class="bg-white p-3 clearfix border-bottom">
                             <p class="mb-1">Item Total <span class="float-right text-dark">${{total}}</span></p>
-                            <!-- <p class="mb-1">Restaurant Charges <span class="float-right text-dark">$62.8</span></p> -->
-                            <!-- <p class="mb-1">Delivery Fee<span class="text-info ml-1"><i class="feather-info"></i></span><span class="float-right text-dark">$10</span></p> -->
-                            <!-- <p class="mb-1 text-success">Total Discount<span class="float-right text-success">$0</span></p> -->
                             <hr>
                             <h6 class="font-weight-bold mb-0">TO PAY <span class="float-right">${{total}}</span></h6>
                         </div>
                         <div class="p-3">
-                            <a class="btn btn-success btn-block btn-lg" href="/checkout">checkout<i class="feather-arrow-right"></i></a>
+                            <a class="btn btn-success btn-block btn-lg" v-if="cartID != null" :href="'checkout/' + cartID" >checkout<i class="feather-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -565,6 +549,7 @@
         },
         data(){
             return{
+                errors:[],
                 // select dropdown
                 value: [],
                 options: {},
@@ -584,6 +569,9 @@
                 getMenuWithMenuSize:null,
                 // deals
                 deaslMenuItems:null,
+                dealsItems:null,
+                dealsCartItems:[],
+                cartID:null,
                 // cart details
                 // single menu cart
                 menu_id:'',
@@ -608,15 +596,15 @@
         methods : {
             // cart details
             getCartDetails(session_id){
-                    console.log(session_id);
-                    axios.get('http://192.168.18.27:5000/api/getCartData/'+this.vendor_id+'/'+session_id).then((response) => {
+                    axios.get('http://ozpos.geekss.com.au/api/getCartData/'+this.vendor_id+'/'+session_id).then((response) => {
                         this.cartData = response.data;
                         console.log(this.cartData);
                         this.total = 0.0;
                         this.cartData.data.cart.forEach(cartData => {
                             this.total = this.total + cartData.price;
+                            this.cartID = cartData.id;
                         });
-                        console.log(this.total);
+                        console.log(this.cartID);
                     })
                     .catch((error) => {
                         console.error(error);
@@ -626,7 +614,7 @@
 
             addToCart()
             {
-                axios.post('http://192.168.18.27:5000/api/addToCart',{
+                axios.post('http://ozpos.geekss.com.au/api/addToCart',{
                     vendor_id : this.vendor_id,
                     session_id: this.session_id,
                     menu_id: this.menu_id,
@@ -673,7 +661,16 @@
 
             addToCartHalfnHalf()
             {
-                axios.post('http://192.168.18.27:5000/api/addToCart',{
+                this.errors = [];
+
+                if (!this.first_half_id) {
+                    this.errors.push('Please Select item for First Half.');
+                }
+                if (!this.second_half_id) {
+                    this.errors.push('Please Select item for Second Half.');
+                }
+
+                axios.post('http://ozpos.geekss.com.au/api/addToCart',{
                     vendor_id : this.vendor_id,
                     session_id: this.session_id,
                     menu_id: this.halfnhalf,
@@ -696,6 +693,9 @@
                         this.quantity = 1;
                         this.halfnhalf = '';
                         this.deals_menus_id = '';
+                        this.single_menu_id = '';
+                        this.first_half_id = '';
+                        this.second_half_id = '';
                         swal({
                         title: "Item Added!",
                         text: response.data.message,
@@ -704,22 +704,11 @@
                         timer: 3000
                     });
                     }
-				})
-				.catch((error) => {
-					console.error(error);
-                     swal({
-                    title: "Some Thing Wrong!",
-                    text: error.response.data.message,
-                    // text: "Sizes are required. Please pick size.",
-                    icon: "error",
-                    buttons: true,
-                    timer: 3000
-                });
 				});
             },
 
             addQuantity(vendor_id , session_id , cart_id){
-                axios.get('http://192.168.18.27:5000/api/addQuantity/'+cart_id).then((response) => {
+                axios.get('http://ozpos.geekss.com.au/api/addQuantity/'+cart_id).then((response) => {
                     this.getCartDetails(session_id);
 				})
 				.catch((error) => {
@@ -728,7 +717,7 @@
             },
 
             minusQuantity(vendor_id , session_id , cart_id){
-                axios.get('http://192.168.18.27:5000/api/minusQuantity/'+cart_id).then((response) => {
+                axios.get('http://ozpos.geekss.com.au/api/minusQuantity/'+cart_id).then((response) => {
                     this.getCartDetails(session_id);
 				})
 				.catch((error) => {
@@ -739,7 +728,7 @@
             // end cart details
             getVendorDetails()
             {
-                axios.get('http://192.168.18.27:5000/api/single_vendor/1').then((response) => {
+                axios.get('http://ozpos.geekss.com.au/api/single_vendor/5').then((response) => {
                     this.vendor = response.data;
                     this.vendor_id =response.data.data.vendor.id
 				})
@@ -752,7 +741,7 @@
             {
                 this.vendor_id =vendor_id;
                 this.menu_id = menu_id;
-                axios.get('http://192.168.18.27:5000/api/menu_size/'+vendor_id+'/'+menu_id).then((response) => {
+                axios.get('http://ozpos.geekss.com.au/api/menu_size/'+vendor_id+'/'+menu_id).then((response) => {
                     this.menuSizes = response.data;
                     this.menuAddonWithSize=null;
 				})
@@ -768,7 +757,7 @@
                 this.options = [];
                 this.addon_id= [''];
                 this.optionMenuId = menu_id;
-                axios.get('http://192.168.18.27:5000/api/menu_addon/'+vendor_id+'/'+menu_id).then((response) => {
+                axios.get('http://ozpos.geekss.com.au/api/menu_addon/'+vendor_id+'/'+menu_id).then((response) => {
                     this.menuAddon = response.data;
                     this.menuAddonWithSize = null;
 				})
@@ -783,7 +772,7 @@
                 this.menu_id = menu_id;
                 this.options = [];
                 this.optionMenuId = menu_id;
-                axios.get('http://192.168.18.27:5000/api/menu_addon/'+vendor_id+'/'+menu_id).then((response) => {
+                axios.get('http://ozpos.geekss.com.au/api/menu_addon/'+vendor_id+'/'+menu_id).then((response) => {
                     this.menuAddon = response.data;
                     this.menuAddonWithSize = null;
                     if(response.data != null){
@@ -806,7 +795,7 @@
                 this.vendor_id = vendor_id;
                 this.menu_id = menu_id;
                 this.size_id = size_id;
-                axios.get('http://192.168.18.27:5000/api/menu_size_addon/'+vendor_id+'/'+menu_id+'/'+size_id).then((response) => {
+                axios.get('http://ozpos.geekss.com.au/api/menu_size_addon/'+vendor_id+'/'+menu_id+'/'+size_id).then((response) => {
                     this.menuAddonWithSize = response.data;
                     for (let i = 0; i < this.menuAddonWithSize.data.MenuAddon.length; i++) {
                         this.uniqueAddoncategory[i] = this.menuAddonWithSize.data.MenuAddon[i].addon_category.name;
@@ -824,7 +813,7 @@
             {
                 this.vendor_id =vendor_id;
                 this.halfnhalf = half_n_half_menu_id;
-                axios.get('http://192.168.18.27:5000/api/single_vendor_retrieve_sizes/'+vendor_id+'/'+half_n_half_menu_id).then((response) => {
+                axios.get('http://ozpos.geekss.com.au/api/single_vendor_retrieve_sizes/'+vendor_id+'/'+half_n_half_menu_id).then((response) => {
                     this.halfAndHalfSizes = response.data;
                     this.menuSizes = null;
 				})
@@ -838,7 +827,7 @@
             {
                 this.vendor_id =vendor_id;
                 this.menuAddon = null;
-                axios.get('http://192.168.18.27:5000/api/menu_size_item_size/'+vendor_id+'/'+item_size_id).then((response) => {
+                axios.get('http://ozpos.geekss.com.au/api/menu_size_item_size/'+vendor_id+'/'+item_size_id).then((response) => {
                     this.getMenuWithMenuSize = response.data;
                     this.menuSizes = null;
 				})
@@ -851,7 +840,7 @@
             getDealsMenuItems(vendor_id,deals_menu_id)
             {
                 this.vendor_id =vendor_id;
-                axios.get('http://192.168.18.27:5000/api/deals-menu-items/'+vendor_id+'/'+deals_menu_id).then((response) => {
+                axios.get('http://ozpos.geekss.com.au/api/deals-menu-items/'+vendor_id+'/'+deals_menu_id).then((response) => {
                     this.deaslMenuItems = response.data;
 				})
                 .catch((error) => {
@@ -859,6 +848,15 @@
 				});
 
             },
+            getDealsItems(vendor_id,deals_menu_id){
+                this.vendor_id =vendor_id;
+                axios.get('http://ozpos.geekss.com.au/api/deals-items/'+vendor_id+'/'+deals_menu_id).then((response) => {
+                    this.dealsItems = response.data;
+				})
+                .catch((error) => {
+					console.error(error);
+				});
+            }
         }
     }
 </script>
