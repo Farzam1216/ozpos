@@ -65,9 +65,9 @@
                 </div>
                 <!-- col.// -->
                 <div class="col-8">
-                    <div class="d-flex align-items-center justify-content-end pr-5">
+                    <div class="d-flex align-items-center justify-content-end pr-5" style="margin-bottom: 58px;">
 
-                        <!-- signin -->
+                        {{--  <!-- signin -->
                         <a href="/user-login" class="widget-header mr-4 text-dark m-none">
                             <div class="icon d-flex align-items-center">
                                 <i class="feather-user h6 mr-2 mb-0"></i> <span>Sign in</span>
@@ -90,7 +90,7 @@
                             <div class="icon d-flex align-items-center">
                                 <i class="feather-shopping-cart h6 mr-2 mb-0"></i> <span>Cart</span>
                             </div>
-                        </a>
+                        </a>  --}}
                         <a class="toggle" href="#">
                             <span></span>
                         </a>

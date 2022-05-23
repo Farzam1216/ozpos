@@ -22,7 +22,7 @@
                                  </button>
                                     </h2>
                                 </div>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                     <div class="osahan-card-body border-top p-3">
                                         <form>
                                             <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
@@ -110,28 +110,32 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="osahan-cart-item mb-3 rounded shadow-sm bg-white overflow-hidden">
+                        <div v-if="LoginStatus == false"  class="osahan-cart-item mb-3 rounded shadow-sm bg-white overflow-hidden">
                             <div class="osahan-cart-item-profile bg-white p-3">
                                 <div class="d-flex flex-column">
                                     <h6 class="mb-3 font-weight-bold">Delivery Address</h6>
                                     <div class="row">
-                                        <div class="custom-control col-lg-6 custom-radio mb-3 position-relative border-custom-radio">
+                                        <div class="custom-control col-lg-12 custom-radio mb-3 position-relative border-custom-radio">
                                             <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
                                             <label class="custom-control-label w-100" for="customRadioInline1">
                                        <div>
-                                          <div class="p-3 bg-white rounded shadow-sm w-100">
-                                             <div class="d-flex align-items-center mb-2">
+                                          <div v-if="userAddress != null" class="p-3 bg-white rounded shadow-sm w-100">
+                                             <!-- <div class="d-flex align-items-center mb-2">
                                                 <h6 class="mb-0">Home</h6>
                                                 <p class="mb-0 badge badge-success ml-auto"><i class="icofont-check-circled"></i> Default</p>
-                                             </div>
-                                             <p class="small text-muted m-0">1001 Veterans Blvd</p>
-                                             <p class="small text-muted m-0">Redwood City, CA 94063</p>
+                                             </div> -->
+                                             <select v-model="existingAddress" name="" class="form-control" id="">
+                                                <option value="">Select Existing Address</option>
+                                                <option v-for="address in userAddress.data.address" :key="address.id" :value="address.id">{{address.address}}</option>
+                                             </select>
+                                             <!-- <p class="small text-muted m-0">1001 Veterans Blvd</p>
+                                             <p class="small text-muted m-0">Redwood City, CA 94063</p> -->
                                           </div>
-                                          <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-light border-top">Edit</a>
+                                          <!-- <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-light border-top">Edit</a> -->
                                        </div>
                                     </label>
                                         </div>
-                                        <div class="custom-control col-lg-6 custom-radio position-relative border-custom-radio">
+                                        <!-- <div class="custom-control col-lg-6 custom-radio position-relative border-custom-radio">
                                             <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
                                             <label class="custom-control-label w-100" for="customRadioInline2">
                                        <div>
@@ -146,23 +150,23 @@
                                           <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-light border-top">Edit</a>
                                        </div>
                                     </label>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModal"> ADD NEW ADDRESS </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="accordion mb-3 rounded shadow-sm bg-white overflow-hidden" id="accordionExample">
+                        <div v-if="LoginStatus == false" class="accordion mb-3 rounded shadow-sm bg-white overflow-hidden" id="accordionExample">
                             <div class="osahan-card bg-white border-bottom overflow-hidden">
                                 <div class="osahan-card-header" id="headingOne">
                                     <h2 class="mb-0">
-                                        <button class="d-flex p-3 align-items-center btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <button @click="credit = true , cashOnDelivery = false , creditCard()" class="d-flex p-3 align-items-center btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                  <i class="feather-credit-card mr-3"></i> Credit/Debit Card
                                  <i class="feather-chevron-down ml-auto"></i>
                                  </button>
                                     </h2>
                                 </div>
-                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div v-if="credit==true" id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="osahan-card-body border-top p-3">
                                         <h6 class="m-0">Add new card</h6>
                                         <p class="small">WE ACCEPT <span class="osahan-card ml-2 font-weight-bold">( Master Card / Visa Card / Rupay )</span></p>
@@ -171,13 +175,14 @@
                                                 <div class="col-md-12 form-group">
                                                     <label class="form-label font-weight-bold small">Card number</label>
                                                     <div class="input-group">
-                                                        <input placeholder="Card number" type="number" class="form-control">
+                                                        <input placeholder="Card number" v-model="cardNumber" type="number" class="form-control">
                                                         <div class="input-group-append"><button type="button" class="btn btn-outline-secondary"><i class="feather-credit-card"></i></button></div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-8 form-group"><label class="form-label font-weight-bold small">Valid through(MM/YY)</label><input placeholder="Enter Valid through(MM/YY)" type="number" class="form-control"></div>
-                                                <div class="col-md-4 form-group"><label class="form-label font-weight-bold small">CVV</label><input placeholder="Enter CVV Number" type="number" class="form-control"></div>
-                                                <div class="col-md-12 form-group"><label class="form-label font-weight-bold small">Name on card</label><input placeholder="Enter Card number" type="text" class="form-control"></div>
+                                                <div class="col-md-4 form-group"><label class="form-label font-weight-bold small">Expire Month(MM)</label><input v-model="month" placeholder="Enter Month(MM)" type="number" class="form-control"></div>
+                                                <div class="col-md-4 form-group"><label class="form-label font-weight-bold small">Expire Year(YY)</label><input v-model="year" placeholder="Enter Year (YY)" type="number" class="form-control"></div>
+                                                <div class="col-md-4 form-group"><label class="form-label font-weight-bold small">CVV</label><input v-model="cvv" placeholder="Enter CVV Number" type="number" class="form-control"></div>
+                                                <div class="col-md-12 form-group"><label class="form-label font-weight-bold small">Name on card</label><input v-model="cardName" placeholder="Enter Name" type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' class="form-control"></div>
                                                 <div class="col-md-12 form-group mb-0">
                                                     <div class="custom-control custom-checkbox"><input type="checkbox" id="custom-checkbox1" class="custom-control-input"><label title="" type="checkbox" for="custom-checkbox1" class="custom-control-label small pt-1">Securely save this card for a faster checkout next time.</label></div>
                                                 </div>
@@ -190,13 +195,13 @@
                             <div class="osahan-card bg-white overflow-hidden">
                                 <div class="osahan-card-header" id="headingThree">
                                     <h2 class="mb-0">
-                                        <button class="d-flex p-3 align-items-center btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        <button @click="credit = false , cashOnDelivery = true , cod()" class="d-flex p-3 align-items-center btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                  <i class="feather-dollar-sign mr-3"></i> Cash on Delivery
                                  <i class="feather-chevron-down ml-auto"></i>
                                  </button>
                                     </h2>
                                 </div>
-                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                <div v-if="cashOnDelivery==true" id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                                     <div class="card-body border-top">
                                         <h6 class="mb-3 mt-0 mb-3 font-weight-bold">Cash</h6>
                                         <p class="m-0">Please keep exact change handy to help us serve you better</p>
@@ -255,7 +260,7 @@
                                 </ul>
                             </p>
                             <!-- <a class="btn btn-success btn-block btn-lg" href="successful">PAY ${{total}}<i class="feather-arrow-right"></i></a> -->
-                            <a class="btn btn-success btn-block btn-lg" @click="payment()">PAY ${{total}}<i class="feather-arrow-right"></i></a>
+                            <a v-if="submitBtn == true" class="btn btn-success btn-block btn-lg" @click="payment()">PAY ${{total}}<i class="feather-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -275,15 +280,22 @@
                     <form class="">
                         <div class="form-row">
                             <div class="col-md-12 form-group">
-                                <label class="form-label">Delivery Area</label>
+                                <label class="form-label">Delivery Address</label>
                                 <div class="input-group">
-                                    <input placeholder="Delivery Area" type="text" class="form-control">
+                                    <input v-model="deliveryAdress" placeholder="Delivery Address" type="text" class="form-control">
                                     <div class="input-group-append"><button type="button" class="btn btn-outline-secondary"><i class="feather-map-pin"></i></button></div>
                                 </div>
                             </div>
-                            <div class="col-md-12 form-group"><label class="form-label">Complete Address</label><input placeholder="Complete Address e.g. house number, street name, landmark" type="text" class="form-control"></div>
-                            <div class="col-md-12 form-group"><label class="form-label">Delivery Instructions</label><input placeholder="Delivery Instructions e.g. Opposite Gold Souk Mall" type="text" class="form-control"></div>
-                            <div class="mb-0 col-md-12 form-group">
+                             <div class="col-md-12 form-group"><label class="form-label">Type</label>
+                                <select v-model="deliveryType" class="form-control" name="" id="">
+                                    <option value="home">Home</option>
+                                    <option value="appartment">Appartment</option>
+                                    <option value="other">Other</option>
+                                </select>
+                             </div>
+                            <!-- <div class="col-md-12 form-group"><label class="form-label">Complete Address</label><input placeholder="Complete Address e.g. house number, street name, landmark" type="text" class="form-control"></div>
+                            <div class="col-md-12 form-group"><label class="form-label">Delivery Instructions</label><input placeholder="Delivery Instructions e.g. Opposite Gold Souk Mall" type="text" class="form-control"></div> -->
+                            <!-- <div class="mb-0 col-md-12 form-group">
                                 <label class="form-label">Nickname</label>
                                 <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
                                     <label class="btn btn-outline-secondary active">
@@ -296,7 +308,7 @@
                               <input type="radio" name="options" id="option32"> Other
                               </label>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
                 </div>
@@ -305,7 +317,7 @@
                         <button type="button" class="btn border-top btn-lg btn-block" data-dismiss="modal">Close</button>
                     </div>
                     <div class="col-6 m-0 p-0">
-                        <button type="button" class="btn btn-primary btn-lg btn-block">Save changes</button>
+                        <button type="button" @click="useraddress()" class="btn btn-primary btn-lg btn-block">Save changes</button>
                     </div>
                 </div>
             </div>
@@ -320,6 +332,7 @@ export default {
     this.setdata();
     this.cartDataa();
     this.getVendorDetails();
+    this.date_function();
   },
   props: {
     cart_prop: String,
@@ -336,18 +349,35 @@ export default {
       total: "",
       paymentMethod: null,
       userAddress: null,
-
     //   login
       login:true,
       loginEmail:'',
       loginPassword:'',
       LoginStatus:true,
+      loginID:'',
+      loginUserName:'',
     // Signup
-     signup:false,
-     name:'',
-     email:'',
-     mobileNumber:'',
-     password:'',
+      signup:false,
+      name:'',
+      email:'',
+      mobileNumber:'',
+      password:'',
+    // delivery adress
+      deliveryAdress:'',
+      deliveryType:'',
+      existingAddress:'',
+      cashOnDelivery:true,
+      credit:true,
+    // payment
+      cardNumber:'',
+      cvv:'',
+      month:'',
+      year:'',
+      cardName:'',
+    //   date
+        date:'',
+        time:'',
+        submitBtn:true,
 
     };
   },
@@ -357,7 +387,7 @@ export default {
     },
     cartDataa() {
       axios
-        .get("http://ozpos.geekss.com.au/api/cartData/" + this.cartID)
+        .get("https://ozpos.geekss.com.au/api/cartData/" + this.cartID)
         .then((response) => {
           this.cartData = response.data;
           this.total = 0.0;
@@ -372,7 +402,7 @@ export default {
     },
     addQuantity(cart_id) {
       axios
-        .get("http://ozpos.geekss.com.au/api/addQuantity/" + cart_id)
+        .get("https://ozpos.geekss.com.au/api/addQuantity/" + cart_id)
         .then((response) => {
           this.cartDataa();
         })
@@ -383,7 +413,7 @@ export default {
 
     minusQuantity(cart_id) {
       axios
-        .get("http://ozpos.geekss.com.au/api/minusQuantity/" + cart_id)
+        .get("https://ozpos.geekss.com.au/api/minusQuantity/" + cart_id)
         .then((response) => {
           this.cartDataa();
         })
@@ -393,7 +423,7 @@ export default {
     },
     getVendorDetails() {
       axios
-        .get("http://ozpos.geekss.com.au/api/single_vendor/5")
+        .get("https://ozpos.geekss.com.au/api/single_vendor/7")
         .then((response) => {
           this.vendor = response.data;
           this.vendor_id = response.data.data.vendor.id;
@@ -403,7 +433,7 @@ export default {
         });
     },
     userlogin(){
-        axios.post('http://ozpos.geekss.com.au/api/user_login',{
+        axios.post('https://ozpos.geekss.com.au/api/user_login',{
             email_id : this.loginEmail,
             password : this.loginPassword,
             provider : "LOCAL",
@@ -421,6 +451,10 @@ export default {
                         })
                     }else{
                         this.LoginStatus = false;
+                        console.log(response.data.data)
+                        this.loginID =response.data.data.id;
+                        this.loginUserName = response.data.data.name;
+                        this.getuseraddress(response.data.data.id);
                         swal({
                             title: "Login Successfull!",
                             text: response.data.message,
@@ -447,19 +481,136 @@ export default {
             })
     },
     usersignup(){
-
     },
+    getuseraddress(){
+        axios
+        .get("https://ozpos.geekss.com.au/api/get-user-address/"+ this.loginID)
+        .then((response) => {
+          this.userAddress = response.data;
+          console.log(this.userAddress);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    useraddress(){
+        axios.post('https://ozpos.geekss.com.au/api/user_address',{
+				address : this.deliveryAdress,
+				type : this.deliveryType,
+                userID : this.loginID,
+				}).then( (response) => {
+                    if (response.status == 200) {
+                        this.getuseraddress();
+                        swal({
+                            title: "Address Added!",
+                            text: "Address Added Successfully",
+                            icon: "success",
+                            buttons: false,
+                            timer: 2000
+                        });
+                    } else {
+                        console.warn(response.data);
+                         swal({
+                            title: "Something went wrong!",
+                            text: response.data.message,
+                            icon: "error",
+                            buttons: true,
+                            timer: 2000
+                        })
+                    }
+
+                    }).catch( (error)=> {
+                        console.log( error.response.data)
+                    })
+    },
+    creditCard(){
+        this.paymentMethod =null;
+        this.paymentMethod = 'STRIPE';
+    },
+    cod(){
+        this.paymentMethod =null;
+        this.paymentMethod = 'COD';
+    },
+    date_function: function () {
+
+            var currentDate = new Date();
+            // console.log(currentDate);
+
+            var formatted_date = new Date().toJSON().slice(0,10).replace(/-/g,'-');
+            this.date = formatted_date;
+            this.time = new Date(new Date().getTime() + 4*60*60*1000).toLocaleTimeString();
+
+        },
     payment() {
       this.errors = [];
-      if ( this.LoginStatus == true) {
+      if (this.LoginStatus == true) {
         this.errors.push("Please Login or Sign up.");
       }
-      if (!this.userAddress) {
-        this.errors.push("Please Add Delivery Address.");
+      if (!this.existingAddress) {
+        this.errors.push("Please Add or Select Delivery Address.");
       }
       if (!this.paymentMethod) {
         this.errors.push("Please Select Payment Method.");
       }
+      if(this.paymentMethod == 'STRIPE'){
+          if(this.cardNumber == '' || this.cvv == '' || this.month == '' || this.year == '' || this.cardName == ''){
+              this.errors.push("Please Fill Credit Card Details Carefully.");
+          }
+      }
+      if(this.errors.length == 0){
+          this.submitBtn =false;
+          axios.post('https://ozpos.geekss.com.au/api/book_order_vuejs',{
+				address_id : this.existingAddress,
+				payment_type : this.paymentMethod,
+                delivery_type : this.paymentMethod,
+                user_id : this.loginID,
+                vendor_id: this.vendor_id,
+                amount:this.total,
+                address_id:this.existingAddress,
+                sub_total : this.total,
+                date:this.date,
+                time:this.time,
+                promocode_id:0,
+                cardNumber:this.cardNumber,
+                month:this.month,
+                year:this.year,
+                cvv:this.cvv,
+                }).then( (response) => {
+                    if (response.status == 200) {
+                        this.submitBtn =true;
+                    swal({
+                        title: "Order Placed!",
+                        text: "Order Placed Successfully",
+                        icon: "success",
+                        buttons: false,
+                        timer: 3000
+                    });
+                }
+                else{
+                     this.submitBtn =true;
+                     swal({
+                            title: "Something went wrong!",
+                            text: response.data.message,
+                            icon: "error",
+                            buttons: true,
+                            timer: 3000
+                        })
+                }
+                }).catch( (error)=> {
+                    console.log( error.response.data)
+                     this.submitBtn =true;
+                    swal({
+                            title: "Something went wrong!",
+                            text: error.response.data.message,
+                            icon: "error",
+                            buttons: true,
+                            timer: 4000
+                        })
+                })
+
+
+      }
+
     },
   },
 };

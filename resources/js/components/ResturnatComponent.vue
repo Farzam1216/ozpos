@@ -436,11 +436,11 @@
                                         </div>
                                         <div class="reviews-members-footer"><a class="total-like btn btn-sm btn-outline-primary" href="#"><i class="feather-thumbs-up"></i> 856M</a> <a class="total-like btn btn-sm btn-outline-primary" href="#"><i class="feather-thumbs-down"></i> 158K</a>
                                             <span class="total-like-user-main ml-2" dir="rtl">
-                                    <a href="#" aria-describedby="tooltip-top0"><img alt="#" src="img/reviewer3.png" class="total-like-user rounded-pill"></a>
-                                    <a href="#" aria-describedby="tooltip-top1"><img alt="#" src="img/reviewer4.png" class="total-like-user rounded-pill"></a>
-                                    <a href="#"><img alt="#" src="img/reviewer5.png" class="total-like-user rounded-pill"></a>
-                                    <a href="#" aria-describedby="tooltip-top3"><img alt="#" src="img/reviewer6.png" class="total-like-user rounded-pill"></a>
-                                    </span>
+                                                <a href="#" aria-describedby="tooltip-top0"><img alt="#" src="img/reviewer3.png" class="total-like-user rounded-pill"></a>
+                                                <a href="#" aria-describedby="tooltip-top1"><img alt="#" src="img/reviewer4.png" class="total-like-user rounded-pill"></a>
+                                                <a href="#"><img alt="#" src="img/reviewer5.png" class="total-like-user rounded-pill"></a>
+                                                <a href="#" aria-describedby="tooltip-top3"><img alt="#" src="img/reviewer6.png" class="total-like-user rounded-pill"></a>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -596,7 +596,7 @@
         methods : {
             // cart details
             getCartDetails(session_id){
-                    axios.get('http://ozpos.geekss.com.au/api/getCartData/'+this.vendor_id+'/'+session_id).then((response) => {
+                    axios.get('https://ozpos.geekss.com.au/api/getCartData/'+this.vendor_id+'/'+session_id).then((response) => {
                         this.cartData = response.data;
                         console.log(this.cartData);
                         this.total = 0.0;
@@ -614,7 +614,7 @@
 
             addToCart()
             {
-                axios.post('http://ozpos.geekss.com.au/api/addToCart',{
+                axios.post('https://ozpos.geekss.com.au/api/addToCart',{
                     vendor_id : this.vendor_id,
                     session_id: this.session_id,
                     menu_id: this.menu_id,
@@ -670,7 +670,7 @@
                     this.errors.push('Please Select item for Second Half.');
                 }
 
-                axios.post('http://ozpos.geekss.com.au/api/addToCart',{
+                axios.post('https://ozpos.geekss.com.au/api/addToCart',{
                     vendor_id : this.vendor_id,
                     session_id: this.session_id,
                     menu_id: this.halfnhalf,
@@ -708,7 +708,7 @@
             },
 
             addQuantity(vendor_id , session_id , cart_id){
-                axios.get('http://ozpos.geekss.com.au/api/addQuantity/'+cart_id).then((response) => {
+                axios.get('https://ozpos.geekss.com.au/api/addQuantity/'+cart_id).then((response) => {
                     this.getCartDetails(session_id);
 				})
 				.catch((error) => {
@@ -717,7 +717,7 @@
             },
 
             minusQuantity(vendor_id , session_id , cart_id){
-                axios.get('http://ozpos.geekss.com.au/api/minusQuantity/'+cart_id).then((response) => {
+                axios.get('https://ozpos.geekss.com.au/api/minusQuantity/'+cart_id).then((response) => {
                     this.getCartDetails(session_id);
 				})
 				.catch((error) => {
@@ -728,7 +728,7 @@
             // end cart details
             getVendorDetails()
             {
-                axios.get('http://ozpos.geekss.com.au/api/single_vendor/5').then((response) => {
+                axios.get('https://ozpos.geekss.com.au/api/single_vendor/7').then((response) => {
                     this.vendor = response.data;
                     this.vendor_id =response.data.data.vendor.id
 				})
@@ -741,7 +741,7 @@
             {
                 this.vendor_id =vendor_id;
                 this.menu_id = menu_id;
-                axios.get('http://ozpos.geekss.com.au/api/menu_size/'+vendor_id+'/'+menu_id).then((response) => {
+                axios.get('https://ozpos.geekss.com.au/api/menu_size/'+vendor_id+'/'+menu_id).then((response) => {
                     this.menuSizes = response.data;
                     this.menuAddonWithSize=null;
 				})
@@ -757,7 +757,7 @@
                 this.options = [];
                 this.addon_id= [''];
                 this.optionMenuId = menu_id;
-                axios.get('http://ozpos.geekss.com.au/api/menu_addon/'+vendor_id+'/'+menu_id).then((response) => {
+                axios.get('https://ozpos.geekss.com.au/api/menu_addon/'+vendor_id+'/'+menu_id).then((response) => {
                     this.menuAddon = response.data;
                     this.menuAddonWithSize = null;
 				})
@@ -772,7 +772,7 @@
                 this.menu_id = menu_id;
                 this.options = [];
                 this.optionMenuId = menu_id;
-                axios.get('http://ozpos.geekss.com.au/api/menu_addon/'+vendor_id+'/'+menu_id).then((response) => {
+                axios.get('https://ozpos.geekss.com.au/api/menu_addon/'+vendor_id+'/'+menu_id).then((response) => {
                     this.menuAddon = response.data;
                     this.menuAddonWithSize = null;
                     if(response.data != null){
@@ -795,7 +795,7 @@
                 this.vendor_id = vendor_id;
                 this.menu_id = menu_id;
                 this.size_id = size_id;
-                axios.get('http://ozpos.geekss.com.au/api/menu_size_addon/'+vendor_id+'/'+menu_id+'/'+size_id).then((response) => {
+                axios.get('https://ozpos.geekss.com.au/api/menu_size_addon/'+vendor_id+'/'+menu_id+'/'+size_id).then((response) => {
                     this.menuAddonWithSize = response.data;
                     for (let i = 0; i < this.menuAddonWithSize.data.MenuAddon.length; i++) {
                         this.uniqueAddoncategory[i] = this.menuAddonWithSize.data.MenuAddon[i].addon_category.name;
@@ -813,7 +813,7 @@
             {
                 this.vendor_id =vendor_id;
                 this.halfnhalf = half_n_half_menu_id;
-                axios.get('http://ozpos.geekss.com.au/api/single_vendor_retrieve_sizes/'+vendor_id+'/'+half_n_half_menu_id).then((response) => {
+                axios.get('https://ozpos.geekss.com.au/api/single_vendor_retrieve_sizes/'+vendor_id+'/'+half_n_half_menu_id).then((response) => {
                     this.halfAndHalfSizes = response.data;
                     this.menuSizes = null;
 				})
@@ -827,7 +827,7 @@
             {
                 this.vendor_id =vendor_id;
                 this.menuAddon = null;
-                axios.get('http://ozpos.geekss.com.au/api/menu_size_item_size/'+vendor_id+'/'+item_size_id).then((response) => {
+                axios.get('https://ozpos.geekss.com.au/api/menu_size_item_size/'+vendor_id+'/'+item_size_id).then((response) => {
                     this.getMenuWithMenuSize = response.data;
                     this.menuSizes = null;
 				})
@@ -840,7 +840,7 @@
             getDealsMenuItems(vendor_id,deals_menu_id)
             {
                 this.vendor_id =vendor_id;
-                axios.get('http://ozpos.geekss.com.au/api/deals-menu-items/'+vendor_id+'/'+deals_menu_id).then((response) => {
+                axios.get('https://ozpos.geekss.com.au/api/deals-menu-items/'+vendor_id+'/'+deals_menu_id).then((response) => {
                     this.deaslMenuItems = response.data;
 				})
                 .catch((error) => {
@@ -850,7 +850,7 @@
             },
             getDealsItems(vendor_id,deals_menu_id){
                 this.vendor_id =vendor_id;
-                axios.get('http://ozpos.geekss.com.au/api/deals-items/'+vendor_id+'/'+deals_menu_id).then((response) => {
+                axios.get('https://ozpos.geekss.com.au/api/deals-items/'+vendor_id+'/'+deals_menu_id).then((response) => {
                     this.dealsItems = response.data;
 				})
                 .catch((error) => {
