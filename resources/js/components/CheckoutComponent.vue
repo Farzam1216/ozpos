@@ -1,5 +1,9 @@
 <template>
     <div class="container">
+        <div v-if="isVisible" class="loader-overlay">
+            <div class="loader"></div>
+            <span class="text" style="font-size:smaller;">Please Wait</span>
+        </div>
         <div class="osahan-checkout">
         <div class="d-none">
             <div class="bg-primary border-bottom p-3 d-flex align-items-center">
@@ -260,7 +264,8 @@
                                 </ul>
                             </p>
                             <!-- <a class="btn btn-success btn-block btn-lg" href="successful">PAY ${{total}}<i class="feather-arrow-right"></i></a> -->
-                            <a v-if="submitBtn == true" class="btn btn-success btn-block btn-lg" @click="payment()">PAY ${{total}}<i class="feather-arrow-right"></i></a>
+                            <a v-if="submitBtn == true" class="btn btn-success btn-block btn-lg" @click="payment()">PAY ${{total}}</a>
+                            <a v-if="orderBtn == true" :href="'/my-order/'+this.loginID+'/'+this.cartID" class="btn btn-success btn-block btn-lg">My Orders</a>
                         </div>
                     </div>
                 </div>
@@ -378,7 +383,8 @@ export default {
         date:'',
         time:'',
         submitBtn:true,
-
+        orderBtn:false,
+        isVisible:false,
     };
   },
   methods: {
@@ -401,24 +407,30 @@ export default {
         });
     },
     addQuantity(cart_id) {
+        this.isVisible = true;
       axios
         .get("https://ozpos.geekss.com.au/api/addQuantity/" + cart_id)
         .then((response) => {
           this.cartDataa();
+          this.isVisible = false;
         })
         .catch((error) => {
           console.error(error);
+          this.isVisible = false;
         });
     },
 
     minusQuantity(cart_id) {
+        this.isVisible = true;
       axios
         .get("https://ozpos.geekss.com.au/api/minusQuantity/" + cart_id)
         .then((response) => {
           this.cartDataa();
+          this.isVisible = false;
         })
         .catch((error) => {
           console.error(error);
+          this.isVisible = false;
         });
     },
     getVendorDetails() {
@@ -433,14 +445,17 @@ export default {
         });
     },
     userlogin(){
+        this.isVisible =true;
         axios.post('https://ozpos.geekss.com.au/api/user_login',{
             email_id : this.loginEmail,
             password : this.loginPassword,
             provider : "LOCAL",
                 }).then( (response) => {
                 if (response.status == 200) {
+                    this.isVisible =false;
                     this.loginErrors = [];
                     if(response.data.success == false){
+                        this.isVisible =false;
                         this.loginErrors.push(response.data.message);
                         swal({
                             title: "Login UnSuccessfull!",
@@ -450,8 +465,8 @@ export default {
                             timer: 3000
                         })
                     }else{
+                        this.isVisible =false;
                         this.LoginStatus = false;
-                        console.log(response.data.data)
                         this.loginID =response.data.data.id;
                         this.loginUserName = response.data.data.name;
                         this.getuseraddress(response.data.data.id);
@@ -465,10 +480,11 @@ export default {
                     }
                     ;
                 }else {
+                     this.isVisible =false;
                     console.warn(response.data);
                 }
                 }).catch( (error)=> {
-                    console.log( error.response.data.errors )
+                    this.isVisible =false;
                     this.loginErrors = [];
 
                         if(error.response.data.errors.email_id){
@@ -558,7 +574,8 @@ export default {
           }
       }
       if(this.errors.length == 0){
-          this.submitBtn =false;
+          this.submitBtn = false;
+          this.isVisible = true;
           axios.post('https://ozpos.geekss.com.au/api/book_order_vuejs',{
 				address_id : this.existingAddress,
 				payment_type : this.paymentMethod,
@@ -577,7 +594,9 @@ export default {
                 cvv:this.cvv,
                 }).then( (response) => {
                     if (response.status == 200) {
-                        this.submitBtn =true;
+                        this.submitBtn =false;
+                        this.orderBtn = true;
+                        this.isVisible = false;
                     swal({
                         title: "Order Placed!",
                         text: "Order Placed Successfully",
@@ -588,6 +607,8 @@ export default {
                 }
                 else{
                      this.submitBtn =true;
+                     this.orderBtn = false;
+                     this.isVisible =false;
                      swal({
                             title: "Something went wrong!",
                             text: response.data.message,
@@ -615,3 +636,65 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+    .loader-overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 999;
+        cursor: pointer;
+        span.text {
+            display: inline-block;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            color: #fff;
+        }
+        .loader {
+            animation: loader-animate 1.5s linear infinite;
+            clip: rect(0, 80px, 80px, 40px);
+            height: 80px;
+            width: 80px;
+            position: absolute;
+            left: calc(50% - 40px);
+            top: calc(50% - 40px);
+            &:after {
+                animation: loader-animate-after 1.5s ease-in-out infinite;
+                clip: rect(0, 80px, 80px, 40px);
+                content: '';
+                border-radius: 50%;
+                height: 80px;
+                width: 80px;
+                position: absolute;
+            }
+        }
+        @keyframes loader-animate {
+            0% {
+                transform: rotate(0deg)
+            }
+            100% {
+                transform: rotate(220deg)
+            }
+        }
+        @keyframes loader-animate-after {
+            0% {
+                box-shadow: inset #fff 0 0 0 17px;
+                transform: rotate(-140deg);
+            }
+            50% {
+                box-shadow: inset #fff 0 0 0 2px;
+            }
+            100% {
+                box-shadow: inset #fff 0 0 0 17px;
+                transform: rotate(140deg);
+            }
+        }
+    }
+</style>
+

@@ -19,6 +19,8 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- Sidebar CSS -->
     <link href="{{ asset('vendor/sidebar/demo.css') }}" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- Scripts -->
     {{--  <script src="{{ asset('js/app.js') }}" defer></script>  --}}
     {{--  <script src="{{ asset('js/app.js') }}"></script>  --}}

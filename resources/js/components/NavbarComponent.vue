@@ -13,8 +13,8 @@
                 <!-- <li><a href="location">Location</a></li> -->
             </ul>
         </li>
-        <li><a href="favorites.html"><i class="feather-heart mr-2"></i> Favorites</a></li>
-        <li><a href="trending.html"><i class="feather-trending-up mr-2"></i> Trending</a></li>
+        <li><a href="#"><i class="feather-heart mr-2"></i> Favorites</a></li>
+        <li><a href="#"><i class="feather-trending-up mr-2"></i> Trending</a></li>
         <!-- <li><a href="most_popular.html"><i class="feather-award mr-2"></i> Most Popular</a></li>
         <li><a href="restaurant.html"><i class="feather-paperclip mr-2"></i> Restaurant Detail</a></li> -->
         <li><a href="checkout"><i class="feather-list mr-2"></i> Checkout</a></li>

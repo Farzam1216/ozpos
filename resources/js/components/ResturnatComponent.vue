@@ -1,5 +1,32 @@
 <template>
-    <section class="container-fluid p-2">
+
+    <section v-if="vendor" class="container-fluid p-2">
+    <div v-if="isVisible" class="loader-overlay">
+            <div class="loader"></div>
+            <span class="text">Please Wait</span>
+    </div>
+        <div  class="container">
+        <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+    Launch demo modal
+    </button> -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="background:none;">
+        <div class="modal-body " >
+            <!-- <rotate-square2 :color="loaderColor"></rotate-square2> -->
+            <div class="text-center">
+    <!-- <b-spinner label="Spinning"></b-spinner>
+    <b-loading></b-loading> -->
+    </div>
+        </div>
+        </div>
+    </div>
+    </div>
+
+        </div>
         <div class="offer-section py-4">
             <div class="container position-relative">
                 <img alt="#" style="width:200px" v-bind:src=" vendor.data.vendor.image "  class="restaurant-pic">
@@ -49,21 +76,15 @@
                 </div>
             </div>
         </div>
-
-
         <!-- menu category from main site  -->
-        <div class="container backcolor">
-            <div class="cat-slider slick-initialized slick-slider" id="navbar-example2">
-                <div class="slick-list draggable">
-                    <div class="slick-track" style="opacity: 1; width: 705px; transform: translate3d(0px, 0px, 0px);">
-                        <div v-for="MenuCategory in vendor.data.MenuCategory" v-bind:key="MenuCategory.id" class="cat-item px-1 py-3 slick-slide slick-current slick-active" style="width: 141px;" tabindex="0" data-slick-index="0" aria-hidden="false">
-                            <a class="bg-white rounded d-block p-2 text-center shadow-sm active" :href="'#/' + MenuCategory.name.toUpperCase()"  tabindex="0">
-                                <p class="m-0 small text-nowrap">{{ MenuCategory.name.toUpperCase() }}</p>
-                            </a>
-                        </div>
-                    </div>
+        <div class="container">
+            <VueSlickCarousel v-bind="settings">
+                <div v-for="MenuCategory in vendor.data.MenuCategory" v-bind:key="MenuCategory.id">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm active" v-smooth-scroll="{ duration: 2500, offset: -50 }" :href="'#/' + MenuCategory.name.toUpperCase()"  tabindex="0">
+                        <p class="m-0 small text-nowrap">{{ MenuCategory.name.toUpperCase() }}</p>
+                    </a>
                 </div>
-            </div>
+            </VueSlickCarousel>
         </div>
         <!-- Menu -->
         <div class="container position-relative">
@@ -132,7 +153,7 @@
                                                                 <button type="button" class="btn border-top btn-lg btn-block" data-dismiss="modal">Close</button>
                                                             </div>
                                                             <div class="col-6 m-0 p-0">
-                                                                <button type="button"  class="btn btn-primary btn-lg btn-block"  @click="addToCart()"> Add To Cart</button>
+                                                                <button type="button"  class="btn btn-primary btn-lg btn-block"  data-dismiss="modal"  @click="addToCart()"> Add To Cart</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -253,7 +274,7 @@
                                                                 <button type="button" class="btn border-top btn-lg btn-block" data-dismiss="modal">Close</button>
                                                             </div>
                                                             <div class="col-6 m-0 p-0">
-                                                                <button type="button" @click="addToCartHalfnHalf()" class="btn btn-primary btn-lg btn-block">Add To Cart</button>
+                                                                <button type="button" @click="addToCartHalfnHalf()" data-dismiss="modal" class="btn btn-primary btn-lg btn-block">Add To Cart</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -325,7 +346,7 @@
                                                             <button type="button" class="btn border-top btn-lg btn-block" data-dismiss="modal">Close</button>
                                                         </div>
                                                         <div class="col-6 m-0 p-0">
-                                                            <button type="button" class="btn btn-primary btn-lg btn-block">Add To Cart</button>
+                                                            <button type="button" data-dismiss="modal" class="btn btn-primary btn-lg btn-block">Add To Cart</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -525,7 +546,7 @@
                             <h6 class="font-weight-bold mb-0">TO PAY <span class="float-right">${{total}}</span></h6>
                         </div>
                         <div class="p-3">
-                            <a class="btn btn-success btn-block btn-lg" v-if="cartID != null" :href="'checkout/' + cartID" >checkout<i class="feather-arrow-right"></i></a>
+                            <a id="checkout" class="btn btn-success btn-block btn-lg" v-if="cartID != null" :href="'checkout/' + cartID" >checkout<i class="feather-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -538,17 +559,70 @@
     import * as $ from "jquery";
     import * as bootstrap from "bootstrap";
     import Multiselect from 'vue-multiselect'
-
+    import Vue from 'vue';
+    import VueSlickCarousel from 'vue-slick-carousel'
+    import 'vue-slick-carousel/dist/vue-slick-carousel.css'
+    // optional style for arrows & dots
+    import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+    import {RotateSquare2} from 'vue-loading-spinner'
+    import { ModelObj } from 'vue-3d-model';
     export default {
-        created() {
+        mounted() {
             console.log('Component mounted.')
+            this.isVisible = true;
             this.getVendorDetails();
         },
         components: {
-            Multiselect
+            Multiselect,
+            VueSlickCarousel,
+            RotateSquare2,
+            ModelObj,
         },
         data(){
             return{
+                rotation: {
+                    x: -Math.PI / 2,
+                    y: 0,
+                    z: 0
+                },
+                settings: {
+                //    "dots": true,
+                    "centerMode": true,
+                    "centerPadding": "20px",
+                    "focusOnSelect": true,
+                    "infinite": true,
+                    "slidesToShow": 6,
+                    "speed": 500,
+                    "variableWidth": true,
+                    "responsive": [
+                        {
+                        "breakpoint": 1024,
+                        "settings": {
+                            "slidesToShow": 3,
+                            "slidesToScroll": 3,
+                            "infinite": true,
+                            "dots": true
+                        }
+                        },
+                        {
+                        "breakpoint": 600,
+                        "settings": {
+                            "slidesToShow": 2,
+                            "slidesToScroll": 2,
+                            "initialSlide": 2
+                        }
+                        },
+                        {
+                        "breakpoint": 480,
+                        "settings": {
+                            "slidesToShow": 1,
+                            "slidesToScroll": 1
+                        }
+                        }
+                    ]
+                    },
+                viewloader:false,
+                viewTemplate:true,
                 errors:[],
                 // select dropdown
                 value: [],
@@ -591,6 +665,8 @@
                 total:'',
                 // end single menu cart
                 // end cart details
+                isVisible:false,
+
             }
         },
         methods : {
@@ -614,6 +690,7 @@
 
             addToCart()
             {
+                this.isVisible =true;
                 axios.post('https://ozpos.geekss.com.au/api/addToCart',{
                     vendor_id : this.vendor_id,
                     session_id: this.session_id,
@@ -628,6 +705,7 @@
                     second_half_id : this.second_half_id,
                 }).then((response) => {
                     // this.cart.push(response.data);
+                    this.isVisible =false;
                     if (response.status == 200) {
                         this.session_id = response.data.data.session_id;
                         this.getCartDetails(this.session_id);
@@ -708,32 +786,41 @@
             },
 
             addQuantity(vendor_id , session_id , cart_id){
+                this.isVisible = true;
                 axios.get('https://ozpos.geekss.com.au/api/addQuantity/'+cart_id).then((response) => {
                     this.getCartDetails(session_id);
+                    this.isVisible = false;
 				})
 				.catch((error) => {
+                    this.isVisible = false;
 					console.error(error);
 				});
             },
 
             minusQuantity(vendor_id , session_id , cart_id){
+                this.isVisible = true;
                 axios.get('https://ozpos.geekss.com.au/api/minusQuantity/'+cart_id).then((response) => {
                     this.getCartDetails(session_id);
+                    this.isVisible = false;
 				})
 				.catch((error) => {
 					console.error(error);
+                    this.isVisible = false;
 				});
             },
 
             // end cart details
             getVendorDetails()
             {
+                this.isVisible = true;
                 axios.get('https://ozpos.geekss.com.au/api/single_vendor/7').then((response) => {
                     this.vendor = response.data;
                     this.vendor_id =response.data.data.vendor.id
+                    this.isVisible = false;
 				})
 				.catch((error) => {
 					console.error(error);
+                    this.isVisible = false;
 				});
             },
 
@@ -861,3 +948,65 @@
     }
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+
+<style lang="scss">
+    .loader-overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 999;
+        cursor: pointer;
+        span.text {
+            display: inline-block;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            color: #fff;
+        }
+        .loader {
+            animation: loader-animate 1.5s linear infinite;
+            clip: rect(0, 80px, 80px, 40px);
+            height: 80px;
+            width: 80px;
+            position: absolute;
+            left: calc(50% - 40px);
+            top: calc(50% - 40px);
+            &:after {
+                animation: loader-animate-after 1.5s ease-in-out infinite;
+                clip: rect(0, 80px, 80px, 40px);
+                content: '';
+                border-radius: 50%;
+                height: 80px;
+                width: 80px;
+                position: absolute;
+            }
+        }
+        @keyframes loader-animate {
+            0% {
+                transform: rotate(0deg)
+            }
+            100% {
+                transform: rotate(220deg)
+            }
+        }
+        @keyframes loader-animate-after {
+            0% {
+                box-shadow: inset #fff 0 0 0 17px;
+                transform: rotate(-140deg);
+            }
+            50% {
+                box-shadow: inset #fff 0 0 0 2px;
+            }
+            100% {
+                box-shadow: inset #fff 0 0 0 17px;
+                transform: rotate(140deg);
+            }
+        }
+    }
+</style>

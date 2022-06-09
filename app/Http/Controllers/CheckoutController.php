@@ -22,6 +22,12 @@ class CheckoutController extends Controller
         return view('frontend.checkout',compact('cartID'));
     }
 
+    public function qrcode($id)
+    {
+        $cartID = $id;
+        return view('frontend.checkoutqr',compact('cartID'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

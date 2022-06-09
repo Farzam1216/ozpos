@@ -22,15 +22,22 @@ Route::get('/', function () {
     return view('frontend.resturant');
 });
 
+Route::get('/qr-code', function () {
+    return view('frontend.resturantqr');
+});
+
 // Route::get('/checkout/{id}', function () {
 //     return view('frontend.checkout');
 // });
 
 Route::get('checkout/{id}', [App\Http\Controllers\CheckoutController::class, 'checkout'])->name('checkout');
+Route::get('qr-code-checkout/{id}', [App\Http\Controllers\CheckoutController::class, 'qrcode']);
+Route::get('/my-order/{id}/{cartID}', [App\Http\Controllers\orderController::class, 'order']);
+Route::get('/track/{id}', [App\Http\Controllers\trackingController::class, 'track']);
 
-Route::get('/my-order', function () {
-    return view('frontend.myOrder');
-});
+// Route::get('/my-order/{id}', function () {
+//     return view('frontend.myOrder');
+// });
 
 Route::get('/user-register', function () {
     return view('frontend.register');

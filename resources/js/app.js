@@ -9,6 +9,10 @@ require('./bootstrap');
 window.Vue = require('vue').default;
 // ES6 Modules or TypeScript
 import swal from 'sweetalert'
+import VueSmoothScroll from 'v-smooth-scroll'
+
+// Vue 2.x
+Vue.use(VueSmoothScroll)
 
 
 /**
@@ -31,14 +35,16 @@ Vue.component('register-component', require('./components/RegisterComponent.vue'
 Vue.component('forgotpassword-component', require('./components/ForgotpasswordComponent.vue').default);
 Vue.component('verification-component', require('./components/VerificationComponent.vue').default);
 Vue.component('resturant-component', require('./components/ResturnatComponent.vue').default);
+Vue.component('resturantcode-component', require('./components/ResturantQrCode.vue').default);
 Vue.component('checkout-component', require('./components/CheckoutComponent.vue').default);
+Vue.component('checkoutqr-component', require('./components/CheckoutqrComponent.vue').default);
 Vue.component('profile-component', require('./components/ProfileComponent.vue').default);
 Vue.component('myorder-component', require('./components/MyorderComponent.vue').default);
 Vue.component('contactus-component', require('./components/ContactusComponent.vue').default);
 Vue.component('privacy-component', require('./components/PrivacyComponent.vue').default);
 Vue.component('terms-component', require('./components/TermsComponent.vue').default);
 Vue.component('successfull-component', require('./components/SuccessfullComponent.vue').default);
-
+Vue.component('track-component', require('./components/TrackComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
