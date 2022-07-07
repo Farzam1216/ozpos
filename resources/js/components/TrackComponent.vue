@@ -226,7 +226,7 @@ const app = initializeApp(firebaseConfig);
 
             getFullAddress(){
                 if(this.driverLat!=''){
-                    axios.get('http://ozpos.geekss.com.au/api/get-driver-address/'+this.driverLat+'/'+this.driverLang).then((response) => {
+                    axios.get('https://backend.ozfoodz.com.au/api/get-driver-address/'+this.driverLat+'/'+this.driverLang).then((response) => {
                         this.driverAddress = response.data.data
                         console.log( this.driverAddress );
                         this.isVisible = false;
@@ -241,7 +241,7 @@ const app = initializeApp(firebaseConfig);
 
             orderHistory(){
                  axios
-                .get("http://ozpos.geekss.com.au/api/track-order/380")
+                .get("https://backend.ozfoodz.com.au/api/track-order/380")
                 .then((response) => {
                      this.trackData = response.data;
                             const db = getDatabase();

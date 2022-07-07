@@ -672,7 +672,7 @@
         methods : {
             // cart details
             getCartDetails(session_id){
-                    axios.get('https://ozpos.geekss.com.au/api/getCartData/'+this.vendor_id+'/'+session_id).then((response) => {
+                    axios.get('https://backend.ozfoodz.com.au/api/getCartData/'+this.vendor_id+'/'+session_id).then((response) => {
                         this.cartData = response.data;
                         console.log(this.cartData);
                         this.total = 0.0;
@@ -691,7 +691,7 @@
             addToCart()
             {
                 this.isVisible =true;
-                axios.post('https://ozpos.geekss.com.au/api/addToCart',{
+                axios.post('https://backend.ozfoodz.com.au/api/addToCart',{
                     vendor_id : this.vendor_id,
                     session_id: this.session_id,
                     menu_id: this.menu_id,
@@ -748,7 +748,7 @@
                     this.errors.push('Please Select item for Second Half.');
                 }
 
-                axios.post('https://ozpos.geekss.com.au/api/addToCart',{
+                axios.post('https://backend.ozfoodz.com.au/api/addToCart',{
                     vendor_id : this.vendor_id,
                     session_id: this.session_id,
                     menu_id: this.halfnhalf,
@@ -787,7 +787,7 @@
 
             addQuantity(vendor_id , session_id , cart_id){
                 this.isVisible = true;
-                axios.get('https://ozpos.geekss.com.au/api/addQuantity/'+cart_id).then((response) => {
+                axios.get('https://backend.ozfoodz.com.au/api/addQuantity/'+cart_id).then((response) => {
                     this.getCartDetails(session_id);
                     this.isVisible = false;
 				})
@@ -799,7 +799,7 @@
 
             minusQuantity(vendor_id , session_id , cart_id){
                 this.isVisible = true;
-                axios.get('https://ozpos.geekss.com.au/api/minusQuantity/'+cart_id).then((response) => {
+                axios.get('https://backend.ozfoodz.com.au/api/minusQuantity/'+cart_id).then((response) => {
                     this.getCartDetails(session_id);
                     this.isVisible = false;
 				})
@@ -813,7 +813,7 @@
             getVendorDetails()
             {
                 this.isVisible = true;
-                axios.get('https://ozpos.geekss.com.au/api/single_vendor/7').then((response) => {
+                axios.get('https://backend.ozfoodz.com.au/api/single_vendor/7').then((response) => {
                     this.vendor = response.data;
                     this.vendor_id =response.data.data.vendor.id
                     this.isVisible = false;
@@ -828,7 +828,7 @@
             {
                 this.vendor_id =vendor_id;
                 this.menu_id = menu_id;
-                axios.get('https://ozpos.geekss.com.au/api/menu_size/'+vendor_id+'/'+menu_id).then((response) => {
+                axios.get('https://backend.ozfoodz.com.au/api/menu_size/'+vendor_id+'/'+menu_id).then((response) => {
                     this.menuSizes = response.data;
                     this.menuAddonWithSize=null;
 				})
@@ -844,7 +844,7 @@
                 this.options = [];
                 this.addon_id= [''];
                 this.optionMenuId = menu_id;
-                axios.get('https://ozpos.geekss.com.au/api/menu_addon/'+vendor_id+'/'+menu_id).then((response) => {
+                axios.get('https://backend.ozfoodz.com.au/api/menu_addon/'+vendor_id+'/'+menu_id).then((response) => {
                     this.menuAddon = response.data;
                     this.menuAddonWithSize = null;
 				})
@@ -859,7 +859,7 @@
                 this.menu_id = menu_id;
                 this.options = [];
                 this.optionMenuId = menu_id;
-                axios.get('https://ozpos.geekss.com.au/api/menu_addon/'+vendor_id+'/'+menu_id).then((response) => {
+                axios.get('https://backend.ozfoodz.com.au/api/menu_addon/'+vendor_id+'/'+menu_id).then((response) => {
                     this.menuAddon = response.data;
                     this.menuAddonWithSize = null;
                     if(response.data != null){
@@ -882,7 +882,7 @@
                 this.vendor_id = vendor_id;
                 this.menu_id = menu_id;
                 this.size_id = size_id;
-                axios.get('https://ozpos.geekss.com.au/api/menu_size_addon/'+vendor_id+'/'+menu_id+'/'+size_id).then((response) => {
+                axios.get('https://backend.ozfoodz.com.au/api/menu_size_addon/'+vendor_id+'/'+menu_id+'/'+size_id).then((response) => {
                     this.menuAddonWithSize = response.data;
                     for (let i = 0; i < this.menuAddonWithSize.data.MenuAddon.length; i++) {
                         this.uniqueAddoncategory[i] = this.menuAddonWithSize.data.MenuAddon[i].addon_category.name;
@@ -900,7 +900,7 @@
             {
                 this.vendor_id =vendor_id;
                 this.halfnhalf = half_n_half_menu_id;
-                axios.get('https://ozpos.geekss.com.au/api/single_vendor_retrieve_sizes/'+vendor_id+'/'+half_n_half_menu_id).then((response) => {
+                axios.get('https://backend.ozfoodz.com.au/api/single_vendor_retrieve_sizes/'+vendor_id+'/'+half_n_half_menu_id).then((response) => {
                     this.halfAndHalfSizes = response.data;
                     this.menuSizes = null;
 				})
@@ -914,7 +914,7 @@
             {
                 this.vendor_id =vendor_id;
                 this.menuAddon = null;
-                axios.get('https://ozpos.geekss.com.au/api/menu_size_item_size/'+vendor_id+'/'+item_size_id).then((response) => {
+                axios.get('https://backend.ozfoodz.com.au/api/menu_size_item_size/'+vendor_id+'/'+item_size_id).then((response) => {
                     this.getMenuWithMenuSize = response.data;
                     this.menuSizes = null;
 				})
@@ -927,7 +927,7 @@
             getDealsMenuItems(vendor_id,deals_menu_id)
             {
                 this.vendor_id =vendor_id;
-                axios.get('https://ozpos.geekss.com.au/api/deals-menu-items/'+vendor_id+'/'+deals_menu_id).then((response) => {
+                axios.get('https://backend.ozfoodz.com.au/api/deals-menu-items/'+vendor_id+'/'+deals_menu_id).then((response) => {
                     this.deaslMenuItems = response.data;
 				})
                 .catch((error) => {
@@ -937,7 +937,7 @@
             },
             getDealsItems(vendor_id,deals_menu_id){
                 this.vendor_id =vendor_id;
-                axios.get('https://ozpos.geekss.com.au/api/deals-items/'+vendor_id+'/'+deals_menu_id).then((response) => {
+                axios.get('https://backend.ozfoodz.com.au/api/deals-items/'+vendor_id+'/'+deals_menu_id).then((response) => {
                     this.dealsItems = response.data;
 				})
                 .catch((error) => {

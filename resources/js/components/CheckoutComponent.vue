@@ -17,7 +17,7 @@
                 <div class="col-md-8 mb-3">
                     <div>
                     <div class="accordion mb-3 rounded shadow-sm bg-white overflow-hidden" id="accordionExample">
-                            <div class="osahan-card bg-white border-bottom overflow-hidden">
+                            <div v-if="LoginStatus==true" class="osahan-card bg-white border-bottom overflow-hidden">
                                 <div class="osahan-card-header" id="headingTwo">
                                     <h2 class="mb-0">
                                         <button class="d-flex p-3 align-items-center btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -26,7 +26,7 @@
                                  </button>
                                     </h2>
                                 </div>
-                                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                <div v-if="LoginStatus==true" id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                     <div class="osahan-card-body border-top p-3">
                                         <form>
                                             <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
@@ -101,7 +101,17 @@
                                                                 <input placeholder="Enter Password..." v-model="loginPassword" type="password" class="form-control">
                                                             </div>
                                                             <div class="col-md-12">
-                                                                <a class="btn btn-primary" @click="userlogin()" href="#">Login</a>
+                                                                <a style=" width: 86px;" class="btn btn-primary" @click="userlogin()" href="#">Login</a>
+                                                                <GoogleLogin class="btn btn-primary" :params="params" :onSuccess="onSuccess" :onFailure="onFailure" >Login With Google</GoogleLogin>
+                                                                <facebook-login  style="margin-top: 10px; margin-left: -14px; " class=""
+                                                                appId="2631526777129043"
+                                                                @login="getUserData"
+                                                                >
+                                                                </facebook-login>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <!-- <GoogleLogin class="button" :params="params" :onSuccess="onSuccess" :onFailure="onFailure" >Login</GoogleLogin> -->
                                                             </div>
 
                                                         </div>
@@ -114,63 +124,156 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-if="LoginStatus == false"  class="osahan-cart-item mb-3 rounded shadow-sm bg-white overflow-hidden">
-                            <div class="osahan-cart-item-profile bg-white p-3">
-                                <div class="d-flex flex-column">
-                                    <h6 class="mb-3 font-weight-bold">Delivery Address</h6>
-                                    <div class="row">
-                                        <div class="custom-control col-lg-12 custom-radio mb-3 position-relative border-custom-radio">
-                                            <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
-                                            <label class="custom-control-label w-100" for="customRadioInline1">
-                                       <div>
-                                          <div v-if="userAddress != null" class="p-3 bg-white rounded shadow-sm w-100">
-                                             <!-- <div class="d-flex align-items-center mb-2">
-                                                <h6 class="mb-0">Home</h6>
-                                                <p class="mb-0 badge badge-success ml-auto"><i class="icofont-check-circled"></i> Default</p>
-                                             </div> -->
-                                             <select v-model="existingAddress" name="" class="form-control" id="">
-                                                <option value="">Select Existing Address</option>
-                                                <option v-for="address in userAddress.data.address" :key="address.id" :value="address.id">{{address.address}}</option>
-                                             </select>
-                                             <!-- <p class="small text-muted m-0">1001 Veterans Blvd</p>
-                                             <p class="small text-muted m-0">Redwood City, CA 94063</p> -->
-                                          </div>
-                                          <!-- <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-light border-top">Edit</a> -->
-                                       </div>
-                                    </label>
-                                        </div>
-                                        <!-- <div class="custom-control col-lg-6 custom-radio position-relative border-custom-radio">
-                                            <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                                            <label class="custom-control-label w-100" for="customRadioInline2">
-                                       <div>
-                                          <div class="p-3 rounded bg-white shadow-sm w-100">
-                                             <div class="d-flex align-items-center mb-2">
-                                                <h6 class="mb-0">Work</h6>
-                                                <p class="mb-0 badge badge-light ml-auto"><i class="icofont-check-circled"></i> Select</p>
-                                             </div>
-                                             <p class="small text-muted m-0">Model Town, Ludhiana</p>
-                                             <p class="small text-muted m-0">Punjab 141002, India</p>
-                                          </div>
-                                          <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-light border-top">Edit</a>
-                                       </div>
-                                    </label>
-                                        </div> -->
-                                    </div>
-                                    <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModal"> ADD NEW ADDRESS </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div v-if="LoginStatus == false" class="accordion mb-3 rounded shadow-sm bg-white overflow-hidden" id="accordionExample">
+                    <div v-if="LoginStatus == false" class="accordion mb-3 rounded shadow-sm bg-white overflow-hidden" id="accordionExample">
                             <div class="osahan-card bg-white border-bottom overflow-hidden">
-                                <div class="osahan-card-header" id="headingOne">
+                                <div class="osahan-card-header" id="headingTwo">
                                     <h2 class="mb-0">
-                                        <button @click="credit = true , cashOnDelivery = false , creditCard()" class="d-flex p-3 align-items-center btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                 <i class="feather-credit-card mr-3"></i> Credit/Debit Card
+                                        <button class="d-flex p-3 align-items-center btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                 <i class="feather-globe mr-3"></i> Pickup or Delivery
                                  <i class="feather-chevron-down ml-auto"></i>
                                  </button>
                                     </h2>
                                 </div>
-                                <div v-if="credit==true" id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                    <div class="osahan-card-body border-top p-3">
+                                        <form>
+                                            <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                                                <label class="btn btn-outline-secondary active">
+                                                <input @click="delivery = true , pickup=false" type="radio" name="options" id="option1" checked> Delivery
+                                                </label>
+                                                <label class="btn btn-outline-secondary">
+                                                <input @click="delivery = false , pickup=true" type="radio" name="options" id="option2"> Pickup
+                                                </label>
+                                            </div>
+                                            <hr>
+                                            <div v-show="pickup" class="form-row">
+                                                <div class="col-md-12 form-group mb-0">
+                                                   <div  class="osahan-cart-item mb-3 rounded shadow-sm bg-white overflow-hidden">
+                                                        <div class="osahan-cart-item-profile bg-white p-3">
+                                                            <div class="d-flex flex-column">
+                                                                <h6 class="mb-3 font-weight-bold">Delivery Address</h6>
+                                                            <div class="row">
+                                                                <div class="custom-control col-sm-12 custom-radio mb-3 position-relative border-custom-radio">
+                                                                    <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
+                                                                    <label class="custom-control-label w-100" for="customRadioInline1">
+                                                                        <div>
+                                                                            <div class="p-3 bg-white rounded shadow-sm w-100">
+                                                                                <div class="d-flex align-items-center mb-2">
+                                                                                    <h6 class="mb-0">{{vendor.data.vendor.name}}</h6>
+                                                                                    <p class="mb-0 badge badge-success ml-auto"><i class="icofont-check-circled"></i> Default</p>
+                                                                                </div>
+                                                                                <p class="small text-muted m-0">{{vendor.data.vendor.address}}</p>
+                                                                                <!-- <p class="small text-muted m-0">Redwood City, CA 94063</p> -->
+                                                                            </div>
+                                                                            <!-- <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-light border-top">Edit</a> -->
+                                                                        </div>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                                <!-- <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModal"> ADD NEW ADDRESS </a> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div v-show="delivery" class="form-row">
+                                                <div class="col-md-12 form-group mb-0">
+                                                   <div  class="osahan-cart-item mb-3 rounded shadow-sm bg-white overflow-hidden">
+                                                        <div class="osahan-cart-item-profile bg-white p-3">
+                                                            <div class="d-flex flex-column">
+                                                                <h6 class="mb-3 font-weight-bold">Delivery Address</h6>
+                                                                <div class="row">
+                                                                    <div class="custom-control col-lg-12 custom-radio mb-3 position-relative border-custom-radio">
+                                                                        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
+                                                                        <label class="custom-control-label w-100" for="customRadioInline1">
+                                                                <div>
+                                                                    <div v-if="userAddress != null" class="p-3 bg-white rounded shadow-sm w-100">
+                                                                        <!-- <div class="d-flex align-items-center mb-2">
+                                                                            <h6 class="mb-0">Home</h6>
+                                                                            <p class="mb-0 badge badge-success ml-auto"><i class="icofont-check-circled"></i> Default</p>
+                                                                        </div> -->
+                                                                        <select v-model="existingAddress" name="" class="form-control" id="">
+                                                                            <option value="">Select Existing Address</option>
+                                                                            <option v-for="address in userAddress.data.address" :key="address.id" :value="address.id">{{address.address}}</option>
+                                                                        </select>
+                                                                        <!-- <p class="small text-muted m-0">1001 Veterans Blvd</p>
+                                                                        <p class="small text-muted m-0">Redwood City, CA 94063</p> -->
+                                                                    </div>
+                                                                    <!-- <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-light border-top">Edit</a> -->
+                                                                </div>
+                                                                </label>
+                                                                    </div>
+                                                                    <!-- <div class="custom-control col-lg-6 custom-radio position-relative border-custom-radio">
+                                                                        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                                                                        <label class="custom-control-label w-100" for="customRadioInline2">
+                                                                <div>
+                                                                    <div class="p-3 rounded bg-white shadow-sm w-100">
+                                                                        <div class="d-flex align-items-center mb-2">
+                                                                            <h6 class="mb-0">Work</h6>
+                                                                            <p class="mb-0 badge badge-light ml-auto"><i class="icofont-check-circled"></i> Select</p>
+                                                                        </div>
+                                                                        <p class="small text-muted m-0">Model Town, Ludhiana</p>
+                                                                        <p class="small text-muted m-0">Punjab 141002, India</p>
+                                                                    </div>
+                                                                    <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-light border-top">Edit</a>
+                                                                </div>
+                                                                </label>
+                                                                    </div> -->
+                                                                </div>
+                                                                <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModal"> ADD NEW ADDRESS </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div v-if="LoginStatus == false" class="accordion mb-3 rounded shadow-sm bg-white overflow-hidden" id="accordionExample">
+
+
+                            <div class="accordion mb-3 rounded shadow-sm bg-white overflow-hidden" id="accordionExample">
+                                <div class="osahan-card bg-white border-bottom overflow-hidden">
+                                    <div class="osahan-card-header" id="headingTwo">
+                                        <h2 class="mb-0">
+                                            <button class="d-flex p-3 align-items-center btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <i class="feather-globe mr-3"></i> Credit/Debit Card or Cash on Delivery
+                                    <i class="feather-chevron-down ml-auto"></i>
+                                    </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                        <div class="osahan-card-body border-top p-3">
+                                            <form>
+                                                <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                                                    <label class="btn btn-outline-secondary">
+                                                    <input @click="credit = true , cashOnDelivery=false , creditCard()" type="radio" name="options" id="option1"  checked> Credit/Debit Card
+                                                    </label>
+                                                    <label class="btn btn-outline-secondary">
+                                                    <input @click="credit = false , cashOnDelivery=true , cod()" type="radio" name="options" id="option2"> Cash on Delivery
+                                                    </label>
+                                                </div>
+                                                <hr>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="osahan-card bg-white border-bottom overflow-hidden">
+                                <div class="osahan-card-header" id="headingOne">
+                                    <!-- <h2 class="mb-0">
+                                        <button @click="credit = true , cashOnDelivery = false , creditCard()" class="d-flex p-3 align-items-center btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                 <i class="feather-credit-card mr-3"></i> Credit/Debit Card
+                                 <i class="feather-chevron-down ml-auto"></i>
+                                 </button>
+                                    </h2> -->
+                                </div>
+                                <div v-if="credit==true" id="collapseOne" class="collapse show " aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="osahan-card-body border-top p-3">
                                         <h6 class="m-0">Add new card</h6>
                                         <p class="small">WE ACCEPT <span class="osahan-card ml-2 font-weight-bold">( Master Card / Visa Card / Rupay )</span></p>
@@ -198,14 +301,14 @@
 
                             <div class="osahan-card bg-white overflow-hidden">
                                 <div class="osahan-card-header" id="headingThree">
-                                    <h2 class="mb-0">
+                                    <!-- <h2 class="mb-0">
                                         <button @click="credit = false , cashOnDelivery = true , cod()" class="d-flex p-3 align-items-center btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                  <i class="feather-dollar-sign mr-3"></i> Cash on Delivery
                                  <i class="feather-chevron-down ml-auto"></i>
                                  </button>
-                                    </h2>
+                                    </h2> -->
                                 </div>
-                                <div v-if="cashOnDelivery==true" id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                <div v-if="cashOnDelivery==true" id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
                                     <div class="card-body border-top">
                                         <h6 class="mb-3 mt-0 mb-3 font-weight-bold">Cash</h6>
                                         <p class="m-0">Please keep exact change handy to help us serve you better</p>
@@ -254,7 +357,7 @@
                             <!-- <p class="mb-1">Delivery Fee<span class="text-info ml-1"><i class="feather-info"></i></span><span class="float-right text-dark">$10</span></p> -->
                             <p class="mb-1 text-success">Total Discount<span class="float-right text-success">$0</span></p>
                             <hr>
-                            <h6 class="font-weight-bold mb-0">TO PAY <span class="float-right">${{total}}</span></h6>
+                            <h6 id="checkout" class="font-weight-bold mb-0">TO PAY <span class="float-right">${{total}}</span></h6>
                         </div>
                         <div class="p-3">
                             <p v-if="errors.length">
@@ -284,6 +387,22 @@
                 <div class="modal-body">
                     <form class="">
                         <div class="form-row">
+                            <div id="mapRef" class="col-md-12 form-group">
+                                <vue-google-autocomplete
+                                    ref="address"
+                                    id="map"
+                                    place_id = ""
+                                    classname="form-control"
+                                    placeholder="Please type your address"
+                                    v-on:placechanged="getAddressData"
+                                    >
+                                </vue-google-autocomplete>
+                              <!-- <GmapAutocomplete style="width:100%;" ref="mapRef" :position="{lat:lat, lng:long}"  @place_changed="updateCoordinates">
+                                </GmapAutocomplete> -->
+                                <GmapMap  ref="mapRef" :center="{lat:lat, lng:long}" @dragend="updateCoordinates()" :zoom="12" :clickable="false" style="width: 100%; height: 300px">
+                                    <gmap-marker  :position="{lat:lat, lng:long}"   :draggable="false" />
+                                </GmapMap>
+                            </div>
                             <div class="col-md-12 form-group">
                                 <label class="form-label">Delivery Address</label>
                                 <div class="input-group">
@@ -322,7 +441,7 @@
                         <button type="button" class="btn border-top btn-lg btn-block" data-dismiss="modal">Close</button>
                     </div>
                     <div class="col-6 m-0 p-0">
-                        <button type="button" @click="useraddress()" class="btn btn-primary btn-lg btn-block">Save changes</button>
+                        <button type="button" @click="useraddress()" class="btn btn-primary btn-lg btn-block" data-dismiss="modal">Save changes</button>
                     </div>
                 </div>
             </div>
@@ -332,18 +451,56 @@
 </template>
 
 <script>
+import {gmapApi} from 'vue2-google-maps'
+import { nextTick } from 'vue'
+ import VueGoogleAutocomplete from "vue-google-autocomplete";
+ import facebookLogin from 'facebook-login-vuejs';
+ import GoogleLogin from 'vue-google-login';
+ import { LoaderPlugin } from 'vue-google-login';
 export default {
+    computed: {
+			google: gmapApi,
+        },
   mounted() {
-    this.setdata();
-    this.cartDataa();
-    this.getVendorDetails();
-    this.date_function();
-  },
-  props: {
-    cart_prop: String,
-  },
+
+            this.$getLocation({})
+                .then(coordinates => {
+                        this.coordinates = coordinates;
+                            this.lat =this.coordinates.lat;
+                            this.long =this.coordinates.lng;
+                            this.getFullAddress(this.lat, this.long)
+                    });
+            const interval = setInterval(() => {
+            if (this.$refs.mapRef) {
+                console.log(this.$refs.mapRef)
+                this.$refs.address.focus();
+        console.log(this.$refs.address.focus())
+                clearInterval(interval)
+            }
+            }, 50)
+            this.setdata();
+            this.cartDataa();
+            this.getVendorDetails();
+            this.date_function();
+        },
+        props: {
+            cart_prop: String,
+        },
   data() {
     return {
+        params: {
+                    client_id: "204982008455-k8oi8lc62fkqmf39rtgk6kd5gajuvo61.apps.googleusercontent.com",
+                    // client_secret:"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",
+                },
+                // only needed if you want to render the button with the google ui
+                renderParams: {
+                    width: 250,
+                    height: 50,
+                    longtitle: true
+                },
+      map:null,
+      address: "",
+      currentPlace:null,
       errors: [],
       loginErrors:[],
       signupErrors:[],
@@ -371,8 +528,8 @@ export default {
       deliveryAdress:'',
       deliveryType:'',
       existingAddress:'',
-      cashOnDelivery:true,
-      credit:true,
+      cashOnDelivery:false,
+      credit:false,
     // payment
       cardNumber:'',
       cvv:'',
@@ -385,15 +542,51 @@ export default {
         submitBtn:true,
         orderBtn:false,
         isVisible:false,
+        coordinates:null,
+         markers: [],
+         mapPostitions:'',
+         lat:'',
+         long:'',
+         fullAddress:'',
+         pickup:false,
+         delivery:true,
+         method:'',
     };
   },
+   components: { VueGoogleAutocomplete, facebookLogin, GoogleLogin },
   methods: {
+     getAddressData: function (addressData, placeResultData, id) {
+        this.address = addressData;
+      },
+    setPlace(place) {
+      this.currentPlace = place;
+    },
     setdata() {
       this.cartID = this.cart_prop;
     },
+    updateCoordinates() {
+        this.$refs.mapRef.$mapPromise.then(map => this.map = map);
+            if(!this.map){
+                this.lat = this.lat;
+                this.lang = this.lang ;
+            }else{
+                this.lat =this.map.getCenter().lat();
+                this.long =this.map.getCenter().lng();
+            }
+        this.getFullAddress(this.lat, this.long)
+    },
+    getFullAddress(lat,long){
+                    axios.get('https://backend.ozfoodz.com.au/api/get-driver-address/'+lat+'/'+long).then((response) => {
+                        this.deliveryAdress = response.data.data;
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            },
+
     cartDataa() {
       axios
-        .get("https://ozpos.geekss.com.au/api/cartData/" + this.cartID)
+        .get("https://backend.ozfoodz.com.au/api/cartData/" + this.cartID)
         .then((response) => {
           this.cartData = response.data;
           this.total = 0.0;
@@ -409,7 +602,7 @@ export default {
     addQuantity(cart_id) {
         this.isVisible = true;
       axios
-        .get("https://ozpos.geekss.com.au/api/addQuantity/" + cart_id)
+        .get("https://backend.ozfoodz.com.au/api/addQuantity/" + cart_id)
         .then((response) => {
           this.cartDataa();
           this.isVisible = false;
@@ -423,7 +616,7 @@ export default {
     minusQuantity(cart_id) {
         this.isVisible = true;
       axios
-        .get("https://ozpos.geekss.com.au/api/minusQuantity/" + cart_id)
+        .get("https://backend.ozfoodz.com.au/api/minusQuantity/" + cart_id)
         .then((response) => {
           this.cartDataa();
           this.isVisible = false;
@@ -435,7 +628,7 @@ export default {
     },
     getVendorDetails() {
       axios
-        .get("https://ozpos.geekss.com.au/api/single_vendor/7")
+        .get("https://backend.ozfoodz.com.au/api/single_vendor/7")
         .then((response) => {
           this.vendor = response.data;
           this.vendor_id = response.data.data.vendor.id;
@@ -446,7 +639,7 @@ export default {
     },
     userlogin(){
         this.isVisible =true;
-        axios.post('https://ozpos.geekss.com.au/api/user_login',{
+        axios.post('https://backend.ozfoodz.com.au/api/user_login',{
             email_id : this.loginEmail,
             password : this.loginPassword,
             provider : "LOCAL",
@@ -484,7 +677,7 @@ export default {
                     console.warn(response.data);
                 }
                 }).catch( (error)=> {
-                    this.isVisible =false;
+                   this.isVisible =false;
                     this.loginErrors = [];
 
                         if(error.response.data.errors.email_id){
@@ -500,7 +693,7 @@ export default {
     },
     getuseraddress(){
         axios
-        .get("https://ozpos.geekss.com.au/api/get-user-address/"+ this.loginID)
+        .get("https://backend.ozfoodz.com.au/api/get-user-address/"+ this.loginID)
         .then((response) => {
           this.userAddress = response.data;
           console.log(this.userAddress);
@@ -510,10 +703,12 @@ export default {
         });
     },
     useraddress(){
-        axios.post('https://ozpos.geekss.com.au/api/user_address',{
+        axios.post('https://backend.ozfoodz.com.au/api/user_address',{
 				address : this.deliveryAdress,
 				type : this.deliveryType,
                 userID : this.loginID,
+                lat:this.lat,
+                lang:this.long,
 				}).then( (response) => {
                     if (response.status == 200) {
                         this.getuseraddress();
@@ -562,9 +757,10 @@ export default {
       if (this.LoginStatus == true) {
         this.errors.push("Please Login or Sign up.");
       }
-      if (!this.existingAddress) {
+      if(this.delivery == true && !this.existingAddress){
         this.errors.push("Please Add or Select Delivery Address.");
       }
+
       if (!this.paymentMethod) {
         this.errors.push("Please Select Payment Method.");
       }
@@ -576,10 +772,16 @@ export default {
       if(this.errors.length == 0){
           this.submitBtn = false;
           this.isVisible = true;
-          axios.post('https://ozpos.geekss.com.au/api/book_order_vuejs',{
+          if(this.pickup == true){
+                this.method = "Pickup";
+          }
+          else{
+             this.method = "Delivery";
+          }
+          axios.post('https://backend.ozfoodz.com.au/api/book_order_vuejs',{
 				address_id : this.existingAddress,
 				payment_type : this.paymentMethod,
-                delivery_type : this.paymentMethod,
+                delivery_type : this.method,
                 user_id : this.loginID,
                 vendor_id: this.vendor_id,
                 amount:this.total,
@@ -628,12 +830,43 @@ export default {
                             timer: 4000
                         })
                 })
-
-
       }
 
     },
-  },
+    facebooklogin(){
+       axios
+        .get("https://backend.ozfoodz.com.au/api/auth/facebook")
+        .then((response) => {
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    googlelogin(){
+        axios
+        .get("https://backend.ozfoodz.com.au/api/auth/google")
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    },
+     onSuccess(googleUser) {
+        console.log('success apis');
+            console.log(googleUser);
+
+            // This only gets the user information: id, name, imageUrl and email
+            console.log(googleUser.getBasicProfile());
+        },
+        onFailure(googleUser){
+            console.log('failure apis');
+ console.log(googleUser);
+        },
+        getUserData(facebook){
+            console.log(facebook);
+        }
+},
 };
 </script>
 <style lang="scss">
@@ -697,4 +930,3 @@ export default {
         }
     }
 </style>
-

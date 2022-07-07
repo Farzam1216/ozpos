@@ -16,7 +16,13 @@
             <div class="col bg-white rounded-circle mt-n4 px-3 py-2">
                 <div class="bg-danger rounded-circle mt-n0 shadow">
                     <a href="#checkout" class="text-white small font-weight-bold text-decoration-none">
-                        <i class="feather-shopping-cart"></i>
+                        {{--  <i class="feather-shopping-cart"></i>  --}}
+                        {{--  <span class="fa-stack fa-2x has-badge" data-count="5">
+                            <i class="feather-shopping-cart"></i>
+                            <i style="" class="fa fa-shopping-cart fa-stack-2x red-cart"></i>
+                        </span>  --}}
+                        <i class="fa" style="font-size:24px">&#xf07a;</i>
+<span class='badge badge-warning' id='lblCartCount'> 5 </span>
                     </a>
                 </div>
             </div>
@@ -41,7 +47,7 @@
                 <div class="row">
                     <aside class="col-md-6 footer-about">
                         <article class="d-flex pb-3">
-                            <div><img alt="#" src="{{ asset('img/logo_web.png') }}" class="logo-footer mr-3"></div>
+                            <div><img alt="#" src="{{ asset('img/loggoo.png') }}" class="logo-footer mr-3"></div>
                             <div>
                                 <h6 class="title text-white">About Us</h6>
                                 <p class="text-muted">Some short text about company like You might remember the Dell computer commercials in which a youth reports.</p>
@@ -74,3 +80,25 @@
             <!-- footer-top.// -->
         </div>
     </footer>
+    <style>
+        .badge {
+            padding-left: 9px;
+            padding-right: 9px;
+            -webkit-border-radius: 9px;
+            -moz-border-radius: 9px;
+            border-radius: 9px;
+          }
+
+          .label-warning[href],
+          .badge-warning[href] {
+            background-color: #c67605;
+          }
+          #lblCartCount {
+              font-size: 12px;
+              background: #ff0000;
+              color: #fff;
+              padding: 0 5px;
+              vertical-align: top;
+              margin-left: -10px;
+          }
+    </style>

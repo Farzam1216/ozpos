@@ -1,5 +1,9 @@
 <template>
     <div class="container">
+        <div v-if="isVisible" class="loader-overlay">
+            <div class="loader"></div>
+            <span class="text" style="font-size:smaller;">Please Wait</span>
+        </div>
         <div class="osahan-checkout">
         <div class="d-none">
             <div class="bg-primary border-bottom p-3 d-flex align-items-center">
@@ -209,6 +213,7 @@
                             </p>
                             <!-- <a class="btn btn-success btn-block btn-lg" href="successful">PAY ${{total}}<i class="feather-arrow-right"></i></a> -->
                             <a v-if="submitBtn == true" class="btn btn-success btn-block btn-lg " style="color:white;" @click="payment()">Place Order<i class="feather-arrow-right text-white"></i></a>
+                             <!-- <a v-if="orderBtn == true" :href="'/my-order/'+this.loginID+'/'+this.cartID" class="btn btn-success btn-block btn-lg">My Orders</a> -->
                         </div>
                     </div>
                 </div>
@@ -330,6 +335,7 @@ export default {
         name:'',
         mobile:'',
         tableNumber:'',
+        isVisible:false,
     };
   },
   methods: {
@@ -338,7 +344,7 @@ export default {
     },
     cartDataa() {
       axios
-        .get("https://ozpos.geekss.com.au/api/cartData/" + this.cartID)
+        .get("https://backend.ozfoodz.com.au/api/cartData/" + this.cartID)
         .then((response) => {
           this.cartData = response.data;
           this.total = 0.0;
@@ -352,10 +358,12 @@ export default {
         });
     },
     addQuantity(cart_id) {
+        this.isVisible = true;
       axios
-        .get("https://ozpos.geekss.com.au/api/addQuantity/" + cart_id)
+        .get("https://backend.ozfoodz.com.au/api/addQuantity/" + cart_id)
         .then((response) => {
           this.cartDataa();
+          this.isVisible = false;
         })
         .catch((error) => {
           console.error(error);
@@ -363,10 +371,12 @@ export default {
     },
 
     minusQuantity(cart_id) {
+        this.isVisible = true;
       axios
-        .get("https://ozpos.geekss.com.au/api/minusQuantity/" + cart_id)
+        .get("https://backend.ozfoodz.com.au/api/minusQuantity/" + cart_id)
         .then((response) => {
           this.cartDataa();
+          this.isVisible = false;
         })
         .catch((error) => {
           console.error(error);
@@ -374,7 +384,7 @@ export default {
     },
     getVendorDetails() {
       axios
-        .get("https://ozpos.geekss.com.au/api/single_vendor/7")
+        .get("https://backend.ozfoodz.com.au/api/single_vendor/7")
         .then((response) => {
             console.log(response.data);
           this.vendor = response.data;
@@ -393,7 +403,7 @@ export default {
     },
     userlogin(){
 
-        // axios.post('https://ozpos.geekss.com.au/api/user_login',{
+        // axios.post('https://backend.ozfoodz.com.au/api/user_login',{
         //     email_id : this.loginEmail,
         //     password : this.loginPassword,
         //     provider : "LOCAL",
@@ -444,7 +454,7 @@ export default {
     },
     getuseraddress(){
         axios
-        .get("https://ozpos.geekss.com.au/api/get-user-address/"+ this.loginID)
+        .get("https://backend.ozfoodz.com.au/api/get-user-address/"+ this.loginID)
         .then((response) => {
           this.userAddress = response.data;
           console.log(this.userAddress);
@@ -454,7 +464,7 @@ export default {
         });
     },
     useraddress(){
-        axios.post('https://ozpos.geekss.com.au/api/user_address',{
+        axios.post('https://backend.ozfoodz.com.au/api/user_address',{
 				address : this.deliveryAdress,
 				type : this.deliveryType,
                 userID : this.loginID,
@@ -515,7 +525,8 @@ export default {
       }
       if(this.errors.length == 0){
           this.submitBtn =false;
-          axios.post('https://ozpos.geekss.com.au/api/book_order_vuejs',{
+          this.isVisible = true;
+          axios.post('https://backend.ozfoodz.com.au/api/book_order_vuejs',{
                 address_id : 51,
 				payment_type : 'Cash On Delivery',
                 delivery_type : 'Cash On Delivery',
@@ -532,7 +543,9 @@ export default {
                 tableNumber : this.tableNumber,
                 }).then( (response) => {
                     if (response.status == 200) {
-                        this.submitBtn =true;
+                        this.submitBtn =false;
+                        this.orderBtn = true;
+                        this.isVisible = false;
                     swal({
                         title: "Order Placed!",
                         text: "Order Placed Successfully",
@@ -543,6 +556,8 @@ export default {
                 }
                 else{
                      this.submitBtn =true;
+                     this.orderBtn = false;
+                     this.isVisible =false;
                      swal({
                             title: "Something went wrong!",
                             text: response.data.message,
@@ -570,3 +585,66 @@ export default {
   },
 };
 </script>
+
+
+<style lang="scss">
+    .loader-overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 999;
+        cursor: pointer;
+        span.text {
+            display: inline-block;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            color: #fff;
+        }
+        .loader {
+            animation: loader-animate 1.5s linear infinite;
+            clip: rect(0, 80px, 80px, 40px);
+            height: 80px;
+            width: 80px;
+            position: absolute;
+            left: calc(50% - 40px);
+            top: calc(50% - 40px);
+            &:after {
+                animation: loader-animate-after 1.5s ease-in-out infinite;
+                clip: rect(0, 80px, 80px, 40px);
+                content: '';
+                border-radius: 50%;
+                height: 80px;
+                width: 80px;
+                position: absolute;
+            }
+        }
+        @keyframes loader-animate {
+            0% {
+                transform: rotate(0deg)
+            }
+            100% {
+                transform: rotate(220deg)
+            }
+        }
+        @keyframes loader-animate-after {
+            0% {
+                box-shadow: inset #fff 0 0 0 17px;
+                transform: rotate(-140deg);
+            }
+            50% {
+                box-shadow: inset #fff 0 0 0 2px;
+            }
+            100% {
+                box-shadow: inset #fff 0 0 0 17px;
+                transform: rotate(140deg);
+            }
+        }
+    }
+</style>

@@ -360,7 +360,7 @@
             },
             orderHistory(){
                  axios
-                .get("https://ozpos.geekss.com.au/api/my-orders/" + this.orderID)
+                .get("https://backend.ozfoodz.com.au/api/my-orders/" + this.orderID)
                 .then((response) => {
                      console.log('order data');
                      console.log(response.data.data.length);
@@ -374,7 +374,7 @@
             },
             cartDataa() {
                 axios
-                    .get("https://ozpos.geekss.com.au/api/cartData/" + this.cartID)
+                    .get("https://backend.ozfoodz.com.au/api/cartData/" + this.cartID)
                     .then((response) => {
                     this.cartData = response.data;
                     this.total = 0.0;
@@ -388,7 +388,7 @@
                 },
                 getVendorDetails() {
                 axios
-                    .get("https://ozpos.geekss.com.au/api/single_vendor/"+this.vendor_id)
+                    .get("https://backend.ozfoodz.com.au/api/single_vendor/"+this.vendor_id)
                     .then((response) => {
                     this.vendor = response.data;
                     this.vendor_id = response.data.data.vendor.id;
