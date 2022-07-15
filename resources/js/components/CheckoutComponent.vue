@@ -124,113 +124,88 @@
                                 </div>
                             </div>
                         </div>
-                    <div v-if="LoginStatus == false" class="accordion mb-3 rounded shadow-sm bg-white overflow-hidden" id="accordionExample">
-                            <div class="osahan-card bg-white border-bottom overflow-hidden">
-                                <div class="osahan-card-header" id="headingTwo">
-                                    <h2 class="mb-0">
-                                        <button class="d-flex p-3 align-items-center btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                 <i class="feather-globe mr-3"></i> Pickup or Delivery
-                                 <i class="feather-chevron-down ml-auto"></i>
-                                 </button>
-                                    </h2>
-                                </div>
-                                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                    <div class="osahan-card-body border-top p-3">
-                                        <form>
-                                            <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                                                <label class="btn btn-outline-secondary active">
-                                                <input @click="delivery = true , pickup=false" type="radio" name="options" id="option1" checked> Delivery
-                                                </label>
-                                                <label class="btn btn-outline-secondary">
-                                                <input @click="delivery = false , pickup=true" type="radio" name="options" id="option2"> Pickup
-                                                </label>
-                                            </div>
-                                            <hr>
-                                            <div v-show="pickup" class="form-row">
-                                                <div class="col-md-12 form-group mb-0">
-                                                   <div  class="osahan-cart-item mb-3 rounded shadow-sm bg-white overflow-hidden">
-                                                        <div class="osahan-cart-item-profile bg-white p-3">
-                                                            <div class="d-flex flex-column">
-                                                                <h6 class="mb-3 font-weight-bold">Delivery Address</h6>
-                                                            <div class="row">
-                                                                <div class="custom-control col-sm-12 custom-radio mb-3 position-relative border-custom-radio">
-                                                                    <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
-                                                                    <label class="custom-control-label w-100" for="customRadioInline1">
-                                                                        <div>
-                                                                            <div class="p-3 bg-white rounded shadow-sm w-100">
-                                                                                <div class="d-flex align-items-center mb-2">
-                                                                                    <h6 class="mb-0">{{vendor.data.vendor.name}}</h6>
-                                                                                    <p class="mb-0 badge badge-success ml-auto"><i class="icofont-check-circled"></i> Default</p>
-                                                                                </div>
-                                                                                <p class="small text-muted m-0">{{vendor.data.vendor.address}}</p>
-                                                                                <!-- <p class="small text-muted m-0">Redwood City, CA 94063</p> -->
-                                                                            </div>
-                                                                            <!-- <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-light border-top">Edit</a> -->
-                                                                        </div>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                                <!-- <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModal"> ADD NEW ADDRESS </a> -->
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                        <!-- <div v-if="LoginStatus == false" class="accordion mb-3 rounded shadow-sm bg-white overflow-hidden" id="accordionExample">
+                                <div class="osahan-card bg-white border-bottom overflow-hidden">
+                                    <div class="osahan-card-header" id="headingTwo">
+                                        <h2 class="mb-0">
+                                            <button class="d-flex p-3 align-items-center btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <i class="feather-globe mr-3"></i> Pickup or Delivery
+                                    <i class="feather-chevron-down ml-auto"></i>
+                                    </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                        <div class="osahan-card-body border-top p-3">
+                                            <form>
+                                                <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                                                    <label class="btn btn-outline-secondary active">
+                                                    <input @click="delivery = true , pickup=false" type="radio" name="options" id="option1" checked> Delivery
+                                                    </label>
+                                                    <label class="btn btn-outline-secondary">
+                                                    <input @click="delivery = false , pickup=true" type="radio" name="options" id="option2"> Pickup
+                                                    </label>
                                                 </div>
-                                            </div>
-                                            <div v-show="delivery" class="form-row">
-                                                <div class="col-md-12 form-group mb-0">
-                                                   <div  class="osahan-cart-item mb-3 rounded shadow-sm bg-white overflow-hidden">
-                                                        <div class="osahan-cart-item-profile bg-white p-3">
-                                                            <div class="d-flex flex-column">
-                                                                <h6 class="mb-3 font-weight-bold">Delivery Address</h6>
+                                                <hr>
+                                                <div v-show="pickup" class="form-row">
+                                                    <div class="col-md-12 form-group mb-0">
+                                                    <div  class="osahan-cart-item mb-3 rounded shadow-sm bg-white overflow-hidden">
+                                                            <div class="osahan-cart-item-profile bg-white p-3">
+                                                                <div class="d-flex flex-column">
+                                                                    <h6 class="mb-3 font-weight-bold">Delivery Address</h6>
                                                                 <div class="row">
-                                                                    <div class="custom-control col-lg-12 custom-radio mb-3 position-relative border-custom-radio">
+                                                                    <div class="custom-control col-sm-12 custom-radio mb-3 position-relative border-custom-radio">
                                                                         <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
                                                                         <label class="custom-control-label w-100" for="customRadioInline1">
-                                                                <div>
-                                                                    <div v-if="userAddress != null" class="p-3 bg-white rounded shadow-sm w-100">
-                                                                        <!-- <div class="d-flex align-items-center mb-2">
-                                                                            <h6 class="mb-0">Home</h6>
-                                                                            <p class="mb-0 badge badge-success ml-auto"><i class="icofont-check-circled"></i> Default</p>
-                                                                        </div> -->
-                                                                        <select v-model="existingAddress" name="" class="form-control" id="">
-                                                                            <option value="">Select Existing Address</option>
-                                                                            <option v-for="address in userAddress.data.address" :key="address.id" :value="address.id">{{address.address}}</option>
-                                                                        </select>
-                                                                        <!-- <p class="small text-muted m-0">1001 Veterans Blvd</p>
-                                                                        <p class="small text-muted m-0">Redwood City, CA 94063</p> -->
+                                                                            <div>
+                                                                                <div class="p-3 bg-white rounded shadow-sm w-100">
+                                                                                    <div class="d-flex align-items-center mb-2">
+                                                                                        <h6 class="mb-0">{{vendor.data.vendor.name}}</h6>
+                                                                                        <p class="mb-0 badge badge-success ml-auto"><i class="icofont-check-circled"></i> Default</p>
+                                                                                    </div>
+                                                                                    <p class="small text-muted m-0">{{vendor.data.vendor.address}}</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                        </label>
                                                                     </div>
-                                                                    <!-- <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-light border-top">Edit</a> -->
                                                                 </div>
-                                                                </label>
-                                                                    </div>
-                                                                    <!-- <div class="custom-control col-lg-6 custom-radio position-relative border-custom-radio">
-                                                                        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                                                                        <label class="custom-control-label w-100" for="customRadioInline2">
-                                                                <div>
-                                                                    <div class="p-3 rounded bg-white shadow-sm w-100">
-                                                                        <div class="d-flex align-items-center mb-2">
-                                                                            <h6 class="mb-0">Work</h6>
-                                                                            <p class="mb-0 badge badge-light ml-auto"><i class="icofont-check-circled"></i> Select</p>
-                                                                        </div>
-                                                                        <p class="small text-muted m-0">Model Town, Ludhiana</p>
-                                                                        <p class="small text-muted m-0">Punjab 141002, India</p>
-                                                                    </div>
-                                                                    <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-light border-top">Edit</a>
-                                                                </div>
-                                                                </label>
-                                                                    </div> -->
-                                                                </div>
-                                                                <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModal"> ADD NEW ADDRESS </a>
+                                                                   </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </form>
+                                                <div v-show="delivery" class="form-row">
+                                                    <div class="col-md-12 form-group mb-0">
+                                                    <div  class="osahan-cart-item mb-3 rounded shadow-sm bg-white overflow-hidden">
+                                                            <div class="osahan-cart-item-profile bg-white p-3">
+                                                                <div class="d-flex flex-column">
+                                                                    <h6 class="mb-3 font-weight-bold">Delivery Address</h6>
+                                                                    <div class="row">
+                                                                        <div class="custom-control col-lg-12 custom-radio mb-3 position-relative border-custom-radio">
+                                                                            <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
+                                                                            <label class="custom-control-label w-100" for="customRadioInline1">
+                                                                    <div>
+                                                                        <div v-if="userAddress != null" class="p-3 bg-white rounded shadow-sm w-100">
+
+                                                                            <select v-model="existingAddress" name="" class="form-control" id="">
+                                                                                <option value="">Select Existing Address</option>
+                                                                                <option v-for="address in userAddress.data.address" :key="address.id" :value="address.id">{{address.address}}</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModal"> ADD NEW ADDRESS </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                        </div> -->
 
                         <div v-if="LoginStatus == false" class="accordion mb-3 rounded shadow-sm bg-white overflow-hidden" id="accordionExample">
 
@@ -368,7 +343,7 @@
                             </p>
                             <!-- <a class="btn btn-success btn-block btn-lg" href="successful">PAY ${{total}}<i class="feather-arrow-right"></i></a> -->
                             <a v-if="submitBtn == true" class="btn btn-success btn-block btn-lg" @click="payment()">PAY ${{total}}</a>
-                            <a v-if="orderBtn == true" :href="'/my-order/'+this.loginID+'/'+this.cartID" class="btn btn-success btn-block btn-lg">My Orders</a>
+                            <a v-if="orderBtn == true" :href="'/my-order/'+this.loginID" class="btn btn-success btn-block btn-lg">My Orders</a>
                         </div>
                     </div>
                 </div>
@@ -387,15 +362,13 @@
                 <div class="modal-body">
                     <form class="">
                         <div class="form-row">
-                            <div id="mapRef" class="col-md-12 form-group">
+                            <div  class="col-md-12 form-group">
+                                <input type="text" id="map" placeholder="Origin" class="form-control"  ref="origin" />
                                 <vue-google-autocomplete
-                                    ref="address"
+                                    class="form-control"
                                     id="map"
-                                    place_id = ""
-                                    classname="form-control"
                                     placeholder="Please type your address"
-                                    v-on:placechanged="getAddressData"
-                                    >
+                                    v-on:placechanged="getAddressData">
                                 </vue-google-autocomplete>
                               <!-- <GmapAutocomplete style="width:100%;" ref="mapRef" :position="{lat:lat, lng:long}"  @place_changed="updateCoordinates">
                                 </GmapAutocomplete> -->
@@ -452,11 +425,9 @@
 
 <script>
 import {gmapApi} from 'vue2-google-maps'
-import { nextTick } from 'vue'
  import VueGoogleAutocomplete from "vue-google-autocomplete";
  import facebookLogin from 'facebook-login-vuejs';
  import GoogleLogin from 'vue-google-login';
- import { LoaderPlugin } from 'vue-google-login';
 export default {
     computed: {
 			google: gmapApi,
@@ -471,11 +442,11 @@ export default {
                             this.getFullAddress(this.lat, this.long)
                     });
             const interval = setInterval(() => {
+                const autocomplete = new google.maps.places.Autocomplete(this.$refs["origin"]);
             if (this.$refs.mapRef) {
-                console.log(this.$refs.mapRef)
-                this.$refs.address.focus();
-        console.log(this.$refs.address.focus())
-                clearInterval(interval)
+                // const autocomplete = new google.maps.places.Autocomplete(this.$refs["origin"]);
+                // this.$refs.address.focus();
+
             }
             }, 50)
             this.setdata();
@@ -498,7 +469,6 @@ export default {
                     height: 50,
                     longtitle: true
                 },
-      map:null,
       address: "",
       currentPlace:null,
       errors: [],
@@ -555,9 +525,9 @@ export default {
   },
    components: { VueGoogleAutocomplete, facebookLogin, GoogleLogin },
   methods: {
-     getAddressData: function (addressData, placeResultData, id) {
+    getAddressData: function (addressData, placeResultData, id) {
         this.address = addressData;
-      },
+    },
     setPlace(place) {
       this.currentPlace = place;
     },
@@ -592,6 +562,7 @@ export default {
           this.total = 0.0;
           this.cartData.data.cart.forEach((cartData) => {
             this.total = this.total + cartData.price;
+            this.existingAddress = cartData.textAddress;
           });
           console.log(response.data);
         })
@@ -650,28 +621,16 @@ export default {
                     if(response.data.success == false){
                         this.isVisible =false;
                         this.loginErrors.push(response.data.message);
-                        swal({
-                            title: "Login UnSuccessfull!",
-                            text: response.data.message,
-                            icon: "error",
-                            buttons: true,
-                            timer: 3000
-                        })
+
                     }else{
+                        console.log(response.data)
                         this.isVisible =false;
                         this.LoginStatus = false;
                         this.loginID =response.data.data.id;
                         this.loginUserName = response.data.data.name;
                         this.getuseraddress(response.data.data.id);
-                        swal({
-                            title: "Login Successfull!",
-                            text: response.data.message,
-                            icon: "success",
-                            buttons: true,
-                            timer: 3000
-                        })
-                    }
-                    ;
+
+                    };
                 }else {
                      this.isVisible =false;
                     console.warn(response.data);
@@ -686,7 +645,7 @@ export default {
                         if(error.response.data.errors.password){
                             this.loginErrors.push(error.response.data.errors.password);
                         };
-
+                     this.isVisible =false;
             })
     },
     usersignup(){
@@ -712,22 +671,10 @@ export default {
 				}).then( (response) => {
                     if (response.status == 200) {
                         this.getuseraddress();
-                        swal({
-                            title: "Address Added!",
-                            text: "Address Added Successfully",
-                            icon: "success",
-                            buttons: false,
-                            timer: 2000
-                        });
+
                     } else {
                         console.warn(response.data);
-                         swal({
-                            title: "Something went wrong!",
-                            text: response.data.message,
-                            icon: "error",
-                            buttons: true,
-                            timer: 2000
-                        })
+
                     }
 
                     }).catch( (error)=> {
@@ -757,9 +704,9 @@ export default {
       if (this.LoginStatus == true) {
         this.errors.push("Please Login or Sign up.");
       }
-      if(this.delivery == true && !this.existingAddress){
-        this.errors.push("Please Add or Select Delivery Address.");
-      }
+    //   if(this.delivery == true && !this.existingAddress){
+    //     this.errors.push("Please Add or Select Delivery Address.");
+    //   }
 
       if (!this.paymentMethod) {
         this.errors.push("Please Select Payment Method.");
@@ -811,13 +758,6 @@ export default {
                      this.submitBtn =true;
                      this.orderBtn = false;
                      this.isVisible =false;
-                     swal({
-                            title: "Something went wrong!",
-                            text: response.data.message,
-                            icon: "error",
-                            buttons: true,
-                            timer: 3000
-                        })
                 }
                 }).catch( (error)=> {
                     console.log( error.response.data)

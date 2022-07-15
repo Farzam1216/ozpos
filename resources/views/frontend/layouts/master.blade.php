@@ -22,9 +22,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDeH1Bn2hYlkDnn_1VrTj34KqZAnLtPWAw"></script>
     <!-- Scripts -->
     {{--  <script src="{{ asset('js/app.js') }}" defer></script>  --}}
     {{--  <script src="{{ asset('js/app.js') }}"></script>  --}}
+    <script src="https://unpkg.com/vue3-google-map"></script>
 </head>
 
 <body class="fixed-bottom-bar">
@@ -37,7 +39,7 @@
         @include('frontend.layouts.navbar')
         @include('frontend.layouts.footer')
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModals" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">

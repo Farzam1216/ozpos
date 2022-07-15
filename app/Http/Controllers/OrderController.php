@@ -21,12 +21,12 @@ class orderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function order($id,$cart_id)
+    public function order($id)
     {
         //
         $userID = $id;
-        $cartID = $cart_id;
-        return view('frontend.myOrder',compact('userID','cartID'));
+        // $cartID = $cart_id;
+        return view('frontend.myOrder',compact('userID'));
     }
 
     /**

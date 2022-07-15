@@ -32,7 +32,7 @@ Route::get('/qr-code', function () {
 
 Route::get('checkout/{id}', [App\Http\Controllers\CheckoutController::class, 'checkout'])->name('checkout');
 Route::get('qr-code-checkout/{id}', [App\Http\Controllers\CheckoutController::class, 'qrcode']);
-Route::get('/my-order/{id}/{cartID}', [App\Http\Controllers\orderController::class, 'order']);
+Route::get('/my-order/{id}', [App\Http\Controllers\orderController::class, 'order']);
 Route::get('/track/{id}', [App\Http\Controllers\trackingController::class, 'track']);
 
 // Route::get('/my-order/{id}', function () {

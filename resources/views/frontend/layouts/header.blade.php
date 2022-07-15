@@ -9,7 +9,7 @@
                     <!-- brand-wrap.// -->
                 </div>
                 <div class="col-3 d-flex align-items-center m-none">
-                    <div class="dropdown mr-3">
+                    {{--  <div class="dropdown mr-3">
                         <a class="text-dark dropdown-toggle d-flex align-items-center py-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div><i class="feather-map-pin mr-2 bg-light rounded-pill p-2 icofont-size"></i></div>
                             <div>
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>  --}}
                 </div>
                 <!-- col.// -->
                 <div class="col-8">

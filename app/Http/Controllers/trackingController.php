@@ -26,8 +26,8 @@ class trackingController extends Controller
     public function track($order_id)
     {
         //
-        $trackData = json_decode(file_get_contents('http://ozpos.geekss.com.au/api/track-order/380'), true);
-        $order = json_decode(file_get_contents('http://ozpos.geekss.com.au/api/get-order/380'), true);
+        $trackData = json_decode(file_get_contents('http://ozpos.geekss.com.au/api/track-order/'.$order_id), true);
+        $order = json_decode(file_get_contents('http://ozpos.geekss.com.au/api/get-order/'.$order_id), true);
 
             $driverLat = $trackData['trackData']['vendorLat'];
             $driverLang = $trackData['trackData']['vendorLang'];

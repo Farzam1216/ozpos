@@ -514,7 +514,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mt-4">
+                <div class="col-md-4 mt-4 overflow-hidden">
                     <div class="osahan-cart-item rounded rounded shadow-sm overflow-hidden bg-white sticky_sidebar">
                         <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3">
                             <img alt="osahan" v-bind:src=" vendor.data.vendor.image" style="width:50px;" class="mr-3 rounded-circle img-fluid">
@@ -523,7 +523,7 @@
                                 <p class="mb-0 small text-muted"><i class="feather-map-pin"></i> {{ vendor.data.vendor.address }}</p>
                             </div>
                         </div>
-                        <div v-if="cartData != null" class="bg-white border-bottom py-2">
+                        <div v-if="cartData != null" class="bg-white py-2">
                             <div  v-for="cartData in cartData.data.cart" :key="cartData.id" class="gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
                                 <div class="media align-items-center">
                                     <div class="mr-2 text-danger" style="margin-bottom: 15px;">&middot;</div>
@@ -537,21 +537,145 @@
                                 </div>
                             </div>
                         </div>
+                        <div  class="bg-white p-3 clearfix ">
+                        <div  v-if="cartData != null" id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                    <div class="osahan-card-body p-3">
+                                        <form>
+                                            <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                                                <label class="btn btn-outline-secondary ">
+                                                <input @click="delivery = true , pickup=false" type="radio" name="options" id="option1" > Delivery
+                                                </label>
+                                                <label class="btn btn-outline-secondary">
+                                                <input @click="delivery = false , pickup=true" type="radio" name="options" id="option2"> Pickup
+                                                </label>
+
+                                            </div>
+                                            <br><br>
+                                            <p style="margin-left: 16px;" v-if="addressError.length">
+                                                <b class="text-danger">Please correct the Delivery Addres:</b>
+                                                <ul >
+                                                    <li class="text-danger" v-for="error in addressError" :key="error.id">{{ error }}</li>
+                                                </ul>
+                                            </p>
+                                            <div v-show="pickup" class="form-row">
+                                                <div class="col-md-12 form-group mb-0">
+                                                   <div  class="osahan-cart-item mb-3 rounded shadow-sm bg-white overflow-hidden">
+                                                        <div class="osahan-cart-item-profile bg-white p-3">
+                                                            <div class="d-flex flex-column">
+                                                                <h6 class="mb-3 font-weight-bold">Pickup Address</h6>
+                                                            <div class="row">
+                                                                <div class="custom-control col-sm-12 custom-radio mb-3 position-relative border-custom-radio">
+                                                                    <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
+                                                                    <label class="custom-control-label w-100" for="customRadioInline1">
+                                                                        <div>
+                                                                            <div class="p-3 bg-white rounded shadow-sm w-100">
+                                                                                <div class="d-flex align-items-center mb-2">
+                                                                                    <h6 class="mb-0">{{vendor.data.vendor.name}}</h6>
+                                                                                    <p class="mb-0 badge badge-success ml-auto"><i class="icofont-check-circled"></i> Default</p>
+                                                                                </div>
+                                                                                <p class="small text-muted m-0">{{vendor.data.vendor.address}}</p>
+                                                                                <!-- <p class="small text-muted m-0">Redwood City, CA 94063</p> -->
+                                                                            </div>
+                                                                            <!-- <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-light border-top">Edit</a> -->
+                                                                        </div>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                                <!-- <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModal"> ADD NEW ADDRESS </a> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div v-show="delivery" class="form-row">
+                                                <div class="col-md-12 form-group mb-0">
+                                                   <div  class="osahan-cart-item mb-3 rounded shadow-sm bg-white overflow-hidden">
+                                                        <div class="osahan-cart-item-profile bg-white ">
+                                                            <div class="d-flex flex-column">
+                                                                <h6 class="mb-3 font-weight-bold">Delivery Address</h6>
+                                                                <div class="row">
+                                                                    <div class="custom-control col-lg-12 custom-radio mb-3 position-relative border-custom-radio">
+                                                                        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
+                                                                        <label class="custom-control-label w-100" for="customRadioInline1">
+                                                                <div>
+                                                                    <div class="bg-white rounded shadow-sm w-100">
+                                                                        <!-- <div class="d-flex align-items-center mb-2">
+                                                                            <h6 class="mb-0">Home</h6>
+                                                                            <p class="mb-0 badge badge-success ml-auto"><i class="icofont-check-circled"></i> Default</p>
+                                                                        </div> -->
+                                                                        <input type="text" placeholder="Origin" class="form-control" hidden ref="origin" />
+                                                                        <vue-google-autocomplete
+                                                                            v-model="textAddress"
+                                                                            class="form-control"
+                                                                            id="map"
+                                                                            placeholder="Please type your address"
+                                                                            v-on:placechanged="getAddressData">
+                                                                        </vue-google-autocomplete>
+                                                                    </div>
+                                                                    <!-- <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-light border-top">Edit</a> -->
+                                                                </div>
+                                                                </label>
+                                                                    </div>
+                                                                    <!-- <div class="custom-control col-lg-6 custom-radio position-relative border-custom-radio">
+                                                                        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                                                                        <label class="custom-control-label w-100" for="customRadioInline2">
+                                                                <div>
+                                                                    <div class="p-3 rounded bg-white shadow-sm w-100">
+                                                                        <div class="d-flex align-items-center mb-2">
+                                                                            <h6 class="mb-0">Work</h6>
+                                                                            <p class="mb-0 badge badge-light ml-auto"><i class="icofont-check-circled"></i> Select</p>
+                                                                        </div>
+                                                                        <p class="small text-muted m-0">Model Town, Ludhiana</p>
+                                                                        <p class="small text-muted m-0">Punjab 141002, India</p>
+                                                                    </div>
+                                                                    <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-light border-top">Edit</a>
+                                                                </div>
+                                                                </label>
+                                                                    </div> -->
+                                                                </div>
+                                                                <a class="btn btn-primary" @click="checkAddress()"> CHECK ADDRESS </a>
+                                                                <!-- <p style="margin-left: 16px;" v-if="addressError.length">
+                                                                    <b class="text-danger">Please correct the Delivery Addres:</b>
+                                                                    <ul >
+                                                                        <li class="text-danger" v-for="error in addressError" :key="error.id">{{ error }}</li>
+                                                                    </ul>
+                                                                </p> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            <!-- <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary active">
+                                <input @click="delivery = true , pickup=false" type="radio" name="options" id="option1" checked> Delivery
+                                </label>
+                                <label class="btn btn-outline-secondary">
+                                <input @click="delivery = false , pickup=true" type="radio" name="options" id="option2"> Pickup
+                                </label>
+                            </div> -->
+                        </div>
                         <div v-if="cartData == null" class="bg-white p-3 clearfix border-bottom">
                             <h6 class="font-weight-bold mb-0">No data in cart.</h6>
                         </div>
-                        <div v-if="cartData != null" class="bg-white p-3 clearfix border-bottom">
+                        <div v-if="cartData != null" class="bg-white p-3 clearfix ">
                             <p class="mb-1">Item Total <span class="float-right text-dark">${{total}}</span></p>
                             <hr>
                             <h6 class="font-weight-bold mb-0">TO PAY <span class="float-right">${{total}}</span></h6>
                         </div>
                         <div class="p-3">
-                            <a id="checkout" class="btn btn-success btn-block btn-lg" v-if="cartID != null" :href="'checkout/' + cartID" >checkout<i class="feather-arrow-right"></i></a>
+                            <a id="checkout" class="btn btn-success btn-block btn-lg" v-if="cartID != null && delivery == false && pickup == false" @click="check()" >checkout<i class="feather-arrow-right"></i></a>
+                            <!-- <a id="checkout" class="btn btn-success btn-block btn-lg" v-if="cartID != null && addressStatus == false && pickup == false" @click="check()" >checkout<i class="feather-arrow-right"></i></a> -->
+                            <a id="checkout" class="btn btn-success btn-block btn-lg" v-if="cartID != null && addressStatus == true  && delivery == true && pickup == false"  :href="'checkout/' + cartID" >checkout<i class="feather-arrow-right"></i></a>
+                            <a id="checkout" class="btn btn-success btn-block btn-lg" v-if="cartID != null && pickup == true && delivery == false" :href="'checkout/' + cartID" >checkout<i class="feather-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </section>
 </template>
 
@@ -566,17 +690,25 @@
     import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
     import {RotateSquare2} from 'vue-loading-spinner'
     import { ModelObj } from 'vue-3d-model';
+    import VueGoogleAutocomplete from "vue-google-autocomplete";
     export default {
         mounted() {
-            console.log('Component mounted.')
             this.isVisible = true;
             this.getVendorDetails();
+
+             console.log('autocomplete');
+            // console.log(autocomplete)
+
+              const interval = setInterval(() => {
+            const autocomplete = new google.maps.places.Autocomplete(this.$refs["origin"]);
+            // console.log(autocomplete)
+            }, 50)
         },
         components: {
             Multiselect,
             VueSlickCarousel,
             RotateSquare2,
-            ModelObj,
+            VueGoogleAutocomplete,
         },
         data(){
             return{
@@ -666,10 +798,60 @@
                 // end single menu cart
                 // end cart details
                 isVisible:false,
-
+                pickup:false,
+                delivery:false,
+                address: "",
+                lat:"",
+                lang:"",
+                addressStatus:false,
+                addressError:[],
+                textAddress:'',
             }
         },
         methods : {
+            getAddressData: function (addressData, placeResultData, id) {
+                this.address = addressData;
+                this.lang = this.address.longitude;
+                this.lat = this.address.latitude;
+                this.textAddress = this.address.route+','+this.address.locality+','+this.address.country;
+            },
+            check(){
+                this.addressError=[];
+                if(this.pickup == false && this.delivery==false){
+                    this.addressError.push('Please Select Method Pickup or Delivery.');
+                }
+                if(this.delivery==true){
+                    this.addressError.push('Please Select a valid Address.');
+                }
+
+            },
+            checkAddress(){
+                this.addressError=[];
+                this.isVisible =true;
+                axios.post('https://backend.ozfoodz.com.au/api/address-check',{
+                    vendor_id : this.vendor_id,
+                    lat: this.lat,
+                    lang: this.lang,
+                }).then((response) => {
+                    // this.cart.push(response.data);
+                    this.isVisible =false;
+                    if (response.status == 200) {
+                        console.log(response.data)
+                        if(response.data.success == false){
+                                this.addressError.push('Sorry your address is not in our delivery zone.Only Self Pick Up Available.');
+                        }
+                        else{
+                            this.addToCart();
+                            this.addressStatus = true;
+                            this.addressError= [];
+                        }
+                    }
+				})
+				.catch((error) => {
+					console.error(error);
+                    this.isVisible =false;
+				});
+            },
             // cart details
             getCartDetails(session_id){
                     axios.get('https://backend.ozfoodz.com.au/api/getCartData/'+this.vendor_id+'/'+session_id).then((response) => {
@@ -691,50 +873,42 @@
             addToCart()
             {
                 this.isVisible =true;
-                axios.post('https://backend.ozfoodz.com.au/api/addToCart',{
-                    vendor_id : this.vendor_id,
-                    session_id: this.session_id,
-                    menu_id: this.menu_id,
-                    size_id : this.size_id,
-                    addon_id: this.addon_id,
-                    quantity: this.quantity,
-                    single_menu_id : this.single_menu_id,
-                    half_and_half_id : this.halfnhalf,
-                    deals_menus_id : this.deals_menus_id,
-                    first_half_id : this.first_half_id,
-                    second_half_id : this.second_half_id,
-                }).then((response) => {
-                    // this.cart.push(response.data);
-                    this.isVisible =false;
-                    if (response.status == 200) {
-                        this.session_id = response.data.data.session_id;
-                        this.getCartDetails(this.session_id);
-                        this.menu_id ='';
-                        this.size_id ='';
-                        this.addon_id= [];
-                        this.quantity = 1;
-                        this.halfnhalf = '';
-                        this.deals_menus_id = '';
-                        swal({
-                        title: "Item Added!",
-                        text: "Item Added To Cart Successfully.",
-                        icon: "success",
-                        buttons: true,
-                        timer: 3000
+
+                    axios.post('https://backend.ozfoodz.com.au/api/addToCart',{
+                        vendor_id : this.vendor_id,
+                        session_id: this.session_id,
+                        menu_id: this.menu_id,
+                        size_id : this.size_id,
+                        addon_id: this.addon_id,
+                        quantity: this.quantity,
+                        single_menu_id : this.single_menu_id,
+                        half_and_half_id : this.halfnhalf,
+                        deals_menus_id : this.deals_menus_id,
+                        first_half_id : this.first_half_id,
+                        second_half_id : this.second_half_id,
+                        textAddress : this.textAddress,
+                        lat:this.lat,
+                        lang:this.lang,
+                    }).then((response) => {
+                        // this.cart.push(response.data);
+
+                        if (response.status == 200) {
+                            this.session_id = response.data.data.session_id;
+                            this.getCartDetails(this.session_id);
+                            this.menu_id ='';
+                            this.size_id ='';
+                            this.addon_id= [];
+                            this.quantity = 1;
+                            this.halfnhalf = '';
+                            this.deals_menus_id = '';
+
+                        }
+                        this.isVisible =false;
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        this.isVisible =false;
                     });
-                    }
-				})
-				.catch((error) => {
-					console.error(error);
-                     swal({
-                    title: "Some Thing Wrong!",
-                    // text: error.response.data.message,
-                    text: "Sizes are required. Please pick size.",
-                    icon: "error",
-                    buttons: true,
-                    timer: 3000
-                });
-				});
             },
 
             addToCartHalfnHalf()
