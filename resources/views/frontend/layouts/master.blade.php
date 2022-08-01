@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Askbootstrap">
-    <meta name="author" content="Askbootstrap">
+    <meta name="description" content="Ozpos">
+    <meta name="author" content="Ozpos">
     <link rel="icon" type="image/png" href="{{ asset('img/fav.png') }}">
     <title>Ozpos - Online Food Ordering Website</title>
     <!-- Slick Slider -->

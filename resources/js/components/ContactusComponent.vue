@@ -12,7 +12,7 @@
             <div class="py-5 osahan-profile row">
                 <div class="col-md-4 mb-3">
                     <div class="bg-white rounded shadow-sm sticky_sidebar overflow-hidden">
-                        <a href="profile.html" class="">
+                        <!-- <a href="profile.html" class="">
                             <div class="d-flex align-items-center p-3">
                                 <div class="left mr-3">
                                     <img alt="#" src="img/user1.jpg" class="rounded-circle">
@@ -22,7 +22,7 @@
                                     <p class="text-muted m-0 small">iamosahan@gmail.com</p>
                                 </div>
                             </div>
-                        </a>
+                        </a> -->
                         <!-- <div class="osahan-credits d-flex align-items-center p-3 bg-light">
                             <p class="m-0">Accounts Credits</p>
                             <h5 class="m-0 ml-auto text-primary">$52.25</h5>

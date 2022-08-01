@@ -4,7 +4,7 @@
             <div class="row align-items-center">
                 <div class="col-1">
                     <a href="/" class="brand-wrap mb-0">
-                        <img alt="#" class="img-fluid" src="{{ asset('img/loggoo.png') }}">
+                        <img alt="#" style="height: 60px;" class="img-fluid" src="{{ asset('img/loggoo.png') }}">
                     </a>
                     <!-- brand-wrap.// -->
                 </div>

@@ -30,6 +30,7 @@ Route::get('/qr-code', function () {
 //     return view('frontend.checkout');
 // });
 
+Route::get('logouts', [App\Http\Controllers\CheckoutController::class, 'logouts'])->name('logouts');
 Route::get('checkout/{id}', [App\Http\Controllers\CheckoutController::class, 'checkout'])->name('checkout');
 Route::get('qr-code-checkout/{id}', [App\Http\Controllers\CheckoutController::class, 'qrcode']);
 Route::get('/my-order/{id}', [App\Http\Controllers\orderController::class, 'order']);

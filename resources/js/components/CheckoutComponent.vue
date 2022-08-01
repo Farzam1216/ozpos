@@ -317,9 +317,22 @@
                             </div>
                         </div>
                         <div class="bg-white p-3 py-3 border-bottom clearfix">
-                            <div class="input-group-sm mb-2 input-group">
-                                <input placeholder="Enter promo code" type="text" class="form-control">
-                                <div class="input-group-append"><button type="button" class="btn btn-primary"><i class="feather-percent"></i> APPLY</button></div>
+                            <div v-if="LoginStatus == false" class="input-group-sm mb-2 input-group">
+                                <input placeholder="Enter promo code" v-model="promo" type="text" class="form-control">
+                                <div class="input-group-append"><button @click="promoMethod()" type="button" class="btn btn-primary"><i class="feather-percent"></i> APPLY</button></div>
+                                <br>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <p v-if="promoErrors.length">
+                                                <b class="text-danger">Please correct the following errors:</b>
+                                                <ul >
+                                                    <li class="text-danger" v-for="error in promoErrors" :key="error.id">{{ error }}</li>
+                                                </ul>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="mb-0 input-group">
                                 <div class="input-group-prepend"><span class="input-group-text"><i class="feather-message-square"></i></span></div>
@@ -327,10 +340,10 @@
                             </div>
                         </div>
                         <div class="bg-white p-3 clearfix border-bottom">
-                            <p class="mb-1">Item Total <span class="float-right text-dark">${{total}}</span></p>
+                            <p class="mb-1">Item Total <span class="float-right text-dark">${{itemtotal}}</span></p>
                             <!-- <p class="mb-1">Restaurant Charges <span class="float-right text-dark">$62.8</span></p> -->
                             <!-- <p class="mb-1">Delivery Fee<span class="text-info ml-1"><i class="feather-info"></i></span><span class="float-right text-dark">$10</span></p> -->
-                            <p class="mb-1 text-success">Total Discount<span class="float-right text-success">$0</span></p>
+                            <p v-if=" this.calculateDiscount != null" class="mb-1 text-success">Total Discount<span class="float-right text-success">${{ calculateDiscount }}</span></p>
                             <hr>
                             <h6 id="checkout" class="font-weight-bold mb-0">TO PAY <span class="float-right">${{total}}</span></h6>
                         </div>
@@ -434,6 +447,12 @@ export default {
         },
   mounted() {
 
+                if(this.$session.exists()){
+                    let sessionValues = this.$session.getAll();
+                    this.loginID = sessionValues.id;
+                    this.LoginStatus = false;
+                }
+
             this.$getLocation({})
                 .then(coordinates => {
                         this.coordinates = coordinates;
@@ -469,6 +488,8 @@ export default {
                     height: 50,
                     longtitle: true
                 },
+      promo:null,
+      promoErrors:[],
       address: "",
       currentPlace:null,
       errors: [],
@@ -521,10 +542,70 @@ export default {
          pickup:false,
          delivery:true,
          method:'',
+         addressLat:'',
+         addressLang:'',
+         address_id:'',
+         cartSession:'',
+         disocuntPercentage :null,
+         disconutAmount :null,
+         calculateDiscount:null,
     };
   },
    components: { VueGoogleAutocomplete, facebookLogin, GoogleLogin },
   methods: {
+    reloadPage() {
+      window.location.reload();
+    },
+    promoMethod(){
+        this.isVisible = true;
+        if (this.promo == null) {
+            this.promoErrors.push("Please Enter Promo Code First.");
+            this.isVisible = false;
+        }
+        else{
+                this.promoErrors = [];
+                axios.post('https://backend.ozfoodz.com.au/api/apply_promo_code_vuejs',{
+				promo : this.promo,
+                userID : this.loginID,
+                date : 8/1/2022,
+                amount: this.total,
+                vendor_id: this.vendor_id,
+				}).then( (response) => {
+                    if (response.status == 200) {
+                        console.log(response);
+                        if(response.data.success == false){
+                            this.promoErrors.push(response.data.data);
+                            this.cartDataa();
+                            this.calculateDiscount = null;
+                            this.promo == null;
+                        }
+                            if(response.data.data.discountType == 'percentage'){
+                                this.calculateDiscount = response.data.data.discount / 100;
+                                this.calculateDiscount = (this.total * this.calculateDiscount).toFixed(2);
+                                this.total =  this.total - (this.total * (response.data.data.discount / 100));
+                                this.total = this.total.toFixed(2);
+                            }
+                        this.isVisible = false;
+                    } else {
+                        console.warn(response.data);
+
+                    this.isVisible = false;
+                    }
+                    }).catch( (error)=> {
+                        console.log( error.response.data)
+                        this.isVisible = false;
+                    })
+        }
+
+
+
+
+
+    },
+    userLogout(){
+                this.$session.destroy()
+                this.userId = null;
+            },
     getAddressData: function (addressData, placeResultData, id) {
         this.address = addressData;
     },
@@ -553,7 +634,27 @@ export default {
                         console.error(error);
                     });
             },
+    storeAddress(){
+        axios.post('https://backend.ozfoodz.com.au/api/user_address',{
+				address : this.existingAddress,
+				type : 'home',
+                userID : this.loginID,
+                lat:this.addressLat,
+                lang:this.addressLang,
+				}).then( (response) => {
+                    if (response.status == 200) {
+                        this.address_id = response.data.data.address.id;
+                        this.getuseraddress();
 
+                    } else {
+                        console.warn(response.data);
+
+                    }
+
+                    }).catch( (error)=> {
+                        console.log( error.response.data)
+                    })
+    },
     cartDataa() {
       axios
         .get("https://backend.ozfoodz.com.au/api/cartData/" + this.cartID)
@@ -562,7 +663,17 @@ export default {
           this.total = 0.0;
           this.cartData.data.cart.forEach((cartData) => {
             this.total = this.total + cartData.price;
-            this.existingAddress = cartData.textAddress;
+            this.itemtotal = this.total;
+            this.cartSession = cartData.session_id;
+            if(cartData.textAddress){
+                this.existingAddress = cartData.textAddress;
+                this.addressLang = cartData.lang;
+                this.addressLat = cartData.lat;
+
+                if(this.$session.exists()){
+                    this.storeAddress();
+                }
+            }
           });
           console.log(response.data);
         })
@@ -623,16 +734,19 @@ export default {
                         this.loginErrors.push(response.data.message);
 
                     }else{
-                        console.log(response.data)
+                        this.$session.start()
+                        this.$session.set('token', response.data.data.token)
+                        this.$session.set('id', response.data.data.id)
                         this.isVisible =false;
                         this.LoginStatus = false;
                         this.loginID =response.data.data.id;
                         this.loginUserName = response.data.data.name;
                         this.getuseraddress(response.data.data.id);
 
+                        this.reloadPage();
                     };
                 }else {
-                     this.isVisible =false;
+                    this.isVisible =false;
                     console.warn(response.data);
                 }
                 }).catch( (error)=> {
@@ -655,6 +769,7 @@ export default {
         .get("https://backend.ozfoodz.com.au/api/get-user-address/"+ this.loginID)
         .then((response) => {
           this.userAddress = response.data;
+          this.address_id = this.userAddress.address.id;
           console.log(this.userAddress);
         })
         .catch((error) => {
@@ -725,14 +840,17 @@ export default {
           else{
              this.method = "Delivery";
           }
+
+
+
           axios.post('https://backend.ozfoodz.com.au/api/book_order_vuejs',{
-				address_id : this.existingAddress,
+                session_id : this.cartSession,
+				address_id : this.address_id,
 				payment_type : this.paymentMethod,
                 delivery_type : this.method,
                 user_id : this.loginID,
                 vendor_id: this.vendor_id,
                 amount:this.total,
-                address_id:this.existingAddress,
                 sub_total : this.total,
                 date:this.date,
                 time:this.time,
@@ -762,6 +880,7 @@ export default {
                 }).catch( (error)=> {
                     console.log( error.response.data)
                      this.submitBtn =true;
+                     this.isVisible = false;
                     swal({
                             title: "Something went wrong!",
                             text: error.response.data.message,
@@ -801,7 +920,7 @@ export default {
         },
         onFailure(googleUser){
             console.log('failure apis');
- console.log(googleUser);
+        console.log(googleUser);
         },
         getUserData(facebook){
             console.log(facebook);

@@ -18,6 +18,14 @@ class CheckoutController extends Controller
 
     public function checkout($id)
     {
+        $finalData = [];
+        $cart = array();
+        $menu = array();
+        $addons = array();
+        $size = array();
+        $finalData['vendor_id'] = 7;
+        $finalData['cart'] = [];
+
         $cartID = $id;
         return view('frontend.checkout',compact('cartID'));
     }
@@ -55,9 +63,15 @@ class CheckoutController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function logouts()
     {
         //
+        echo "<script>";
+        echo " var currentUrl =  document.referrer;";
+        echo "sessionStorage.clear();  ";
+        echo "window.location.href = '/';";
+        echo "</script>";
+        // return redirect()->back();
     }
 
     /**

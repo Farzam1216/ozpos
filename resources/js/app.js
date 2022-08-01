@@ -41,6 +41,8 @@ Vue.use(VueGoogleMaps, {
     installComponents: true,
 })
 
+
+
 // import { GmapMarker } from 'vue2-google-maps/src/components/marker'
 // Vue.component('GmapMarker', GmapMarker)
 

@@ -17,44 +17,7 @@
                     <ul class="nav nav-tabsa custom-tabsa border-0 flex-column bg-white rounded overflow-hidden shadow-sm p-2 c-t-order" id="myTab" role="tablist">
                         <li class="nav-item border-top" role="presentation">
                             <a class="nav-link border-0 text-dark py-3 active" @click="allOrders()" id="completed-tab" data-toggle="tab" href="#completed" role="tab" aria-controls="completed" aria-selected="true">
-                                <i class="feather-truck mr-2 text-danger mb-0"></i> All Orders</a>
-                        </li>
-                        <li class="nav-item border-top" role="presentation">
-                            <a class="nav-link border-0 text-dark py-3" @click="approvess()" id="canceled-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="canceled" aria-selected="false">
-                                <i class="feather-truck mr-2 text-danger mb-0"></i> Approved</a>
-                        </li>
-                        <li class="nav-item border-top" role="presentation">
-                            <a class="nav-link border-0 text-dark py-3" @click="pendings()" id="canceled-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="canceled" aria-selected="false">
-                                <i class="feather-truck mr-2 text-danger mb-0"></i> Pending</a>
-                        </li>
-
-                        <li class="nav-item border-top" role="presentation">
-                            <a class="nav-link border-0 text-dark py-3" @click="preparings()"  id="progress-tab" data-toggle="tab" href="#preparing" role="tab" aria-controls="progress" aria-selected="false">
-                                <i class="feather-clock mr-2 text-warning mb-0"></i> Preparing Food</a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link border-0 text-dark py-3 " @click="completeds()" id="completeds-tab" data-toggle="tab" href="#completeds" role="tab" aria-controls="completeds" aria-selected="true">
-                                <i class="feather-check mr-2 text-success mb-0"></i> Completed</a>
-                        </li>
-                        <li class="nav-item border-top" role="presentation">
-                            <a class="nav-link border-0 text-dark py-3" @click="readys()" id="progress-tab" data-toggle="tab" href="#ready" role="tab" aria-controls="progress" aria-selected="false">
-                                <i class="feather-watch mr-2 text-success mb-0"></i> Ready To Pickup</a>
-                        </li>
-                        <li class="nav-item border-top" role="presentation">
-                            <a class="nav-link border-0 text-dark py-3" @click="picked()" id="progress-tab" data-toggle="tab" href="#picked" role="tab" aria-controls="progress" aria-selected="false">
-                                <i class="feather-watch mr-2 text-success mb-0"></i> Picked By Driver</a>
-                        </li>
-                        <li class="nav-item border-top" role="presentation">
-                            <a class="nav-link border-0 text-dark py-3" @click="delivereds()" id="canceled-tab" data-toggle="tab" href="#deliver" role="tab" aria-controls="canceled" aria-selected="false">
-                                <i class="feather-send mr-2 text-danger mb-0"></i> Delivered</a>
-                        </li>
-                        <li class="nav-item border-top" role="presentation">
-                            <a class="nav-link border-0 text-dark py-3" @click="cancels()" id="canceled-tab" data-toggle="tab" href="#canceled" role="tab" aria-controls="canceled" aria-selected="false">
-                                <i class="feather-x-circle mr-2 text-danger mb-0"></i> Canceled</a>
-                        </li>
-                        <li class="nav-item border-top" role="presentation">
-                            <a class="nav-link border-0 text-dark py-3" @click="rejects()" id="canceled-tab" data-toggle="tab" href="#rejects" role="tab" aria-controls="canceled" aria-selected="false">
-                                <i class="feather-x mr-2 text-danger mb-0"></i> Reject</a>
+                                <i class="feather-truck mr-2 text-danger mb-0"></i> My Orders</a>
                         </li>
 
                     </ul>
@@ -340,8 +303,12 @@
                                             <p>ORDER {{orderData.order_id}}</p>
                                             <!-- <p class="mb-0 small"><a href="#">View Details</a></p> -->
                                         </div>
-                                        <div class="ml-auto">
-                                            <p class="bg-success text-white py-1 px-2 rounded small mb-1">{{orderData.order_status}}</p>
+                                        <div class="ml-auto" v-if="orderData.id != null ">
+                                            <p class="bg-success text-white py-1 px-2 rounded small mb-1" v-if="firebaseData[orderData.id] && firebaseData[orderData.id].status!='ACCEPT' && firebaseData[orderData.id].status !='PICKUP'"> {{firebaseData[orderData.id].status }}</p>
+                                            <p class="bg-success text-white py-1 px-2 rounded small mb-1" v-if="firebaseData[orderData.id] && firebaseData[orderData.id].status =='ACCEPT'">WAITING FOR DRIVER TO PICKUP</p>
+                                            <p class="bg-success text-white py-1 px-2 rounded small mb-1" v-if="firebaseData[orderData.id] && firebaseData[orderData.id].status =='PICKUP'">PICKED UP BY THE DRIVER</p>
+
+                                            <p class="bg-success text-white py-1 px-2 rounded small mb-1" v-if="!firebaseData[orderData.id]"> PENDING</p>
                                             <p class="small font-weight-bold text-center"><i class="feather-clock"></i> {{orderData.time}} {{orderData.date}}</p>
                                         </div>
                                     </div>
@@ -349,12 +316,10 @@
                                         <div class="small">
                                             <p v-for="items in orderData.orderItems" :key="items.id" class="text- font-weight-bold mb-0">{{ items.item_name }} x {{items.qty}}</p>
                                         </div>
-                                        <div class="text-muted m-0 ml-auto mr-3 small">Total Payment<br>
-                                            <span class="text-dark font-weight-bold">${{orderData.sub_total}}</span>
-                                        </div>
-                                        <div class="text-right">
+                                        <div class="text-muted m-0 ml-auto mr-1 small">
                                             <a href="" class="btn btn-primary px-3">Total Payment</a>
                                             <a href="" class="btn btn-outline-primary px-3">${{orderData.sub_total}}</a>
+                                            <a v-if="firebaseData[orderData.id] && firebaseData[orderData.id].status =='PICKUP'" :href="'/track/' + orderData.id" class="btn btn-primary px-3">Track On Map</a>
                                         </div>
                                     </div>
                                 </div>
@@ -403,12 +368,39 @@
 </template>
 
 <script>
+
+import { initializeApp } from 'firebase/app';
+import { getDatabase,ref,onValue } from "firebase/database";
+
+// TODO: Replace the following with your app's Firebase project configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyCr8iiALRjdxKxk8CGdM10C8L4Q8yS7Ed4",
+    authDomain: "mealup-af29b.firebaseapp.com",
+    databaseURL: "https://mealup-af29b-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "mealup-af29b",
+    storageBucket: "mealup-af29b.appspot.com",
+    messagingSenderId: "502253922422",
+    appId: "1:502253922422:web:80f34da78b18bce5701757",
+    measurementId: "G-77FRR1X6L3"
+};
+
+const app = initializeApp(firebaseConfig);
     export default {
         mounted() {
             this.setdata();
             this.orderHistory();
-            this.cartDataa();
+            // this.cartDataa();
             this.getVendorDetails();
+            if(this.$session.exists()){
+                            let sessionValues = this.$session.getAll();
+                            this.userId = sessionValues.id;
+                    }
+                      const db = getDatabase();;
+                            const lang = ref(db, 'orders/'+this.userId);
+                            onValue(lang, (snapshot) => {
+                              this.firebaseData= snapshot.val();
+                              console.log(this.firebaseData);
+                            });
         },
         props: {
             cart_prop: String,
@@ -433,10 +425,17 @@
                all:true,
                approves:false,
                isVisible:false,
+               userId:null,
+               firebaseData :null,
+               orderStatus : null,
             }
         },
 
         methods : {
+            userLogout(){
+                this.$session.destroy()
+                this.userId = null;
+            },
             setdata() {
                 // this.cartID = this.cart_prop;
                 this.orderID = this.order_prop;
@@ -446,14 +445,13 @@
                  axios
                 .get("https://backend.ozfoodz.com.au/api/my-orders/" + this.orderID)
                 .then((response) => {
-                     console.log('order data');
-                     console.log(response.data.data.length);
-                     this.orderData = response.data
+                     this.orderData = response.data;
+                     console.log(this.orderData);
                      this.vendor_id = response.data.data[0].vendor_id;
                      this.isVisible = false;
                 })
                 .catch((error) => {
-                console.error(error);
+                 console.error(error);
                  this.isVisible = false;
                 });
             },
@@ -483,103 +481,103 @@
                     console.error(error);
                     });
                 },
-                pendings(){
-                    this.pending = true;
-                    this.preparing =false;
-                    this.completed =false;
-                    this.deliver =false;
-                    this.ready =false;
-                    this.cancel =false;
-                    this.reject =false;
-                    this.pickedByDriver =false;
-                    this.all = false;
-                    this.approves=false;
-                },
-                preparings(){
-                    this.pending = false;
-                    this.preparing =true;
-                    this.completed =false;
-                    this.deliver =false;
-                    this.ready =false;
-                    this.cancel =false;
-                    this.reject =false;
-                    this.pickedByDriver =false;
-                    this.all = false;
-                      this.approves=false;
-                },
-                completeds(){
+                // pendings(){
+                //     this.pending = true;
+                //     this.preparing =false;
+                //     this.completed =false;
+                //     this.deliver =false;
+                //     this.ready =false;
+                //     this.cancel =false;
+                //     this.reject =false;
+                //     this.pickedByDriver =false;
+                //     this.all = false;
+                //     this.approves=false;
+                // },
+                // preparings(){
+                //     this.pending = false;
+                //     this.preparing =true;
+                //     this.completed =false;
+                //     this.deliver =false;
+                //     this.ready =false;
+                //     this.cancel =false;
+                //     this.reject =false;
+                //     this.pickedByDriver =false;
+                //     this.all = false;
+                //       this.approves=false;
+                // },
+                // completeds(){
 
-                    this.pending = false;
-                    this.preparing =false;
-                    this.completed =true;
-                    this.deliver =false;
-                    this.ready =false;
-                    this.cancel =false;
-                    this.reject =false;
-                    this.pickedByDriver =false;
-                    this.all = false;
-                      this.approves=false;
-                },
-                delivereds(){
-                    this.pending = false;
-                    this.preparing =false;
-                    this.completed =false;
-                    this.deliver =true;
-                    this.ready =false;
-                    this.cancel =false;
-                    this.reject =false;
-                    this.pickedByDriver =false;
-                    this.all = false;
-                      this.approves=false;
-                },
-                readys(){
-                    this.pending = false;
-                    this.preparing =false;
-                    this.completed =false;
-                    this.deliver =false;
-                    this.ready =true;
-                    this.cancel =false;
-                    this.reject =false;
-                    this.pickedByDriver =false;
-                    this.all = false;
-                      this.approves=false;
-                },
-                cancels(){
-                    this.pending = false;
-                    this.preparing =false;
-                    this.completed =false;
-                    this.deliver =false;
-                    this.ready =false;
-                    this.cancel =true;
-                    this.reject =false;
-                    this.pickedByDriver =false;
-                    this.all = false;
-                      this.approves=false;
-                },
-                rejects(){
-                    this.pending = false;
-                    this.preparing =false;
-                    this.completed =false;
-                    this.deliver =false;
-                    this.ready =false;
-                    this.cancel =false;
-                    this.reject =true;
-                    this.pickedByDriver =false;
-                    this.all = false;
-                      this.approves=false;
-                },
-                picked(){
-                    this.pending = false;
-                    this.preparing =false;
-                    this.completed =false;
-                    this.deliver =false;
-                    this.ready =false;
-                    this.cancel =false;
-                    this.reject =false;
-                    this.pickedByDriver =true;
-                    this.all = false;
-                      this.approves=false;
-                },
+                //     this.pending = false;
+                //     this.preparing =false;
+                //     this.completed =true;
+                //     this.deliver =false;
+                //     this.ready =false;
+                //     this.cancel =false;
+                //     this.reject =false;
+                //     this.pickedByDriver =false;
+                //     this.all = false;
+                //       this.approves=false;
+                // },
+                // delivereds(){
+                //     this.pending = false;
+                //     this.preparing =false;
+                //     this.completed =false;
+                //     this.deliver =true;
+                //     this.ready =false;
+                //     this.cancel =false;
+                //     this.reject =false;
+                //     this.pickedByDriver =false;
+                //     this.all = false;
+                //       this.approves=false;
+                // },
+                // readys(){
+                //     this.pending = false;
+                //     this.preparing =false;
+                //     this.completed =false;
+                //     this.deliver =false;
+                //     this.ready =true;
+                //     this.cancel =false;
+                //     this.reject =false;
+                //     this.pickedByDriver =false;
+                //     this.all = false;
+                //       this.approves=false;
+                // },
+                // cancels(){
+                //     this.pending = false;
+                //     this.preparing =false;
+                //     this.completed =false;
+                //     this.deliver =false;
+                //     this.ready =false;
+                //     this.cancel =true;
+                //     this.reject =false;
+                //     this.pickedByDriver =false;
+                //     this.all = false;
+                //       this.approves=false;
+                // },
+                // rejects(){
+                //     this.pending = false;
+                //     this.preparing =false;
+                //     this.completed =false;
+                //     this.deliver =false;
+                //     this.ready =false;
+                //     this.cancel =false;
+                //     this.reject =true;
+                //     this.pickedByDriver =false;
+                //     this.all = false;
+                //       this.approves=false;
+                // },
+                // picked(){
+                //     this.pending = false;
+                //     this.preparing =false;
+                //     this.completed =false;
+                //     this.deliver =false;
+                //     this.ready =false;
+                //     this.cancel =false;
+                //     this.reject =false;
+                //     this.pickedByDriver =true;
+                //     this.all = false;
+                //       this.approves=false;
+                // },
                 allOrders(){
                     this.pending = false;
                     this.preparing =false;
@@ -592,18 +590,18 @@
                     this.all = true;
                       this.approves=false;
                 },
-                approvess(){
-                    this.pending = false;
-                    this.preparing =false;
-                    this.completed =false;
-                    this.deliver =false;
-                    this.ready =false;
-                    this.cancel =false;
-                    this.reject =false;
-                    this.pickedByDriver =false;
-                    this.all = false;
-                    this.approves=true;
-                }
+                // approvess(){
+                //     this.pending = false;
+                //     this.preparing =false;
+                //     this.completed =false;
+                //     this.deliver =false;
+                //     this.ready =false;
+                //     this.cancel =false;
+                //     this.reject =false;
+                //     this.pickedByDriver =false;
+                //     this.all = false;
+                //     this.approves=true;
+                // }
 
         }
     }

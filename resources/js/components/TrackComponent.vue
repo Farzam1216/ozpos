@@ -51,7 +51,9 @@
             </div>
         </div> -->
         <section v-if="isVisible == false" class="section bg-white osahan-track-order-page position-relative">
-            <iframe class="position-absolute" :src="'https://www.google.com/maps/embed/v1/directions?key=AIzaSyBqh1mQPnqMSiOUlr-1_3p11XyOsPWRYHI&&origin='+driverAddress+'&destination=Amir Boys Hostle Comercial Markeet Rawalpindi+Pakistan&avoid=tolls|highways'" width="100%" height="676" frameborder="0"
+            <!-- <iframe class="position-absolute" :src="'https://www.google.com/maps/embed/v1/directions?key=AIzaSyBqh1mQPnqMSiOUlr-1_3p11XyOsPWRYHI&&origin='+driverAddress+'&destination=Amir Boys Hostle Comercial Markeet Rawalpindi+Pakistan&avoid=tolls|highways'" width="100%" height="676" frameborder="0"
+            style="border:0" allowfullscreen></iframe> -->
+             <iframe class="position-absolute" :src="'https://www.google.com/maps/embed/v1/directions?key=AIzaSyBqh1mQPnqMSiOUlr-1_3p11XyOsPWRYHI&&origin='+driverAddress+'&destination='+address" width="100%" height="676" frameborder="0"
             style="border:0" allowfullscreen></iframe>
             <!-- <div class="container pt-5 pb-5">
                 <div class="row d-flex align-items-center">
@@ -205,11 +207,25 @@ const app = initializeApp(firebaseConfig);
 
     export default {
         created() {
-            this.orderHistory();
             this.setData();
+            this.orderHistory();
+
+             onValue(lang, (snapshot) => {
+                              this.driverLang= snapshot.val();
+                              console.log(this.driverLang)
+                               this.getFullAddress();
+                            });
+                            // lat
+                            const lat = ref(db, 'drivers/42/driverLat');
+                            onValue(lat, (snapshot) => {
+                            this.driverLat= snapshot.val();
+                            this.getFullAddress();
+                            });
+
         },
         props: {
             user_address_prop:String,
+            order_id_prop:String,
         },
         data(){
             return{
@@ -220,6 +236,7 @@ const app = initializeApp(firebaseConfig);
                 driverLat:'',
                 driverAddress:'',
                 isVisible:true,
+                orderID:null,
             }
         },
         methods : {
@@ -241,13 +258,14 @@ const app = initializeApp(firebaseConfig);
 
             orderHistory(){
                  axios
-                .get("https://backend.ozfoodz.com.au/api/track-order/443")
+                .get('https://backend.ozfoodz.com.au/api/track-order/'+this.orderID)
                 .then((response) => {
                      this.trackData = response.data;
                             const db = getDatabase();
                             const lang = ref(db, 'drivers/42/driverLang');
                             onValue(lang, (snapshot) => {
                               this.driverLang= snapshot.val();
+                              console.log(this.driverLang)
                                this.getFullAddress();
                             });
                             // lat
@@ -265,6 +283,7 @@ const app = initializeApp(firebaseConfig);
             },
             setData(){
                 this.address = this.user_address_prop;
+                this.orderID =Number(this.order_id_prop);
             }
         }
     }

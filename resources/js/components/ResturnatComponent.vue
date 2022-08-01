@@ -368,153 +368,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <div id="ratings-and-reviews" class="bg-white shadow-sm d-flex align-items-center rounded p-3 mb-3 clearfix restaurant-detailed-star-rating">
-                            <h6 class="mb-0">Rate this Place</h6>
-                            <div class="star-rating ml-auto">
-                                <div class="d-inline-block h6 m-0"><i class="feather-star text-warning"></i>
-                                    <i class="feather-star text-warning"></i>
-                                    <i class="feather-star text-warning"></i>
-                                    <i class="feather-star text-warning"></i>
-                                    <i class="feather-star"></i>
-                                </div>
-                                <b class="text-black ml-2">334</b>
-                            </div>
-                        </div>
-                        <div class="bg-white rounded p-3 mb-3 clearfix graph-star-rating rounded shadow-sm">
-                            <h6 class="mb-0 mb-1">Ratings and Reviews</h6>
-                            <p class="text-muted mb-4 mt-1 small">Rated 3.5 out of 5</p>
-                            <div class="graph-star-rating-body">
-                                <div class="rating-list">
-                                    <div class="rating-list-left font-weight-bold small">5 Star</div>
-                                    <div class="rating-list-center">
-                                        <div class="progress">
-                                            <div role="progressbar" class="progress-bar bg-info" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100" style="width: 56%;"></div>
-                                        </div>
-                                    </div>
-                                    <div class="rating-list-right font-weight-bold small">56 %</div>
-                                </div>
-                                <div class="rating-list">
-                                    <div class="rating-list-left font-weight-bold small">4 Star</div>
-                                    <div class="rating-list-center">
-                                        <div class="progress">
-                                            <div role="progressbar" class="progress-bar bg-info" aria-valuenow="23" aria-valuemin="0" aria-valuemax="100" style="width: 23%;"></div>
-                                        </div>
-                                    </div>
-                                    <div class="rating-list-right font-weight-bold small">23 %</div>
-                                </div>
-                                <div class="rating-list">
-                                    <div class="rating-list-left font-weight-bold small">3 Star</div>
-                                    <div class="rating-list-center">
-                                        <div class="progress">
-                                            <div role="progressbar" class="progress-bar bg-info" aria-valuenow="11" aria-valuemin="0" aria-valuemax="100" style="width: 11%;"></div>
-                                        </div>
-                                    </div>
-                                    <div class="rating-list-right font-weight-bold small">11 %</div>
-                                </div>
-                                <div class="rating-list">
-                                    <div class="rating-list-left font-weight-bold small">2 Star</div>
-                                    <div class="rating-list-center">
-                                        <div class="progress">
-                                            <div role="progressbar" class="progress-bar bg-info" aria-valuenow="6" aria-valuemin="0" aria-valuemax="100" style="width: 6%;"></div>
-                                        </div>
-                                    </div>
-                                    <div class="rating-list-right font-weight-bold small">6 %</div>
-                                </div>
-                                <div class="rating-list">
-                                    <div class="rating-list-left font-weight-bold small">1 Star</div>
-                                    <div class="rating-list-center">
-                                        <div class="progress">
-                                            <div role="progressbar" class="progress-bar bg-info" aria-valuenow="4" aria-valuemin="0" aria-valuemax="100" style="width: 4%;"></div>
-                                        </div>
-                                    </div>
-                                    <div class="rating-list-right font-weight-bold small">4 %</div>
-                                </div>
-                            </div>
-                            <div class="graph-star-rating-footer text-center mt-3"><button type="button" class="btn btn-primary btn-block btn-sm">Rate and Review</button></div>
-                        </div>
-                        <div class="bg-white p-3 mb-3 restaurant-detailed-ratings-and-reviews shadow-sm rounded">
-                            <a class="text-primary float-right" href="#">Top Rated</a>
-                            <h6 class="mb-1">All Ratings and Reviews</h6>
-                            <div class="reviews-members py-3">
-                                <div class="media">
-                                    <a href="#"><img alt="#" src="img/reviewer1.png" class="mr-3 rounded-pill"></a>
-                                    <div class="media-body">
-                                        <div class="reviews-members-header">
-                                            <div class="star-rating float-right">
-                                                <div class="d-inline-block" style="font-size: 14px;"><i class="feather-star text-warning"></i>
-                                                    <i class="feather-star text-warning"></i>
-                                                    <i class="feather-star text-warning"></i>
-                                                    <i class="feather-star text-warning"></i>
-                                                    <i class="feather-star"></i>
-                                                </div>
-                                            </div>
-                                            <h6 class="mb-0"><a class="text-dark" href="#">Trump</a></h6>
-                                            <p class="text-muted small">Tue, 20 Mar 2020</p>
-                                        </div>
-                                        <div class="reviews-members-body">
-                                            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classNameical Latin literature from 45 BC, making it over 2000 years old.</p>
-                                        </div>
-                                        <div class="reviews-members-footer"><a class="total-like btn btn-sm btn-outline-primary" href="#"><i class="feather-thumbs-up"></i> 856M</a> <a class="total-like btn btn-sm btn-outline-primary" href="#"><i class="feather-thumbs-down"></i> 158K</a>
-                                            <span class="total-like-user-main ml-2" dir="rtl">
-                                                <a href="#" aria-describedby="tooltip-top0"><img alt="#" src="img/reviewer3.png" class="total-like-user rounded-pill"></a>
-                                                <a href="#" aria-describedby="tooltip-top1"><img alt="#" src="img/reviewer4.png" class="total-like-user rounded-pill"></a>
-                                                <a href="#"><img alt="#" src="img/reviewer5.png" class="total-like-user rounded-pill"></a>
-                                                <a href="#" aria-describedby="tooltip-top3"><img alt="#" src="img/reviewer6.png" class="total-like-user rounded-pill"></a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="reviews-members py-3">
-                                <div class="media">
-                                    <a href="#"><img alt="#" src="img/reviewer2.png" class="mr-3 rounded-pill"></a>
-                                    <div class="media-body">
-                                        <div class="reviews-members-header">
-                                            <div class="star-rating float-right">
-                                                <div class="d-inline-block" style="font-size: 14px;"><i class="feather-star text-warning"></i>
-                                                    <i class="feather-star text-warning"></i>
-                                                    <i class="feather-star text-warning"></i>
-                                                    <i class="feather-star text-warning"></i>
-                                                    <i class="feather-star"></i>
-                                                </div>
-                                            </div>
-                                            <h6 class="mb-0"><a class="text-dark" href="#">Jhon Smith</a></h6>
-                                            <p class="text-muted small">Tue, 20 Mar 2020</p>
-                                        </div>
-                                        <div class="reviews-members-body">
-                                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-                                        </div>
-                                        <div class="reviews-members-footer"><a class="total-like btn btn-sm btn-outline-primary" href="#"><i class="feather-thumbs-up"></i> 88K</a> <a class="total-like btn btn-sm btn-outline-primary" href="#"><i class="feather-thumbs-down"></i> 1K</a><span class="total-like-user-main ml-2"
-                                                dir="rtl"><a href="#"><img alt="#" src="img/reviewer3.png" class="total-like-user rounded-pill"></a><a href="#"><img alt="#" src="img/reviewer4.png" class="total-like-user rounded-pill"></a><a href="#"><img alt="#" src="img/reviewer5.png" class="total-like-user rounded-pill"></a><a href="#"><img alt="#" src="img/reviewer6.png" class="total-like-user rounded-pill"></a></span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <a class="text-center w-100 d-block mt-3 font-weight-bold" href="#">See All Reviews</a>
-                        </div>
-                        <div class="bg-white p-3 rating-review-select-page rounded shadow-sm">
-                            <h6 class="mb-3">Leave Comment</h6>
-                            <div class="d-flex align-items-center mb-3">
-                                <p class="m-0 small">Rate the Place</p>
-                                <div class="star-rating ml-auto">
-                                    <div class="d-inline-block"><i class="feather-star text-warning"></i>
-                                        <i class="feather-star text-warning"></i>
-                                        <i class="feather-star text-warning"></i>
-                                        <i class="feather-star text-warning"></i>
-                                        <i class="feather-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <form>
-                                <div class="form-group"><label class="form-label small">Your Comment</label><textarea class="form-control"></textarea></div>
-                                <div class="form-group mb-0"><button type="button" class="btn btn-primary btn-block"> Submit Comment </button></div>
-                            </form>
-                        </div>
-                    </div>
+
                 </div>
-                <div class="col-md-4 mt-4 overflow-hidden">
+                <div class="col-md-4 mt-4 ">
                     <div class="osahan-cart-item rounded rounded shadow-sm overflow-hidden bg-white sticky_sidebar">
                         <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3">
                             <img alt="osahan" v-bind:src=" vendor.data.vendor.image" style="width:50px;" class="mr-3 rounded-circle img-fluid">
@@ -523,22 +379,8 @@
                                 <p class="mb-0 small text-muted"><i class="feather-map-pin"></i> {{ vendor.data.vendor.address }}</p>
                             </div>
                         </div>
-                        <div v-if="cartData != null" class="bg-white py-2">
-                            <div  v-for="cartData in cartData.data.cart" :key="cartData.id" class="gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
-                                <div class="media align-items-center">
-                                    <div class="mr-2 text-danger" style="margin-bottom: 15px;">&middot;</div>
-                                    <div class="media-body">
-                                        <h6 class="mb-1">{{cartData.menu_name}}</h6>
-                                        <p class="text-gray mb-0 ml-2 text-muted small">${{cartData.unit_price}}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <span class="count-number float-right"><button type="button" class="btn-sm left dec btn btn-outline-secondary" @click="minusQuantity(vendor.data.vendor.id,cartData.session_id,cartData.id)"> <i class="feather-minus"></i> </button><input class="count-number-input"  type="text" readonly="" :value="cartData.quantity"><button type="button" class="btn-sm right inc btn btn-outline-secondary" @click="addQuantity(vendor.data.vendor.id,cartData.session_id,cartData.id)"> <i class="feather-plus"></i> </button></span>
-                                </div>
-                            </div>
-                        </div>
                         <div  class="bg-white p-3 clearfix ">
-                        <div  v-if="cartData != null" id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                <div  v-if="cartData != null" id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                     <div class="osahan-card-body p-3">
                                         <form>
                                             <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
@@ -592,54 +434,42 @@
                                                    <div  class="osahan-cart-item mb-3 rounded shadow-sm bg-white overflow-hidden">
                                                         <div class="osahan-cart-item-profile bg-white ">
                                                             <div class="d-flex flex-column">
-                                                                <h6 class="mb-3 font-weight-bold">Delivery Address</h6>
+                                                                <h6 class="mb-3 font-weight-bold">Select Delivery Address</h6>
                                                                 <div class="row">
                                                                     <div class="custom-control col-lg-12 custom-radio mb-3 position-relative border-custom-radio">
                                                                         <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
                                                                         <label class="custom-control-label w-100" for="customRadioInline1">
-                                                                <div>
-                                                                    <div class="bg-white rounded shadow-sm w-100">
-                                                                        <!-- <div class="d-flex align-items-center mb-2">
-                                                                            <h6 class="mb-0">Home</h6>
-                                                                            <p class="mb-0 badge badge-success ml-auto"><i class="icofont-check-circled"></i> Default</p>
-                                                                        </div> -->
-                                                                        <input type="text" placeholder="Origin" class="form-control" hidden ref="origin" />
-                                                                        <vue-google-autocomplete
-                                                                            v-model="textAddress"
-                                                                            class="form-control"
-                                                                            id="map"
-                                                                            placeholder="Please type your address"
-                                                                            v-on:placechanged="getAddressData">
-                                                                        </vue-google-autocomplete>
+                                                                            <div>
+                                                                                <div class="bg-white rounded shadow-sm w-100">
+                                                                                    <input type="text" placeholder="Origin" class="form-control" hidden ref="origin" />
+                                                                                    <vue-google-autocomplete
+                                                                                        :country="['au']"
+                                                                                        v-model="textAddress"
+                                                                                        class="form-control b2"
+                                                                                        id="map"
+                                                                                        placeholder="Please type your address"
+                                                                                        v-on:placechanged="getAddressData">
+                                                                                    </vue-google-autocomplete>
+                                                                                </div>
+                                                                                <!-- <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-light border-top">Edit</a> -->
+                                                                            </div>
+                                                                        </label>
                                                                     </div>
-                                                                    <!-- <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-light border-top">Edit</a> -->
                                                                 </div>
-                                                                </label>
+                                                                <!-- <h6 class="mb-3 font-weight-bold">Choose Order Time</h6>
+                                                                <div class="row">
+                                                                    <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                                                                        <label class="btn  border ">
+                                                                            <input  type="radio" name="options" id="option1"> ASAP
+                                                                        </label>
+                                                                        <label class="btn  border" style="width:140px">
+                                                                            <datetime type="datetime" class="" v-model="datetime12" use12-hour placeholder="Select Date and Time"></datetime>
+                                                                        </label>
                                                                     </div>
-                                                                    <!-- <div class="custom-control col-lg-6 custom-radio position-relative border-custom-radio">
-                                                                        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                                                                        <label class="custom-control-label w-100" for="customRadioInline2">
-                                                                <div>
-                                                                    <div class="p-3 rounded bg-white shadow-sm w-100">
-                                                                        <div class="d-flex align-items-center mb-2">
-                                                                            <h6 class="mb-0">Work</h6>
-                                                                            <p class="mb-0 badge badge-light ml-auto"><i class="icofont-check-circled"></i> Select</p>
-                                                                        </div>
-                                                                        <p class="small text-muted m-0">Model Town, Ludhiana</p>
-                                                                        <p class="small text-muted m-0">Punjab 141002, India</p>
-                                                                    </div>
-                                                                    <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-light border-top">Edit</a>
                                                                 </div>
-                                                                </label>
-                                                                    </div> -->
-                                                                </div>
-                                                                <a class="btn btn-primary" @click="checkAddress()"> CHECK ADDRESS </a>
-                                                                <!-- <p style="margin-left: 16px;" v-if="addressError.length">
-                                                                    <b class="text-danger">Please correct the Delivery Addres:</b>
-                                                                    <ul >
-                                                                        <li class="text-danger" v-for="error in addressError" :key="error.id">{{ error }}</li>
-                                                                    </ul>
-                                                                </p> -->
+                                                                <br> -->
+                                                                <a class="btn btn-primary text-white" @click="checkAddress()"> CHECK ADDRESS </a>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -648,15 +478,22 @@
                                         </form>
                                     </div>
                                 </div>
-                            <!-- <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                                <label class="btn btn-outline-secondary active">
-                                <input @click="delivery = true , pickup=false" type="radio" name="options" id="option1" checked> Delivery
-                                </label>
-                                <label class="btn btn-outline-secondary">
-                                <input @click="delivery = false , pickup=true" type="radio" name="options" id="option2"> Pickup
-                                </label>
-                            </div> -->
                         </div>
+                        <div v-if="cartData != null" class="bg-white py-2">
+                            <div  v-for="cartData in cartData.data.cart" :key="cartData.id" class="gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
+                                <div class="media align-items-center">
+                                    <div class="mr-2 text-danger" style="margin-bottom: 15px;">&middot;</div>
+                                    <div class="media-body">
+                                        <h6 class="mb-1">{{cartData.menu_name}}</h6>
+                                        <p class="text-gray mb-0 ml-2 text-muted small">${{cartData.unit_price}}</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <span class="count-number float-right"><button type="button" class="btn-sm left dec btn btn-outline-secondary" @click="minusQuantity(vendor.data.vendor.id,cartData.session_id,cartData.id)"> <i class="feather-minus"></i> </button><input class="count-number-input"  type="text" readonly="" :value="cartData.quantity"><button type="button" class="btn-sm right inc btn btn-outline-secondary" @click="addQuantity(vendor.data.vendor.id,cartData.session_id,cartData.id)"> <i class="feather-plus"></i> </button></span>
+                                </div>
+                            </div>
+                        </div>
+
                         <div v-if="cartData == null" class="bg-white p-3 clearfix border-bottom">
                             <h6 class="font-weight-bold mb-0">No data in cart.</h6>
                         </div>
@@ -666,7 +503,8 @@
                             <h6 class="font-weight-bold mb-0">TO PAY <span class="float-right">${{total}}</span></h6>
                         </div>
                         <div class="p-3">
-                            <a id="checkout" class="btn btn-success btn-block btn-lg" v-if="cartID != null && delivery == false && pickup == false" @click="check()" >checkout<i class="feather-arrow-right"></i></a>
+                            <a id="checkout" class="btn btn-success btn-block btn-lg" v-if="cartID != null && delivery == false && pickup == false && total != null && total < 200" @click="check()" >checkout<i class="feather-arrow-right"></i></a>
+                            <!-- <a id="checkout" class="btn btn-success btn-block btn-lg" v-if="total != null && total < 200" @click="check()" >checkout<i class="feather-arrow-right"></i></a> -->
                             <!-- <a id="checkout" class="btn btn-success btn-block btn-lg" v-if="cartID != null && addressStatus == false && pickup == false" @click="check()" >checkout<i class="feather-arrow-right"></i></a> -->
                             <a id="checkout" class="btn btn-success btn-block btn-lg" v-if="cartID != null && addressStatus == true  && delivery == true && pickup == false"  :href="'checkout/' + cartID" >checkout<i class="feather-arrow-right"></i></a>
                             <a id="checkout" class="btn btn-success btn-block btn-lg" v-if="cartID != null && pickup == true && delivery == false" :href="'checkout/' + cartID" >checkout<i class="feather-arrow-right"></i></a>
@@ -691,16 +529,22 @@
     import {RotateSquare2} from 'vue-loading-spinner'
     import { ModelObj } from 'vue-3d-model';
     import VueGoogleAutocomplete from "vue-google-autocomplete";
+    import { Datetime } from 'vue-datetime';
+    import VueSession from 'vue-session'
+    Vue.use(VueSession)
+    import LogoutButton from './NavbarComponent.vue';
+    import 'vue-datetime/dist/vue-datetime.css'
     export default {
         mounted() {
             this.isVisible = true;
             this.getVendorDetails();
-
-             console.log('autocomplete');
             // console.log(autocomplete)
 
-              const interval = setInterval(() => {
-            const autocomplete = new google.maps.places.Autocomplete(this.$refs["origin"]);
+             const interval = setInterval(() => {
+             const autocomplete = new google.maps.places.Autocomplete(this.$refs["origin"]);
+             autocomplete.setComponentRestrictions({
+                country: ["aus"],
+            });
             // console.log(autocomplete)
             }, 50)
         },
@@ -709,6 +553,8 @@
             VueSlickCarousel,
             RotateSquare2,
             VueGoogleAutocomplete,
+            datetime: Datetime,
+            LogoutButton,
         },
         data(){
             return{
@@ -794,7 +640,7 @@
                 quantity: 1,
                 vendor_id : '',
                 cartQuantity:'',
-                total:'',
+                total:null,
                 // end single menu cart
                 // end cart details
                 isVisible:false,
@@ -806,9 +652,14 @@
                 addressStatus:false,
                 addressError:[],
                 textAddress:'',
+                datetime12:''
             }
         },
         methods : {
+            userLogout(){
+                this.$session.destroy()
+                this.userId = null;
+            },
             getAddressData: function (addressData, placeResultData, id) {
                 this.address = addressData;
                 this.lang = this.address.longitude;
@@ -823,6 +674,11 @@
                 if(this.delivery==true){
                     this.addressError.push('Please Select a valid Address.');
                 }
+
+                if(this.total < 200){
+                    this.addressError.push('Minimum Order Amount is 200 AUS.');
+                }
+
 
             },
             checkAddress(){

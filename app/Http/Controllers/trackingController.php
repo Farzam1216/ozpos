@@ -26,8 +26,8 @@ class trackingController extends Controller
     public function track($order_id)
     {
         //
-        $trackData = json_decode(file_get_contents('http://ozpos.geekss.com.au/api/track-order/'.$order_id), true);
-        $order = json_decode(file_get_contents('http://ozpos.geekss.com.au/api/get-order/'.$order_id), true);
+        $trackData = json_decode(file_get_contents('http://backend.ozfoodz.com.au/api/track-order/'.$order_id), true);
+        $order = json_decode(file_get_contents('http://backend.ozfoodz.com.au/api/get-order/'.$order_id), true);
 
             $driverLat = $trackData['trackData']['vendorLat'];
             $driverLang = $trackData['trackData']['vendorLang'];
@@ -57,11 +57,7 @@ class trackingController extends Controller
 
                 }
             }
-
-
-
             $geocode = "https://maps.googleapis.com/maps/api/geocode/json?latlng=$driverLat,$driverLang&sensor=false&key=AIzaSyBqh1mQPnqMSiOUlr-1_3p11XyOsPWRYHI";
-
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $geocode);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -90,9 +86,9 @@ class trackingController extends Controller
 
 
 
+            $order_id = $order_id;
 
-
-        return view('frontend.track',compact('trackData','order','useraddress','driveraddress'));
+        return view('frontend.track',compact('trackData','order','useraddress','driveraddress','order_id'));
     }
 
 
